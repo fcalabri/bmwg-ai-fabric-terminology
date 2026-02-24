@@ -209,18 +209,21 @@
         defined in the companion methodology documents.</dd>
 
         <dt>JFI</dt>
-        <dd>Jain's Fairness Index. A scalar measure of flow-level throughput
-        fairness across a set of n flows, defined as:
-        <artwork align="center" type="ascii-art"><![CDATA[
+        <dd>
+          <t>Jain's Fairness Index. A scalar measure of flow-level throughput
+          fairness across a set of n flows, defined as:</t>
+          <artwork align="center" type="ascii-art"><![CDATA[
 JFI = (Σxᵢ)² / (n · Σxᵢ²)
-        ]]></artwork>
-        where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect
-        fairness; lower values indicate disparity. <bcp14>SHOULD</bcp14> be
-        computed per <xref target="RFC1242"/> reporting conventions.</dd>
+          ]]></artwork>
+          <t>where xᵢ is the throughput of flow i. A value of 1.0 indicates
+          perfect fairness; lower values indicate disparity.
+          <bcp14>SHOULD</bcp14> be computed per <xref target="RFC1242"/>
+          reporting conventions.</t>
+        </dd>
 
         <dt>Offered Load</dt>
         <dd>The total traffic rate presented to the DUT from test equipment,
-        expressed as a fraction of line rate (0&ndash;100%) or as absolute
+        expressed as a fraction of line rate (0&#x2013;100%) or as absolute
         bit/s. Offered load is controlled independently of DUT absorption,
         enabling characterization of saturation behavior.</dd>
 
@@ -294,25 +297,27 @@ JFI = (Σxᵢ)² / (n · Σxᵢ²)
         <dd>A collective operation in which each participant sends a distinct
         payload to every other participant and receives a distinct payload from
         every other participant. The critical collective for Mixture-of-Experts
-        token dispatch. Generates N&sup2;&minus;1 independent
+        token dispatch. Generates N&#xB2;&#x2212;1 independent
         point-to-point flows for N participants.</dd>
 
         <dt>Ring Algorithm</dt>
         <dd>An AllReduce (or AllGather/ReduceScatter) algorithm structured as a
         logical ring of participants. Each participant sends data to its right
-        neighbor and receives from its left neighbor in 2(N&minus;1) steps.
-        Bus bandwidth efficiency approaches 2(N&minus;1)/N, approaching 100%
+        neighbor and receives from its left neighbor in 2(N&#x2212;1) steps.
+        Bus bandwidth efficiency approaches 2(N&#x2212;1)/N, approaching 100%
         for large N. Standard baseline for BusBW calculation.</dd>
 
         <dt>BusBW</dt>
-        <dd>Bus Bandwidth. The effective data throughput achieved per
-        accelerator during a collective operation, normalizing for algorithm
-        overhead:
-        <artwork align="center" type="ascii-art"><![CDATA[
+        <dd>
+          <t>Bus Bandwidth. The effective data throughput achieved per
+          accelerator during a collective operation, normalizing for algorithm
+          overhead:</t>
+          <artwork align="center" type="ascii-art"><![CDATA[
 BusBW = (data_size × algo_factor) / elapsed_time
-        ]]></artwork>
-        For ring AllReduce, algo_factor = 2(N&minus;1)/N. BusBW enables
-        comparison across cluster sizes and collective algorithms.</dd>
+          ]]></artwork>
+          <t>For ring AllReduce, algo_factor = 2(N&#x2212;1)/N. BusBW enables
+          comparison across cluster sizes and collective algorithms.</t>
+        </dd>
 
         <dt>CCL</dt>
         <dd>Collective Communication Library. A software library providing
@@ -330,8 +335,8 @@ BusBW = (data_size × algo_factor) / elapsed_time
         <dt>Bulk Synchronous Parallel (BSP)</dt>
         <dd>A distributed computation model structured as alternating compute
         and communicate phases, with a global synchronization barrier between
-        phases. Standard training workloads follow BSP: forward pass &rarr;
-        backward pass &rarr; AllReduce gradient sync &rarr; optimizer
+        phases. Standard training workloads follow BSP: forward pass &#x2192;
+        backward pass &#x2192; AllReduce gradient sync &#x2192; optimizer
         step.</dd>
 
       </dl>
@@ -632,7 +637,7 @@ BusBW = (data_size × algo_factor) / elapsed_time
         <dd>Dynamic Load Balancing using flowlet detection. A per-flow
         rerouting mechanism that reassigns a flow to a new ECMP path when the
         flow has been idle longer than the flowlet gap threshold (typically
-        500&nbsp;ns&ndash;2&nbsp;&micro;s), reducing out-of-order packet risk
+        500&nbsp;ns&#x2013;2&nbsp;&#xB5;s), reducing out-of-order packet risk
         compared to packet spray while improving utilization over static
         per-flow ECMP.</dd>
 
@@ -753,23 +758,27 @@ BusBW = (data_size × algo_factor) / elapsed_time
         end-to-end training efficiency KPI.</dd>
 
         <dt>Roofline JCT</dt>
-        <dd>The theoretical minimum JCT assuming perfect (zero-contention,
-        zero-queuing) network behavior, calculated as:
-        <artwork align="center" type="ascii-art"><![CDATA[
+        <dd>
+          <t>The theoretical minimum JCT assuming perfect (zero-contention,
+          zero-queuing) network behavior, calculated as:</t>
+          <artwork align="center" type="ascii-art"><![CDATA[
 Roofline JCT = computation_time + serialization_delay
 serialization_delay = message_size / link_rate
-        ]]></artwork>
-        Provides a reference for evaluating fabric overhead.</dd>
+          ]]></artwork>
+          <t>Provides a reference for evaluating fabric overhead.</t>
+        </dd>
 
         <dt>JCT Ratio</dt>
-        <dd>The ratio of measured JCT to Roofline JCT. A value of 1.0
-        indicates no network-induced overhead. Values &gt; 1.0 quantify
-        fabric inefficiency:
-        <artwork align="center" type="ascii-art"><![CDATA[
+        <dd>
+          <t>The ratio of measured JCT to Roofline JCT. A value of 1.0
+          indicates no network-induced overhead. Values &gt; 1.0 quantify
+          fabric inefficiency:</t>
+          <artwork align="center" type="ascii-art"><![CDATA[
 JCT Ratio = JCT_measured / JCT_roofline
-        ]]></artwork>
-        The JCT Ratio is the primary comparative metric for AI training fabric
-        benchmarking.</dd>
+          ]]></artwork>
+          <t>The JCT Ratio is the primary comparative metric for AI training
+          fabric benchmarking.</t>
+        </dd>
 
         <dt>Gradient Synchronization</dt>
         <dd>The AllReduce collective operation performed after the backward pass
@@ -829,16 +838,16 @@ JCT Ratio = JCT_measured / JCT_roofline
         projection matrices from the multi-head attention layers) computed
         during the prefill phase and reused during each decode step to avoid
         redundant recomputation. KV cache size scales with: number of layers
-        &times; number of attention heads &times; head dimension &times;
-        sequence length &times; numerical precision. The attention head
+        &#xD7; number of attention heads &#xD7; head dimension &#xD7;
+        sequence length &#xD7; numerical precision. The attention head
         configuration <bcp14>MUST</bcp14> be reported in all benchmark
         results.</dd>
 
         <dt>Prefill Phase</dt>
         <dd>The compute-bound phase of LLM inference in which the entire input
         prompt is processed in parallel to generate the KV cache and the first
-        output token. Characterized by high arithmetic intensity (200&ndash;400
-        ops/byte), high accelerator utilization (90&ndash;95%), and large
+        output token. Characterized by high arithmetic intensity (200&#x2013;400
+        ops/byte), high accelerator utilization (90&#x2013;95%), and large
         activation tensors. Prefill latency dominates TTFT for long
         prompts.</dd>
 
@@ -846,7 +855,7 @@ JCT Ratio = JCT_measured / JCT_roofline
         <dd>The memory-bandwidth-bound phase of LLM inference in which output
         tokens are generated autoregressively, one token per forward pass, by
         reading the KV cache. Characterized by low arithmetic intensity
-        (60&ndash;80 ops/byte), lower accelerator utilization (20&ndash;40%),
+        (60&#x2013;80 ops/byte), lower accelerator utilization (20&#x2013;40%),
         and memory-bandwidth-limited KV cache reads. Decode throughput limits
         TPS.</dd>
 
@@ -875,7 +884,7 @@ JCT Ratio = JCT_measured / JCT_roofline
         <dt>PagedAttention</dt>
         <dd>A KV cache memory management technique storing attention keys and
         values in fixed-size, non-contiguous virtual pages (typically
-        16&ndash;64&nbsp;KB), inspired by OS virtual memory management.
+        16&#x2013;64&nbsp;KB), inspired by OS virtual memory management.
         PagedAttention reduces memory fragmentation and enables efficient KV
         cache sharing across requests with common prefixes.</dd>
 
@@ -897,7 +906,7 @@ JCT Ratio = JCT_measured / JCT_roofline
         decode phase. Payload sizes are padded to fixed maximum dimensions
         (compatible with static graph capture), enabling lower kernel-launch
         overhead at the cost of slight bandwidth inefficiency. Target latency:
-        &lt; 200&nbsp;&micro;s per dispatch round trip.</dd>
+        &lt; 200&nbsp;&#xB5;s per dispatch round trip.</dd>
 
         <dt>SLO</dt>
         <dd>Service Level Objective. A quantitative target for an inference
