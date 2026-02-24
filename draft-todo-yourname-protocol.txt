@@ -2,7 +2,7 @@
 
 
 
-WG Working Group                                              Y. N. Here
+Network Working Group                                        F. Calabria
 Internet-Draft                                    Your Organization Here
 Intended status: Informational                          24 February 2026
 Expires: 28 August 2026
@@ -20,16 +20,13 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-todo-yourname-
+   https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-todo-
+   yourname-protocol.html.  Status information for this document may be
+   found at https://datatracker.ietf.org/doc/draft-todo-yourname-
    protocol/.
 
-   Discussion of this document takes place on the WG Working Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
-
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/fcalabri/bmwg-ai-fabric-terminology.
 
 Status of This Memo
 
@@ -109,6 +106,6 @@ Acknowledgments
 
 Author's Address
 
-   Your Name Here
+   Fernando Calabria
    Your Organization Here
-   Email: your.email@example.com
+   Email: fcalabri@gmail.com
