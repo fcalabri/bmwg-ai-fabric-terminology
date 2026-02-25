@@ -45,10 +45,14 @@ author:
     email: "carlos@bluefern.consulting"
  -
     fullname: "Qin Wu"
+    initials: "Q."
+    surname: "Wu"
     organization: Huawei
     email: "bill.wu@huawei.com"
  -
     fullname: "Giuseppe Fioccola"
+    initials: "G."
+    surname: "Fioccola"
     organization: Huawei
     email: "giuseppe.fioccola@huawei.com"
 
