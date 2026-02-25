@@ -3,7 +3,7 @@ title: "Benchmarking Terminology for AI Network Fabrics"
 abbrev: "AI Fabric Benchmarking Terminology"
 category: info
 
-docname: draft-calabria-bmwg-ai-fabric-terminology-00
+docname: draft-calabria-bmwg-ai-fabric-terminology-latest
 submissiontype: IETF
 number:
 date:
