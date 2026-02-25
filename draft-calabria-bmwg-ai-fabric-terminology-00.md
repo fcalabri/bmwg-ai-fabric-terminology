@@ -25,6 +25,7 @@ keyword:
  - JCT
  - TTFT
  - KV cache
+
 venue:
   github: "fcalabri/bmwg-ai-fabric-terminology"
   latest: "https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-bmwg-ai-fabric-terminology-00.html"
