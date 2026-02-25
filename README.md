@@ -1,13 +1,13 @@
 <!-- regenerate: on (set to off if you edit this file) -->
 
-# TODO - Your title
+# Benchmarking Terminology for AI Network Fabrics
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "Benchmarking Terminology for AI Network Fabrics".
 
-* [Editor's Copy](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-todo-yourname-protocol.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-todo-yourname-protocol)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-todo-yourname-protocol)
-* [Compare Editor's Copy to Individual Draft](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-todo-yourname-protocol.diff)
+* [Editor's Copy](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-calabria-bmwg-ai-fabric-terminology.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-terminology)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology)
+* [Compare Editor's Copy to Individual Draft](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-calabria-bmwg-ai-fabric-terminology.diff)
 
 
 ## Contributing
