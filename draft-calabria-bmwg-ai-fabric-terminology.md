@@ -44,9 +44,9 @@ author:
     organization: Blue Fern Consulting
     email: "carlos@bluefern.consulting"
  -
-   fullname: "Qin Wu"
-   organization: Huawei
-   email: "bill.wu@huawei.com"
+    fullname: "Qin Wu"
+    organization: Huawei
+    email: "bill.wu@huawei.com"
  -
     fullname: "Giuseppe Fioccola"
     organization: Huawei
@@ -123,19 +123,14 @@ the AI fabric context definition in this document takes precedence.
 
 ## Requirements Language
 
-The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**,
-**SHALL NOT**, **SHOULD**, **SHOULD NOT**, **RECOMMENDED**,
-**NOT RECOMMENDED**, **MAY**, and **OPTIONAL** in this
-document are to be interpreted as described in BCP 14
-{{!RFC2119}} {{!RFC8174}} when, and only when, they appear
-in all capitals, as shown here.
+{::boilerplate bcp14-tagged}
 
 ## Scope and Purpose
 
 This document defines terminology specifically for benchmarking
 Ethernet-based AI network fabrics in controlled laboratory
 environments as specified by the BMWG charter
-{{?charter-ietf-bmwg}}. The defined terms cover:
+{{charter-ietf-bmwg}}. The defined terms cover:
 distributed AI training collective communication patterns, LLM
 inference serving architectures, RDMA transport semantics (RoCEv2
 and UET), congestion control mechanisms, fabric topology
@@ -164,9 +159,9 @@ fabric benchmarking:
 
 - draft-bmwg-ai-fabric-terminology-00 (this document): Terminology
   definitions.
-- {{?TRAINING-BENCH-00}}: Benchmarking methodology for AI training
+- {{TRAINING-BENCH}}: Benchmarking methodology for AI training
   workloads.
-- {{?INFERENCE-BENCH-00}}: Benchmarking methodology for AI inference
+- {{INFERENCE-BENCH}}: Benchmarking methodology for AI inference
   serving workloads.
 
 Implementers and evaluators SHOULD read this terminology document
@@ -411,7 +406,7 @@ RoCEv2:
   encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling
   RDMA semantics on standard Ethernet infrastructure. Requires lossless
   fabric operation (PFC or equivalent) for correctness. Standardized in
-  IBTA Annex 16 {{?IBTA-ROCE}} and transported over UDP
+  IBTA Annex 16 {{IBTA-ROCE}} and transported over UDP
   destination port 4791.
 
 QP:
@@ -437,7 +432,7 @@ RDMA Verb:
 UET:
 : Ultra Ethernet Transport. A transport protocol defined by the
   Ultra Ethernet Consortium (UEC) Specification 1.0
-  {{?UEC-SPEC-1.0}} as a next-generation AI/HPC fabric
+  {{UEC-SPEC-1.0}} as a next-generation AI/HPC fabric
   transport. UET is connectionless, supports native packet spraying
   (Reliable Unordered Delivery), and integrates multipath load
   balancing and congestion control. Transported over UDP destination
@@ -460,7 +455,7 @@ ROD:
 
 The following terms define UET-specific concepts introduced by the
 Ultra Ethernet Consortium (UEC) Specification 1.0
-{{?UEC-SPEC-1.0}}.
+{{UEC-SPEC-1.0}}.
 
 {:newline="true"}
 RUD:
@@ -708,7 +703,7 @@ Link Utilization:
 # Training-Specific Terms
 
 The following terms are specific to AI training workload benchmarking
-and are used normatively in {{?TRAINING-BENCH-00}}.
+and are used normatively in {{TRAINING-BENCH}}.
 
 {:newline="true"}
 JCT:
@@ -766,7 +761,7 @@ Soak Test:
 
 The following terms are specific to AI inference serving workload
 benchmarking and are used normatively in
-{{?INFERENCE-BENCH-00}}.
+{{INFERENCE-BENCH}}.
 
 {:newline="true"}
 TTFT:
@@ -1065,7 +1060,7 @@ RFC 2119 / RFC 8174:
       of all shards.  Used in tensor-parallel (Megatron-style) layers to
       reconstruct distributed activations or parameters.
 
-The companion document {{?INFERENCE-BENCH}} references
+The companion document {{INFERENCE-BENCH}} references
 UDP port 4793 as the destination port for UET traffic. The authors note
 that IANA assignment of this port number for UET SHOULD
 be verified against the IANA Service Name and Transport Protocol Port
