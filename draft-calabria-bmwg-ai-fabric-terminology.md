@@ -1159,8 +1159,7 @@ in each companion methodology document.
    |                    | FHI, Goodput, Zero | Packet Loss           |
    |                    | Packet Loss        |                       |
    +--------------------+--------------------+-----------------------+
-   
-   ~~~~
+~~~~
 {: #cross-ref title="Table 1: Term Cross-Reference to Companion Documents" artwork-align="center"}
 
 # Appendix B: Term Taxonomy Summary
