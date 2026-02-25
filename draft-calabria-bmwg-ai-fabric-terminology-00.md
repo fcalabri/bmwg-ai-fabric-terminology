@@ -86,11 +86,11 @@ networks, intra-node (NVLink/PCIe) interconnects, or storage networking.
 
 ## Relationship to Existing BMWG Work
 
-This document extends the foundational BMWG terminology established in [RFC1242] (network
-interconnect benchmarking terminology) and [RFC8238] (data center benchmarking terminology).
+This document extends the foundational BMWG terminology established in {{?RFC1242}} (network
+interconnect benchmarking terminology) and {{?RFC8238}} (data center benchmarking terminology).
 Where terms are defined in those RFCs, this document provides AI fabric context extensions;
 the core definitions remain as established. This document also extends the test methodology
-framework of [RFC2544] and [RFC8239] as applied in the companion AI fabric methodology
+framework of {{?RFC2544}} and {{?RFC8239}} as applied in the companion AI fabric methodology
 documents.
 
 ## Relationship to Companion Documents
@@ -112,7 +112,7 @@ difference, which is noted explicitly.
 
 The key words **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **SHOULD**,
 **SHOULD NOT**, **RECOMMENDED**, **NOT RECOMMENDED**, **MAY**, and **OPTIONAL** in this
-document are to be interpreted as described in BCP 14 [RFC2119] [RFC8174] when, and only
+document are to be interpreted as described in BCP 14 {{!RFC2119}} {{!RFC8174}} when, and only
 when, they appear in all capitals, as shown here.
 
 # General Benchmarking Terms
@@ -493,7 +493,7 @@ when, they appear in all capitals, as shown here.
       be evaluated in fabric-level soak tests.
 
    ECN
-      Explicit Congestion Notification ([RFC3168]).  An IP-layer
+      Explicit Congestion Notification ({{?RFC3168}}).  An IP-layer
       mechanism in which a congested router marks packets with the
       Congestion Experienced (CE) codepoint in the IP ECN field instead
       of dropping them.  The receiver echoes congestion feedback to the
@@ -640,7 +640,7 @@ when, they appear in all capitals, as shown here.
 #  Training-Specific Terms
 
    The following terms are specific to AI training workload benchmarking
-   and are used normatively in [TRAINING-BENCH-00].
+   and are used normatively in [TRAINING-BENCH].
 
    JCT
       Job Completion Time.  The wall-clock elapsed time from the start
@@ -692,7 +692,7 @@ when, they appear in all capitals, as shown here.
 #  Inference-Specific Terms
 
    The following terms are specific to AI inference serving workload
-   benchmarking and are used normatively in [INFERENCE-BENCH-00].
+   benchmarking and are used normatively in [INFERENCE-BENCH].
 
    TTFT
       Time to First Token.  The elapsed time from receipt of an
@@ -915,7 +915,7 @@ when, they appear in all capitals, as shown here.
 
    This document has no IANA actions.
 
-   The companion document [INFERENCE-BENCH-00] references UDP port 4793
+   The companion document [INFERENCE-BENCH] references UDP port 4793
    as the destination port for UET traffic.  The authors note that IANA
    assignment of this port number for UET SHOULD be verified against the
    IANA Service Name and Transport Protocol Port Number Registry prior
