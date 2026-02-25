@@ -19,13 +19,40 @@ keyword:
 author:
  -
     fullname: "Fernando Calabria"
-    organization: Your Organization Here
+    organization: Cisco
     email: "fcalabri@gmail.com"
+
+ -
+    fullname: "Carlos Pignataro"
+    organization: Blue Fern Consulting
+    email: "carlos@bluefern.consulting"
+ -
+   fullname: "Qin Wu"
+   organization: Huawei
+   email: "bill.wu@huawei.com"
+ -
+    fullname: "Giuseppe Fioccola"
+    organization: Huawei
+    email: "giuseppe.fioccola@huawei.com"
 
 normative:
 
 informative:
 
+  charter-ietf-bmwg:
+    title: Benchmarking Methodology Working Group Charter
+    target: https://datatracker.ietf.org/group/bmwg/about/
+    date: 2024
+
+  IBTA-ROCE:
+    title: InfiniBand Architecture Specification, Annex 16: RoCE
+    target: https://www.infinibandta.org
+    date: 2010
+
+  UEC-SPEC-1.0:
+    title: Ultra Ethernet Specification 1.0
+    target: https://ultraethernet.org
+    date: 2024
 
 --- abstract
 
