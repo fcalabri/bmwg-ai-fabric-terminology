@@ -95,12 +95,6 @@ informative:
     seriesinfo:
       Internet-Draft: draft-bmwg-ai-fabric-inference-bench-00
 
-  charter-ietf-bmwg:
-    title: "Benchmarking Methodology Working Group Charter"
-    target: https://datatracker.ietf.org/group/bmwg/about/
-    author:
-      - org: IETF
-    date: 2024
 
 --- abstract
 
@@ -133,8 +127,7 @@ the AI fabric context definition in this document takes precedence.
 
 This document defines terminology specifically for benchmarking
 Ethernet-based AI network fabrics in controlled laboratory
-environments as specified by the BMWG charter
-{{charter-ietf-bmwg}}. The defined terms cover:
+environments. The defined terms cover:
 distributed AI training collective communication patterns, LLM
 inference serving architectures, RDMA transport semantics (RoCEv2
 and UET), congestion control mechanisms, fabric topology
