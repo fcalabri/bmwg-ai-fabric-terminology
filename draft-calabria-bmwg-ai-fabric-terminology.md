@@ -462,6 +462,6 @@ definition.
 | 7 | Clos/Fat-Tree, Rail-Optimized, Bisection Bandwidth, Oversubscription Ratio, ToR Switch, Spine/Superspine, NIC, Buffer Occupancy, Zero-Impact Failover, Link Utilization | Fabric Topology |
 | 8 | JCT, Roofline JCT, JCT Ratio, Gradient Synchronization, Step Time, Soak Test | Training-Specific |
 | 9 | TTFT, ITL, TPS, KV Cache, Prefill Phase, Decode Phase, Disaggregated Serving, xPyD Ratio, Continuous Batching, PagedAttention, Prefix Caching, Normal Dispatch, Low-Latency Dispatch, SLO, Speculative Decoding | Inference-Specific |
-| §10 | Primary KPI, Secondary KPI, Fabric Health Indicator, Goodput, Zero Packet Loss | KPI Classification |
-| §11 | RFC 1242, RFC 2544, RFC 8238, RFC 8239, RFC 2119/8174 | Referenced Standards |
+| 10 | Primary KPI, Secondary KPI, Fabric Health Indicator, Goodput, Zero Packet Loss | KPI Classification |
+| 11 | RFC 1242, RFC 2544, RFC 8238, RFC 8239, RFC 2119/8174 | Referenced Standards |
 {: #tab-taxo title="Complete Term Taxonomy"}
