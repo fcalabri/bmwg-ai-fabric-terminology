@@ -1,0 +1,223 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2026-02-26T02:01:46.307097+00:00",
+  "repo": "fcalabri/bmwg-ai-fabric-terminology",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDORX8iVs7GOExX",
+      "title": "markdown file reformat",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/1",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T12:46:36Z",
+      "updatedAt": "2026-02-25T12:47:13Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "b7d6130f7d1cd3818770861e016fe3af980f14e1",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-1",
+      "headRefOid": "2e220a506c8c153924950a486243b93f5800e32c",
+      "closedAt": "2026-02-25T12:47:12Z",
+      "mergedAt": "2026-02-25T12:47:12Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "3427f3f1b192ddbd1129a88a81811face4a16870"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDORX8iVs7GOa2y",
+      "title": "markdown file reformat",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/2",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T13:05:58Z",
+      "updatedAt": "2026-02-25T13:06:31Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "3427f3f1b192ddbd1129a88a81811face4a16870",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-2",
+      "headRefOid": "379149db8558980ec12e2a414b389c4d55ff7a1a",
+      "closedAt": "2026-02-25T13:06:31Z",
+      "mergedAt": "2026-02-25T13:06:31Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "b7bbd48ffb2c4fae4d401d51f071077dfc8998d5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDORX8iVs7GOnIy",
+      "title": "Fix reference and add new coauthor",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/3",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T13:17:16Z",
+      "updatedAt": "2026-02-25T13:17:50Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "b7bbd48ffb2c4fae4d401d51f071077dfc8998d5",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-3",
+      "headRefOid": "905377407180aef06880040e336411112d44292c",
+      "closedAt": "2026-02-25T13:17:49Z",
+      "mergedAt": "2026-02-25T13:17:49Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "408ae4d376cadf05614bb0a2a38e256d82d3d972"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDORX8iVs7GOs3J",
+      "title": "Fix references",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/4",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T13:22:45Z",
+      "updatedAt": "2026-02-25T13:34:51Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "46fdcf38f90de7d2c520ee5267ba27cfbb76bbc0",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-4",
+      "headRefOid": "9b46e1a0ca13ea24ce05e2e6677bb5d1d9d74a36",
+      "closedAt": "2026-02-25T13:34:51Z",
+      "mergedAt": "2026-02-25T13:34:51Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "3e80c1dcc6e3a02f909ebef974b7e6305c69dc45"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDORX8iVs7GPKjI",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology-00.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/5",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-25T13:51:09Z",
+      "updatedAt": "2026-02-25T13:51:41Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "ee460135b2457df9d1b23c28a7a2fe84dac93529",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-5",
+      "headRefOid": "8ab75434e6c9a9fbbfcfab4062f7da30da05fff6",
+      "closedAt": "2026-02-25T13:51:41Z",
+      "mergedAt": "2026-02-25T13:51:41Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "9f0600498eaba0066abaf4dc1b9f631c857ceb68"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDORX8iVs7GZuve",
+      "title": "figure table format issue",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/6",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-26T01:58:41Z",
+      "updatedAt": "2026-02-26T01:59:11Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "ba65bccd6fbb9d489fc8532d1ed4b0535cf1bed6",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-6",
+      "headRefOid": "8ab9ce9c08952e074c2ac8b6ab42bb43f6fc3d1b",
+      "closedAt": "2026-02-26T01:59:10Z",
+      "mergedAt": "2026-02-26T01:59:10Z",
+      "mergedBy": "billwuqin",
+      "mergeCommit": {
+        "oid": "6a6a1293d26ab6845155c451c1316420ecfa5e50"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
