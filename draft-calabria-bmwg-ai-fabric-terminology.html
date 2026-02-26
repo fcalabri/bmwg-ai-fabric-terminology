@@ -1250,7 +1250,7 @@ the AI fabric context definition in this document takes precedence.<a href="#sec
             <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-referenced-standards-abbrev" class="internal xref">Referenced Standards Abbreviations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-general-benchmarking-terms-2" class="internal xref">General Benchmarking Terms</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-general-benchmarking-terms-3" class="internal xref">General Benchmarking Terms</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
             <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-collective-communication-ter" class="internal xref">Collective Communication Terms</a></p>
@@ -1461,6 +1461,82 @@ are determined by worst-case, not median, performance.<a href="#section-2-2.20.1
 </dd>
       <dd class="break"></dd>
 </dl>
+<span id="name-general-benchmarking-terms-2"></span><div id="tab-gen-bench">
+<table class="center" id="table-1">
+        <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-general-benchmarking-terms-2" class="selfRef">General Benchmarking Terms</a>
+        </caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Term</th>
+            <th class="text-left" rowspan="1" colspan="1">Definition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>AI Fabric</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">The dedicated Ethernet backend network interconnecting accelerators (GPUs/XPUs) for distributed AI training and inference workloads. Typically implemented as a non-blocking Clos (fat-tree) topology running RoCEv2 or UET transport. Distinct from the front-end (management/storage) network.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>DUT</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">Device Under Test. The network element(s) whose performance characteristics are being measured. In AI fabric benchmarking the DUT is one or more fabric elements: leaf switches, spine switches, NICs, or the complete fabric assembly.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>SUT</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">System Under Test. The complete AI compute system including accelerators, NICs, the fabric DUT, and serving/training software, when end-to-end metrics are the measurement objective.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>RT</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">Router Tester / Traffic Generator. Test equipment capable of generating and receiving network traffic at specified rates with nanosecond-resolution timestamping sufficient for the measurements defined in the companion methodology documents.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>JFI</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows: <code>JFI = (Σxᵢ)² / (n · Σxᵢ²)</code> where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. <strong><span class="bcp14">SHOULD</span></strong> be computed per <span>[<a href="#RFC1242" class="cite xref">RFC1242</a>]</span> reporting conventions.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Offered Load</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">The total traffic rate presented to the DUT from test equipment, expressed as a fraction of line rate (0–100%) or as absolute bit/s. Offered load is controlled independently of DUT absorption, enabling characterization of saturation behavior.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Trial Duration</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">The time interval over which a single measurement is conducted. For AI fabric tests, the <strong><span class="bcp14">RECOMMENDED</span></strong> minimum is 60 seconds for throughput tests and 300 seconds for soak/stability tests, per the methodology in <span>[<a href="#RFC2544" class="cite xref">RFC2544</a>]</span> as extended herein.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Warmup Period</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">A mandatory pre-measurement interval during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. <strong><span class="bcp14">RECOMMENDED</span></strong> minimum: 10 seconds.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Binary Search</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Percentile Latency</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">A latency statistic expressing that the specified fraction of all measured latency samples fall at or below the reported value. Denoted Pxx (e.g., P50, P95, P99, P99.9). Tail latency (P99 and above) is especially relevant for AI fabric benchmarking because SLO violations are determined by worst-case, not median, performance.</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
 </section>
 </div>
 <div id="collective-communication-terms">
@@ -2399,8 +2475,8 @@ normative.<a href="#section-11-2.10.1" class="pilcrow">¶</a></p>
 </div>
 <div id="general-benchmarking-terms-1">
 <section id="section-12">
-      <h2 id="name-general-benchmarking-terms-2">
-<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-general-benchmarking-terms-2" class="section-name selfRef">General Benchmarking Terms</a>
+      <h2 id="name-general-benchmarking-terms-3">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-general-benchmarking-terms-3" class="section-name selfRef">General Benchmarking Terms</a>
       </h2>
 <p id="section-12-1">The following terms establish the general measurement framework
    applicable to all AI fabric benchmarking activities.<a href="#section-12-1" class="pilcrow">¶</a></p>
@@ -2589,9 +2665,9 @@ by the document authors.<a href="#section-13-5" class="pilcrow">¶</a></p>
 <p id="appendix-A-1">The following table identifies which terms from this document are used
 in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-term-cross-reference-to-com"></span><div id="tab-cross-ref">
-<table class="center" id="table-1">
+<table class="center" id="table-2">
         <caption>
-<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#table-2" class="selfRef">Table 2</a>:
 <a href="#name-term-cross-reference-to-com" class="selfRef">Term Cross-Reference to Companion Documents</a>
         </caption>
 <thead>
@@ -2666,9 +2742,9 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
 organized by category, with the section reference for the full
 definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <span id="name-complete-term-taxonomy"></span><div id="tab-taxo">
-<table class="center" id="table-2">
+<table class="center" id="table-3">
         <caption>
-<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#table-3" class="selfRef">Table 3</a>:
 <a href="#name-complete-term-taxonomy" class="selfRef">Complete Term Taxonomy</a>
         </caption>
 <thead>
