@@ -1311,39 +1311,39 @@ Appendix B: Term Taxonomy Summary
    +=========+====================================+====================+
    | Section | Term(s)                            | Category           |
    +=========+====================================+====================+
-   | §2      | DUT, SUT, RT, JFI, Offered         | General            |
+   | 2       | DUT, SUT, RT, JFI, Offered         | General            |
    |         | Load, Trial Duration, Warmup       | Benchmarking       |
    |         | Period, Binary Search,             |                    |
    |         | Percentile Latency, AI             |                    |
    |         | Fabric                             |                    |
    +---------+------------------------------------+--------------------+
-   | §3      | Collective Operation,              | Collective         |
+   | 3       | Collective Operation,              | Collective         |
    |         | AllReduce, AllGather,              | Communication      |
    |         | ReduceScatter, AllToAll,           |                    |
    |         | Ring Algorithm, BusBW, CCL,        |                    |
    |         | SPMD, BSP                          |                    |
    +---------+------------------------------------+--------------------+
-   | §4      | Data Parallelism, Tensor           | Parallelism        |
+   | 4       | Data Parallelism, Tensor           | Parallelism        |
    |         | Parallelism, Pipeline              | Strategies         |
    |         | Parallelism, Expert                |                    |
    |         | Parallelism, MoE, DP               |                    |
    |         | Attention, ZeRO                    |                    |
    +---------+------------------------------------+--------------------+
-   | §5.1    | RDMA, RoCEv2, QP, Reliable         | Transport — RDMA / |
+   | 5.1     | RDMA, RoCEv2, QP, Reliable         | Transport — RDMA / |
    |         | Connected (RC), RDMA Verb,         | RoCEv2             |
    |         | UET, PDC, ROD                      |                    |
    +---------+------------------------------------+--------------------+
-   | §5.2    | RUD, RUDI, UUD, UEC Profile,       | Transport — UET    |
+   | 5.2     | RUD, RUDI, UUD, UEC Profile,       | Transport — UET    |
    |         | LLR, Packet Trimming, CBFC,        |                    |
    |         | Entropy Value, GIN, KVCXL          |                    |
    +---------+------------------------------------+--------------------+
-   | §6      | PFC, PFC Storm, PFC                | Congestion Control |
+   | 6       | PFC, PFC Storm, PFC                | Congestion Control |
    |         | Deadlock, ECN, DCQCN, ECN          |                    |
    |         | Marking Ratio, Incast,             |                    |
    |         | Incast Ratio, Packet Spray,        |                    |
    |         | DLB/Flowlet, ECMP, MMR             |                    |
    +---------+------------------------------------+--------------------+
-   | §7      | Clos/Fat-Tree, Rail-               | Fabric Topology    |
+   | 7       | Clos/Fat-Tree, Rail-               | Fabric Topology    |
    |         | Optimized, Bisection               |                    |
    |         | Bandwidth, Oversubscription        |                    |
    |         | Ratio, ToR Switch, Spine/          |                    |
@@ -1351,12 +1351,12 @@ Appendix B: Term Taxonomy Summary
    |         | Occupancy, Zero-Impact             |                    |
    |         | Failover, Link Utilization         |                    |
    +---------+------------------------------------+--------------------+
-   | §8      | JCT, Roofline JCT, JCT             | Training-Specific  |
+   | 8       | JCT, Roofline JCT, JCT             | Training-Specific  |
    |         | Ratio, Gradient                    |                    |
    |         | Synchronization, Step Time,        |                    |
    |         | Soak Test                          |                    |
    +---------+------------------------------------+--------------------+
-   | §9      | TTFT, ITL, TPS, KV Cache,          | Inference-Specific |
+   | 9       | TTFT, ITL, TPS, KV Cache,          | Inference-Specific |
    |         | Prefill Phase, Decode Phase,       |                    |
    |         | Disaggregated Serving, xPyD        |                    |
    |         | Ratio, Continuous Batching,        |                    |
