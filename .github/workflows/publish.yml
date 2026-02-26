@@ -1,5 +1,4 @@
 name: "Publish New Draft Version"
-
 on:
   push:
     tags:
@@ -10,7 +9,6 @@ on:
         description: "Submitter email"
         default: ""
         type: string
-
 jobs:
   build:
     name: "Publish New Draft Version"
@@ -22,15 +20,13 @@ jobs:
         # Needed for tracing file history for replacement status
         fetch-depth: 0
         fetch-tags: true
-
     # See https://github.com/actions/checkout/issues/290
     - name: "Get Tag Annotations"
+      if: startsWith(github.ref, 'refs/tags/')
       run: git fetch -f origin ${{ github.ref }}:${{ github.ref }}
-
     - name: "Setup"
       id: setup
       run: date -u "+date=%FT%T" >>"$GITHUB_OUTPUT"
-
     - name: "Caching"
       uses: actions/cache@v4
       with:
@@ -42,14 +38,12 @@ jobs:
           .targets.mk
         key: i-d-${{ steps.setup.outputs.date }}
         restore-keys: i-d-
-
     - name: "Build Drafts"
       id: build
       uses: martinthomson/i-d-template@v1
       with:
         make: releases
         token: ${{ github.token }}
-
     - name: "Upload to Datatracker"
       uses: martinthomson/i-d-template@v1
       with:
@@ -57,7 +51,6 @@ jobs:
       env:
         UPLOAD_EMAIL: ${{ inputs.email }}
         GITHUB_STEP: upload
-
     - name: "Archive Submitted Drafts"
       uses: actions/upload-artifact@v4
       if: always() && steps.build.outcome == 'success'
