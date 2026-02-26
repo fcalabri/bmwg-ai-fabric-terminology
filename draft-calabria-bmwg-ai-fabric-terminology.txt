@@ -1365,11 +1365,11 @@ Appendix B: Term Taxonomy Summary
    |         | Low-Latency Dispatch, SLO,         |                    |
    |         | Speculative Decoding               |                    |
    +---------+------------------------------------+--------------------+
-   | §10     | Primary KPI, Secondary KPI,        | KPI Classification |
+   | 10      | Primary KPI, Secondary KPI,        | KPI Classification |
    |         | Fabric Health Indicator,           |                    |
    |         | Goodput, Zero Packet Loss          |                    |
    +---------+------------------------------------+--------------------+
-   | §11     | RFC 1242, RFC 2544, RFC            | Referenced         |
+   | 11      | RFC 1242, RFC 2544, RFC            | Referenced         |
    |         | 8238, RFC 8239, RFC                | Standards          |
    |         | 2119/8174                          |                    |
    +---------+------------------------------------+--------------------+
