@@ -1159,7 +1159,7 @@ in each companion methodology document.
    |                    | Packet Loss        |                       |
    +--------------------+--------------------+-----------------------+
 ~~~~
-{: #cross-ref title="Term Cross-Reference to Companion Documents" artwork-align="center"}
+{: #tab-cross-ref title="Term Cross-Reference to Companion Documents"}
 
 # Appendix B: Term Taxonomy Summary
 {:numbered="false"}
@@ -1235,5 +1235,4 @@ definition.
    |         | 2119/8174                          |                    |
    +---------+------------------------------------+--------------------+
 ~~~~
-{: #taxo title="Complete Term Taxonomy" artwork-align="center"}
-
+{: #tab-taxo title="Complete Term Taxonomy"}
