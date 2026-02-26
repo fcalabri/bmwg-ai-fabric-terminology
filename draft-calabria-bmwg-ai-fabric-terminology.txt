@@ -123,11 +123,11 @@ Table of Contents
 
    This document defines terminology specifically for benchmarking
    Ethernet-based AI network fabrics in controlled laboratory
-   environments as specified by the BMWG charter [charter-ietf-bmwg].
-   The defined terms cover: distributed AI training collective
-   communication patterns, LLM inference serving architectures, RDMA
-   transport semantics (RoCEv2 and UET), congestion control mechanisms,
-   fabric topology characteristics, and performance metric definitions.
+   environments.  The defined terms cover: distributed AI training
+   collective communication patterns, LLM inference serving
+   architectures, RDMA transport semantics (RoCEv2 and UET), congestion
+   control mechanisms, fabric topology characteristics, and performance
+   metric definitions.
 
    This document does not define acceptance criteria, performance
    requirements, or configuration recommendations.  It does not address
@@ -1184,10 +1184,6 @@ Normative References
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 Informative References
-
-   [charter-ietf-bmwg]
-              IETF, "Benchmarking Methodology Working Group Charter",
-              2024, <https://datatracker.ietf.org/group/bmwg/about/>.
 
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
