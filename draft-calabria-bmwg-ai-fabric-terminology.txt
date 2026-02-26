@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 29 August 2026                             Blue Fern Consulting
+Expires: 30 August 2026                             Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                        25 February 2026
+                                                        26 February 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2026.
+   This Internet-Draft will expire on 30 August 2026.
 
 Copyright Notice
 
@@ -1171,7 +1171,7 @@ Appendix A: Term Cross-Reference to Companion Documents
      |                    | Packet Loss        |                       |
      +--------------------+--------------------+-----------------------+
 
-      Figure 1: Table 1: Term Cross-Reference to Companion Documents
+          Figure 1: Term Cross-Reference to Companion Documents
 
 Appendix B: Term Taxonomy Summary
 
@@ -1245,7 +1245,7 @@ Appendix B: Term Taxonomy Summary
    |         | 2119/8174                          |                    |
    +---------+------------------------------------+--------------------+
 
-              Figure 2: Table 2: Complete Term Taxonomy
+                   Figure 2: Complete Term Taxonomy
 
 Authors' Addresses
 
