@@ -230,7 +230,7 @@ patterns and fabric requirements.
 The following terms define RDMA and RoCEv2 transport semantics as
 used in AI fabric benchmarking. UET, PDC, and ROD are included here
 for direct comparison with their RoCEv2 counterparts; full UET-specific
-terms are defined in {{Section 5.2}}.
+terms are defined in Section 5.2.
 
 | Term | Definition |
 |---|---|
