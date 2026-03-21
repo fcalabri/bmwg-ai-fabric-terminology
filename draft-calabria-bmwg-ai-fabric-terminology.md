@@ -240,7 +240,7 @@ used in AI fabric benchmarking.
 | **UET** | Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET is connectionless, supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793 (pending IANA verification). |
 | **PDC** | Packet Delivery Context. The ephemeral, lightweight transport endpoint in UET, analogous to but distinct from an RDMA Queue Pair. PDCs are connectionless (no setup handshake), enabling low-latency initiation and reduced per-flow state in the NIC and switch. |
 | **ROD** | Reliable Ordered Delivery. A UET transport service providing reliable, in-order packet delivery, semantically equivalent to RoCEv2 RC mode. Suitable for legacy RDMA applications requiring strict ordering guarantees. |
-{: #tab-rocev2 title="Distributed Parallelism Strategy Terms"}
+{: #tab-rocev2 title="RoCEv2 and RDMA Terms"}
 
 ## Ultra Ethernet Transport (UET) Terms
 
