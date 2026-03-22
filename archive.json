@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-19T02:09:19.995490+00:00",
+  "timestamp": "2026-03-22T02:10:11.691860+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -215,6 +215,34 @@
       "mergedBy": "billwuqin",
       "mergeCommit": {
         "oid": "6a6a1293d26ab6845155c451c1316420ecfa5e50"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDORX8iVs7MVtfA",
+      "title": "Fix incorrect table title for RoCEv2 and RDMA Terms table",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/7",
+      "state": "MERGED",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Summary\n\n- The `#tab-rocev2` table had the wrong title: \"Distributed Parallelism Strategy Terms\" (copy-paste error from the section above)\n- Corrected to \"RoCEv2 and RDMA Terms\" to match the section heading at \u00a75.1\n\n## Test plan\n\n- [ ] Verify rendered HTML shows correct table caption",
+      "createdAt": "2026-03-21T09:41:31Z",
+      "updatedAt": "2026-03-21T11:53:08Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "5be0e17401953454aacbbb836bc1a019e130c106",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "fix-rocev2-table-title",
+      "headRefOid": "5e11b4594deea11d4024d05b05ee8e85e8b81e2e",
+      "closedAt": "2026-03-21T11:53:08Z",
+      "mergedAt": "2026-03-21T11:53:08Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "2eed22f311963703f4b345c66c90c0f6db5b1271"
       },
       "comments": [],
       "reviews": []
