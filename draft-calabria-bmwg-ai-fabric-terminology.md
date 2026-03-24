@@ -313,6 +313,8 @@ documents.
 
 | Term | Definition |
 |---|---|
+| **Fabric DUT Boundary** | The precise measurement boundary for BMWG AI fabric benchmarks. Defined as the NIC Ethernet port (transmit side at source, receive side at destination). All benchmarked metrics (throughput, latency, loss, congestion) are measured at or between NIC Ethernet ports. Intra-node segments (NVLink, PCIe Gen4/5, CXL) are outside the DUT boundary and MUST NOT be included in fabric benchmark results without explicit labelling as a separate measurement component. |
+| **Intra-Node Transfer Overhead** | The latency and bandwidth consumed by data movement within a single server node: specifically, the GPU-to-NIC path via PCIe or CXL, and GPU-to-GPU communication via NVLink. Intra-node transfer overhead is a contextual measurement reported alongside fabric benchmarks in end-to-end decomposition tests but is not itself the benchmarked entity in any test in this document |
 | **Clos / Fat-Tree Topology** | A multi-stage switch topology providing non-blocking or oversubscribed connectivity between all leaf-to-leaf pairs. In AI fabric deployments, a two-tier (leaf-spine) or three-tier (leaf-spine-superspine) Clos is standard. Full bisection bandwidth (1:1) is the target for training fabrics; 2:1 or 4:1 oversubscription may be acceptable for inference fabrics. |
 | **Rail-Optimized Topology** | A topology in which the NIC ports of each server are distributed across multiple ToR switches (one NIC port per switch), such that collective traffic between adjacent servers traverses different physical paths. Minimizes switch-to-switch traffic during ring AllReduce, maximizing effective BusBW. Requires ECMP-aware collective placement. |
 | **Bisection Bandwidth** | The aggregate bandwidth across the minimum cut that divides the fabric into two equal halves. Non-blocking fabrics provide bisection bandwidth equal to half the total edge (server-facing) bandwidth. Limits worst-case all-to-all communication throughput. |
@@ -323,7 +325,7 @@ documents.
 | **Buffer Occupancy** | The instantaneous or time-averaged fill level of a switch port's packet buffer, expressed in bytes or as a fraction of total buffer capacity. Elevated sustained buffer occupancy indicates congestion. P99 buffer occupancy is a Fabric Health Indicator in the companion methodology documents. |
 | **Zero-Impact Failover** | Sub-microsecond automatic path convergence upon a link or switch failure resulting in no measurable increase to JCT or TTFT. Requires pre-programmed alternate paths and hardware-level fast reroute (FRR) with sub-microsecond detection, not relying on routing protocol convergence. |
 | **Link Utilization** | The fraction of the nominal link capacity actually used for data transmission over a measurement interval, expressed as a percentage. Reported as mean, P95, and P99 per link. High asymmetric link utilization (low average but high peak) is characteristic of bursty AI inference traffic. |
-{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}
+|{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}||
 
 # Training-Specific Terms
 
