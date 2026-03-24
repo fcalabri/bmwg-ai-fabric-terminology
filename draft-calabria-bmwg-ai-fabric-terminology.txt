@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 22 September 2026                          Blue Fern Consulting
+Expires: 25 September 2026                          Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                           21 March 2026
+                                                           24 March 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 September 2026.
+   This Internet-Draft will expire on 25 September 2026.
 
 Copyright Notice
 
@@ -725,96 +725,132 @@ Table of Contents
    infrastructure components referenced in the companion methodology
    documents.
 
-    +===================+=============================================+
-    | Term              | Definition                                  |
-    +===================+=============================================+
-    | *Clos / Fat-Tree  | A multi-stage switch topology providing     |
-    | Topology*         | non-blocking or oversubscribed connectivity |
-    |                   | between all leaf-to-leaf pairs.  In AI      |
-    |                   | fabric deployments, a two-tier (leaf-spine) |
-    |                   | or three-tier (leaf-spine-superspine) Clos  |
-    |                   | is standard.  Full bisection bandwidth      |
-    |                   | (1:1) is the target for training fabrics;   |
-    |                   | 2:1 or 4:1 oversubscription may be          |
-    |                   | acceptable for inference fabrics.           |
-    +-------------------+---------------------------------------------+
-    | *Rail-Optimized   | A topology in which the NIC ports of each   |
-    | Topology*         | server are distributed across multiple ToR  |
-    |                   | switches (one NIC port per switch), such    |
-    |                   | that collective traffic between adjacent    |
-    |                   | servers traverses different physical paths. |
-    |                   | Minimizes switch-to-switch traffic during   |
-    |                   | ring AllReduce, maximizing effective BusBW. |
-    |                   | Requires ECMP-aware collective placement.   |
-    +-------------------+---------------------------------------------+
-    | *Bisection        | The aggregate bandwidth across the minimum  |
-    | Bandwidth*        | cut that divides the fabric into two equal  |
-    |                   | halves.  Non-blocking fabrics provide       |
-    |                   | bisection bandwidth equal to half the total |
-    |                   | edge (server-facing) bandwidth.  Limits     |
-    |                   | worst-case all-to-all communication         |
-    |                   | throughput.                                 |
-    +-------------------+---------------------------------------------+
-    | *Oversubscription | The ratio of total edge (server-facing)     |
-    | Ratio*            | bandwidth to total bisection bandwidth in a |
-    |                   | Clos fabric.  A 1:1 ratio is non-blocking;  |
-    |                   | higher ratios (e.g., 2:1, 4:1) reduce       |
-    |                   | fabric cost but may bottleneck all-to-all   |
-    |                   | and AllReduce patterns when all server      |
-    |                   | ports are active simultaneously.            |
-    +-------------------+---------------------------------------------+
-    | *ToR Switch*      | Top-of-Rack switch.  The first-hop          |
-    |                   | aggregation switch connecting accelerator   |
-    |                   | servers in a rack to the spine layer of the |
-    |                   | fabric.  In rail-optimized topologies,      |
-    |                   | multiple ToR switches serve a single rack,  |
-    |                   | with each server's NICs distributed across  |
-    |                   | ToRs.                                       |
-    +-------------------+---------------------------------------------+
-    | *Spine /          | Intermediate and top-layer switches in a    |
-    | Superspine*       | multi-tier Clos fabric, providing inter-    |
-    |                   | rack and inter-pod connectivity             |
-    |                   | respectively.  Spine switches aggregate     |
-    |                   | multiple ToR switches; superspine switches  |
-    |                   | aggregate multiple spine pods.              |
-    +-------------------+---------------------------------------------+
-    | *NIC*             | Network Interface Controller.  The hardware |
-    |                   | device providing network connectivity for   |
-    |                   | an accelerator host.  AI fabric NICs        |
-    |                   | support RDMA (RoCEv2 or UET), hardware      |
-    |                   | offload for collective operations, and,     |
-    |                   | optionally, GPU-Initiated Networking (GIN). |
-    |                   | NIC model and firmware version *MUST* be    |
-    |                   | documented in all benchmark reports.        |
-    +-------------------+---------------------------------------------+
-    | *Buffer           | The instantaneous or time-averaged fill     |
-    | Occupancy*        | level of a switch port's packet buffer,     |
-    |                   | expressed in bytes or as a fraction of      |
-    |                   | total buffer capacity.  Elevated sustained  |
-    |                   | buffer occupancy indicates congestion.  P99 |
-    |                   | buffer occupancy is a Fabric Health         |
-    |                   | Indicator in the companion methodology      |
-    |                   | documents.                                  |
-    +-------------------+---------------------------------------------+
-    | *Zero-Impact      | Sub-microsecond automatic path convergence  |
-    | Failover*         | upon a link or switch failure resulting in  |
-    |                   | no measurable increase to JCT or TTFT.      |
-    |                   | Requires pre-programmed alternate paths and |
-    |                   | hardware-level fast reroute (FRR) with sub- |
-    |                   | microsecond detection, not relying on       |
-    |                   | routing protocol convergence.               |
-    +-------------------+---------------------------------------------+
-    | *Link             | The fraction of the nominal link capacity   |
-    | Utilization*      | actually used for data transmission over a  |
-    |                   | measurement interval, expressed as a        |
-    |                   | percentage.  Reported as mean, P95, and P99 |
-    |                   | per link.  High asymmetric link utilization |
-    |                   | (low average but high peak) is              |
-    |                   | characteristic of bursty AI inference       |
-    |                   | traffic.                                    |
-    +-------------------+---------------------------------------------+
+     +===================+===========================================+
+     | Term              | Definition                                |
+     +===================+===========================================+
+     | *Fabric DUT       | The precise measurement boundary for BMWG |
+     | Boundary*         | AI fabric benchmarks.  Defined as the NIC |
+     |                   | Ethernet port (transmit side at source,   |
+     |                   | receive side at destination).  All        |
+     |                   | benchmarked metrics (throughput, latency, |
+     |                   | loss, congestion) are measured at or      |
+     |                   | between NIC Ethernet ports.  Intra-node   |
+     |                   | segments (NVLink, PCIe Gen4/5, CXL) are   |
+     |                   | outside the DUT boundary and MUST NOT be  |
+     |                   | included in fabric benchmark results      |
+     |                   | without explicit labelling as a separate  |
+     |                   | measurement component.                    |
+     +-------------------+-------------------------------------------+
+     | *Intra-Node       | The latency and bandwidth consumed by     |
+     | Transfer          | data movement within a single server      |
+     | Overhead*         | node: specifically, the GPU-to-NIC path   |
+     |                   | via PCIe or CXL, and GPU-to-GPU           |
+     |                   | communication via NVLink.  Intra-node     |
+     |                   | transfer overhead is a contextual         |
+     |                   | measurement reported alongside fabric     |
+     |                   | benchmarks in end-to-end decomposition    |
+     |                   | tests but is not itself the benchmarked   |
+     |                   | entity in any test in this document       |
+     +-------------------+-------------------------------------------+
+     | *Clos / Fat-Tree  | A multi-stage switch topology providing   |
+     | Topology*         | non-blocking or oversubscribed            |
+     |                   | connectivity between all leaf-to-leaf     |
+     |                   | pairs.  In AI fabric deployments, a two-  |
+     |                   | tier (leaf-spine) or three-tier (leaf-    |
+     |                   | spine-superspine) Clos is standard.  Full |
+     |                   | bisection bandwidth (1:1) is the target   |
+     |                   | for training fabrics; 2:1 or 4:1          |
+     |                   | oversubscription may be acceptable for    |
+     |                   | inference fabrics.                        |
+     +-------------------+-------------------------------------------+
+     | *Rail-Optimized   | A topology in which the NIC ports of each |
+     | Topology*         | server are distributed across multiple    |
+     |                   | ToR switches (one NIC port per switch),   |
+     |                   | such that collective traffic between      |
+     |                   | adjacent servers traverses different      |
+     |                   | physical paths.  Minimizes switch-to-     |
+     |                   | switch traffic during ring AllReduce,     |
+     |                   | maximizing effective BusBW.  Requires     |
+     |                   | ECMP-aware collective placement.          |
+     +-------------------+-------------------------------------------+
+     | *Bisection        | The aggregate bandwidth across the        |
+     | Bandwidth*        | minimum cut that divides the fabric into  |
+     |                   | two equal halves.  Non-blocking fabrics   |
+     |                   | provide bisection bandwidth equal to half |
+     |                   | the total edge (server-facing) bandwidth. |
+     |                   | Limits worst-case all-to-all              |
+     |                   | communication throughput.                 |
+     +-------------------+-------------------------------------------+
+     | *Oversubscription | The ratio of total edge (server-facing)   |
+     | Ratio*            | bandwidth to total bisection bandwidth in |
+     |                   | a Clos fabric.  A 1:1 ratio is non-       |
+     |                   | blocking; higher ratios (e.g., 2:1, 4:1)  |
+     |                   | reduce fabric cost but may bottleneck     |
+     |                   | all-to-all and AllReduce patterns when    |
+     |                   | all server ports are active               |
+     |                   | simultaneously.                           |
+     +-------------------+-------------------------------------------+
+     | *ToR Switch*      | Top-of-Rack switch.  The first-hop        |
+     |                   | aggregation switch connecting accelerator |
+     |                   | servers in a rack to the spine layer of   |
+     |                   | the fabric.  In rail-optimized            |
+     |                   | topologies, multiple ToR switches serve a |
+     |                   | single rack, with each server's NICs      |
+     |                   | distributed across ToRs.                  |
+     +-------------------+-------------------------------------------+
+     | *Spine /          | Intermediate and top-layer switches in a  |
+     | Superspine*       | multi-tier Clos fabric, providing inter-  |
+     |                   | rack and inter-pod connectivity           |
+     |                   | respectively.  Spine switches aggregate   |
+     |                   | multiple ToR switches; superspine         |
+     |                   | switches aggregate multiple spine pods.   |
+     +-------------------+-------------------------------------------+
+     | *NIC*             | Network Interface Controller.  The        |
+     |                   | hardware device providing network         |
+     |                   | connectivity for an accelerator host.  AI |
+     |                   | fabric NICs support RDMA (RoCEv2 or UET), |
+     |                   | hardware offload for collective           |
+     |                   | operations, and, optionally, GPU-         |
+     |                   | Initiated Networking (GIN).  NIC model    |
+     |                   | and firmware version *MUST* be documented |
+     |                   | in all benchmark reports.                 |
+     +-------------------+-------------------------------------------+
+     | *Buffer           | The instantaneous or time-averaged fill   |
+     | Occupancy*        | level of a switch port's packet buffer,   |
+     |                   | expressed in bytes or as a fraction of    |
+     |                   | total buffer capacity.  Elevated          |
+     |                   | sustained buffer occupancy indicates      |
+     |                   | congestion.  P99 buffer occupancy is a    |
+     |                   | Fabric Health Indicator in the companion  |
+     |                   | methodology documents.                    |
+     +-------------------+-------------------------------------------+
+     | *Zero-Impact      | Sub-microsecond automatic path            |
+     | Failover*         | convergence upon a link or switch failure |
+     |                   | resulting in no measurable increase to    |
+     |                   | JCT or TTFT.  Requires pre-programmed     |
+     |                   | alternate paths and hardware-level fast   |
+     |                   | reroute (FRR) with sub-microsecond        |
+     |                   | detection, not relying on routing         |
+     |                   | protocol convergence.                     |
+     +-------------------+-------------------------------------------+
+     | *Link             | The fraction of the nominal link capacity |
+     | Utilization*      | actually used for data transmission over  |
+     |                   | a measurement interval, expressed as a    |
+     |                   | percentage.  Reported as mean, P95, and   |
+     |                   | P99 per link.  High asymmetric link       |
+     |                   | utilization (low average but high peak)   |
+     |                   | is characteristic of bursty AI inference  |
+     |                   | traffic.                                  |
+     +-------------------+-------------------------------------------+
+     | {: #tab-fabric-   |                                           |
+     | topo              |                                           |
+     | title="Fabric     |                                           |
+     | Topology and      |                                           |
+     | Infrastructure    |                                           |
+     | Terms"}           |                                           |
+     +-------------------+-------------------------------------------+
 
-             Table 9: Fabric Topology and Infrastructure Terms
+                                  Table 9
 
 8.  Training-Specific Terms
 
