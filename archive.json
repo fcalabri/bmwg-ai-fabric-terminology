@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-24T02:03:00.290788+00:00",
+  "timestamp": "2026-03-26T02:22:10.916449+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -246,6 +246,102 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDORX8iVs7NAdES",
+      "title": "DUT Boundary",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/8",
+      "state": "CLOSED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Added DUT Boundary and Intra-Node Transfer Overhead  Definitions ",
+      "createdAt": "2026-03-24T13:21:45Z",
+      "updatedAt": "2026-03-24T13:46:55Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "2eed22f311963703f4b345c66c90c0f6db5b1271",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "Fer-01-review",
+      "headRefOid": "e4b3c21e00000373d0ad9f56abfaa9b09d9b2540",
+      "closedAt": "2026-03-24T13:46:54Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDORX8iVs7NButk",
+      "title": "DUT Boundary Definition",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/9",
+      "state": "CLOSED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "cpignata"
+      ],
+      "labels": [],
+      "body": "Added DUT Boundary Definition  and Intra-Node Transfer Overhead to be added into training and inference documents ,  requested by Sowjanya",
+      "createdAt": "2026-03-24T14:23:50Z",
+      "updatedAt": "2026-03-24T14:37:45Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "2eed22f311963703f4b345c66c90c0f6db5b1271",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "DUT-Boundary",
+      "headRefOid": "ab2396b8921d8336ac085d3e0e5449d102831e37",
+      "closedAt": "2026-03-24T14:37:44Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDORX8iVs7NC-fH",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/10",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "DUT Boundary Definitions and Intra-Node Transfer Overhead",
+      "createdAt": "2026-03-24T15:25:32Z",
+      "updatedAt": "2026-03-24T19:59:44Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "2eed22f311963703f4b345c66c90c0f6db5b1271",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "DUT_Boundary",
+      "headRefOid": "538cb0816f3dced0d98cc21bbb140da11d101ed1",
+      "closedAt": "2026-03-24T19:59:13Z",
+      "mergedAt": "2026-03-24T19:59:13Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "77807b11685840ba092759c5cbccab67b7e7191e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs7uiE1y",
+          "commit": {
+            "abbreviatedOid": "538cb08"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-24T19:53:59Z",
+          "updatedAt": "2026-03-24T19:53:59Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
