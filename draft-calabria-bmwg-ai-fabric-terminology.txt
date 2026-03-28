@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 25 September 2026                          Blue Fern Consulting
+Expires: 29 September 2026                          Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                           24 March 2026
+                                                           28 March 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -62,7 +62,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 September 2026.
+   This Internet-Draft will expire on 29 September 2026.
 
 Copyright Notice
 
@@ -919,10 +919,10 @@ Table of Contents
    +==================+================================================+
    | Term             | Definition                                     |
    +==================+================================================+
-   | *TTFT*           | Time to First Token.  The elapsed time         |
-   |                  | from receipt of an inference request by        |
-   |                  | the serving system to emission of the          |
-   |                  | first output token.  Encompasses prompt        |
+   | *TTFT*           | Time to First Token.  The elapsed time from    |
+   |                  | receipt of an inference request by the         |
+   |                  | serving system to emission of the first        |
+   |                  | output token.  Encompasses prompt              |
    |                  | processing (prefill), KV cache generation,     |
    |                  | optional KV cache transfer (in                 |
    |                  | disaggregated architectures), and the          |
@@ -930,20 +930,18 @@ Table of Contents
    |                  | target: TTFT < 500 ms at P99.                  |
    +------------------+------------------------------------------------+
    | *ITL*            | Inter-Token Latency.  The elapsed time         |
-   |                  | between successive output tokens during        |
-   |                  | the autoregressive decode phase.  Measured     |
-   |                  | at P50, P95, P99, and P99.9 to                 |
-   |                  | characterize tail latency behavior.            |
-   |                  | Interactive serving target: ITL < 50 ms at     |
-   |                  | P99.                                           |
+   |                  | between successive output tokens during the    |
+   |                  | autoregressive decode phase.  Measured at      |
+   |                  | P50, P95, P99, and P99.9 to characterize       |
+   |                  | tail latency behavior.  Interactive serving    |
+   |                  | target: ITL < 50 ms at P99.                    |
    +------------------+------------------------------------------------+
-   | *TPS*            | Tokens Per Second.  Aggregate throughput       |
-   |                  | of the inference serving system, measured      |
-   |                  | as the total number of output tokens           |
-   |                  | generated per second across all concurrent     |
-   |                  | requests.  Reported separately for input-      |
-   |                  | side (prefill) TPS and output-side             |
-   |                  | (decode) TPS.                                  |
+   | *TPS*            | Tokens Per Second.  Aggregate throughput of    |
+   |                  | the inference serving system, measured as      |
+   |                  | the total number of output tokens generated    |
+   |                  | per second across all concurrent requests.     |
+   |                  | Reported separately for input-side             |
+   |                  | (prefill) TPS and output-side (decode) TPS.    |
    +------------------+------------------------------------------------+
    | *KV Cache*       | Key-Value Cache.  The intermediate             |
    |                  | attention state (key and value projection      |
@@ -956,15 +954,15 @@ Table of Contents
    |                  | The attention head configuration *MUST* be     |
    |                  | reported in all benchmark results.             |
    +------------------+------------------------------------------------+
-   | *Prefill Phase*  | The compute-bound phase of LLM inference       |
-   |                  | in which the entire input prompt is            |
-   |                  | processed in parallel to generate the KV       |
-   |                  | cache and the first output token.              |
-   |                  | Characterized by high arithmetic intensity     |
-   |                  | (200–400 ops/byte), high accelerator           |
-   |                  | utilization (90–95%), and large activation     |
-   |                  | tensors.  Prefill latency dominates TTFT       |
-   |                  | for long prompts.                              |
+   | *Prefill Phase*  | The compute-bound phase of LLM inference in    |
+   |                  | which the entire input prompt is processed     |
+   |                  | in parallel to generate the KV cache and       |
+   |                  | the first output token.  Characterized by      |
+   |                  | high arithmetic intensity (200–400 ops/        |
+   |                  | byte), high accelerator utilization            |
+   |                  | (90–95%), and large activation tensors.        |
+   |                  | Prefill latency dominates TTFT for long        |
+   |                  | prompts.                                       |
    +------------------+------------------------------------------------+
    | *Decode Phase*   | The memory-bandwidth-bound phase of LLM        |
    |                  | inference in which output tokens are           |
@@ -972,18 +970,18 @@ Table of Contents
    |                  | forward pass, by reading the KV cache.         |
    |                  | Characterized by low arithmetic intensity      |
    |                  | (60–80 ops/byte), lower accelerator            |
-   |                  | utilization (20–40%), and memory-              |
-   |                  | bandwidth-limited KV cache reads.  Decode      |
-   |                  | throughput limits TPS.                         |
+   |                  | utilization (20–40%), and memory-bandwidth-    |
+   |                  | limited KV cache reads.  Decode throughput     |
+   |                  | limits TPS.                                    |
    +------------------+------------------------------------------------+
    | *Disaggregated   | An inference serving architecture in which     |
    | Serving*         | the prefill phase and decode phase are         |
    |                  | executed on physically separate groups of      |
    |                  | accelerators (workers), connected by a         |
-   |                  | network fabric.  Allows independent            |
-   |                  | scaling of prefill and decode resources        |
-   |                  | (xPyD) but introduces KV cache transfer as     |
-   |                  | a fabric-critical data movement.               |
+   |                  | network fabric.  Allows independent scaling    |
+   |                  | of prefill and decode resources (xPyD) but     |
+   |                  | introduces KV cache transfer as a fabric-      |
+   |                  | critical data movement.                        |
    +------------------+------------------------------------------------+
    | *xPyD Ratio*     | The allocation ratio of x prefill workers      |
    |                  | to y decode workers in a disaggregated         |
@@ -1003,8 +1001,8 @@ Table of Contents
    |                  | fabric traffic burstiness.                     |
    +------------------+------------------------------------------------+
    | *PagedAttention* | A KV cache memory management technique         |
-   |                  | storing attention keys and values in           |
-   |                  | fixed-size, non-contiguous virtual pages       |
+   |                  | storing attention keys and values in fixed-    |
+   |                  | size, non-contiguous virtual pages             |
    |                  | (typically 16–64 KB), inspired by OS           |
    |                  | virtual memory management.  Reduces memory     |
    |                  | fragmentation and enables efficient KV         |
@@ -1019,18 +1017,18 @@ Table of Contents
    |                  | secondary KPI for inference serving            |
    |                  | efficiency.                                    |
    +------------------+------------------------------------------------+
-   | *Normal          | An AllToAll MoE dispatch communication         |
-   | Dispatch*        | mode optimized for the prefill phase.          |
-   |                  | Payload sizes are variable (depending on       |
-   |                  | token-to-expert routing), generating           |
-   |                  | dynamic tensor shapes incompatible with        |
-   |                  | static graph capture.  Maximizes               |
-   |                  | throughput for large batches at the cost       |
-   |                  | of higher per-dispatch latency.                |
+   | *Normal          | An AllToAll MoE dispatch communication mode    |
+   | Dispatch*        | optimized for the prefill phase.  Payload      |
+   |                  | sizes are variable (depending on token-to-     |
+   |                  | expert routing), generating dynamic tensor     |
+   |                  | shapes incompatible with static graph          |
+   |                  | capture.  Maximizes throughput for large       |
+   |                  | batches at the cost of higher per-dispatch     |
+   |                  | latency.                                       |
    +------------------+------------------------------------------------+
-   | *Low-Latency     | An AllToAll MoE dispatch communication         |
-   | Dispatch*        | mode optimized for the decode phase.           |
-   |                  | Payload sizes are padded to fixed maximum      |
+   | *Low-Latency     | An AllToAll MoE dispatch communication mode    |
+   | Dispatch*        | optimized for the decode phase.  Payload       |
+   |                  | sizes are padded to fixed maximum              |
    |                  | dimensions (compatible with static graph       |
    |                  | capture), enabling lower kernel-launch         |
    |                  | overhead at the cost of slight bandwidth       |
@@ -1044,14 +1042,30 @@ Table of Contents
    |                  | (e.g., < 50 ms P99) under a specified          |
    |                  | request arrival rate.                          |
    +------------------+------------------------------------------------+
-   | *Speculative     | An inference acceleration technique using      |
-   | Decoding*        | a small draft model to generate candidate      |
-   |                  | token sequences verified in parallel by        |
-   |                  | the target model.  Reduces effective ITL       |
-   |                  | but generates bursty, variable-length KV       |
-   |                  | cache traffic; noted as a future               |
-   |                  | benchmarking area not fully specified in       |
-   |                  | the current companion documents.               |
+   | *Speculative     | An inference acceleration technique using a    |
+   | Decoding*        | small draft model to generate candidate        |
+   |                  | token sequences verified in parallel by the    |
+   |                  | target model.  Reduces effective ITL but       |
+   |                  | generates bursty, variable-length KV cache     |
+   |                  | traffic; noted as a future benchmarking        |
+   |                  | area not fully specified in the current        |
+   |                  | companion documents.                           |
+   +------------------+------------------------------------------------+
+   | *S_KV*           | The total size in bytes of the KV cache        |
+   |                  | state generated by a single inference          |
+   |                  | request across all transformer layers and      |
+   |                  | all context tokens, computed as: S_KV = 2 x    |
+   |                  | L x H_kv x D x C x P_bytes.  Where: L =        |
+   |                  | number of transformer layers; H_kv = number    |
+   |                  | of KV attention heads per layer (H_kv <=       |
+   |                  | H_total for GQA/MQA); D = per-head key/        |
+   |                  | value dimension (head_dim), typically          |
+   |                  | model_dim / H_total; C = context length in     |
+   |                  | tokens (prompt + generated tokens); P_bytes    |
+   |                  | = precision in bytes per element (FP16/BF16    |
+   |                  | = 2, FP8/INT8 = 1); Factor 2 accounts for      |
+   |                  | both K and V tensors, each of shape [H_kv,     |
+   |                  | D] per layer per token.                        |
    +------------------+------------------------------------------------+
 
                      Table 11: Inference-Specific Terms
