@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-26T02:22:10.916449+00:00",
+  "timestamp": "2026-03-29T02:26:02.875862+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -339,6 +339,56 @@
           "body": "",
           "createdAt": "2026-03-24T19:53:59Z",
           "updatedAt": "2026-03-24T19:53:59Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDORX8iVs7OFyYx",
+      "title": "Inference KV_size added",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/11",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "KX_size to reflect changes on Inference draft",
+      "createdAt": "2026-03-27T15:45:50Z",
+      "updatedAt": "2026-03-28T12:34:22Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "77807b11685840ba092759c5cbccab67b7e7191e",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "S_KV-definition",
+      "headRefOid": "e17910ec15cd3604778cda82ec7d0549a93a50c5",
+      "closedAt": "2026-03-28T12:34:22Z",
+      "mergedAt": "2026-03-28T12:34:22Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "8d8e801baa70d1b1a5b5b2ab544127bdbc906bd1"
+      },
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "hopefully last addition b4 01",
+          "createdAt": "2026-03-28T12:34:18Z",
+          "updatedAt": "2026-03-28T12:34:18Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs7v7jL2",
+          "commit": {
+            "abbreviatedOid": "e17910e"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-28T09:18:50Z",
+          "updatedAt": "2026-03-28T09:18:50Z",
           "comments": []
         }
       ]
