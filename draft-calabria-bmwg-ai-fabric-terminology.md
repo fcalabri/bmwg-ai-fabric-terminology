@@ -28,7 +28,7 @@ keyword:
 
 venue:
   github: "fcalabri/bmwg-ai-fabric-terminology"
-  latest: "https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-bmwg-ai-fabric-terminology-00.html"
+  latest: "https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-bmwg-ai-fabric-terminology.html"
 
 author:
  -
@@ -82,7 +82,7 @@ informative:
         name: Carlos Pignataro
     date: 2026-02
     seriesinfo:
-      Internet-Draft: draft-bmwg-ai-fabric-training-bench-00
+      Internet-Draft: draft-bmwg-ai-fabric-training-bench
 
   INFERENCE-BENCH:
     title: "Benchmarking Methodology for AI Inference Serving Network Fabrics"
@@ -93,7 +93,7 @@ informative:
         name: Carlos Pignataro
     date: 2026-02
     seriesinfo:
-      Internet-Draft: draft-bmwg-ai-fabric-inference-bench-00
+      Internet-Draft: draft-bmwg-ai-fabric-inference-bench
 
 
 --- abstract
@@ -108,8 +108,8 @@ communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
-This document is a companion to draft-bmwg-ai-fabric-training-bench-00
-and draft-bmwg-ai-fabric-inference-bench-00. Those documents
+This document is a companion to {{?I-D.bmwg-ai-fabric-training-bench}}
+and {{?I-D.bmwg-ai-fabric-inference-bench}}. Those documents
 SHOULD NOT be applied without first consulting the terminology defined
 herein. Where definitions herein overlap with RFC 1242 or RFC 8238,
 the AI fabric context definition in this document takes precedence.
@@ -154,7 +154,7 @@ documents.
 This document is one of three companion Internet-Drafts addressing AI
 fabric benchmarking:
 
-- draft-bmwg-ai-fabric-terminology-00 (this document): Terminology
+- {{?I-D.bmwg-ai-fabric-terminology}} (this document): Terminology
   definitions.
 - {{TRAINING-BENCH}}: Benchmarking methodology for AI training
   workloads.
