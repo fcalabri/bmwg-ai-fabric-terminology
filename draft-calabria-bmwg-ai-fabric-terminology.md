@@ -418,8 +418,8 @@ methodology documents.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
-
+This work has benefited from the discussions that occurred during IPPM&BMWG joint meeting and on BMWG mailing list. Thanks Carsten Rossenhoevel, Mohamed Boucadair
+, Sowjanya Reddy for valuable review and comments.
 
 --- back
 
