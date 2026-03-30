@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 29 September 2026                          Blue Fern Consulting
+Expires: 1 October 2026                             Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                           28 March 2026
+                                                           30 March 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -27,12 +27,11 @@ Abstract
    Ethernet Transport), congestion control behaviors, AI-specific Key
    Performance Indicators (KPIs), and fabric topology concepts.
 
-   This document is a companion to draft-bmwg-ai-fabric-training-
-   bench-00 and draft-bmwg-ai-fabric-inference-bench-00.  Those
-   documents SHOULD NOT be applied without first consulting the
-   terminology defined herein.  Where definitions herein overlap with
-   RFC 1242 or RFC 8238, the AI fabric context definition in this
-   document takes precedence.
+   This document is a companion to [I-D.bmwg-ai-fabric-training-bench]
+   and [I-D.bmwg-ai-fabric-inference-bench].  Those documents SHOULD NOT
+   be applied without first consulting the terminology defined herein.
+   Where definitions herein overlap with RFC 1242 or RFC 8238, the AI
+   fabric context definition in this document takes precedence.
 
 About This Document
 
@@ -40,7 +39,7 @@ About This Document
 
    The latest revision of this draft can be found at
    https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-
-   bmwg-ai-fabric-terminology-00.html.  Status information for this
+   bmwg-ai-fabric-terminology.html.  Status information for this
    document may be found at https://datatracker.ietf.org/doc/draft-
    calabria-bmwg-ai-fabric-terminology/.
 
@@ -62,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 September 2026.
+   This Internet-Draft will expire on 1 October 2026.
 
 Copyright Notice
 
@@ -150,7 +149,7 @@ Table of Contents
    This document is one of three companion Internet-Drafts addressing AI
    fabric benchmarking:
 
-   *  draft-bmwg-ai-fabric-terminology-00 (this document): Terminology
+   *  [I-D.bmwg-ai-fabric-terminology] (this document): Terminology
       definitions.
 
    *  [TRAINING-BENCH]: Benchmarking methodology for AI training
@@ -1237,6 +1236,15 @@ Normative References
 
 Informative References
 
+   [I-D.bmwg-ai-fabric-inference-bench]
+              "*** BROKEN REFERENCE ***".
+
+   [I-D.bmwg-ai-fabric-terminology]
+              "*** BROKEN REFERENCE ***".
+
+   [I-D.bmwg-ai-fabric-training-bench]
+              "*** BROKEN REFERENCE ***".
+
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
               Specification, Annex 16: RoCE", 2010,
@@ -1246,9 +1254,9 @@ Informative References
               Calabria, F. and C. Pignataro, "Benchmarking Methodology
               for AI Inference Serving Network Fabrics", Work in
               Progress, Internet-Draft, draft-bmwg-ai-fabric-inference-
-              bench-00, February 2026,
+              bench, February 2026,
               <https://datatracker.ietf.org/doc/html/draft-bmwg-ai-
-              fabric-inference-bench-00>.
+              fabric-inference-bench>.
 
    [RFC1242]  Bradner, S., "Benchmarking Terminology for Network
               Interconnection Devices", RFC 1242, DOI 10.17487/RFC1242,
@@ -1265,9 +1273,9 @@ Informative References
    [TRAINING-BENCH]
               Calabria, F. and C. Pignataro, "Benchmarking Methodology
               for AI Training Network Fabrics", Work in Progress,
-              Internet-Draft, draft-bmwg-ai-fabric-training-bench-00,
+              Internet-Draft, draft-bmwg-ai-fabric-training-bench,
               February 2026, <https://datatracker.ietf.org/doc/html/
-              draft-bmwg-ai-fabric-training-bench-00>.
+              draft-bmwg-ai-fabric-training-bench>.
 
    [UEC-SPEC-1.0]
               Ultra Ethernet Consortium, "Ultra Ethernet Specification
