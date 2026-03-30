@@ -20,7 +20,9 @@ communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts. 
        This document is the common terminology baseline for the companion
-methodology documents. Companion documents  SHOULD  reference definitions
+methodology documents  
+and  
+Companion documents  SHOULD  reference definitions
 herein rather than restate them, and  MAY  redefine a term only where the
 specific workload context introduces a substantive technical difference;
 in such cases the companion document  MUST  cite the original definition
@@ -1133,7 +1135,9 @@ communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document is the common terminology baseline for the companion
-methodology documents. Companion documents <span class="bcp14">SHOULD</span> reference definitions
+methodology documents <span>[<a href="#I-D.bmwg-ai-fabric-training-bench" class="cite xref">I-D.bmwg-ai-fabric-training-bench</a>]</span>
+and <span>[<a href="#I-D.bmwg-ai-fabric-inference-bench" class="cite xref">I-D.bmwg-ai-fabric-inference-bench</a>]</span>
+Companion documents <span class="bcp14">SHOULD</span> reference definitions
 herein rather than restate them, and <span class="bcp14">MAY</span> redefine a term only where the
 specific workload context introduces a substantive technical difference;
 in such cases the companion document <span class="bcp14">MUST</span> cite the original definition
@@ -1360,7 +1364,7 @@ documents.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 fabric benchmarking:<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.4-2.1">
-            <p id="section-1.4-2.1.1"><span>[<a href="#I-D.bmwg-ai-fabric-terminology" class="cite xref">I-D.bmwg-ai-fabric-terminology</a>]</span> (this document): Terminology
+            <p id="section-1.4-2.1.1">This document: Terminology
 definitions.<a href="#section-1.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.4-2.2">
@@ -1891,7 +1895,7 @@ associated fabric behaviors critical to AI workload performance.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">
               <strong>ECN</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Explicit Congestion Notification ([RFC3168]). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN.</td>
+            <td class="text-left" rowspan="1" colspan="1">Explicit Congestion Notification (<span>[<a href="#RFC3168" class="cite xref">RFC3168</a>]</span>). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2016,8 +2020,12 @@ associated fabric behaviors critical to AI workload performance.<a href="#sectio
 <p id="section-7-1">The following terms define fabric topology architectures and
 infrastructure components referenced in the companion methodology
 documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<span id="name-fabric-topology-and-infrastr"></span><div id="tab-fabric-topo">
 <table class="center" id="table-9">
-        <caption><a href="#table-9" class="selfRef">Table 9</a></caption>
+        <caption>
+<a href="#table-9" class="selfRef">Table 9</a>:
+<a href="#name-fabric-topology-and-infrastr" class="selfRef">Fabric Topology and Infrastructure Terms</a>
+        </caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Term</th>
@@ -2097,12 +2105,9 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </td>
             <td class="text-left" rowspan="1" colspan="1">The fraction of the nominal link capacity actually used for data transmission over a measurement interval, expressed as a percentage. Reported as mean, P95, and P99 per link. High asymmetric link utilization (low average but high peak) is characteristic of bursty AI inference traffic.</td>
           </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
-          </tr>
         </tbody>
       </table>
+</div>
 </section>
 </div>
 <div id="training-specific-terms">
@@ -2533,7 +2538,11 @@ methodology documents.<a href="#section-11-1" class="pilcrow">¶</a></p>
 <a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="I-D.bmwg-ai-fabric-terminology">[I-D.bmwg-ai-fabric-terminology]</dt>
+<dt id="I-D.bmwg-ai-fabric-inference-bench">[I-D.bmwg-ai-fabric-inference-bench]</dt>
+        <dd>
+<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.bmwg-ai-fabric-training-bench">[I-D.bmwg-ai-fabric-training-bench]</dt>
         <dd>
 <span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
 <dd class="break"></dd>
@@ -2548,6 +2557,10 @@ methodology documents.<a href="#section-11-1" class="pilcrow">¶</a></p>
 <dt id="RFC1242">[RFC1242]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Benchmarking Terminology for Network Interconnection Devices"</span>, <span class="seriesInfo">RFC 1242</span>, <span class="seriesInfo">DOI 10.17487/RFC1242</span>, <time datetime="1991-07" class="refDate">July 1991</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc1242">https://www.rfc-editor.org/rfc/rfc1242</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3168">[RFC3168]</dt>
+        <dd>
+<span class="refAuthor">Ramakrishnan, K.</span>, <span class="refAuthor">Floyd, S.</span>, and <span class="refAuthor">D. Black</span>, <span class="refTitle">"The Addition of Explicit Congestion Notification (ECN) to IP"</span>, <span class="seriesInfo">RFC 3168</span>, <span class="seriesInfo">DOI 10.17487/RFC3168</span>, <time datetime="2001-09" class="refDate">September 2001</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc3168">https://www.rfc-editor.org/rfc/rfc3168</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8238">[RFC8238]</dt>
         <dd>
