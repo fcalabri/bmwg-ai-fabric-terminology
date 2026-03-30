@@ -108,11 +108,14 @@ communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
-This document is a companion to {{?I-D.bmwg-ai-fabric-training-bench}}
-and {{?I-D.bmwg-ai-fabric-inference-bench}}. Those documents
-SHOULD NOT be applied without first consulting the terminology defined
-herein. Where definitions herein overlap with RFC 1242 or RFC 8238,
-the AI fabric context definition in this document takes precedence.
+This document is the common terminology baseline for the companion
+methodology documents. Companion documents SHOULD reference definitions 
+herein rather than restate them, and MAY redefine a term only where the
+specific workload context introduces a substantive technical difference; 
+in such cases the companion document MUST cite the original definition
+and state the nature of the difference.. Where definitions herein overlap
+with RFC 1242 or RFC 8238, the AI fabric context definition in this document 
+takes precedence.
 
 
 --- middle
