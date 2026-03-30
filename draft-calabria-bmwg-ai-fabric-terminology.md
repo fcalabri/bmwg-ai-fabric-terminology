@@ -109,7 +109,9 @@ Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
 This document is the common terminology baseline for the companion
-methodology documents. Companion documents SHOULD reference definitions
+methodology documents {{?I-D.bmwg-ai-fabric-training-bench}}
+and {{?I-D.bmwg-ai-fabric-inference-bench}}
+Companion documents SHOULD reference definitions
 herein rather than restate them, and MAY redefine a term only where the
 specific workload context introduces a substantive technical difference;
 in such cases the companion document MUST cite the original definition
