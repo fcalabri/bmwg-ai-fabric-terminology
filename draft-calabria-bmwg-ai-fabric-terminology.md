@@ -109,13 +109,16 @@ Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
 This document is the common terminology baseline for the companion
-methodology documents. Companion documents SHOULD reference definitions 
+methodology documents. Companion documents SHOULD reference definitions
 herein rather than restate them, and MAY redefine a term only where the
-specific workload context introduces a substantive technical difference; 
+specific workload context introduces a substantive technical difference;
 in such cases the companion document MUST cite the original definition
-and state the nature of the difference. Where definitions herein overlap
-with RFC 1242 or RFC 8238, the AI fabric context definition in this document
-takes precedence.
+and state the nature of the difference.
+
+ Where definitions herein overlap with RFC 1242 or RFC 8238, the AI
+ fabric context definition in this document takes precedence.
+
+
 
 
 --- middle
