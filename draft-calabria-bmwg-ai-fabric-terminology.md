@@ -113,8 +113,8 @@ methodology documents. Companion documents SHOULD reference definitions
 herein rather than restate them, and MAY redefine a term only where the
 specific workload context introduces a substantive technical difference; 
 in such cases the companion document MUST cite the original definition
-and state the nature of the difference.. Where definitions herein overlap
-with RFC 1242 or RFC 8238, the AI fabric context definition in this document 
+and state the nature of the difference. Where definitions herein overlap
+with RFC 1242 or RFC 8238, the AI fabric context definition in this document
 takes precedence.
 
 
