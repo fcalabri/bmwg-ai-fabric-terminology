@@ -73,19 +73,25 @@ informative:
       - org: Ultra Ethernet Consortium
     date: 2024
 
-  TRAINING-BENCH:
-    title: "Benchmarking Methodology for AI Training Network Fabrics"
+  I-D.calabria-bmwg-ai-fabric-terminology:
+    title: "Benchmarking Terminology for AI Network Fabrics"
+    target: https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-terminology/
     author:
       - ins: F. Calabria
         name: Fernando Calabria
       - ins: C. Pignataro
         name: Carlos Pignataro
+      - ins: Q. Wu
+        name: Qin Wu
+      - ins: G. Fioccola
+        name: Giuseppe Fioccola
     date: 2026-02
     seriesinfo:
-      Internet-Draft: draft-bmwg-ai-fabric-training-bench
+      Internet-Draft: draft-calabria-bmwg-ai-fabric-terminology
 
-  INFERENCE-BENCH:
-    title: "Benchmarking Methodology for AI Inference Serving Network Fabrics"
+  I-D.calabria-bmwg-ai-fabric-training-bench:
+    title: "Benchmarking Methodology for AI Training Network Fabrics"
+    target: https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-training-bench/
     author:
       - ins: F. Calabria
         name: Fernando Calabria
@@ -93,7 +99,19 @@ informative:
         name: Carlos Pignataro
     date: 2026-02
     seriesinfo:
-      Internet-Draft: draft-bmwg-ai-fabric-inference-bench
+      Internet-Draft: draft-calabria-bmwg-ai-fabric-training-bench
+
+  I-D.calabria-bmwg-ai-fabric-inference-bench:
+    title: "Benchmarking Methodology for AI Inference Serving Network Fabrics"
+    target: https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-inference-bench/
+    author:
+      - ins: F. Calabria
+        name: Fernando Calabria
+      - ins: C. Pignataro
+        name: Carlos Pignataro
+    date: 2026-02
+    seriesinfo:
+      Internet-Draft: draft-calabria-bmwg-ai-fabric-inference-bench
 
 
 --- abstract
@@ -108,8 +126,8 @@ communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
-This document is a companion to {{?I-D.bmwg-ai-fabric-training-bench}}
-and {{?I-D.bmwg-ai-fabric-inference-bench}}. Those documents
+This document is a companion to {{?I-D.calabria-bmwg-ai-fabric-training-bench}}
+and {{?I-D.calabria-bmwg-ai-fabric-inference-bench}}. Those documents
 SHOULD NOT be applied without first consulting the terminology defined
 herein. Where definitions herein overlap with RFC 1242 or RFC 8238,
 the AI fabric context definition in this document takes precedence.
@@ -154,11 +172,11 @@ documents.
 This document is one of three companion Internet-Drafts addressing AI
 fabric benchmarking:
 
-- {{?I-D.bmwg-ai-fabric-terminology}} (this document): Terminology
+- {{?I-D.calabria-bmwg-ai-fabric-terminology}} (this document): Terminology
   definitions.
-- {{TRAINING-BENCH}}: Benchmarking methodology for AI training
+- {{?I-D.calabria-bmwg-ai-fabric-training-bench}}: Benchmarking methodology for AI training
   workloads.
-- {{INFERENCE-BENCH}}: Benchmarking methodology for AI inference
+- {{?I-D.calabria-bmwg-ai-fabric-inference-bench}}: Benchmarking methodology for AI inference
   serving workloads.
 
 Implementers and evaluators SHOULD read this terminology document
@@ -179,9 +197,9 @@ applicable to all AI fabric benchmarking activities.
 | **DUT** | Device Under Test. The network element(s) whose performance characteristics are being measured. In AI fabric benchmarking the DUT is one or more fabric elements: leaf switches, spine switches, NICs, or the complete fabric assembly. |
 | **SUT** | System Under Test. The complete AI compute system including accelerators, NICs, the fabric DUT, and serving/training software, when end-to-end metrics are the measurement objective. |
 | **RT** | Router Tester / Traffic Generator. Test equipment capable of generating and receiving network traffic at specified rates with nanosecond-resolution timestamping sufficient for the measurements defined in the companion methodology documents. |
-| **JFI** | Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows: `JFI = (Σxᵢ)² / (n · Σxᵢ²)` where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. **SHOULD** be computed per [RFC1242] reporting conventions. |
+| **JFI** | Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows: `JFI = (Σxᵢ)² / (n · Σxᵢ²)` where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. **SHOULD** be computed per {{?RFC1242}} reporting conventions. |
 | **Offered Load** | The total traffic rate presented to the DUT from test equipment, expressed as a fraction of line rate (0–100%) or as absolute bit/s. Offered load is controlled independently of DUT absorption, enabling characterization of saturation behavior. |
-| **Trial Duration** | The time interval over which a single measurement is conducted. For AI fabric tests, the **RECOMMENDED** minimum is 60 seconds for throughput tests and 300 seconds for soak/stability tests, per the methodology in [RFC2544] as extended herein. |
+| **Trial Duration** | The time interval over which a single measurement is conducted. For AI fabric tests, the **RECOMMENDED** minimum is 60 seconds for throughput tests and 300 seconds for soak/stability tests, per the methodology in {{?RFC2544}} as extended herein. |
 | **Warmup Period** | A mandatory pre-measurement interval during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. **RECOMMENDED** minimum: 10 seconds. |
 | **Binary Search** | An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations. |
 | **Percentile Latency** | A latency statistic expressing that the specified fraction of all measured latency samples fall at or below the reported value. Denoted Pxx (e.g., P50, P95, P99, P99.9). Tail latency (P99 and above) is especially relevant for AI fabric benchmarking because SLO violations are determined by worst-case, not median, performance. |
@@ -200,7 +218,7 @@ are the primary traffic sources in distributed AI workloads.
 | **ReduceScatter** | A collective combining an element-wise reduction with a scatter, so each participant receives a distinct slice of the reduced result. Used in ZeRO-stage optimizer strategies and as the first half of a ring-AllReduce. |
 | **AllToAll** | A collective in which each participant sends a distinct payload to every other participant and receives a distinct payload from every other participant. The critical collective for Mixture-of-Experts token dispatch. Generates N²−1 independent point-to-point flows for N participants. |
 | **Ring Algorithm** | An AllReduce (or AllGather/ReduceScatter) algorithm structured as a logical ring of participants. Each participant sends to its right neighbor and receives from its left neighbor in 2(N−1) steps. Bus bandwidth efficiency = 2(N−1)/N, approaching 100% for large N. Standard baseline for BusBW calculation. |
-| **BusBW** | Bus Bandwidth. Effective per-accelerator throughput during a collective, normalizing for algorithm overhead: `BusBW = (data_size × algo_factor) / elapsed_time`. For ring AllReduce, `algo_factor = 2(N−1)/N`. Enables comparison across cluster sizes and collective algorithms. |
+| **BusBW** | The effective data throughput per accelerator during a collective<br/>   operation, computed as:<br/><br/>      BusBW = (data_size × algo_factor) / time<br/><br/>   where algo_factor normalizes for the collective type and algorithm:<br/><br />Collective       Algorithm                    algo_factor<br /><br/>   AllReduce        Ring / recursive doubling    2 × (n−1) / n<br/>   AllReduce        Binary / double-binary tree  2 × log₂(n) / n<br/>   AllGather        Ring                         (n−1) / n<br/>   ReduceScatter    Ring                         (n−1) / n<br/>   AllToAll         Direct                       (n−1) / n<br/><br/>   n = number of participating accelerators.<br/><br/>Ring AllReduce is the conventional comparison baseline. <br/><br/>Note: collective libraries commonly select the algorithm dynamically based on message size (e.g., tree-based for small messages, ring for large messages); algo_factor therefore varies with message size and MUST be reported per message-size bucket when dynamic selection is active. <br/>Reports MUST state: collective type, algorithm, algo_factor value, collective library name and version, and n. Units: Gbps per accelerator. |
 | **CCL** | Collective Communication Library. A software library providing optimized implementations of collective operations (AllReduce, AllGather, etc.) over a specific transport. The CCL implementation **MUST** be documented in the test report. |
 | **SPMD** | Single Program Multiple Data. The execution model underlying bulk-synchronous distributed training, in which all accelerators execute identical computation on distinct data partitions, synchronizing at collective barriers between steps. |
 | **Bulk Synchronous Parallel (BSP)** | A distributed computation model structured as alternating compute and communicate phases with a global synchronization barrier between phases. Standard training workloads follow BSP: forward pass → backward pass → AllReduce gradient sync → optimizer step. |
@@ -284,7 +302,7 @@ associated fabric behaviors critical to AI workload performance.
 | **PFC** | Priority Flow Control (IEEE 802.1Qbb). A lossless Ethernet mechanism in which a receiver transmits a PAUSE frame to its upstream neighbor on a specific priority class when its ingress buffer approaches a configured threshold, temporarily halting transmission of that priority. Required for lossless RoCEv2 operation. PFC operates hop-by-hop and can propagate congestion upstream (PFC storm risk). |
 | **PFC Storm** | A pathological condition in which PFC PAUSE frames propagate across multiple hops, causing widespread throughput degradation or deadlock unrelated to the original congestion source. Detection and mitigation **SHOULD** be part of soak test evaluation per the companion methodology documents. |
 | **PFC Deadlock** | A circular PFC dependency in which sets of flows mutually pause each other indefinitely, resulting in zero progress for affected traffic classes. Deadlock risk is elevated in non-tree topologies and **MUST** be evaluated in fabric-level soak tests. |
-| **ECN** | Explicit Congestion Notification ([RFC3168]). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
+| **ECN** | Explicit Congestion Notification ({{?RFC3168}}). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
 | **DCQCN** | Data Center Quantized Congestion Notification. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. Note: PFC serves as a separate, orthogonal backstop to prevent packet loss during DCQCN convergence; PFC is **not** a component of the DCQCN algorithm itself. |
 | **ECN Marking Ratio** | The fraction of packets (expressed as a percentage) that are marked with the CE codepoint in the IP ECN field over a measurement interval. A high ECN Marking Ratio indicates persistent congestion and is a primary Fabric Health Indicator. |
 | **Incast** | A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in AllReduce and collective operations. |
@@ -325,12 +343,12 @@ documents.
 | **Buffer Occupancy** | The instantaneous or time-averaged fill level of a switch port's packet buffer, expressed in bytes or as a fraction of total buffer capacity. Elevated sustained buffer occupancy indicates congestion. P99 buffer occupancy is a Fabric Health Indicator in the companion methodology documents. |
 | **Zero-Impact Failover** | Sub-microsecond automatic path convergence upon a link or switch failure resulting in no measurable increase to JCT or TTFT. Requires pre-programmed alternate paths and hardware-level fast reroute (FRR) with sub-microsecond detection, not relying on routing protocol convergence. |
 | **Link Utilization** | The fraction of the nominal link capacity actually used for data transmission over a measurement interval, expressed as a percentage. Reported as mean, P95, and P99 per link. High asymmetric link utilization (low average but high peak) is characteristic of bursty AI inference traffic. |
-|{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}||
+{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}
 
 # Training-Specific Terms
 
 The following terms are specific to AI training workload benchmarking
-and are used normatively in {{TRAINING-BENCH}}.
+and are used normatively in {{?I-D.calabria-bmwg-ai-fabric-training-bench}}.
 
 | Term | Definition |
 |---|---|
@@ -346,7 +364,7 @@ and are used normatively in {{TRAINING-BENCH}}.
 
 The following terms are specific to AI inference serving workload
 benchmarking and are used normatively in
-{{INFERENCE-BENCH}}.
+{{?I-D.calabria-bmwg-ai-fabric-inference-bench}}.
 
 | Term | Definition |
 |---|---|
