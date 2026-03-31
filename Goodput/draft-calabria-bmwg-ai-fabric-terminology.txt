@@ -1139,7 +1139,7 @@ Table of Contents
     |                | Inference_Goodput.                             |
     +----------------+------------------------------------------------+
     | *Zero Packet   | time, excluding retransmitted packets,         |
-    | Loss*          | protocol |A test acceptance criterion          |
+    | Loss*          | protocol.  A test acceptance criterion         |
     |                | requiring that no packets are dropped by the   |
     |                | DUT during the measurement interval.  For      |
     |                | RoCEv2 and UET transports, zero packet loss is |
