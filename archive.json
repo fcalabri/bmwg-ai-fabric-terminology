@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-29T02:26:02.875862+00:00",
+  "timestamp": "2026-03-31T02:23:42.492901+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -49,7 +49,221 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 13,
+      "id": "I_kwDORX8iVs74fHbF",
+      "title": "Scope boundary between network fabric and intra-node interconnects ( from Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/13",
+      "state": "CLOSED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T08:59:08Z",
+      "updatedAt": "2026-03-30T11:46:48Z",
+      "closedAt": "2026-03-30T11:46:48Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "Please check the new DUT Boundary definition. This comment should be addressed there,  but if you consider that adding this comment (redundant) would not 'hurt\u2019, please go ahead. ",
+          "createdAt": "2026-03-30T11:31:53Z",
+          "updatedAt": "2026-03-30T11:31:53Z"
+        },
+        {
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks for clarification, yes, I confirm this comment has been addressed by the following PR\nhttps://github.com/fcalabri/bmwg-ai-fabric-terminology/commit/77807b11685840ba092759c5cbccab67b7e7191e",
+          "createdAt": "2026-03-30T11:46:25Z",
+          "updatedAt": "2026-03-30T11:46:25Z"
+        },
+        {
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe this issue can be closed.",
+          "createdAt": "2026-03-30T11:46:45Z",
+          "updatedAt": "2026-03-30T11:46:45Z"
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDORX8iVs74hE7r",
+      "title": "Clarify relationship between terminology and companion documents (From Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/14",
+      "state": "CLOSED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T10:09:43Z",
+      "updatedAt": "2026-03-30T14:41:03Z",
+      "closedAt": "2026-03-30T14:41:03Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "her comments do not  address the fundamental issue when there is a conflict between the docs and its resolution,   thinking about a definition like this ....\n\n\nThis document is the common terminology baseline for the companion methodology documents. Companion documents SHOULD reference definitions herein rather than restate them, and MAY redefine a term only where the specific workload context introduces a substantive technical difference; in such cases the companion document MUST cite the original definition and state the nature of the difference.",
+          "createdAt": "2026-03-30T14:21:19Z",
+          "updatedAt": "2026-03-30T14:21:19Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "addressed by new PR ",
+          "createdAt": "2026-03-30T14:41:03Z",
+          "updatedAt": "2026-03-30T14:41:03Z"
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "I_kwDORX8iVs74hGCS",
+      "title": "Distinguish descriptive terminology from illustrative targets (From Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/15",
+      "state": "CLOSED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T10:10:20Z",
+      "updatedAt": "2026-03-30T14:14:18Z",
+      "closedAt": "2026-03-30T14:14:18Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "addressed ",
+          "createdAt": "2026-03-30T14:14:08Z",
+          "updatedAt": "2026-03-30T14:14:08Z"
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "I_kwDORX8iVs74hGxL",
+      "title": "BusBW definition could benefit from broader algorithm guidance (from Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/16",
+      "state": "OPEN",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T10:10:47Z",
+      "updatedAt": "2026-03-30T13:57:06Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "This is complicated,  her text still doe into address the main issue with the BusBW definition that formula is only defined for allReduced (most typical) . Need to consider what is already there on sections 9.1 to 9.4 (training) and define all the algo and algo factor on a an updated  busBW definition",
+          "createdAt": "2026-03-30T13:51:15Z",
+          "updatedAt": "2026-03-30T13:51:15Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "after terminology update - references on training and inference docs will need to be added / addressed ",
+          "createdAt": "2026-03-30T13:57:06Z",
+          "updatedAt": "2026-03-30T13:57:06Z"
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "I_kwDORX8iVs74hIC5",
+      "title": "Clarify whether some UET-related terms are forward-looking (From Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/17",
+      "state": "CLOSED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T10:11:39Z",
+      "updatedAt": "2026-03-30T13:16:36Z",
+      "closedAt": "2026-03-30T13:16:36Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "Document clearly mentions that it is based on UEC 1.0 - do not need to get into vendor or implementation-specific support (partial or not) of the spec, to ensure a vendor 'agnostic' methodology based on standard or not vendor-specific implementation.",
+          "createdAt": "2026-03-30T13:16:35Z",
+          "updatedAt": "2026-03-30T13:16:35Z"
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "I_kwDORX8iVs74hIzM",
+      "title": "Goodput definition could better distinguish payload from protocol efficiency (From Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/18",
+      "state": "OPEN",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T10:12:05Z",
+      "updatedAt": "2026-03-30T13:33:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "I see her comment, but her proposed text will not address it and does not comply with rfc1242' definition , and has some substantial problems like -  an RDMA PUT operation carrying a KV cache block, every byte of the message body is payload \u2014 but none of it is \"application-useful\" in the token-generation sense. ",
+          "createdAt": "2026-03-30T13:28:24Z",
+          "updatedAt": "2026-03-30T13:28:24Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "need to work on a better good put definition and differentiate with Fabric_Goodput  and Inference_Goodput:",
+          "createdAt": "2026-03-30T13:33:52Z",
+          "updatedAt": "2026-03-30T13:33:52Z"
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "I_kwDORX8iVs74hJ1x",
+      "title": "Acknowledgments section still has TODO text (From Sowjanya)",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/19",
+      "state": "CLOSED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
+      "createdAt": "2026-03-30T10:12:45Z",
+      "updatedAt": "2026-03-30T13:18:37Z",
+      "closedAt": "2026-03-30T13:18:36Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "This work has benefited from the discussions that occurred during IPPM&BMWG joint meeting and on BMWG mailing list. Thanks Carsten Rossenhoevel, Mohamed Boucadair , Sowjanya Reddy for valuable review and comments.",
+          "createdAt": "2026-03-30T13:18:37Z",
+          "updatedAt": "2026-03-30T13:18:37Z"
+        }
+      ]
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -392,6 +606,111 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDORX8iVs7OiO3R",
+      "title": "remove -00 suffix",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/12",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "-00 suffix is subject to change when a new version is updated therefore, it is recommended to remove -00 suffix for simplicity.",
+      "createdAt": "2026-03-30T08:29:03Z",
+      "updatedAt": "2026-03-30T11:30:03Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "8d8e801baa70d1b1a5b5b2ab544127bdbc906bd1",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-7",
+      "headRefOid": "7c1e9868428aabb6b0f90b79473bb03f8f8b6ea3",
+      "closedAt": "2026-03-30T11:30:03Z",
+      "mergedAt": "2026-03-30T11:30:03Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "ee96f55a805ca95414962948b3dc04ef8d36c579"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDORX8iVs7OkTNH",
+      "title": "Acknowledges section Update",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/20",
+      "state": "MERGED",
+      "author": "billwuqin",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-03-30T10:17:45Z",
+      "updatedAt": "2026-03-30T14:44:35Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "8d8e801baa70d1b1a5b5b2ab544127bdbc906bd1",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "billwuqin-patch-8",
+      "headRefOid": "cd5b413062c5fd29cf8e88bd11e64f1301a7c939",
+      "closedAt": "2026-03-30T13:12:26Z",
+      "mergedAt": "2026-03-30T13:12:26Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "fe6ee29d4e144653e100b21ccf99121052c8b119"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs7wLbpz",
+          "commit": {
+            "abbreviatedOid": "b5e4458"
+          },
+          "author": "github-actions",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-30T10:18:10Z",
+          "updatedAt": "2026-03-30T10:18:11Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "````suggestion\nThis work has benefited from the discussions that occurred during IPPM&BMWG joint meeting and on BMWG mailing list. Thanks Carsten Rossenhoevel, Mohamed Boucadair  , Sowjanya Reddy for valuable review and comments.\n````",
+              "createdAt": "2026-03-30T10:18:10Z",
+              "updatedAt": "2026-03-30T10:18:11Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDORX8iVs7OpWlw",
+      "title": "Fcalabri patch 1",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/21",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "billwuqin"
+      ],
+      "labels": [],
+      "body": "Clarify relationship between terminology and companion documents\r\n",
+      "createdAt": "2026-03-30T14:41:50Z",
+      "updatedAt": "2026-03-30T19:40:45Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "fe6ee29d4e144653e100b21ccf99121052c8b119",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "fcalabri-patch-1",
+      "headRefOid": "b8aebc7355b6ca5559afa4a3a093dd92fc821604",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
