@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 1 October 2026                             Blue Fern Consulting
+Expires: 2 October 2026                             Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                           30 March 2026
+                                                           31 March 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -27,9 +27,15 @@ Abstract
    Ethernet Transport), congestion control behaviors, AI-specific Key
    Performance Indicators (KPIs), and fabric topology concepts.
 
-   This document is a companion to [I-D.bmwg-ai-fabric-training-bench]
-   and [I-D.bmwg-ai-fabric-inference-bench].  Those documents SHOULD NOT
-   be applied without first consulting the terminology defined herein.
+   This document is the common terminology baseline for the companion
+   methodology documents [I-D.bmwg-ai-fabric-training-bench] and
+   [I-D.bmwg-ai-fabric-inference-bench] Companion documents SHOULD
+   reference definitions herein rather than restate them, and MAY
+   redefine a term only where the specific workload context introduces a
+   substantive technical difference; in such cases the companion
+   document MUST cite the original definition and state the nature of
+   the difference.
+
    Where definitions herein overlap with RFC 1242 or RFC 8238, the AI
    fabric context definition in this document takes precedence.
 
@@ -61,7 +67,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 October 2026.
+   This Internet-Draft will expire on 2 October 2026.
 
 Copyright Notice
 
@@ -149,8 +155,7 @@ Table of Contents
    This document is one of three companion Internet-Drafts addressing AI
    fabric benchmarking:
 
-   *  [I-D.bmwg-ai-fabric-terminology] (this document): Terminology
-      definitions.
+   *  This document: Terminology definitions.
 
    *  [TRAINING-BENCH]: Benchmarking methodology for AI training
       workloads.
@@ -841,15 +846,8 @@ Table of Contents
      |                   | is characteristic of bursty AI inference  |
      |                   | traffic.                                  |
      +-------------------+-------------------------------------------+
-     | {: #tab-fabric-   |                                           |
-     | topo              |                                           |
-     | title="Fabric     |                                           |
-     | Topology and      |                                           |
-     | Infrastructure    |                                           |
-     | Terms"}           |                                           |
-     +-------------------+-------------------------------------------+
 
-                                  Table 9
+             Table 9: Fabric Topology and Infrastructure Terms
 
 8.  Training-Specific Terms
 
@@ -1242,9 +1240,6 @@ Informative References
    [I-D.bmwg-ai-fabric-inference-bench]
               "*** BROKEN REFERENCE ***".
 
-   [I-D.bmwg-ai-fabric-terminology]
-              "*** BROKEN REFERENCE ***".
-
    [I-D.bmwg-ai-fabric-training-bench]
               "*** BROKEN REFERENCE ***".
 
@@ -1264,6 +1259,11 @@ Informative References
    [RFC1242]  Bradner, S., "Benchmarking Terminology for Network
               Interconnection Devices", RFC 1242, DOI 10.17487/RFC1242,
               July 1991, <https://www.rfc-editor.org/rfc/rfc1242>.
+
+   [RFC3168]  Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
+              of Explicit Congestion Notification (ECN) to IP",
+              RFC 3168, DOI 10.17487/RFC3168, September 2001,
+              <https://www.rfc-editor.org/rfc/rfc3168>.
 
    [RFC8238]  Avramov, L. and J. Rapp, "Data Center Benchmarking
               Terminology", RFC 8238, DOI 10.17487/RFC8238, August 2017,
