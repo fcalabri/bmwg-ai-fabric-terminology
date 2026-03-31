@@ -27,17 +27,13 @@ Abstract
    Ethernet Transport), congestion control behaviors, AI-specific Key
    Performance Indicators (KPIs), and fabric topology concepts.
 
-   This document is the common terminology baseline for the companion
-   methodology documents [I-D.bmwg-ai-fabric-training-bench] and
-   [I-D.bmwg-ai-fabric-inference-bench] Companion documents SHOULD
-   reference definitions herein rather than restate them, and MAY
-   redefine a term only where the specific workload context introduces a
-   substantive technical difference; in such cases the companion
-   document MUST cite the original definition and state the nature of
-   the difference.
-
-   Where definitions herein overlap with RFC 1242 or RFC 8238, the AI
-   fabric context definition in this document takes precedence.
+   This document is a companion to
+   [I-D.calabria-bmwg-ai-fabric-training-bench] and
+   [I-D.calabria-bmwg-ai-fabric-inference-bench].  Those documents
+   SHOULD NOT be applied without first consulting the terminology
+   defined herein.  Where definitions herein overlap with RFC 1242 or
+   RFC 8238, the AI fabric context definition in this document takes
+   precedence.
 
 About This Document
 
@@ -155,13 +151,14 @@ Table of Contents
    This document is one of three companion Internet-Drafts addressing AI
    fabric benchmarking:
 
-   *  This document: Terminology definitions.
+   *  [I-D.calabria-bmwg-ai-fabric-terminology] (this document):
+      Terminology definitions.
 
-   *  [TRAINING-BENCH]: Benchmarking methodology for AI training
-      workloads.
+   *  [I-D.calabria-bmwg-ai-fabric-training-bench]: Benchmarking
+      methodology for AI training workloads.
 
-   *  [INFERENCE-BENCH]: Benchmarking methodology for AI inference
-      serving workloads.
+   *  [I-D.calabria-bmwg-ai-fabric-inference-bench]: Benchmarking
+      methodology for AI inference serving workloads.
 
    Implementers and evaluators SHOULD read this terminology document
    before applying the companion methodology documents.  Terms defined
@@ -254,87 +251,120 @@ Table of Contents
    The following terms define the collective communication operations
    that are the primary traffic sources in distributed AI workloads.
 
-   +=================+================================================+
-   | Term            | Definition                                     |
-   +=================+================================================+
-   | *Collective     | A coordinated communication pattern executed   |
-   | Operation*      | simultaneously across all accelerators in a    |
-   |                 | training or inference group.  Core             |
-   |                 | collectives: AllReduce (gradient aggregation), |
-   |                 | AllGather (parameter distribution),            |
-   |                 | ReduceScatter (partial reduction + scatter),   |
-   |                 | and AllToAll (expert dispatch in MoE models).  |
-   +-----------------+------------------------------------------------+
-   | *AllReduce*     | A collective in which each participant         |
-   |                 | contributes a tensor and all participants      |
-   |                 | receive the element-wise sum (or other         |
-   |                 | reduction) of all contributions.  The dominant |
-   |                 | communication primitive in data-parallel and   |
-   |                 | tensor-parallel training.  BusBW is the        |
-   |                 | primary KPI.                                   |
-   +-----------------+------------------------------------------------+
-   | *AllGather*     | A collective in which each participant         |
-   |                 | contributes a shard of a tensor and all        |
-   |                 | participants receive the concatenation of all  |
-   |                 | shards.  Used in tensor-parallel (Megatron-    |
-   |                 | style) layers to reconstruct distributed       |
-   |                 | activations or parameters.                     |
-   +-----------------+------------------------------------------------+
-   | *ReduceScatter* | A collective combining an element-wise         |
-   |                 | reduction with a scatter, so each participant  |
-   |                 | receives a distinct slice of the reduced       |
-   |                 | result.  Used in ZeRO-stage optimizer          |
-   |                 | strategies and as the first half of a ring-    |
-   |                 | AllReduce.                                     |
-   +-----------------+------------------------------------------------+
-   | *AllToAll*      | A collective in which each participant sends a |
-   |                 | distinct payload to every other participant    |
-   |                 | and receives a distinct payload from every     |
-   |                 | other participant.  The critical collective    |
-   |                 | for Mixture-of-Experts token dispatch.         |
-   |                 | Generates N²−1 independent point-to-point      |
-   |                 | flows for N participants.                      |
-   +-----------------+------------------------------------------------+
-   | *Ring           | An AllReduce (or AllGather/ReduceScatter)      |
-   | Algorithm*      | algorithm structured as a logical ring of      |
-   |                 | participants.  Each participant sends to its   |
-   |                 | right neighbor and receives from its left      |
-   |                 | neighbor in 2(N−1) steps.  Bus bandwidth       |
-   |                 | efficiency = 2(N−1)/N, approaching 100% for    |
-   |                 | large N.  Standard baseline for BusBW          |
-   |                 | calculation.                                   |
-   +-----------------+------------------------------------------------+
-   | *BusBW*         | Bus Bandwidth.  Effective per-accelerator      |
-   |                 | throughput during a collective, normalizing    |
-   |                 | for algorithm overhead: BusBW = (data_size ×   |
-   |                 | algo_factor) / elapsed_time.  For ring         |
-   |                 | AllReduce, algo_factor = 2(N−1)/N.  Enables    |
-   |                 | comparison across cluster sizes and collective |
-   |                 | algorithms.                                    |
-   +-----------------+------------------------------------------------+
-   | *CCL*           | Collective Communication Library.  A software  |
-   |                 | library providing optimized implementations of |
-   |                 | collective operations (AllReduce, AllGather,   |
-   |                 | etc.) over a specific transport.  The CCL      |
-   |                 | implementation *MUST* be documented in the     |
-   |                 | test report.                                   |
-   +-----------------+------------------------------------------------+
-   | *SPMD*          | Single Program Multiple Data.  The execution   |
-   |                 | model underlying bulk-synchronous distributed  |
-   |                 | training, in which all accelerators execute    |
-   |                 | identical computation on distinct data         |
-   |                 | partitions, synchronizing at collective        |
-   |                 | barriers between steps.                        |
-   +-----------------+------------------------------------------------+
-   | *Bulk           | A distributed computation model structured as  |
-   | Synchronous     | alternating compute and communicate phases     |
-   | Parallel (BSP)* | with a global synchronization barrier between  |
-   |                 | phases.  Standard training workloads follow    |
-   |                 | BSP: forward pass → backward pass → AllReduce  |
-   |                 | gradient sync → optimizer step.                |
-   +-----------------+------------------------------------------------+
+   +=================+=================================================+
+   | Term            | Definition                                      |
+   +=================+=================================================+
+   | *Collective     | A coordinated communication pattern             |
+   | Operation*      | executed simultaneously across all              |
+   |                 | accelerators in a training or inference         |
+   |                 | group.  Core collectives: AllReduce             |
+   |                 | (gradient aggregation), AllGather               |
+   |                 | (parameter distribution), ReduceScatter         |
+   |                 | (partial reduction + scatter), and              |
+   |                 | AllToAll (expert dispatch in MoE models).       |
+   +-----------------+-------------------------------------------------+
+   | *AllReduce*     | A collective in which each participant          |
+   |                 | contributes a tensor and all participants       |
+   |                 | receive the element-wise sum (or other          |
+   |                 | reduction) of all contributions.  The           |
+   |                 | dominant communication primitive in data-       |
+   |                 | parallel and tensor-parallel training.          |
+   |                 | BusBW is the primary KPI.                       |
+   +-----------------+-------------------------------------------------+
+   | *AllGather*     | A collective in which each participant          |
+   |                 | contributes a shard of a tensor and all         |
+   |                 | participants receive the concatenation of       |
+   |                 | all shards.  Used in tensor-parallel            |
+   |                 | (Megatron-style) layers to reconstruct          |
+   |                 | distributed activations or parameters.          |
+   +-----------------+-------------------------------------------------+
+   | *ReduceScatter* | A collective combining an element-wise          |
+   |                 | reduction with a scatter, so each               |
+   |                 | participant receives a distinct slice of        |
+   |                 | the reduced result.  Used in ZeRO-stage         |
+   |                 | optimizer strategies and as the first half      |
+   |                 | of a ring-AllReduce.                            |
+   +-----------------+-------------------------------------------------+
+   | *AllToAll*      | A collective in which each participant          |
+   |                 | sends a distinct payload to every other         |
+   |                 | participant and receives a distinct             |
+   |                 | payload from every other participant.  The      |
+   |                 | critical collective for Mixture-of-Experts      |
+   |                 | token dispatch.  Generates N²−1                 |
+   |                 | independent point-to-point flows for N          |
+   |                 | participants.                                   |
+   +-----------------+-------------------------------------------------+
+   | *Ring           | An AllReduce (or AllGather/ReduceScatter)       |
+   | Algorithm*      | algorithm structured as a logical ring of       |
+   |                 | participants.  Each participant sends to        |
+   |                 | its right neighbor and receives from its        |
+   |                 | left neighbor in 2(N−1) steps.  Bus             |
+   |                 | bandwidth efficiency = 2(N−1)/N,                |
+   |                 | approaching 100% for large N.  Standard         |
+   |                 | baseline for BusBW calculation.                 |
+   +-----------------+-------------------------------------------------+
+   | *BusBW*         | The effective data throughput per               |
+   |                 | accelerator during a collective                 |
+   |                 | operation, computed as:                         |
+   |                 |                                                 |
+   |                 | BusBW = (data_size × algo_factor) / time        |
+   |                 |                                                 |
+   |                 | where algo_factor normalizes for the            |
+   |                 | collective type and algorithm:                  |
+   |                 |                                                 |
+   |                 | Collective Algorithm algo_factor                |
+   |                 |                                                 |
+   |                 | AllReduce Ring / recursive doubling 2 ×         |
+   |                 | (n−1) / n                                       |
+   |                 | AllReduce Binary / double-binary tree 2 ×       |
+   |                 | log₂(n) / n                                     |
+   |                 | AllGather Ring (n−1) / n                        |
+   |                 | ReduceScatter Ring (n−1) / n                    |
+   |                 | AllToAll Direct (n−1) / n                       |
+   |                 |                                                 |
+   |                 | n = number of participating accelerators.       |
+   |                 |                                                 |
+   |                 | Ring AllReduce is the conventional              |
+   |                 | comparison baseline.                            |
+   |                 |                                                 |
+   |                 | Note: collective libraries commonly select      |
+   |                 | the algorithm dynamically based on message      |
+   |                 | size (e.g., tree-based for small messages,      |
+   |                 | ring for large messages); algo_factor           |
+   |                 | therefore varies with message size and          |
+   |                 | MUST be reported per message-size bucket        |
+   |                 | when dynamic selection is active.               |
+   |                 | Reports MUST state: collective type,            |
+   |                 | algorithm, algo_factor value, collective        |
+   |                 | library name and version, and n.  Units:        |
+   |                 | Gbps per accelerator.                           |
+   +-----------------+-------------------------------------------------+
+   | *CCL*           | Collective Communication Library.  A            |
+   |                 | software library providing optimized            |
+   |                 | implementations of collective operations        |
+   |                 | (AllReduce, AllGather, etc.) over a             |
+   |                 | specific transport.  The CCL                    |
+   |                 | implementation *MUST* be documented in the      |
+   |                 | test report.                                    |
+   +-----------------+-------------------------------------------------+
+   | *SPMD*          | Single Program Multiple Data.  The              |
+   |                 | execution model underlying bulk-                |
+   |                 | synchronous distributed training, in which      |
+   |                 | all accelerators execute identical              |
+   |                 | computation on distinct data partitions,        |
+   |                 | synchronizing at collective barriers            |
+   |                 | between steps.                                  |
+   +-----------------+-------------------------------------------------+
+   | *Bulk           | A distributed computation model structured      |
+   | Synchronous     | as alternating compute and communicate          |
+   | Parallel (BSP)* | phases with a global synchronization            |
+   |                 | barrier between phases.  Standard training      |
+   |                 | workloads follow BSP: forward pass →            |
+   |                 | backward pass → AllReduce gradient sync →       |
+   |                 | optimizer step.                                 |
+   +-----------------+-------------------------------------------------+
 
-                 Table 2: Collective Communication Terms
+                  Table 2: Collective Communication Terms
 
 4.  Distributed Parallelism Strategy Terms
 
@@ -852,7 +882,8 @@ Table of Contents
 8.  Training-Specific Terms
 
    The following terms are specific to AI training workload benchmarking
-   and are used normatively in [TRAINING-BENCH].
+   and are used normatively in
+   [I-D.calabria-bmwg-ai-fabric-training-bench].
 
     +==================+==============================================+
     | Term             | Definition                                   |
@@ -911,7 +942,8 @@ Table of Contents
 9.  Inference-Specific Terms
 
    The following terms are specific to AI inference serving workload
-   benchmarking and are used normatively in [INFERENCE-BENCH].
+   benchmarking and are used normatively in
+   [I-D.calabria-bmwg-ai-fabric-inference-bench].
 
    +==================+================================================+
    | Term             | Definition                                     |
@@ -1237,24 +1269,34 @@ Normative References
 
 Informative References
 
-   [I-D.bmwg-ai-fabric-inference-bench]
-              "*** BROKEN REFERENCE ***".
+   [I-D.calabria-bmwg-ai-fabric-inference-bench]
+              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
+              "Benchmarking Methodology for AI Inference Serving Network
+              Fabrics", Work in Progress, Internet-Draft, draft-
+              calabria-bmwg-ai-fabric-inference-bench-00, 26 February
+              2026, <https://datatracker.ietf.org/doc/html/draft-
+              calabria-bmwg-ai-fabric-inference-bench-00>.
 
-   [I-D.bmwg-ai-fabric-training-bench]
-              "*** BROKEN REFERENCE ***".
+   [I-D.calabria-bmwg-ai-fabric-terminology]
+              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
+              "Benchmarking Terminology for AI Network Fabrics", Work in
+              Progress, Internet-Draft, draft-calabria-bmwg-ai-fabric-
+              terminology-00, 26 February 2026,
+              <https://datatracker.ietf.org/doc/html/draft-calabria-
+              bmwg-ai-fabric-terminology-00>.
+
+   [I-D.calabria-bmwg-ai-fabric-training-bench]
+              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
+              "Benchmarking Methodology for AI Training Network
+              Fabrics", Work in Progress, Internet-Draft, draft-
+              calabria-bmwg-ai-fabric-training-bench-00, 26 February
+              2026, <https://datatracker.ietf.org/doc/html/draft-
+              calabria-bmwg-ai-fabric-training-bench-00>.
 
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
               Specification, Annex 16: RoCE", 2010,
               <https://www.infinibandta.org>.
-
-   [INFERENCE-BENCH]
-              Calabria, F. and C. Pignataro, "Benchmarking Methodology
-              for AI Inference Serving Network Fabrics", Work in
-              Progress, Internet-Draft, draft-bmwg-ai-fabric-inference-
-              bench, February 2026,
-              <https://datatracker.ietf.org/doc/html/draft-bmwg-ai-
-              fabric-inference-bench>.
 
    [RFC1242]  Bradner, S., "Benchmarking Terminology for Network
               Interconnection Devices", RFC 1242, DOI 10.17487/RFC1242,
@@ -1272,13 +1314,6 @@ Informative References
    [RFC8239]  Avramov, L. and J. Rapp, "Data Center Benchmarking
               Methodology", RFC 8239, DOI 10.17487/RFC8239, August 2017,
               <https://www.rfc-editor.org/rfc/rfc8239>.
-
-   [TRAINING-BENCH]
-              Calabria, F. and C. Pignataro, "Benchmarking Methodology
-              for AI Training Network Fabrics", Work in Progress,
-              Internet-Draft, draft-bmwg-ai-fabric-training-bench,
-              February 2026, <https://datatracker.ietf.org/doc/html/
-              draft-bmwg-ai-fabric-training-bench>.
 
    [UEC-SPEC-1.0]
               Ultra Ethernet Consortium, "Ultra Ethernet Specification
