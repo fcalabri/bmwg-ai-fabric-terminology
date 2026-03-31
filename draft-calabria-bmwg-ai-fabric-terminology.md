@@ -387,9 +387,13 @@ companion methodology documents.
 | **Primary KPI** | A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT and ITL. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations. |
 | **Secondary KPI** | A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: collective operation throughput (BusBW), KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations. |
 | **Fabric Health Indicator (FHI)** | An operational metric characterizing fabric stability and anomaly conditions rather than peak performance. FHIs include: PFC event rate, PFC storm occurrence, ECN marking ratio, packet loss rate, buffer occupancy (P99), and retransmission rate. FHIs **SHOULD** be continuously monitored and reported throughout all test categories. |
-| **Goodput** | The application-useful data delivered per unit time, excluding retransmitted packets, protocol overhead, and padding. Goodput may differ significantly from raw throughput during congestion events; both **SHOULD** be reported in benchmarking results. |
-| **Zero Packet Loss** | A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion. |
-{: #tab-kpi-class title="KPI Classification Terms"}
+| **Goodput** | The application-useful data delivered per unit Benchmark reports MUST use the qualified term to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth. Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_BW measures Fabric_Goodput; it does not measure Inference_Goodput. |
+| **Zero Packet Loss** | time, excluding retransmitted packets, protocol   \|A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion. |
+|{: #tab-kpi-class title="KPI Classification Terms"}||
+
+
+
+
 
 ## KPI Tier Summary
 
