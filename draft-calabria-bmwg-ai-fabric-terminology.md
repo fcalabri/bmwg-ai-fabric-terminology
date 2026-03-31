@@ -108,11 +108,19 @@ communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
-This document is a companion to {{?I-D.bmwg-ai-fabric-training-bench}}
-and {{?I-D.bmwg-ai-fabric-inference-bench}}. Those documents
-SHOULD NOT be applied without first consulting the terminology defined
-herein. Where definitions herein overlap with RFC 1242 or RFC 8238,
-the AI fabric context definition in this document takes precedence.
+This document is the common terminology baseline for the companion
+methodology documents {{?I-D.bmwg-ai-fabric-training-bench}}
+and {{?I-D.bmwg-ai-fabric-inference-bench}}
+Companion documents SHOULD reference definitions
+herein rather than restate them, and MAY redefine a term only where the
+specific workload context introduces a substantive technical difference;
+in such cases the companion document MUST cite the original definition
+and state the nature of the difference.
+
+ Where definitions herein overlap with RFC 1242 or RFC 8238, the AI
+ fabric context definition in this document takes precedence.
+
+
 
 
 --- middle
@@ -154,7 +162,7 @@ documents.
 This document is one of three companion Internet-Drafts addressing AI
 fabric benchmarking:
 
-- {{?I-D.bmwg-ai-fabric-terminology}} (this document): Terminology
+- This document: Terminology
   definitions.
 - {{TRAINING-BENCH}}: Benchmarking methodology for AI training
   workloads.
@@ -284,7 +292,7 @@ associated fabric behaviors critical to AI workload performance.
 | **PFC** | Priority Flow Control (IEEE 802.1Qbb). A lossless Ethernet mechanism in which a receiver transmits a PAUSE frame to its upstream neighbor on a specific priority class when its ingress buffer approaches a configured threshold, temporarily halting transmission of that priority. Required for lossless RoCEv2 operation. PFC operates hop-by-hop and can propagate congestion upstream (PFC storm risk). |
 | **PFC Storm** | A pathological condition in which PFC PAUSE frames propagate across multiple hops, causing widespread throughput degradation or deadlock unrelated to the original congestion source. Detection and mitigation **SHOULD** be part of soak test evaluation per the companion methodology documents. |
 | **PFC Deadlock** | A circular PFC dependency in which sets of flows mutually pause each other indefinitely, resulting in zero progress for affected traffic classes. Deadlock risk is elevated in non-tree topologies and **MUST** be evaluated in fabric-level soak tests. |
-| **ECN** | Explicit Congestion Notification ([RFC3168]). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
+| **ECN** | Explicit Congestion Notification ({{?RFC3168}}). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
 | **DCQCN** | Data Center Quantized Congestion Notification. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. Note: PFC serves as a separate, orthogonal backstop to prevent packet loss during DCQCN convergence; PFC is **not** a component of the DCQCN algorithm itself. |
 | **ECN Marking Ratio** | The fraction of packets (expressed as a percentage) that are marked with the CE codepoint in the IP ECN field over a measurement interval. A high ECN Marking Ratio indicates persistent congestion and is a primary Fabric Health Indicator. |
 | **Incast** | A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in AllReduce and collective operations. |
@@ -325,7 +333,7 @@ documents.
 | **Buffer Occupancy** | The instantaneous or time-averaged fill level of a switch port's packet buffer, expressed in bytes or as a fraction of total buffer capacity. Elevated sustained buffer occupancy indicates congestion. P99 buffer occupancy is a Fabric Health Indicator in the companion methodology documents. |
 | **Zero-Impact Failover** | Sub-microsecond automatic path convergence upon a link or switch failure resulting in no measurable increase to JCT or TTFT. Requires pre-programmed alternate paths and hardware-level fast reroute (FRR) with sub-microsecond detection, not relying on routing protocol convergence. |
 | **Link Utilization** | The fraction of the nominal link capacity actually used for data transmission over a measurement interval, expressed as a percentage. Reported as mean, P95, and P99 per link. High asymmetric link utilization (low average but high peak) is characteristic of bursty AI inference traffic. |
-|{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}||
+{: #tab-fabric-topo title="Fabric Topology and Infrastructure Terms"}
 
 # Training-Specific Terms
 
