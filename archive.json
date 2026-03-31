@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-31T02:23:42.492901+00:00",
+  "timestamp": "2026-03-31T21:32:42.770645+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -154,7 +154,7 @@
       "id": "I_kwDORX8iVs74hGxL",
       "title": "BusBW definition could benefit from broader algorithm guidance (from Sowjanya)",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/16",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "billwuqin",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -163,8 +163,8 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
       "createdAt": "2026-03-30T10:10:47Z",
-      "updatedAt": "2026-03-30T13:57:06Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-31T15:32:52Z",
+      "closedAt": "2026-03-31T15:32:52Z",
       "comments": [
         {
           "author": "fcalabri",
@@ -179,6 +179,13 @@
           "body": "after terminology update - references on training and inference docs will need to be added / addressed ",
           "createdAt": "2026-03-30T13:57:06Z",
           "updatedAt": "2026-03-30T13:57:06Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "new Definition Section 10 for BUSBW ",
+          "createdAt": "2026-03-31T15:32:52Z",
+          "updatedAt": "2026-03-31T15:32:52Z"
         }
       ]
     },
@@ -213,15 +220,15 @@
       "id": "I_kwDORX8iVs74hIzM",
       "title": "Goodput definition could better distinguish payload from protocol efficiency (From Sowjanya)",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "billwuqin",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/bmwg/aC6UY_HVONIqR6xE21bYS_EyLto/",
       "createdAt": "2026-03-30T10:12:05Z",
-      "updatedAt": "2026-03-30T13:33:52Z",
-      "closedAt": null,
+      "updatedAt": "2026-03-31T12:50:35Z",
+      "closedAt": "2026-03-31T12:50:35Z",
       "comments": [
         {
           "author": "fcalabri",
@@ -236,6 +243,13 @@
           "body": "need to work on a better good put definition and differentiate with Fabric_Goodput  and Inference_Goodput:",
           "createdAt": "2026-03-30T13:33:52Z",
           "updatedAt": "2026-03-30T13:33:52Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "New Goodput Definition, refer to PR ",
+          "createdAt": "2026-03-31T12:50:31Z",
+          "updatedAt": "2026-03-31T12:50:31Z"
         }
       ]
     },
@@ -689,7 +703,7 @@
       "id": "PR_kwDORX8iVs7OpWlw",
       "title": "Fcalabri patch 1",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -698,17 +712,77 @@
       "labels": [],
       "body": "Clarify relationship between terminology and companion documents\r\n",
       "createdAt": "2026-03-30T14:41:50Z",
-      "updatedAt": "2026-03-30T19:40:45Z",
+      "updatedAt": "2026-03-31T15:07:33Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "fe6ee29d4e144653e100b21ccf99121052c8b119",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "fcalabri-patch-1",
       "headRefOid": "b8aebc7355b6ca5559afa4a3a093dd92fc821604",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-31T15:07:13Z",
+      "mergedAt": "2026-03-31T15:07:13Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "060d290993f96de6cb03b349495aa932987a6ba3"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDORX8iVs7O8UX4",
+      "title": "Goodput",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/22",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "fix spacing ",
+      "createdAt": "2026-03-31T12:48:42Z",
+      "updatedAt": "2026-03-31T15:30:18Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "fe6ee29d4e144653e100b21ccf99121052c8b119",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "Goodput",
+      "headRefOid": "87701bc4345ebbfe1643bccf06f21625e48f1c2b",
+      "closedAt": "2026-03-31T15:30:18Z",
+      "mergedAt": "2026-03-31T15:30:18Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "635d837c798b3a75b9d082c7ba76be1f31eeda49"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDORX8iVs7O_P_O",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/23",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "fcalabri"
+      ],
+      "labels": [],
+      "body": "BUSBW definition and link and references fixes (correct datatracker documents / links",
+      "createdAt": "2026-03-31T15:27:45Z",
+      "updatedAt": "2026-03-31T15:29:46Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "060d290993f96de6cb03b349495aa932987a6ba3",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "BusBW",
+      "headRefOid": "24bc554f14fa6f50afc82f7aaf293c7ff711a00e",
+      "closedAt": "2026-03-31T15:29:46Z",
+      "mergedAt": "2026-03-31T15:29:46Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "40f62a1687fc8cbb05dfbee662c4d6cb4cd0ef98"
+      },
       "comments": [],
       "reviews": []
     }
