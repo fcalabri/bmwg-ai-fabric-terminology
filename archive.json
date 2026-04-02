@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-31T21:32:42.770645+00:00",
+  "timestamp": "2026-04-02T02:12:18.988922+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -276,6 +276,22 @@
           "updatedAt": "2026-03-30T13:18:37Z"
         }
       ]
+    },
+    {
+      "number": 24,
+      "id": "I_kwDORX8iVs75TOxO",
+      "title": "References for MOE changes on Inference Doc",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/24",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Expert Choice Routing -> Variables and T_Dispatch ",
+      "createdAt": "2026-03-31T21:46:17Z",
+      "updatedAt": "2026-03-31T21:46:17Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
