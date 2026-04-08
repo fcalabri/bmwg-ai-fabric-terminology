@@ -2282,8 +2282,7 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>T_dispatch</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The dispatch payload per accelerator per MoE layer, computed as:T_dispatch =     (B * k * H_model * P_bytes) / N where B = batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. Used as the canonical traffic volume parameter in the MoE test matrix (see Section 7.1 on <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>
-</td>
+            <td class="text-left" rowspan="1" colspan="1">The dispatch payload per accelerator per MoE layer, computed as: T_dispatch = (B * k * H_model * P_bytes) / N where B = batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. Used as the canonical traffic volume parameter in the MoE test matrix (see Section 7.1 of the companion inference benchmarking draft).</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2306,6 +2305,7 @@ benchmarking and are used normatively in
         </tbody>
       </table>
 </div>
+<p id="section-9-3">See Section 7.1 of <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span> for the MoE test matrix referenced by T_dispatch above.<a href="#section-9-3" class="pilcrow">¶</a></p>
 <div id="inference-phase-characteristics">
 <section id="section-9.1">
         <h3 id="name-inference-phase-characteris">
@@ -2359,8 +2359,12 @@ benchmarking and are used normatively in
       </h2>
 <p id="section-10-1">The following terms define the three-tier KPI taxonomy used across both
 companion methodology documents.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<span id="name-kpi-classification-terms-2"></span><div id="tab-kpi-class">
 <table class="center" id="table-13">
-        <caption><a href="#table-13" class="selfRef">Table 13</a></caption>
+        <caption>
+<a href="#table-13" class="selfRef">Table 13</a>:
+<a href="#name-kpi-classification-terms-2" class="selfRef">KPI Classification Terms</a>
+        </caption>
 <thead>
           <tr>
             <th class="text-left" rowspan="1" colspan="1">Term</th>
@@ -2398,12 +2402,9 @@ companion methodology documents.<a href="#section-10-1" class="pilcrow">¶</a></
 </td>
             <td class="text-left" rowspan="1" colspan="1">time, excluding retransmitted packets, protocol.  A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
           </tr>
-          <tr>
-            <td class="text-left" rowspan="1" colspan="1">{: #tab-kpi-class title="KPI Classification Terms"}</td>
-            <td class="text-left" rowspan="1" colspan="1"> </td>
-          </tr>
         </tbody>
       </table>
+</div>
 <div id="kpi-tier-summary">
 <section id="section-10.1">
         <h3 id="name-kpi-tier-summary">

@@ -951,46 +951,47 @@ Table of Contents
    | *TTFT*           | Time to First Token.  The elapsed time from    |
    |                  | receipt of an inference request by the         |
    |                  | serving system to emission of the first        |
-   |                  | output token.  Encompasses prompt processing   |
-   |                  | (prefill), KV cache generation, optional KV    |
-   |                  | cache transfer (in disaggregated               |
-   |                  | architectures), and the initial decode step.   |
-   |                  | Interactive serving target: TTFT < 500 ms at   |
-   |                  | P99.                                           |
+   |                  | output token.  Encompasses prompt              |
+   |                  | processing (prefill), KV cache generation,     |
+   |                  | optional KV cache transfer (in                 |
+   |                  | disaggregated architectures), and the          |
+   |                  | initial decode step.  Interactive serving      |
+   |                  | target: TTFT < 500 ms at P99.                  |
    +------------------+------------------------------------------------+
    | *ITL*            | Inter-Token Latency.  The elapsed time         |
    |                  | between successive output tokens during the    |
    |                  | autoregressive decode phase.  Measured at      |
-   |                  | P50, P95, P99, and P99.9 to characterize tail  |
-   |                  | latency behavior.  Interactive serving         |
+   |                  | P50, P95, P99, and P99.9 to characterize       |
+   |                  | tail latency behavior.  Interactive serving    |
    |                  | target: ITL < 50 ms at P99.                    |
    +------------------+------------------------------------------------+
    | *TPS*            | Tokens Per Second.  Aggregate throughput of    |
-   |                  | the inference serving system, measured as the  |
-   |                  | total number of output tokens generated per    |
-   |                  | second across all concurrent requests.         |
-   |                  | Reported separately for input-side (prefill)   |
-   |                  | TPS and output-side (decode) TPS.              |
+   |                  | the inference serving system, measured as      |
+   |                  | the total number of output tokens generated    |
+   |                  | per second across all concurrent requests.     |
+   |                  | Reported separately for input-side             |
+   |                  | (prefill) TPS and output-side (decode) TPS.    |
    +------------------+------------------------------------------------+
-   | *KV Cache*       | Key-Value Cache.  The intermediate attention   |
-   |                  | state (key and value projection matrices from  |
-   |                  | multi-head attention layers) computed during   |
-   |                  | the prefill phase and reused during each       |
-   |                  | decode step to avoid redundant recomputation.  |
-   |                  | KV cache size scales with: layers ×            |
-   |                  | attention_heads × head_dim × sequence_length   |
-   |                  | × precision.  The attention head               |
-   |                  | configuration *MUST* be reported in all        |
-   |                  | benchmark results.                             |
+   | *KV Cache*       | Key-Value Cache.  The intermediate             |
+   |                  | attention state (key and value projection      |
+   |                  | matrices from multi-head attention layers)     |
+   |                  | computed during the prefill phase and          |
+   |                  | reused during each decode step to avoid        |
+   |                  | redundant recomputation.  KV cache size        |
+   |                  | scales with: layers × attention_heads ×        |
+   |                  | head_dim × sequence_length × precision.        |
+   |                  | The attention head configuration *MUST* be     |
+   |                  | reported in all benchmark results.             |
    +------------------+------------------------------------------------+
    | *Prefill Phase*  | The compute-bound phase of LLM inference in    |
-   |                  | which the entire input prompt is processed in  |
-   |                  | parallel to generate the KV cache and the      |
-   |                  | first output token.  Characterized by high     |
-   |                  | arithmetic intensity (200–400 ops/byte), high  |
-   |                  | accelerator utilization (90–95%), and large    |
-   |                  | activation tensors.  Prefill latency           |
-   |                  | dominates TTFT for long prompts.               |
+   |                  | which the entire input prompt is processed     |
+   |                  | in parallel to generate the KV cache and       |
+   |                  | the first output token.  Characterized by      |
+   |                  | high arithmetic intensity (200–400 ops/        |
+   |                  | byte), high accelerator utilization            |
+   |                  | (90–95%), and large activation tensors.        |
+   |                  | Prefill latency dominates TTFT for long        |
+   |                  | prompts.                                       |
    +------------------+------------------------------------------------+
    | *Decode Phase*   | The memory-bandwidth-bound phase of LLM        |
    |                  | inference in which output tokens are           |
@@ -1011,29 +1012,31 @@ Table of Contents
    |                  | introduces KV cache transfer as a fabric-      |
    |                  | critical data movement.                        |
    +------------------+------------------------------------------------+
-   | *xPyD Ratio*     | The allocation ratio of x prefill workers to   |
-   |                  | y decode workers in a disaggregated serving    |
-   |                  | cluster.  Example: 3P9D denotes 3 prefill      |
-   |                  | nodes and 9 decode nodes.  The optimal xPyD    |
-   |                  | ratio depends on model size, prompt/output     |
-   |                  | length distributions, and TTFT/ITL SLO         |
-   |                  | targets.                                       |
+   | *xPyD Ratio*     | The allocation ratio of x prefill workers      |
+   |                  | to y decode workers in a disaggregated         |
+   |                  | serving cluster.  Example: 3P9D denotes 3      |
+   |                  | prefill nodes and 9 decode nodes.  The         |
+   |                  | optimal xPyD ratio depends on model size,      |
+   |                  | prompt/output length distributions, and        |
+   |                  | TTFT/ITL SLO targets.                          |
    +------------------+------------------------------------------------+
-   | *Continuous      | A dynamic inference scheduling technique that  |
-   | Batching*        | inserts new requests into an active decode     |
-   |                  | batch as slots become available (without       |
-   |                  | waiting for the current batch to complete),    |
-   |                  | improving accelerator utilization compared to  |
-   |                  | static batching.  Generates variable batch     |
-   |                  | sizes that affect fabric traffic burstiness.   |
+   | *Continuous      | A dynamic inference scheduling technique       |
+   | Batching*        | that inserts new requests into an active       |
+   |                  | decode batch as slots become available         |
+   |                  | (without waiting for the current batch to      |
+   |                  | complete), improving accelerator               |
+   |                  | utilization compared to static batching.       |
+   |                  | Generates variable batch sizes that affect     |
+   |                  | fabric traffic burstiness.                     |
    +------------------+------------------------------------------------+
    | *PagedAttention* | A KV cache memory management technique         |
    |                  | storing attention keys and values in fixed-    |
-   |                  | size, non-contiguous virtual pages (typically  |
-   |                  | 16–64 KB), inspired by OS virtual memory       |
-   |                  | management.  Reduces memory fragmentation and  |
-   |                  | enables efficient KV cache sharing across      |
-   |                  | requests with common prefixes.                 |
+   |                  | size, non-contiguous virtual pages             |
+   |                  | (typically 16–64 KB), inspired by OS           |
+   |                  | virtual memory management.  Reduces memory     |
+   |                  | fragmentation and enables efficient KV         |
+   |                  | cache sharing across requests with common      |
+   |                  | prefixes.                                      |
    +------------------+------------------------------------------------+
    | *Prefix Caching* | Reuse of previously computed KV cache          |
    |                  | segments for inference requests sharing a      |
@@ -1054,11 +1057,12 @@ Table of Contents
    +------------------+------------------------------------------------+
    | *Low-Latency     | An AllToAll MoE dispatch communication mode    |
    | Dispatch*        | optimized for the decode phase.  Payload       |
-   |                  | sizes are padded to fixed maximum dimensions   |
-   |                  | (compatible with static graph capture),        |
-   |                  | enabling lower kernel-launch overhead at the   |
-   |                  | cost of slight bandwidth inefficiency.         |
-   |                  | Target: < 200 µs per dispatch round trip.      |
+   |                  | sizes are padded to fixed maximum              |
+   |                  | dimensions (compatible with static graph       |
+   |                  | capture), enabling lower kernel-launch         |
+   |                  | overhead at the cost of slight bandwidth       |
+   |                  | inefficiency.  Target: < 200 µs per            |
+   |                  | dispatch round trip.                           |
    +------------------+------------------------------------------------+
    | *Expert Choice   | A token routing strategy in which experts      |
    | Routing*         | select which tokens to process, rather than    |
@@ -1077,53 +1081,58 @@ Table of Contents
    +------------------+------------------------------------------------+
    | *Top-k with      | A top-k routing variant in which tokens        |
    | Token Drop*      | destined for overloaded experts are dropped    |
-   |                  | or redirected to a fallback.  Reduces worst-   |
-   |                  | case dispatch traffic volume at the cost of    |
-   |                  | model output quality under load.               |
+   |                  | or redirected to a fallback.  Reduces          |
+   |                  | worst-case dispatch traffic volume at the      |
+   |                  | cost of model output quality under load.       |
    +------------------+------------------------------------------------+
-   | *T_dispatch*     | The dispatch payload per accelerator per MoE   |
-   |                  | layer, computed as:T_dispatch = (B * k *       |
-   |                  | H_model * P_bytes) / N where B = batch size    |
-   |                  | (tokens), k = top-k routing count, H_model =   |
-   |                  | hidden dimension, P_bytes = bytes per element  |
-   |                  | (BF16=2, FP8=1), N = EP group size.  Used as   |
-   |                  | the canonical traffic volume parameter in the  |
-   |                  | MoE test matrix (see Section 7.1 on            |
-   |                  | [I-D.calabria-bmwg-ai-fabric-inference-bench]  |
+   | *T_dispatch*     | The dispatch payload per accelerator per       |
+   |                  | MoE layer, computed as: T_dispatch = (B * k    |
+   |                  | * H_model * P_bytes) / N where B = batch       |
+   |                  | size (tokens), k = top-k routing count,        |
+   |                  | H_model = hidden dimension, P_bytes = bytes    |
+   |                  | per element (BF16=2, FP8=1), N = EP group      |
+   |                  | size.  Used as the canonical traffic volume    |
+   |                  | parameter in the MoE test matrix (see          |
+   |                  | Section 7.1 of the companion inference         |
+   |                  | benchmarking draft).                           |
    +------------------+------------------------------------------------+
    | *SLO*            | Service Level Objective.  A quantitative       |
    |                  | target for an inference serving KPI.  AI       |
-   |                  | inference SLOs typically specify maximum TTFT  |
-   |                  | (e.g., < 500 ms P99) and maximum ITL (e.g., <  |
-   |                  | 50 ms P99) under a specified request arrival   |
-   |                  | rate.                                          |
+   |                  | inference SLOs typically specify maximum       |
+   |                  | TTFT (e.g., < 500 ms P99) and maximum ITL      |
+   |                  | (e.g., < 50 ms P99) under a specified          |
+   |                  | request arrival rate.                          |
    +------------------+------------------------------------------------+
    | *Speculative     | An inference acceleration technique using a    |
-   | Decoding*        | small draft model to generate candidate token  |
-   |                  | sequences verified in parallel by the target   |
-   |                  | model.  Reduces effective ITL but generates    |
-   |                  | bursty, variable-length KV cache traffic;      |
-   |                  | noted as a future benchmarking area not fully  |
-   |                  | specified in the current companion documents.  |
+   | Decoding*        | small draft model to generate candidate        |
+   |                  | token sequences verified in parallel by the    |
+   |                  | target model.  Reduces effective ITL but       |
+   |                  | generates bursty, variable-length KV cache     |
+   |                  | traffic; noted as a future benchmarking        |
+   |                  | area not fully specified in the current        |
+   |                  | companion documents.                           |
    +------------------+------------------------------------------------+
-   | *S_KV*           | The total size in bytes of the KV cache state  |
-   |                  | generated by a single inference request        |
-   |                  | across all transformer layers and all context  |
-   |                  | tokens, computed as: S_KV = 2 x L x H_kv x D   |
-   |                  | x C x P_bytes.  Where: L = number of           |
-   |                  | transformer layers; H_kv = number of KV        |
-   |                  | attention heads per layer (H_kv <= H_total     |
-   |                  | for GQA/MQA); D = per-head key/value           |
-   |                  | dimension (head_dim), typically model_dim /    |
-   |                  | H_total; C = context length in tokens (prompt  |
-   |                  | + generated tokens); P_bytes = precision in    |
-   |                  | bytes per element (FP16/BF16 = 2, FP8/INT8 =   |
-   |                  | 1); Factor 2 accounts for both K and V         |
-   |                  | tensors, each of shape [H_kv, D] per layer     |
-   |                  | per token.                                     |
+   | *S_KV*           | The total size in bytes of the KV cache        |
+   |                  | state generated by a single inference          |
+   |                  | request across all transformer layers and      |
+   |                  | all context tokens, computed as: S_KV = 2 x    |
+   |                  | L x H_kv x D x C x P_bytes.  Where: L =        |
+   |                  | number of transformer layers; H_kv = number    |
+   |                  | of KV attention heads per layer (H_kv <=       |
+   |                  | H_total for GQA/MQA); D = per-head key/        |
+   |                  | value dimension (head_dim), typically          |
+   |                  | model_dim / H_total; C = context length in     |
+   |                  | tokens (prompt + generated tokens); P_bytes    |
+   |                  | = precision in bytes per element (FP16/BF16    |
+   |                  | = 2, FP8/INT8 = 1); Factor 2 accounts for      |
+   |                  | both K and V tensors, each of shape [H_kv,     |
+   |                  | D] per layer per token.                        |
    +------------------+------------------------------------------------+
 
                      Table 11: Inference-Specific Terms
+
+   See Section 7.1 of [I-D.calabria-bmwg-ai-fabric-inference-bench] for
+   the MoE test matrix referenced by T_dispatch above.
 
 9.1.  Inference Phase Characteristics
 
@@ -1145,73 +1154,63 @@ Table of Contents
    The following terms define the three-tier KPI taxonomy used across
    both companion methodology documents.
 
-    +================+================================================+
-    | Term           | Definition                                     |
-    +================+================================================+
-    | *Primary KPI*  | A top-level performance indicator directly     |
-    |                | representing end-user experience or training   |
-    |                | efficiency.  In training: JCT Ratio and BusBW. |
-    |                | In inference: TTFT and ITL.  Primary KPIs are  |
-    |                | the principal reporting metric and the basis   |
-    |                | for comparative benchmarking across DUT        |
-    |                | implementations.                               |
-    +----------------+------------------------------------------------+
-    | *Secondary     | A fabric-level performance indicator providing |
-    | KPI*           | mechanistic explanation for primary KPI        |
-    |                | values.  Examples: collective operation        |
-    |                | throughput (BusBW), KV cache transfer goodput, |
-    |                | AllToAll dispatch latency, ECMP imbalance      |
-    |                | (MMR), and link utilization.  Secondary KPIs   |
-    |                | enable root-cause analysis of Primary KPI      |
-    |                | deviations.                                    |
-    +----------------+------------------------------------------------+
-    | *Fabric Health | An operational metric characterizing fabric    |
-    | Indicator      | stability and anomaly conditions rather than   |
-    | (FHI)*         | peak performance.  FHIs include: PFC event     |
-    |                | rate, PFC storm occurrence, ECN marking ratio, |
-    |                | packet loss rate, buffer occupancy (P99), and  |
-    |                | retransmission rate.  FHIs *SHOULD* be         |
-    |                | continuously monitored and reported throughout |
-    |                | all test categories.                           |
-    +----------------+------------------------------------------------+
-    | *Goodput*      | The application-useful data delivered per unit |
-    |                | Benchmark reports MUST use the qualified term  |
-    |                | to avoid ambiguity.                            |
-    |                | *Fabric_Goodput:* RDMA message payload bytes   |
-    |                | successfully delivered per unit time at the    |
-    |                | DUT boundary, excluding transport headers,     |
-    |                | framing overhead, padding, and retransmitted   |
-    |                | bytes.  This is the numerator quantity in      |
-    |                | KV_xfer_bandwidth and EP_alltoall_bandwidth.   |
-    |                | Units: GB/s or Gbps; reports MUST state which. |
-    |                | *Inference_Goodput:* Output tokens             |
-    |                | successfully delivered per unit time, counting |
-    |                | only requests that complete without            |
-    |                | preemption, eviction, or error.  Corresponds   |
-    |                | to TPS_output over successfully completed      |
-    |                | requests only.  Units: tokens/second.          |
-    |                | The two planes MUST NOT be conflated.  KV_BW   |
-    |                | measures Fabric_Goodput; it does not measure   |
-    |                | Inference_Goodput.                             |
-    +----------------+------------------------------------------------+
-    | *Zero Packet   | time, excluding retransmitted packets,         |
-    | Loss*          | protocol.  A test acceptance criterion         |
-    |                | requiring that no packets are dropped by the   |
-    |                | DUT during the measurement interval.  For      |
-    |                | RoCEv2 and UET transports, zero packet loss is |
-    |                | the target operating condition.  The binary    |
-    |                | search procedure in the companion methodology  |
-    |                | documents determines the maximum offered load  |
-    |                | satisfying this criterion.                     |
-    +----------------+------------------------------------------------+
-    | {: #tab-kpi-   |                                                |
-    | class          |                                                |
-    | title="KPI     |                                                |
-    | Classification |                                                |
-    | Terms"}        |                                                |
-    +----------------+------------------------------------------------+
+   +============+=====================================================+
+   | Term       | Definition                                          |
+   +============+=====================================================+
+   | *Primary   | A top-level performance indicator directly          |
+   | KPI*       | representing end-user experience or training        |
+   |            | efficiency.  In training: JCT Ratio and BusBW.  In  |
+   |            | inference: TTFT and ITL.  Primary KPIs are the      |
+   |            | principal reporting metric and the basis for        |
+   |            | comparative benchmarking across DUT                 |
+   |            | implementations.                                    |
+   +------------+-----------------------------------------------------+
+   | *Secondary | A fabric-level performance indicator providing      |
+   | KPI*       | mechanistic explanation for primary KPI values.     |
+   |            | Examples: collective operation throughput (BusBW),  |
+   |            | KV cache transfer goodput, AllToAll dispatch        |
+   |            | latency, ECMP imbalance (MMR), and link             |
+   |            | utilization.  Secondary KPIs enable root-cause      |
+   |            | analysis of Primary KPI deviations.                 |
+   +------------+-----------------------------------------------------+
+   | *Fabric    | An operational metric characterizing fabric         |
+   | Health     | stability and anomaly conditions rather than peak   |
+   | Indicator  | performance.  FHIs include: PFC event rate, PFC     |
+   | (FHI)*     | storm occurrence, ECN marking ratio, packet loss    |
+   |            | rate, buffer occupancy (P99), and retransmission    |
+   |            | rate.  FHIs *SHOULD* be continuously monitored and  |
+   |            | reported throughout all test categories.            |
+   +------------+-----------------------------------------------------+
+   | *Goodput*  | The application-useful data delivered per unit      |
+   |            | Benchmark reports MUST use the qualified term to    |
+   |            | avoid ambiguity.                                    |
+   |            | *Fabric_Goodput:* RDMA message payload bytes        |
+   |            | successfully delivered per unit time at the DUT     |
+   |            | boundary, excluding transport headers, framing      |
+   |            | overhead, padding, and retransmitted bytes.  This   |
+   |            | is the numerator quantity in KV_xfer_bandwidth and  |
+   |            | EP_alltoall_bandwidth.  Units: GB/s or Gbps;        |
+   |            | reports MUST state which.                           |
+   |            | *Inference_Goodput:* Output tokens successfully     |
+   |            | delivered per unit time, counting only requests     |
+   |            | that complete without preemption, eviction, or      |
+   |            | error.  Corresponds to TPS_output over successfully |
+   |            | completed requests only.  Units: tokens/second.     |
+   |            | The two planes MUST NOT be conflated.  KV_BW        |
+   |            | measures Fabric_Goodput; it does not measure        |
+   |            | Inference_Goodput.                                  |
+   +------------+-----------------------------------------------------+
+   | *Zero      | time, excluding retransmitted packets, protocol.  A |
+   | Packet     | test acceptance criterion requiring that no packets |
+   | Loss*      | are dropped by the DUT during the measurement       |
+   |            | interval.  For RoCEv2 and UET transports, zero      |
+   |            | packet loss is the target operating condition.  The |
+   |            | binary search procedure in the companion            |
+   |            | methodology documents determines the maximum        |
+   |            | offered load satisfying this criterion.             |
+   +------------+-----------------------------------------------------+
 
-                                  Table 13
+                    Table 13: KPI Classification Terms
 
 10.1.  KPI Tier Summary
 
