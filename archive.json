@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-02T02:12:18.988922+00:00",
+  "timestamp": "2026-04-09T02:11:49.308025+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -282,16 +282,24 @@
       "id": "I_kwDORX8iVs75TOxO",
       "title": "References for MOE changes on Inference Doc",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Expert Choice Routing -> Variables and T_Dispatch ",
       "createdAt": "2026-03-31T21:46:17Z",
-      "updatedAt": "2026-03-31T21:46:17Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-04-07T21:40:10Z",
+      "closedAt": "2026-04-07T21:40:10Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "addressed by MoE branch, see PR",
+          "createdAt": "2026-04-07T21:40:10Z",
+          "updatedAt": "2026-04-07T21:40:10Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -599,7 +607,7 @@
       "labels": [],
       "body": "KX_size to reflect changes on Inference draft",
       "createdAt": "2026-03-27T15:45:50Z",
-      "updatedAt": "2026-03-28T12:34:22Z",
+      "updatedAt": "2026-04-07T21:38:58Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "77807b11685840ba092759c5cbccab67b7e7191e",
@@ -756,7 +764,7 @@
       "labels": [],
       "body": "fix spacing ",
       "createdAt": "2026-03-31T12:48:42Z",
-      "updatedAt": "2026-03-31T15:30:18Z",
+      "updatedAt": "2026-04-07T21:38:59Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "fe6ee29d4e144653e100b21ccf99121052c8b119",
@@ -786,7 +794,7 @@
       "labels": [],
       "body": "BUSBW definition and link and references fixes (correct datatracker documents / links",
       "createdAt": "2026-03-31T15:27:45Z",
-      "updatedAt": "2026-03-31T15:29:46Z",
+      "updatedAt": "2026-04-07T21:39:00Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "060d290993f96de6cb03b349495aa932987a6ba3",
@@ -801,6 +809,50 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDORX8iVs7QhhB_",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/25",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "fcalabri"
+      ],
+      "labels": [],
+      "body": "MoE new Definitions to match inference draft",
+      "createdAt": "2026-04-07T14:32:50Z",
+      "updatedAt": "2026-04-08T14:33:22Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "635d837c798b3a75b9d082c7ba76be1f31eeda49",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "MoE",
+      "headRefOid": "6f5e85d1518eadf1e204a65ebd40dbccb59d4904",
+      "closedAt": "2026-04-08T14:33:22Z",
+      "mergedAt": "2026-04-08T14:33:22Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "824c76f36b39e3d8a21f6d76a4cf1c008ecd0e17"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs7y58Se",
+          "commit": {
+            "abbreviatedOid": "6f5e85d"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-04-08T13:04:44Z",
+          "updatedAt": "2026-04-08T13:04:44Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
