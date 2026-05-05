@@ -22,10 +22,12 @@ Performance Indicators (KPIs), and fabric topology concepts.
        This document is a companion to  
 and  . Those documents
  SHOULD NOT  be applied without first consulting the terminology defined
-herein. Where definitions herein overlap with RFC 1242 or RFC 8238,
-the AI fabric context definition in this document takes precedence. 
+herein. Where definitions herein overlap with RFC 1242 or RFC 8238, this
+document provides AI fabric context extensions and refinements;
+the foundational definitions in those RFCs remain authoritative
+for general network benchmarking. 
     " name="description">
-<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="benchmarking" name="keyword">
 <meta content="terminology" name="keyword">
 <meta content="AI training" name="keyword">
@@ -41,18 +43,18 @@ the AI fabric context definition in this document takes precedence.
 <meta content="KV cache" name="keyword">
 <meta content="draft-calabria-bmwg-ai-fabric-terminology-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.32.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.9.4
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
-    requests 2.32.5
-    wcwidth 0.6.0
+    requests 2.33.1
+    wcwidth 0.7.0
 -->
 <link href="draft-calabria-bmwg-ai-fabric-terminology.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1073,11 +1075,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">AI Fabric Benchmarking Terminology</td>
-<td class="right">April 2026</td>
+<td class="right">May 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Calabria, et al.</td>
-<td class="center">Expires 10 October 2026</td>
+<td class="center">Expires 6 November 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1090,12 +1092,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-calabria-bmwg-ai-fabric-terminology-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-08" class="published">8 April 2026</time>
+<time datetime="2026-05-05" class="published">5 May 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-10-10">10 October 2026</time></dd>
+<dd class="expires"><time datetime="2026-11-06">6 November 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,8 +1134,10 @@ Performance Indicators (KPIs), and fabric topology concepts.<a href="#section-ab
 <p id="section-abstract-2">This document is a companion to <span>[<a href="#I-D.calabria-bmwg-ai-fabric-training-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-training-bench</a>]</span>
 and <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>. Those documents
 <span class="bcp14">SHOULD NOT</span> be applied without first consulting the terminology defined
-herein. Where definitions herein overlap with RFC 1242 or RFC 8238,
-the AI fabric context definition in this document takes precedence.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+herein. Where definitions herein overlap with RFC 1242 or RFC 8238, this
+document provides AI fabric context extensions and refinements;
+the foundational definitions in those RFCs remain authoritative
+for general network benchmarking.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1165,7 +1169,7 @@ the AI fabric context definition in this document takes precedence.<a href="#sec
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1423,7 +1427,7 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
             <td class="text-left" rowspan="1" colspan="1">
               <strong>JFI</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows: <code>JFI = (Σxᵢ)² / (n · Σxᵢ²)</code> where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. <strong><span class="bcp14">SHOULD</span></strong> be computed per <span>[<a href="#RFC1242" class="cite xref">RFC1242</a>]</span> reporting conventions.</td>
+            <td class="text-left" rowspan="1" colspan="1">Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows: <code>JFI = (Σxᵢ)² / (n · Σxᵢ²)</code> where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. Defined in <span>[<a href="#Jain1984" class="cite xref">Jain1984</a>]</span>. <strong><span class="bcp14">SHOULD</span></strong> be reported alongside throughput measurements for all multi-flow AI fabric tests.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1508,7 +1512,7 @@ are the primary traffic sources in distributed AI workloads.<a href="#section-3-
             <td class="text-left" rowspan="1" colspan="1">
               <strong>AllToAll</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A collective in which each participant sends a distinct payload to every other participant and receives a distinct payload from every other participant. The critical collective for Mixture-of-Experts token dispatch. Generates N²−1 independent point-to-point flows for N participants.</td>
+            <td class="text-left" rowspan="1" colspan="1">A collective in which each participant sends a distinct payload to every other participant and receives a distinct payload from every other participant. The critical collective for Mixture-of-Experts token dispatch. Generates N(N−1) independent point-to-point flows for N participants.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1520,7 +1524,7 @@ are the primary traffic sources in distributed AI workloads.<a href="#section-3-
             <td class="text-left" rowspan="1" colspan="1">
               <strong>BusBW</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The effective data throughput per accelerator during a collective<br>   operation, computed as:<br><br>      BusBW = (data_size × algo_factor) / time<br><br>   where algo_factor normalizes for the collective type and algorithm:<br><br>Collective       Algorithm                    algo_factor<br><br>   AllReduce        Ring / recursive doubling    2 × (n−1) / n<br>   AllReduce        Binary / double-binary tree  2 × log₂(n) / n<br>   AllGather        Ring                         (n−1) / n<br>   ReduceScatter    Ring                         (n−1) / n<br>   AllToAll         Direct                       (n−1) / n<br><br>   n = number of participating accelerators.<br><br>Ring AllReduce is the conventional comparison baseline. <br><br>Note: collective libraries commonly select the algorithm dynamically based on message size (e.g., tree-based for small messages, ring for large messages); algo_factor therefore varies with message size and <span class="bcp14">MUST</span> be reported per message-size bucket when dynamic selection is active. <br>Reports <span class="bcp14">MUST</span> state: collective type, algorithm, algo_factor value, collective library name and version, and n. Units: Gbps per accelerator.</td>
+            <td class="text-left" rowspan="1" colspan="1">The effective data throughput per accelerator during a collective operation, computed as:<br><br>BusBW = (data_size × algo_factor) / time<br><br>algo_factor is a fixed normalization constant derived from the ideal ring algorithm for each collective type, applied regardless of the algorithm actually selected by the collective library at runtime. This makes BusBW algorithm-invariant: the same hardware moving the same data volume in the same time yields the same BusBW whether the library selects ring, tree, or recursive doubling. This convention follows the NCCL nccl-tests definition.<br><br>Collective       algo_factor<br>AllReduce        2 × (n−1) / n<br>AllGather        (n−1) / n<br>ReduceScatter    (n−1) / n<br>AllToAll         (n−1) / n<br><br>n = number of participating accelerators.<br><br>Worked example — AllReduce, n=8, data_size=1 GB, time=10 ms:<br>algo_factor = 2 × (8−1) / 8 = 1.75<br>BusBW = (1 GB × 1.75) / 10 ms = 175 GB/s<br><br>Reports <span class="bcp14">MUST</span> state: collective type, algo_factor value, collective library name and version, and n. The algorithm actually selected by the library <span class="bcp14">SHOULD</span> be reported as diagnostic information when known. Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1650,7 +1654,7 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>RoCEv2</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Requires lossless fabric operation (PFC or equivalent) for correctness. Standardized in IBTA Annex 16; transported over UDP destination port 4791.</td>
+              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Requires lossless fabric operation (PFC or equivalent) for correctness. Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -2481,7 +2485,7 @@ methodology documents.<a href="#section-11-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>RFC 1242</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">"Benchmarking Terminology for Network Interconnect Devices" (Bradner, 1991). Defines foundational benchmarking terms (throughput, latency, frame loss rate, back-to-back frames). The baseline terminology reference for BMWG work. Where terms in this document overlap with RFC 1242 definitions, the AI fabric context definitions herein take precedence.</td>
+            <td class="text-left" rowspan="1" colspan="1">"Benchmarking Terminology for Network Interconnect Devices" (Bradner, 1991). Defines foundational benchmarking terms (throughput, latency, frame loss rate, back-to-back frames). The baseline terminology reference for BMWG work. Where terms in this document overlap with RFC 1242 definitions, this document contextualizes and extends those definitions for AI fabric benchmarking.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2555,19 +2559,23 @@ methodology documents.<a href="#section-11-1" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="I-D.calabria-bmwg-ai-fabric-inference-bench">[I-D.calabria-bmwg-ai-fabric-inference-bench]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Methodology for AI Inference Serving Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-inference-bench-00</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-00">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Methodology for AI Inference Serving Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-inference-bench-01</span>, <time datetime="2026-04-21" class="refDate">21 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-01">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.calabria-bmwg-ai-fabric-terminology">[I-D.calabria-bmwg-ai-fabric-terminology]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Terminology for AI Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-terminology-00</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-00">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Terminology for AI Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-terminology-01</span>, <time datetime="2026-04-21" class="refDate">21 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-01">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.calabria-bmwg-ai-fabric-training-bench">[I-D.calabria-bmwg-ai-fabric-training-bench]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Methodology for AI Training Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-training-bench-00</span>, <time datetime="2026-02-26" class="refDate">26 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-00">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Methodology for AI Training Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-training-bench-01</span>, <time datetime="2026-04-21" class="refDate">21 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-01">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IBTA-ROCE">[IBTA-ROCE]</dt>
         <dd>
-<span class="refAuthor">InfiniBand Trade Association</span>, <span class="refTitle">"InfiniBand Architecture Specification, Annex 16: RoCE"</span>, <time datetime="2010" class="refDate">2010</time>, <span>&lt;<a href="https://www.infinibandta.org">https://www.infinibandta.org</a>&gt;</span>. </dd>
+<span class="refAuthor">InfiniBand Trade Association</span>, <span class="refTitle">"InfiniBand Architecture Specification Volume 1, Annex A17: RoCEv2"</span>, <time datetime="2014-09" class="refDate">September 2014</time>, <span>&lt;<a href="https://www.infinibandta.org">https://www.infinibandta.org</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="Jain1984">[Jain1984]</dt>
+        <dd>
+<span class="refAuthor">Jain, R.</span>, <span class="refAuthor">Chiu, D.</span>, and <span class="refAuthor">W. Hawe</span>, <span class="refTitle">"A Quantitative Measure of Fairness and Discrimination for Resource Allocation in Shared Computer Systems"</span>, <span class="seriesInfo">DEC Technical Report TR-301</span>, <time datetime="1984-09" class="refDate">September 1984</time>, <span>&lt;<a href="https://www.cs.wustl.edu/~jain/papers/ftp/fairness.pdf">https://www.cs.wustl.edu/~jain/papers/ftp/fairness.pdf</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC1242">[RFC1242]</dt>
         <dd>

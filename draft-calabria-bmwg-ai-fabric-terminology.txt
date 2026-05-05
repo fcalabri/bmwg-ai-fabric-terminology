@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 10 October 2026                            Blue Fern Consulting
+Expires: 6 November 2026                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                            8 April 2026
+                                                              5 May 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -32,8 +32,9 @@ Abstract
    [I-D.calabria-bmwg-ai-fabric-inference-bench].  Those documents
    SHOULD NOT be applied without first consulting the terminology
    defined herein.  Where definitions herein overlap with RFC 1242 or
-   RFC 8238, the AI fabric context definition in this document takes
-   precedence.
+   RFC 8238, this document provides AI fabric context extensions and
+   refinements; the foundational definitions in those RFCs remain
+   authoritative for general network benchmarking.
 
 About This Document
 
@@ -63,7 +64,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 October 2026.
+   This Internet-Draft will expire on 6 November 2026.
 
 Copyright Notice
 
@@ -171,198 +172,201 @@ Table of Contents
    The following terms establish the general measurement framework
    applicable to all AI fabric benchmarking activities.
 
-   +=============+====================================================+
-   | Term        | Definition                                         |
-   +=============+====================================================+
-   | *AI Fabric* | The dedicated Ethernet backend network             |
-   |             | interconnecting accelerators (GPUs/XPUs) for       |
-   |             | distributed AI training and inference workloads.   |
-   |             | Typically implemented as a non-blocking Clos (fat- |
-   |             | tree) topology running RoCEv2 or UET transport.    |
-   |             | Distinct from the front-end (management/storage)   |
-   |             | network.                                           |
-   +-------------+----------------------------------------------------+
-   | *DUT*       | Device Under Test.  The network element(s) whose   |
-   |             | performance characteristics are being measured.    |
-   |             | In AI fabric benchmarking the DUT is one or more   |
-   |             | fabric elements: leaf switches, spine switches,    |
-   |             | NICs, or the complete fabric assembly.             |
-   +-------------+----------------------------------------------------+
-   | *SUT*       | System Under Test.  The complete AI compute system |
-   |             | including accelerators, NICs, the fabric DUT, and  |
-   |             | serving/training software, when end-to-end metrics |
-   |             | are the measurement objective.                     |
-   +-------------+----------------------------------------------------+
-   | *RT*        | Router Tester / Traffic Generator.  Test equipment |
-   |             | capable of generating and receiving network        |
-   |             | traffic at specified rates with nanosecond-        |
-   |             | resolution timestamping sufficient for the         |
-   |             | measurements defined in the companion methodology  |
-   |             | documents.                                         |
-   +-------------+----------------------------------------------------+
-   | *JFI*       | Jain's Fairness Index.  A scalar measure of flow-  |
-   |             | level throughput fairness across n flows: JFI =    |
-   |             | (Σxᵢ)² / (n · Σxᵢ²) where xᵢ is the throughput of  |
-   |             | flow i.  A value of 1.0 indicates perfect          |
-   |             | fairness; lower values indicate disparity.         |
-   |             | *SHOULD* be computed per [RFC1242] reporting       |
-   |             | conventions.                                       |
-   +-------------+----------------------------------------------------+
-   | *Offered    | The total traffic rate presented to the DUT from   |
-   | Load*       | test equipment, expressed as a fraction of line    |
-   |             | rate (0–100%) or as absolute bit/s.  Offered load  |
-   |             | is controlled independently of DUT absorption,     |
-   |             | enabling characterization of saturation behavior.  |
-   +-------------+----------------------------------------------------+
-   | *Trial      | The time interval over which a single measurement  |
-   | Duration*   | is conducted.  For AI fabric tests, the            |
-   |             | *RECOMMENDED* minimum is 60 seconds for throughput |
-   |             | tests and 300 seconds for soak/stability tests,    |
-   |             | per the methodology in [RFC2544] as extended       |
-   |             | herein.                                            |
-   +-------------+----------------------------------------------------+
-   | *Warmup     | A mandatory pre-measurement interval during which  |
-   | Period*     | traffic is sent but results are not recorded.      |
-   |             | Ensures adaptive routing tables, PFC watermarks,   |
-   |             | and DCQCN/UET congestion controllers reach steady  |
-   |             | state before measurement begins. *RECOMMENDED*     |
-   |             | minimum: 10 seconds.                               |
-   +-------------+----------------------------------------------------+
-   | *Binary     | An iterative test procedure for determining the    |
-   | Search*     | maximum offered load at which a DUT meets a        |
-   |             | specified acceptance criterion (e.g., zero packet  |
-   |             | loss).  The search halves the candidate load range |
-   |             | at each iteration, converging to a resolution of   |
-   |             | 0.1% offered load within 10 iterations.            |
-   +-------------+----------------------------------------------------+
-   | *Percentile | A latency statistic expressing that the specified  |
-   | Latency*    | fraction of all measured latency samples fall at   |
-   |             | or below the reported value.  Denoted Pxx (e.g.,   |
-   |             | P50, P95, P99, P99.9).  Tail latency (P99 and      |
-   |             | above) is especially relevant for AI fabric        |
-   |             | benchmarking because SLO violations are determined |
-   |             | by worst-case, not median, performance.            |
-   +-------------+----------------------------------------------------+
+     +=============+=================================================+
+     | Term        | Definition                                      |
+     +=============+=================================================+
+     | *AI Fabric* | The dedicated Ethernet backend network          |
+     |             | interconnecting accelerators (GPUs/XPUs) for    |
+     |             | distributed AI training and inference           |
+     |             | workloads.  Typically implemented as a non-     |
+     |             | blocking Clos (fat-tree) topology running       |
+     |             | RoCEv2 or UET transport.  Distinct from the     |
+     |             | front-end (management/storage) network.         |
+     +-------------+-------------------------------------------------+
+     | *DUT*       | Device Under Test.  The network element(s)      |
+     |             | whose performance characteristics are being     |
+     |             | measured.  In AI fabric benchmarking the DUT is |
+     |             | one or more fabric elements: leaf switches,     |
+     |             | spine switches, NICs, or the complete fabric    |
+     |             | assembly.                                       |
+     +-------------+-------------------------------------------------+
+     | *SUT*       | System Under Test.  The complete AI compute     |
+     |             | system including accelerators, NICs, the fabric |
+     |             | DUT, and serving/training software, when end-   |
+     |             | to-end metrics are the measurement objective.   |
+     +-------------+-------------------------------------------------+
+     | *RT*        | Router Tester / Traffic Generator.  Test        |
+     |             | equipment capable of generating and receiving   |
+     |             | network traffic at specified rates with         |
+     |             | nanosecond-resolution timestamping sufficient   |
+     |             | for the measurements defined in the companion   |
+     |             | methodology documents.                          |
+     +-------------+-------------------------------------------------+
+     | *JFI*       | Jain's Fairness Index.  A scalar measure of     |
+     |             | flow-level throughput fairness across n flows:  |
+     |             | JFI = (Σxᵢ)² / (n · Σxᵢ²) where xᵢ is the       |
+     |             | throughput of flow i.  A value of 1.0 indicates |
+     |             | perfect fairness; lower values indicate         |
+     |             | disparity.  Defined in [Jain1984]. *SHOULD* be  |
+     |             | reported alongside throughput measurements for  |
+     |             | all multi-flow AI fabric tests.                 |
+     +-------------+-------------------------------------------------+
+     | *Offered    | The total traffic rate presented to the DUT     |
+     | Load*       | from test equipment, expressed as a fraction of |
+     |             | line rate (0–100%) or as absolute bit/s.        |
+     |             | Offered load is controlled independently of DUT |
+     |             | absorption, enabling characterization of        |
+     |             | saturation behavior.                            |
+     +-------------+-------------------------------------------------+
+     | *Trial      | The time interval over which a single           |
+     | Duration*   | measurement is conducted.  For AI fabric tests, |
+     |             | the *RECOMMENDED* minimum is 60 seconds for     |
+     |             | throughput tests and 300 seconds for soak/      |
+     |             | stability tests, per the methodology in         |
+     |             | [RFC2544] as extended herein.                   |
+     +-------------+-------------------------------------------------+
+     | *Warmup     | A mandatory pre-measurement interval during     |
+     | Period*     | which traffic is sent but results are not       |
+     |             | recorded.  Ensures adaptive routing tables, PFC |
+     |             | watermarks, and DCQCN/UET congestion            |
+     |             | controllers reach steady state before           |
+     |             | measurement begins. *RECOMMENDED* minimum: 10   |
+     |             | seconds.                                        |
+     +-------------+-------------------------------------------------+
+     | *Binary     | An iterative test procedure for determining the |
+     | Search*     | maximum offered load at which a DUT meets a     |
+     |             | specified acceptance criterion (e.g., zero      |
+     |             | packet loss).  The search halves the candidate  |
+     |             | load range at each iteration, converging to a   |
+     |             | resolution of 0.1% offered load within 10       |
+     |             | iterations.                                     |
+     +-------------+-------------------------------------------------+
+     | *Percentile | A latency statistic expressing that the         |
+     | Latency*    | specified fraction of all measured latency      |
+     |             | samples fall at or below the reported value.    |
+     |             | Denoted Pxx (e.g., P50, P95, P99, P99.9).  Tail |
+     |             | latency (P99 and above) is especially relevant  |
+     |             | for AI fabric benchmarking because SLO          |
+     |             | violations are determined by worst-case, not    |
+     |             | median, performance.                            |
+     +-------------+-------------------------------------------------+
 
-                   Table 1: General Benchmarking Terms
+                    Table 1: General Benchmarking Terms
 
 3.  Collective Communication Terms
 
    The following terms define the collective communication operations
    that are the primary traffic sources in distributed AI workloads.
 
-   +=================+=================================================+
-   | Term            | Definition                                      |
-   +=================+=================================================+
-   | *Collective     | A coordinated communication pattern             |
-   | Operation*      | executed simultaneously across all              |
-   |                 | accelerators in a training or inference         |
-   |                 | group.  Core collectives: AllReduce             |
-   |                 | (gradient aggregation), AllGather               |
-   |                 | (parameter distribution), ReduceScatter         |
-   |                 | (partial reduction + scatter), and              |
-   |                 | AllToAll (expert dispatch in MoE models).       |
-   +-----------------+-------------------------------------------------+
-   | *AllReduce*     | A collective in which each participant          |
-   |                 | contributes a tensor and all participants       |
-   |                 | receive the element-wise sum (or other          |
-   |                 | reduction) of all contributions.  The           |
-   |                 | dominant communication primitive in data-       |
-   |                 | parallel and tensor-parallel training.          |
-   |                 | BusBW is the primary KPI.                       |
-   +-----------------+-------------------------------------------------+
-   | *AllGather*     | A collective in which each participant          |
-   |                 | contributes a shard of a tensor and all         |
-   |                 | participants receive the concatenation of       |
-   |                 | all shards.  Used in tensor-parallel            |
-   |                 | (Megatron-style) layers to reconstruct          |
-   |                 | distributed activations or parameters.          |
-   +-----------------+-------------------------------------------------+
-   | *ReduceScatter* | A collective combining an element-wise          |
-   |                 | reduction with a scatter, so each               |
-   |                 | participant receives a distinct slice of        |
-   |                 | the reduced result.  Used in ZeRO-stage         |
-   |                 | optimizer strategies and as the first half      |
-   |                 | of a ring-AllReduce.                            |
-   +-----------------+-------------------------------------------------+
-   | *AllToAll*      | A collective in which each participant          |
-   |                 | sends a distinct payload to every other         |
-   |                 | participant and receives a distinct             |
-   |                 | payload from every other participant.  The      |
-   |                 | critical collective for Mixture-of-Experts      |
-   |                 | token dispatch.  Generates N²−1                 |
-   |                 | independent point-to-point flows for N          |
-   |                 | participants.                                   |
-   +-----------------+-------------------------------------------------+
-   | *Ring           | An AllReduce (or AllGather/ReduceScatter)       |
-   | Algorithm*      | algorithm structured as a logical ring of       |
-   |                 | participants.  Each participant sends to        |
-   |                 | its right neighbor and receives from its        |
-   |                 | left neighbor in 2(N−1) steps.  Bus             |
-   |                 | bandwidth efficiency = 2(N−1)/N,                |
-   |                 | approaching 100% for large N.  Standard         |
-   |                 | baseline for BusBW calculation.                 |
-   +-----------------+-------------------------------------------------+
-   | *BusBW*         | The effective data throughput per               |
-   |                 | accelerator during a collective                 |
-   |                 | operation, computed as:                         |
-   |                 |                                                 |
-   |                 | BusBW = (data_size × algo_factor) / time        |
-   |                 |                                                 |
-   |                 | where algo_factor normalizes for the            |
-   |                 | collective type and algorithm:                  |
-   |                 |                                                 |
-   |                 | Collective Algorithm algo_factor                |
-   |                 |                                                 |
-   |                 | AllReduce Ring / recursive doubling 2 ×         |
-   |                 | (n−1) / n                                       |
-   |                 | AllReduce Binary / double-binary tree 2 ×       |
-   |                 | log₂(n) / n                                     |
-   |                 | AllGather Ring (n−1) / n                        |
-   |                 | ReduceScatter Ring (n−1) / n                    |
-   |                 | AllToAll Direct (n−1) / n                       |
-   |                 |                                                 |
-   |                 | n = number of participating accelerators.       |
-   |                 |                                                 |
-   |                 | Ring AllReduce is the conventional              |
-   |                 | comparison baseline.                            |
-   |                 |                                                 |
-   |                 | Note: collective libraries commonly select      |
-   |                 | the algorithm dynamically based on message      |
-   |                 | size (e.g., tree-based for small messages,      |
-   |                 | ring for large messages); algo_factor           |
-   |                 | therefore varies with message size and          |
-   |                 | MUST be reported per message-size bucket        |
-   |                 | when dynamic selection is active.               |
-   |                 | Reports MUST state: collective type,            |
-   |                 | algorithm, algo_factor value, collective        |
-   |                 | library name and version, and n.  Units:        |
-   |                 | Gbps per accelerator.                           |
-   +-----------------+-------------------------------------------------+
-   | *CCL*           | Collective Communication Library.  A            |
-   |                 | software library providing optimized            |
-   |                 | implementations of collective operations        |
-   |                 | (AllReduce, AllGather, etc.) over a             |
-   |                 | specific transport.  The CCL                    |
-   |                 | implementation *MUST* be documented in the      |
-   |                 | test report.                                    |
-   +-----------------+-------------------------------------------------+
-   | *SPMD*          | Single Program Multiple Data.  The              |
-   |                 | execution model underlying bulk-                |
-   |                 | synchronous distributed training, in which      |
-   |                 | all accelerators execute identical              |
-   |                 | computation on distinct data partitions,        |
-   |                 | synchronizing at collective barriers            |
-   |                 | between steps.                                  |
-   +-----------------+-------------------------------------------------+
-   | *Bulk           | A distributed computation model structured      |
-   | Synchronous     | as alternating compute and communicate          |
-   | Parallel (BSP)* | phases with a global synchronization            |
-   |                 | barrier between phases.  Standard training      |
-   |                 | workloads follow BSP: forward pass →            |
-   |                 | backward pass → AllReduce gradient sync →       |
-   |                 | optimizer step.                                 |
-   +-----------------+-------------------------------------------------+
+    +=================+===============================================+
+    | Term            | Definition                                    |
+    +=================+===============================================+
+    | *Collective     | A coordinated communication pattern executed  |
+    | Operation*      | simultaneously across all accelerators in a   |
+    |                 | training or inference group.  Core            |
+    |                 | collectives: AllReduce (gradient              |
+    |                 | aggregation), AllGather (parameter            |
+    |                 | distribution), ReduceScatter (partial         |
+    |                 | reduction + scatter), and AllToAll (expert    |
+    |                 | dispatch in MoE models).                      |
+    +-----------------+-----------------------------------------------+
+    | *AllReduce*     | A collective in which each participant        |
+    |                 | contributes a tensor and all participants     |
+    |                 | receive the element-wise sum (or other        |
+    |                 | reduction) of all contributions.  The         |
+    |                 | dominant communication primitive in data-     |
+    |                 | parallel and tensor-parallel training.  BusBW |
+    |                 | is the primary KPI.                           |
+    +-----------------+-----------------------------------------------+
+    | *AllGather*     | A collective in which each participant        |
+    |                 | contributes a shard of a tensor and all       |
+    |                 | participants receive the concatenation of all |
+    |                 | shards.  Used in tensor-parallel (Megatron-   |
+    |                 | style) layers to reconstruct distributed      |
+    |                 | activations or parameters.                    |
+    +-----------------+-----------------------------------------------+
+    | *ReduceScatter* | A collective combining an element-wise        |
+    |                 | reduction with a scatter, so each participant |
+    |                 | receives a distinct slice of the reduced      |
+    |                 | result.  Used in ZeRO-stage optimizer         |
+    |                 | strategies and as the first half of a ring-   |
+    |                 | AllReduce.                                    |
+    +-----------------+-----------------------------------------------+
+    | *AllToAll*      | A collective in which each participant sends  |
+    |                 | a distinct payload to every other participant |
+    |                 | and receives a distinct payload from every    |
+    |                 | other participant.  The critical collective   |
+    |                 | for Mixture-of-Experts token dispatch.        |
+    |                 | Generates N(N−1) independent point-to-point   |
+    |                 | flows for N participants.                     |
+    +-----------------+-----------------------------------------------+
+    | *Ring           | An AllReduce (or AllGather/ReduceScatter)     |
+    | Algorithm*      | algorithm structured as a logical ring of     |
+    |                 | participants.  Each participant sends to its  |
+    |                 | right neighbor and receives from its left     |
+    |                 | neighbor in 2(N−1) steps.  Bus bandwidth      |
+    |                 | efficiency = 2(N−1)/N, approaching 100% for   |
+    |                 | large N.  Standard baseline for BusBW         |
+    |                 | calculation.                                  |
+    +-----------------+-----------------------------------------------+
+    | *BusBW*         | The effective data throughput per accelerator |
+    |                 | during a collective operation, computed as:   |
+    |                 |                                               |
+    |                 | BusBW = (data_size × algo_factor) / time      |
+    |                 |                                               |
+    |                 | algo_factor is a fixed normalization constant |
+    |                 | derived from the ideal ring algorithm for     |
+    |                 | each collective type, applied regardless of   |
+    |                 | the algorithm actually selected by the        |
+    |                 | collective library at runtime.  This makes    |
+    |                 | BusBW algorithm-invariant: the same hardware  |
+    |                 | moving the same data volume in the same time  |
+    |                 | yields the same BusBW whether the library     |
+    |                 | selects ring, tree, or recursive doubling.    |
+    |                 | This convention follows the NCCL nccl-tests   |
+    |                 | definition.                                   |
+    |                 |                                               |
+    |                 | Collective algo_factor                        |
+    |                 | AllReduce 2 × (n−1) / n                       |
+    |                 | AllGather (n−1) / n                           |
+    |                 | ReduceScatter (n−1) / n                       |
+    |                 | AllToAll (n−1) / n                            |
+    |                 |                                               |
+    |                 | n = number of participating accelerators.     |
+    |                 |                                               |
+    |                 | Worked example — AllReduce, n=8, data_size=1  |
+    |                 | GB, time=10 ms:                               |
+    |                 | algo_factor = 2 × (8−1) / 8 = 1.75            |
+    |                 | BusBW = (1 GB × 1.75) / 10 ms = 175 GB/s      |
+    |                 |                                               |
+    |                 | Reports MUST state: collective type,          |
+    |                 | algo_factor value, collective library name    |
+    |                 | and version, and n.  The algorithm actually   |
+    |                 | selected by the library SHOULD be reported as |
+    |                 | diagnostic information when known.  Units:    |
+    |                 | GB/s or Gbps; reports MUST state which.       |
+    +-----------------+-----------------------------------------------+
+    | *CCL*           | Collective Communication Library.  A software |
+    |                 | library providing optimized implementations   |
+    |                 | of collective operations (AllReduce,          |
+    |                 | AllGather, etc.) over a specific transport.   |
+    |                 | The CCL implementation *MUST* be documented   |
+    |                 | in the test report.                           |
+    +-----------------+-----------------------------------------------+
+    | *SPMD*          | Single Program Multiple Data.  The execution  |
+    |                 | model underlying bulk-synchronous distributed |
+    |                 | training, in which all accelerators execute   |
+    |                 | identical computation on distinct data        |
+    |                 | partitions, synchronizing at collective       |
+    |                 | barriers between steps.                       |
+    +-----------------+-----------------------------------------------+
+    | *Bulk           | A distributed computation model structured as |
+    | Synchronous     | alternating compute and communicate phases    |
+    | Parallel (BSP)* | with a global synchronization barrier between |
+    |                 | phases.  Standard training workloads follow   |
+    |                 | BSP: forward pass → backward pass → AllReduce |
+    |                 | gradient sync → optimizer step.               |
+    +-----------------+-----------------------------------------------+
 
                   Table 2: Collective Communication Terms
 
@@ -445,71 +449,75 @@ Table of Contents
    for direct comparison with their RoCEv2 counterparts; full UET-
    specific terms are defined in Section 5.2.
 
-    +===========+====================================================+
-    | Term      | Definition                                         |
-    +===========+====================================================+
-    | *RDMA*    | Remote Direct Memory Access.  A transport          |
-    |           | mechanism enabling direct memory-to-memory data    |
-    |           | transfer between hosts without involving the       |
-    |           | destination CPU, providing zero-copy semantics and |
-    |           | kernel bypass.  Implementations include InfiniBand |
-    |           | Verbs (native IB), iWARP (RDMA over TCP), and      |
-    |           | RoCEv2 (RDMA over Converged Ethernet v2).          |
-    +-----------+----------------------------------------------------+
-    | *RoCEv2*  | RDMA over Converged Ethernet version 2.  An RDMA   |
-    |           | transport encapsulating InfiniBand transport layer |
-    |           | (BTH) over UDP/IP, enabling RDMA semantics on      |
-    |           | standard Ethernet infrastructure.  Requires        |
-    |           | lossless fabric operation (PFC or equivalent) for  |
-    |           | correctness.  Standardized in IBTA Annex 16;       |
-    |           | transported over UDP destination port 4791.        |
-    +-----------+----------------------------------------------------+
-    | *QP*      | Queue Pair.  The fundamental RDMA communication    |
-    |           | endpoint comprising a Send Queue (SQ) and Receive  |
-    |           | Queue (RQ).  QPs are connection-oriented in        |
-    |           | Reliable Connected (RC) mode.  Multiple QPs per    |
-    |           | source-destination pair are used to increase ECMP  |
-    |           | entropy in fabric load balancing.                  |
-    +-----------+----------------------------------------------------+
-    | *Reliable | An RDMA QP transport service type providing        |
-    | Connected | reliable, in-order delivery between exactly two    |
-    | (RC)*     | endpoints.  The primary QP type for AI collective  |
-    |           | operations via RoCEv2.  Requires connection setup  |
-    |           | before data transfer and maintains per-QP state    |
-    |           | for retransmission.                                |
-    +-----------+----------------------------------------------------+
-    | *RDMA     | An operation primitive of the RDMA programming     |
-    | Verb*     | model.  Key verbs: SEND/RECV (two-sided, receiver  |
-    |           | must post a buffer), WRITE (one-sided, target      |
-    |           | memory written directly), READ (one-sided, remote  |
-    |           | memory read), and Atomic (compare-and-swap, fetch- |
-    |           | and-add).  AI collectives predominantly use WRITE  |
-    |           | and SEND.                                          |
-    +-----------+----------------------------------------------------+
-    | *UET*     | Ultra Ethernet Transport.  A transport protocol    |
-    |           | defined by the Ultra Ethernet Consortium (UEC)     |
-    |           | Specification 1.0 as a next-generation AI/HPC      |
-    |           | fabric transport.  UET is connectionless, supports |
-    |           | native packet spraying (RUD), and integrates       |
-    |           | multipath load balancing and congestion control.   |
-    |           | Transported over UDP destination port 4793         |
-    |           | (pending IANA verification).                       |
-    +-----------+----------------------------------------------------+
-    | *PDC*     | Packet Delivery Context.  The ephemeral,           |
-    |           | lightweight transport endpoint in UET, analogous   |
-    |           | to but distinct from an RDMA Queue Pair.  PDCs are |
-    |           | connectionless (no setup handshake), enabling low- |
-    |           | latency initiation and reduced per-flow state in   |
-    |           | the NIC and switch.                                |
-    +-----------+----------------------------------------------------+
-    | *ROD*     | Reliable Ordered Delivery.  A UET transport        |
-    |           | service providing reliable, in-order packet        |
-    |           | delivery, semantically equivalent to RoCEv2 RC     |
-    |           | mode.  Suitable for legacy RDMA applications       |
-    |           | requiring strict ordering guarantees.              |
-    +-----------+----------------------------------------------------+
+   +===========+=======================================================+
+   | Term      | Definition                                            |
+   +===========+=======================================================+
+   | *RDMA*    | Remote Direct Memory Access.  A transport             |
+   |           | mechanism enabling direct memory-to-memory data       |
+   |           | transfer between hosts without involving the          |
+   |           | destination CPU, providing zero-copy semantics        |
+   |           | and kernel bypass.  Implementations include           |
+   |           | InfiniBand Verbs (native IB), iWARP (RDMA over        |
+   |           | TCP), and RoCEv2 (RDMA over Converged Ethernet        |
+   |           | v2).                                                  |
+   +-----------+-------------------------------------------------------+
+   | *RoCEv2*  | RDMA over Converged Ethernet version 2.  An RDMA      |
+   |           | transport encapsulating InfiniBand transport          |
+   |           | layer (BTH) over UDP/IP, enabling RDMA semantics      |
+   |           | on standard Ethernet infrastructure.  Requires        |
+   |           | lossless fabric operation (PFC or equivalent)         |
+   |           | for correctness.  Standardized in IBTA                |
+   |           | InfiniBand Architecture Volume 1, Annex A17           |
+   |           | (RoCEv2, September 2014) [IBTA-ROCE];                 |
+   |           | transported over UDP destination port 4791.           |
+   +-----------+-------------------------------------------------------+
+   | *QP*      | Queue Pair.  The fundamental RDMA communication       |
+   |           | endpoint comprising a Send Queue (SQ) and             |
+   |           | Receive Queue (RQ).  QPs are connection-oriented      |
+   |           | in Reliable Connected (RC) mode.  Multiple QPs        |
+   |           | per source-destination pair are used to increase      |
+   |           | ECMP entropy in fabric load balancing.                |
+   +-----------+-------------------------------------------------------+
+   | *Reliable | An RDMA QP transport service type providing           |
+   | Connected | reliable, in-order delivery between exactly two       |
+   | (RC)*     | endpoints.  The primary QP type for AI                |
+   |           | collective operations via RoCEv2.  Requires           |
+   |           | connection setup before data transfer and             |
+   |           | maintains per-QP state for retransmission.            |
+   +-----------+-------------------------------------------------------+
+   | *RDMA     | An operation primitive of the RDMA programming        |
+   | Verb*     | model.  Key verbs: SEND/RECV (two-sided,              |
+   |           | receiver must post a buffer), WRITE (one-sided,       |
+   |           | target memory written directly), READ (one-           |
+   |           | sided, remote memory read), and Atomic (compare-      |
+   |           | and-swap, fetch-and-add).  AI collectives             |
+   |           | predominantly use WRITE and SEND.                     |
+   +-----------+-------------------------------------------------------+
+   | *UET*     | Ultra Ethernet Transport.  A transport protocol       |
+   |           | defined by the Ultra Ethernet Consortium (UEC)        |
+   |           | Specification 1.0 as a next-generation AI/HPC         |
+   |           | fabric transport.  UET is connectionless,             |
+   |           | supports native packet spraying (RUD), and            |
+   |           | integrates multipath load balancing and               |
+   |           | congestion control.  Transported over UDP             |
+   |           | destination port 4793 (pending IANA                   |
+   |           | verification).                                        |
+   +-----------+-------------------------------------------------------+
+   | *PDC*     | Packet Delivery Context.  The ephemeral,              |
+   |           | lightweight transport endpoint in UET, analogous      |
+   |           | to but distinct from an RDMA Queue Pair.  PDCs        |
+   |           | are connectionless (no setup handshake),              |
+   |           | enabling low-latency initiation and reduced per-      |
+   |           | flow state in the NIC and switch.                     |
+   +-----------+-------------------------------------------------------+
+   | *ROD*     | Reliable Ordered Delivery.  A UET transport           |
+   |           | service providing reliable, in-order packet           |
+   |           | delivery, semantically equivalent to RoCEv2 RC        |
+   |           | mode.  Suitable for legacy RDMA applications          |
+   |           | requiring strict ordering guarantees.                 |
+   +-----------+-------------------------------------------------------+
 
-                      Table 4: RoCEv2 and RDMA Terms
+                       Table 4: RoCEv2 and RDMA Terms
 
 5.2.  Ultra Ethernet Transport (UET) Terms
 
@@ -1242,51 +1250,48 @@ Table of Contents
    documents referenced throughout this document and the companion
    methodology documents.
 
-   +===========+=======================================================+
-   | Reference | Definition                                            |
-   +===========+=======================================================+
-   | *RFC      | "Benchmarking Terminology for Network                 |
-   | 1242*     | Interconnect Devices" (Bradner, 1991).  Defines       |
-   |           | foundational benchmarking terms (throughput,          |
-   |           | latency, frame loss rate, back-to-back frames).       |
-   |           | The baseline terminology reference for BMWG           |
-   |           | work.  Where terms in this document overlap           |
-   |           | with RFC 1242 definitions, the AI fabric              |
-   |           | context definitions herein take precedence.           |
-   +-----------+-------------------------------------------------------+
-   | *RFC      | "Benchmarking Methodology for Network                 |
-   | 2544*     | Interconnect Devices" (Bradner & McQuaid,             |
-   |           | 1999).  Defines test methodologies for                |
-   |           | throughput, latency, frame loss rate, and back-       |
-   |           | to-back measurements.  The AI fabric                  |
-   |           | methodology documents extend RFC 2544                 |
-   |           | procedures for AI-specific traffic patterns and       |
-   |           | test durations.                                       |
-   +-----------+-------------------------------------------------------+
-   | *RFC      | "Data Center Benchmarking Terminology" (Bitar         |
-   | 8238*     | et al., 2017).  Extends RFC 1242 with data            |
-   |           | center-relevant terms including forwarding            |
-   |           | table scaling, congestion, and VM/SDN.  Incast,       |
-   |           | ECN, and buffer occupancy concepts in this            |
-   |           | document align with RFC 8238 definitions.             |
-   +-----------+-------------------------------------------------------+
-   | *RFC      | "Data Center Benchmarking Methodology" (Bitar         |
-   | 8239*     | et al., 2017).  Defines test methodologies for        |
-   |           | data center network functions including incast,       |
-   |           | ECN marking, and lossless behavior.  The AI           |
-   |           | fabric companion methodology documents extend         |
-   |           | RFC 8239 for distributed AI collective traffic        |
-   |           | patterns.                                             |
-   +-----------+-------------------------------------------------------+
-   | *RFC 2119 | "Key words for use in RFCs to Indicate                |
-   | / RFC     | Requirement Levels" (Bradner, 1997; Leiba,            |
-   | 8174*     | 2017).  Define the normative requirement              |
-   |           | language: MUST, MUST NOT, REQUIRED, SHALL,            |
-   |           | SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED,           |
-   |           | MAY, and OPTIONAL.  RFC 8174 clarifies that           |
-   |           | these terms are normative only when in                |
-   |           | uppercase; lowercase uses are not normative.          |
-   +-----------+-------------------------------------------------------+
+    +===========+=====================================================+
+    | Reference | Definition                                          |
+    +===========+=====================================================+
+    | *RFC      | "Benchmarking Terminology for Network Interconnect  |
+    | 1242*     | Devices" (Bradner, 1991).  Defines foundational     |
+    |           | benchmarking terms (throughput, latency, frame loss |
+    |           | rate, back-to-back frames).  The baseline           |
+    |           | terminology reference for BMWG work.  Where terms   |
+    |           | in this document overlap with RFC 1242 definitions, |
+    |           | this document contextualizes and extends those      |
+    |           | definitions for AI fabric benchmarking.             |
+    +-----------+-----------------------------------------------------+
+    | *RFC      | "Benchmarking Methodology for Network Interconnect  |
+    | 2544*     | Devices" (Bradner & McQuaid, 1999).  Defines test   |
+    |           | methodologies for throughput, latency, frame loss   |
+    |           | rate, and back-to-back measurements.  The AI fabric |
+    |           | methodology documents extend RFC 2544 procedures    |
+    |           | for AI-specific traffic patterns and test           |
+    |           | durations.                                          |
+    +-----------+-----------------------------------------------------+
+    | *RFC      | "Data Center Benchmarking Terminology" (Bitar et    |
+    | 8238*     | al., 2017).  Extends RFC 1242 with data center-     |
+    |           | relevant terms including forwarding table scaling,  |
+    |           | congestion, and VM/SDN.  Incast, ECN, and buffer    |
+    |           | occupancy concepts in this document align with RFC  |
+    |           | 8238 definitions.                                   |
+    +-----------+-----------------------------------------------------+
+    | *RFC      | "Data Center Benchmarking Methodology" (Bitar et    |
+    | 8239*     | al., 2017).  Defines test methodologies for data    |
+    |           | center network functions including incast, ECN      |
+    |           | marking, and lossless behavior.  The AI fabric      |
+    |           | companion methodology documents extend RFC 8239 for |
+    |           | distributed AI collective traffic patterns.         |
+    +-----------+-----------------------------------------------------+
+    | *RFC 2119 | "Key words for use in RFCs to Indicate Requirement  |
+    | / RFC     | Levels" (Bradner, 1997; Leiba, 2017).  Define the   |
+    | 8174*     | normative requirement language: MUST, MUST NOT,     |
+    |           | REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,     |
+    |           | RECOMMENDED, MAY, and OPTIONAL.  RFC 8174 clarifies |
+    |           | that these terms are normative only when in         |
+    |           | uppercase; lowercase uses are not normative.        |
+    +-----------+-----------------------------------------------------+
 
                 Table 15: Referenced Standards Abbreviations
 
@@ -1321,30 +1326,36 @@ Informative References
               Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
               "Benchmarking Methodology for AI Inference Serving Network
               Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-inference-bench-00, 26 February
-              2026, <https://datatracker.ietf.org/doc/html/draft-
-              calabria-bmwg-ai-fabric-inference-bench-00>.
+              calabria-bmwg-ai-fabric-inference-bench-01, 21 April 2026,
+              <https://datatracker.ietf.org/doc/html/draft-calabria-
+              bmwg-ai-fabric-inference-bench-01>.
 
    [I-D.calabria-bmwg-ai-fabric-terminology]
               Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
               "Benchmarking Terminology for AI Network Fabrics", Work in
               Progress, Internet-Draft, draft-calabria-bmwg-ai-fabric-
-              terminology-00, 26 February 2026,
+              terminology-01, 21 April 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-terminology-00>.
+              bmwg-ai-fabric-terminology-01>.
 
    [I-D.calabria-bmwg-ai-fabric-training-bench]
               Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
               "Benchmarking Methodology for AI Training Network
               Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-training-bench-00, 26 February
-              2026, <https://datatracker.ietf.org/doc/html/draft-
-              calabria-bmwg-ai-fabric-training-bench-00>.
+              calabria-bmwg-ai-fabric-training-bench-01, 21 April 2026,
+              <https://datatracker.ietf.org/doc/html/draft-calabria-
+              bmwg-ai-fabric-training-bench-01>.
 
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
-              Specification, Annex 16: RoCE", 2010,
-              <https://www.infinibandta.org>.
+              Specification Volume 1, Annex A17: RoCEv2", September
+              2014, <https://www.infinibandta.org>.
+
+   [Jain1984] Jain, R., Chiu, D., and W. Hawe, "A Quantitative Measure
+              of Fairness and Discrimination for Resource Allocation in
+              Shared Computer Systems", DEC Technical Report TR-301,
+              September 1984,
+              <https://www.cs.wustl.edu/~jain/papers/ftp/fairness.pdf>.
 
    [RFC1242]  Bradner, S., "Benchmarking Terminology for Network
               Interconnection Devices", RFC 1242, DOI 10.17487/RFC1242,
