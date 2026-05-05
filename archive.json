@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-09T02:11:49.308025+00:00",
+  "timestamp": "2026-05-05T02:41:01.863134+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -300,6 +300,70 @@
           "updatedAt": "2026-04-07T21:40:10Z"
         }
       ]
+    },
+    {
+      "number": 26,
+      "id": "I_kwDORX8iVs8AAAABBOh5sA",
+      "title": "JFI misattributed",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/26",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Confusing RFC1242  attribution,  maybe reference to Jain1984  (should I add it as informative reference  ",
+      "createdAt": "2026-05-04T14:23:55Z",
+      "updatedAt": "2026-05-04T14:23:55Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 27,
+      "id": "I_kwDORX8iVs8AAAABBOjwBg",
+      "title": "Percentile Latency",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/27",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Improve  Percentile Latency definition (anchor RFC 1242 ) ",
+      "createdAt": "2026-05-04T14:28:51Z",
+      "updatedAt": "2026-05-04T14:28:51Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 28,
+      "id": "I_kwDORX8iVs8AAAABBOluZA",
+      "title": "AllToAll flow",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/28",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Correct AllToAll flow count formula - should read - N(N\u22121) ",
+      "createdAt": "2026-05-04T14:33:39Z",
+      "updatedAt": "2026-05-04T14:33:39Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 29,
+      "id": "I_kwDORX8iVs8AAAABBPEH0Q",
+      "title": "Improve BusBW",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/29",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "improve BusBW definition - adapt to fix normalization (NCCL convention (busbw.h) \n\n",
+      "createdAt": "2026-05-04T15:50:57Z",
+      "updatedAt": "2026-05-04T15:50:57Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
