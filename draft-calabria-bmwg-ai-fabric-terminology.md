@@ -57,6 +57,12 @@ author:
     email: "giuseppe.fioccola@huawei.com"
 
 normative:
+  UEC-SPEC-1.0:
+    title: "Ultra Ethernet Specification 1.0"
+    target: https://ultraethernet.org
+    author:
+      - org: Ultra Ethernet Consortium
+    date: 2024
 
 informative:
   Jain1984:
@@ -78,53 +84,6 @@ informative:
     author:
       - org: InfiniBand Trade Association
     date: 2014-09
-
-  UEC-SPEC-1.0:
-    title: "Ultra Ethernet Specification 1.0"
-    target: https://ultraethernet.org
-    author:
-      - org: Ultra Ethernet Consortium
-    date: 2024
-
-  I-D.calabria-bmwg-ai-fabric-terminology:
-    title: "Benchmarking Terminology for AI Network Fabrics"
-    target: https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-terminology/
-    author:
-      - ins: F. Calabria
-        name: Fernando Calabria
-      - ins: C. Pignataro
-        name: Carlos Pignataro
-      - ins: Q. Wu
-        name: Qin Wu
-      - ins: G. Fioccola
-        name: Giuseppe Fioccola
-    date: 2026-02
-    seriesinfo:
-      Internet-Draft: draft-calabria-bmwg-ai-fabric-terminology
-
-  I-D.calabria-bmwg-ai-fabric-training-bench:
-    title: "Benchmarking Methodology for AI Training Network Fabrics"
-    target: https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-training-bench/
-    author:
-      - ins: F. Calabria
-        name: Fernando Calabria
-      - ins: C. Pignataro
-        name: Carlos Pignataro
-    date: 2026-02
-    seriesinfo:
-      Internet-Draft: draft-calabria-bmwg-ai-fabric-training-bench
-
-  I-D.calabria-bmwg-ai-fabric-inference-bench:
-    title: "Benchmarking Methodology for AI Inference Serving Network Fabrics"
-    target: https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-inference-bench/
-    author:
-      - ins: F. Calabria
-        name: Fernando Calabria
-      - ins: C. Pignataro
-        name: Carlos Pignataro
-    date: 2026-02
-    seriesinfo:
-      Internet-Draft: draft-calabria-bmwg-ai-fabric-inference-bench
 
 
 --- abstract
@@ -174,12 +133,12 @@ interconnects, or storage networking.
 ## Relationship to Existing BMWG Work
 
 This document extends the foundational BMWG terminology established
-in {{?RFC1242}} (network interconnect benchmarking terminology) and
-{{?RFC8238}} (data center benchmarking terminology). Where terms are
+in {{!RFC1242}} (network interconnect benchmarking terminology) and
+{{!RFC8238}} (data center benchmarking terminology). Where terms are
 defined in those RFCs, this document provides AI fabric context
 extensions; the core definitions remain as established. This document
 also extends the test methodology framework of {{!RFC2544}} and
-{{?RFC8239}} as applied in the companion AI fabric methodology
+{{!RFC8239}} as applied in the companion AI fabric methodology
 documents.
 
 ## Relationship to Companion Documents
@@ -214,7 +173,7 @@ applicable to all AI fabric benchmarking activities.
 | **RT** | Router Tester / Traffic Generator. Test equipment capable of generating and receiving network traffic at specified rates with nanosecond-resolution timestamping sufficient for the measurements defined in the companion methodology documents. |
 | **JFI** | Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows: `JFI = (Σxᵢ)² / (n · Σxᵢ²)` where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. Defined in {{Jain1984}}. **SHOULD** be reported alongside throughput measurements for all multi-flow AI fabric tests. |
 | **Offered Load** | The total traffic rate presented to the DUT from test equipment, expressed as a fraction of line rate (0–100%) or as absolute bit/s. Offered load is controlled independently of DUT absorption, enabling characterization of saturation behavior. |
-| **Trial Duration** | The time interval over which a single measurement is conducted. For AI fabric tests, the **RECOMMENDED** minimum is 60 seconds for throughput tests and 300 seconds for soak/stability tests, per the methodology in {{?RFC2544}} as extended herein. |
+| **Trial Duration** | The time interval over which a single measurement is conducted. For AI fabric tests, the **RECOMMENDED** minimum is 60 seconds for throughput tests and 300 seconds for soak/stability tests, per the methodology in {{!RFC2544}} as extended herein. |
 | **Warmup Period** | A mandatory pre-measurement interval during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. **RECOMMENDED** minimum: 10 seconds. |
 | **Binary Search** | An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations. |
 | **Percentile Latency** | A latency statistic expressing that the specified fraction of all measured latency samples fall at or below the reported value. Denoted Pxx (e.g., P50, P95, P99, P99.9). Tail latency (P99 and above) is especially relevant for AI fabric benchmarking because SLO violations are determined by worst-case, not median, performance. |
@@ -317,7 +276,7 @@ associated fabric behaviors critical to AI workload performance.
 | **PFC** | Priority Flow Control (IEEE 802.1Qbb). A lossless Ethernet mechanism in which a receiver transmits a PAUSE frame to its upstream neighbor on a specific priority class when its ingress buffer approaches a configured threshold, temporarily halting transmission of that priority. Required for lossless RoCEv2 operation. PFC operates hop-by-hop and can propagate congestion upstream (PFC storm risk). |
 | **PFC Storm** | A pathological condition in which PFC PAUSE frames propagate across multiple hops, causing widespread throughput degradation or deadlock unrelated to the original congestion source. Detection and mitigation **SHOULD** be part of soak test evaluation per the companion methodology documents. |
 | **PFC Deadlock** | A circular PFC dependency in which sets of flows mutually pause each other indefinitely, resulting in zero progress for affected traffic classes. Deadlock risk is elevated in non-tree topologies and **MUST** be evaluated in fabric-level soak tests. |
-| **ECN** | Explicit Congestion Notification ({{?RFC3168}}). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
+| **ECN** | Explicit Congestion Notification ({{!RFC3168}}). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
 | **DCQCN** | Data Center Quantized Congestion Notification. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. Note: PFC serves as a separate, orthogonal backstop to prevent packet loss during DCQCN convergence; PFC is **not** a component of the DCQCN algorithm itself. |
 | **ECN Marking Ratio** | The fraction of packets (expressed as a percentage) that are marked with the CE codepoint in the IP ECN field over a measurement interval. A high ECN Marking Ratio indicates persistent congestion and is a primary Fabric Health Indicator. |
 | **Incast** | A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in AllReduce and collective operations. |
@@ -457,11 +416,28 @@ methodology documents.
 | **RFC 2119 / RFC 8174** | "Key words for use in RFCs to Indicate Requirement Levels" (Bradner, 1997; Leiba, 2017). Define the normative requirement language: MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, MAY, and OPTIONAL. RFC 8174 clarifies that these terms are normative only when in uppercase; lowercase uses are not normative. |
 {: #reference-standard title="Referenced Standards Abbreviations"}
 
+# IANA Considerations
+
+This document is a terminology document and has no IANA actions.
+
+The UET UDP destination port 4793 referenced in {{tab-rocev2}} is expected to be assigned through the Ultra Ethernet Specification {{UEC-SPEC-1.0}}; this document does not request any IANA assignment.
+
+# Security Considerations
+
+This document defines benchmarking terminology and does not specify any protocol mechanism. It therefore introduces no new protocol-level security considerations beyond those of the underlying technologies it references. The following operational considerations apply to environments in which the terms defined herein are exercised:
+
+- Lab-only scope. As stated in Section 1.2, the methodology this terminology supports is intended for controlled laboratory environments. Direct application of these benchmarks to production fabrics carrying tenant traffic is out of scope and may expose operational systems to the failure modes described below.
+
+- PFC storm and deadlock as a denial-of-service surface. The PFC, PFC Storm, and PFC Deadlock terms in {{tab-congest-control}} describe failure modes in which PAUSE-frame propagation can halt forwarding across multiple hops. A misconfigured or maliciously crafted traffic source on a lossless RoCEv2 fabric can trigger fabric-wide throughput collapse. Operators applying soak-test methodologies that intentionally probe these conditions MUST isolate the test fabric from production traffic.
+
+- RDMA exposure. The RDMA verbs defined in {{tab-rocev2}} provide direct memory access to registered regions. Benchmark setups commonly use permissive memory-region permissions for convenience; such configurations MUST NOT be exposed beyond the test fabric. Production RDMA deployments require authentication, authorization, and memory-region scoping not addressed by the benchmark methodology this terminology supports.
+
+- KV cache telemetry sensitivity. The KV Cache and S_KV metrics in {{tab-infer-specific}} characterize per-request memory state whose size and contents reflect user prompt characteristics. Telemetry collected during inference benchmarks may therefore disclose information about the prompts processed. Test traffic for these benchmarks SHOULD use synthetic prompts, and any captured KV-cache contents SHOULD be treated as sensitive.
+
 # Acknowledgments
 {:numbered="false"}
 
-This work has benefited from the discussions that occurred during IPPM&BMWG joint meeting and on BMWG mailing list. Thanks Carsten Rossenhoevel, Mohamed Boucadair
-, Sowjanya Reddy for valuable review and comments.
+This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel, Mohamed Boucadair, and Sowjanya Reddy for valuable review and comments.
 
 --- back
 
