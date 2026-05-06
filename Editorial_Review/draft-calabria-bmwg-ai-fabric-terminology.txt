@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 6 November 2026                            Blue Fern Consulting
+Expires: 7 November 2026                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                              5 May 2026
+                                                              6 May 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -64,7 +64,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2026.
+   This Internet-Draft will expire on 7 November 2026.
 
 Copyright Notice
 
@@ -1301,8 +1301,8 @@ Table of Contents
 
    This document is a terminology document and has no IANA actions.
 
-   The UET UDP destination port 4793 referenced in Table 4 is expected
-   to be assigned through the Ultra Ethernet Specification
+   Note that the UET UDP destination port 4793 referenced in Table 4 is
+   expected to be assigned through the Ultra Ethernet Specification
    [UEC-SPEC-1.0]; this document does not request any IANA assignment.
 
 13.  Security Considerations
