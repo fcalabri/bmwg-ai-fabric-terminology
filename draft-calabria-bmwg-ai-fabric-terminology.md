@@ -420,7 +420,7 @@ methodology documents.
 
 This document is a terminology document and has no IANA actions.
 
-The UET UDP destination port 4793 referenced in {{tab-rocev2}} is expected to be assigned through the Ultra Ethernet Specification {{UEC-SPEC-1.0}}; this document does not request any IANA assignment.
+Note that the UET UDP destination port 4793 referenced in {{tab-rocev2}} is expected to be assigned through the Ultra Ethernet Specification {{UEC-SPEC-1.0}}; this document does not request any IANA assignment.
 
 # Security Considerations
 
