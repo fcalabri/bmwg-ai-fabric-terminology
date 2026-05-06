@@ -1301,43 +1301,41 @@ Table of Contents
 
 13.  Security Considerations
 
-   This document defines benchmarking terminology and does not specify
-   any protocol mechanism.  It therefore introduces no new protocol-
-   level security considerations beyond those of the underlying
-   technologies it references.  The following operational considerations
-   apply to environments in which the terms defined herein are
-   exercised:
+   This document defines terminology and does not specify any protocol
+   mechanism.  It therefore introduces no new protocol-level security
+   considerations beyond those of the underlying technologies it
+   references.  The considerations below follow the BMWG convention
+   established in [RFC8238] and apply to any benchmarking activity
+   conducted using the terms defined herein.
 
-   *  Lab-only scope.  As stated in Section 1.2, the methodology this
-      terminology supports is intended for controlled laboratory
-      environments.  Direct application of these benchmarks to
-      production fabrics carrying tenant traffic is out of scope and may
-      expose operational systems to the failure modes described below.
+   Benchmarking activities as described in the companion methodology
+   documents are limited to technology characterization of AI fabrics
+   using controlled stimuli in a laboratory environment, with dedicated
+   address space and the constraints specified in those documents.
 
-   *  PFC storm and deadlock as a denial-of-service surface.  The PFC,
-      PFC Storm, and PFC Deadlock terms in Table 7 describe failure
-      modes in which PAUSE-frame propagation can halt forwarding across
-      multiple hops.  A misconfigured or maliciously crafted traffic
-      source on a lossless RoCEv2 fabric can trigger fabric-wide
-      throughput collapse.  Operators applying soak-test methodologies
-      that intentionally probe these conditions MUST isolate the test
-      fabric from production traffic.
+   The benchmarking network topology will be an independent test setup
+   and MUST NOT be connected to devices that may forward the test
+   traffic into a production network or misroute traffic to the test
+   management network.  This isolation requirement is particularly
+   important for AI fabric benchmarking because the lossless transport
+   modes referenced in Table 7 (PFC, DCQCN, CBFC) propagate congestion
+   hop-by-hop and can extend the blast radius of a misconfigured test
+   beyond the immediate DUT.
 
-   *  RDMA exposure.  The RDMA verbs defined in Table 4 provide direct
-      memory access to registered regions.  Benchmark setups commonly
-      use permissive memory-region permissions for convenience; such
-      configurations MUST NOT be exposed beyond the test fabric.
-      Production RDMA deployments require authentication, authorization,
-      and memory-region scoping not addressed by the benchmark
-      methodology this terminology supports.
+   Benchmarking is performed on a "black-box" basis, relying solely on
+   measurements observable external to the DUT or SUT as defined in
+   Table 1.
 
-   *  KV cache telemetry sensitivity.  The KV Cache and S_KV metrics in
-      Table 11 characterize per-request memory state whose size and
-      contents reflect user prompt characteristics.  Telemetry collected
-      during inference benchmarks may therefore disclose information
-      about the prompts processed.  Test traffic for these benchmarks
-      SHOULD use synthetic prompts, and any captured KV-cache contents
-      SHOULD be treated as sensitive.
+   Special capabilities SHOULD NOT exist in the DUT specifically for
+   benchmarking purposes.  Any implications for network security arising
+   from the DUT SHOULD be identical in the lab and in production
+   networks.  In particular, RDMA memory-region permissions and KV cache
+   telemetry exposure are properties of the deployed configuration, not
+   of the benchmarking methodology, and SHOULD reflect production
+   posture during testing.  Synthetic inputs SHOULD be used for the
+   inference benchmarks referencing the KV Cache and S_KV terms in
+   Table 11 so that no production prompt content is processed in the
+   test environment.
 
 Acknowledgments
 
