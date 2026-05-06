@@ -319,8 +319,8 @@ Table of Contents
     |                 | moving the same data volume in the same time  |
     |                 | yields the same BusBW whether the library     |
     |                 | selects ring, tree, or recursive doubling.    |
-    |                 | This convention follows the NCCL nccl-tests   |
-    |                 | definition.                                   |
+    |                 | The algo_factor calculation MUST conform to   |
+    |                 | the formula specified here.                   |
     |                 |                                               |
     |                 | Collective algo_factor                        |
     |                 | AllReduce 2 × (n−1) / n                       |
