@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-05T02:41:01.863134+00:00",
+  "timestamp": "2026-05-07T02:48:09.652018+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -306,15 +306,15 @@
       "id": "I_kwDORX8iVs8AAAABBOh5sA",
       "title": "JFI misattributed",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Confusing RFC1242  attribution,  maybe reference to Jain1984  (should I add it as informative reference  ",
       "createdAt": "2026-05-04T14:23:55Z",
-      "updatedAt": "2026-05-04T14:23:55Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-05T14:11:21Z",
+      "closedAt": "2026-05-05T14:11:21Z",
       "comments": []
     },
     {
@@ -322,15 +322,15 @@
       "id": "I_kwDORX8iVs8AAAABBOjwBg",
       "title": "Percentile Latency",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Improve  Percentile Latency definition (anchor RFC 1242 ) ",
       "createdAt": "2026-05-04T14:28:51Z",
-      "updatedAt": "2026-05-04T14:28:51Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-05T14:11:22Z",
+      "closedAt": "2026-05-05T14:11:22Z",
       "comments": []
     },
     {
@@ -338,15 +338,15 @@
       "id": "I_kwDORX8iVs8AAAABBOluZA",
       "title": "AllToAll flow",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/28",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Correct AllToAll flow count formula - should read - N(N\u22121) ",
       "createdAt": "2026-05-04T14:33:39Z",
-      "updatedAt": "2026-05-04T14:33:39Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-05T14:11:23Z",
+      "closedAt": "2026-05-05T14:11:22Z",
       "comments": []
     },
     {
@@ -354,16 +354,40 @@
       "id": "I_kwDORX8iVs8AAAABBPEH0Q",
       "title": "Improve BusBW",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "improve BusBW definition - adapt to fix normalization (NCCL convention (busbw.h) \n\n",
       "createdAt": "2026-05-04T15:50:57Z",
-      "updatedAt": "2026-05-04T15:50:57Z",
-      "closedAt": null,
+      "updatedAt": "2026-05-05T14:11:23Z",
+      "closedAt": "2026-05-05T14:11:23Z",
       "comments": []
+    },
+    {
+      "number": 31,
+      "id": "I_kwDORX8iVs8AAAABBVcnKg",
+      "title": "Editorial Review",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/31",
+      "state": "CLOSED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Missing IANA and Security Considerations ",
+      "createdAt": "2026-05-05T13:48:13Z",
+      "updatedAt": "2026-05-05T14:11:26Z",
+      "closedAt": "2026-05-05T14:11:26Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "Cloned from 4 Fixes PR -  ",
+          "createdAt": "2026-05-05T13:50:23Z",
+          "updatedAt": "2026-05-05T13:50:23Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -915,6 +939,340 @@
           "createdAt": "2026-04-08T13:04:44Z",
           "updatedAt": "2026-04-08T13:04:44Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDORX8iVs7YaqW1",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/30",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "fcalabri"
+      ],
+      "labels": [],
+      "body": "last 4 issues  and  updated / corrected informative references  ",
+      "createdAt": "2026-05-05T13:44:55Z",
+      "updatedAt": "2026-05-05T16:14:01Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "1fbc20bac0f7282d9fb9915aab45202a5199d11b",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "Last_4_issues",
+      "headRefOid": "c7b45d5927822e860366725075ab3159d2032337",
+      "closedAt": "2026-05-05T16:14:00Z",
+      "mergedAt": "2026-05-05T16:14:00Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "eb426ee0a88ce84ff9be2ff0bace3d1259313be4"
+      },
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "JFI/Jain1984, precedence , wording, AllToAll N(N\u22121), IBTA Annex A17, BusBW algorithm (fixed) ",
+          "createdAt": "2026-05-05T13:49:49Z",
+          "updatedAt": "2026-05-05T13:49:49Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs78GKDZ",
+          "commit": {
+            "abbreviatedOid": "c7b45d5"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-05T15:29:07Z",
+          "updatedAt": "2026-05-05T15:29:07Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDORX8iVs7YbNeA",
+      "title": "Editorial review",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/32",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [
+        "fcalabri"
+      ],
+      "labels": [],
+      "body": "IANA and Security Considerations -  typo on BMWG IPPM ",
+      "createdAt": "2026-05-05T14:09:44Z",
+      "updatedAt": "2026-05-06T13:25:36Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "1fbc20bac0f7282d9fb9915aab45202a5199d11b",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "Editorial_Review",
+      "headRefOid": "42091b6a85e920ab415bc3f60e7dbaf1c2a5856b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs78RL16",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T00:07:09Z",
+          "updatedAt": "2026-05-06T00:07:10Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "It looks extension to the test methodology framework should be defined in AI fabric methodology draft instead of this terminology draft, remove?",
+              "createdAt": "2026-05-06T00:07:10Z",
+              "updatedAt": "2026-05-06T00:07:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78RR4P",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T00:14:14Z",
+          "updatedAt": "2026-05-06T00:14:14Z",
+          "comments": [
+            {
+              "originalPosition": 165,
+              "body": "```suggestion\nNote that the UET UDP destination port 4793 referenced in {{tab-rocev2}} is expected to be assigned through the Ultra Ethernet Specification {{UEC-SPEC-1.0}}; this document does not request any IANA assignment.\n```\nIt looks this paragaph provides additional clarification to the line 421, however I don't think this paragraph should be kept when this document is moving for publication since this document is IETF document instead of UEC document. maybe add this paragraph as Editor-note? ",
+              "createdAt": "2026-05-06T00:14:14Z",
+              "updatedAt": "2026-05-06T00:14:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78RWll",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T00:20:52Z",
+          "updatedAt": "2026-05-06T00:20:53Z",
+          "comments": [
+            {
+              "originalPosition": 169,
+              "body": "Please refer to https://datatracker.ietf.org/doc/rfc8238/  and https://datatracker.ietf.org/doc/rfc8455/ to see how terminology draft write security consideration.",
+              "createdAt": "2026-05-06T00:20:53Z",
+              "updatedAt": "2026-05-06T00:20:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78SCRW",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T01:22:09Z",
+          "updatedAt": "2026-05-06T01:22:09Z",
+          "comments": [
+            {
+              "originalPosition": 112,
+              "body": "```suggestion\n| **JFI** | Fairness Index. A scalar measure of flow-level throughput fairness across n flows {{Jain1984}}: `JFI = (\u03a3x\u1d62)\u00b2 / (n \u00b7 \u03a3x\u1d62\u00b2)` where x\u1d62 is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. **SHOULD** be reported alongside throughput measurements for all multi-flow AI fabric tests. |\n```",
+              "createdAt": "2026-05-06T01:22:09Z",
+              "updatedAt": "2026-05-06T01:22:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78SGu8",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T01:31:16Z",
+          "updatedAt": "2026-05-06T01:31:16Z",
+          "comments": [
+            {
+              "originalPosition": 127,
+              "body": "Do we want to make make BusBw calculation strongly dependson NVIDIA Collective Communications Library (NCCL)?",
+              "createdAt": "2026-05-06T01:31:16Z",
+              "updatedAt": "2026-05-06T01:31:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78SKch",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T01:38:34Z",
+          "updatedAt": "2026-05-06T01:38:34Z",
+          "comments": [
+            {
+              "originalPosition": 127,
+              "body": "```suggestion\n| **BusBW** | The effective data throughput per accelerator during a collective operation, computed as:<br/><br/>BusBW = (data_size \u00d7 algo_factor) / time<br/><br/>algo_factor is a fixed normalization constant derived from the ideal ring algorithm for each collective type, applied regardless of the algorithm actually selected by the collective library at runtime. This makes BusBW algorithm-invariant: the same hardware moving the same data volume in the same time yields the same BusBW whether the library selects ring, tree, or recursive doubling. The algo_factor calculation MUST conform to the formula specified here.<br/><br/>Collective       algo_factor<br/>AllReduce        2 \u00d7 (n\u22121) / n<br/>AllGather        (n\u22121) / n<br/>ReduceScatter    (n\u22121) / n<br/>AllToAll         (n\u22121) / n<br/><br/>n = number of participating accelerators.<br/><br/>Worked example \u2014 AllReduce, n=8, data_size=1 GB, time=10 ms:<br/>algo_factor = 2 \u00d7 (8\u22121) / 8 = 1.75<br/>BusBW = (1 GB \u00d7 1.75) / 10 ms = 175 GB/s<br/><br/>Reports MUST state: collective type, algo_factor value, collective library name and version, and n. The algorithm actually selected by the library SHOULD be reported as diagnostic information when known. Units: GB/s or Gbps; reports MUST state which. |\n```",
+              "createdAt": "2026-05-06T01:38:34Z",
+              "updatedAt": "2026-05-06T01:38:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78SLCh",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2026-05-06T01:39:25Z",
+          "updatedAt": "2026-05-06T01:39:25Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDORX8iVs78SUk1",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T01:54:06Z",
+          "updatedAt": "2026-05-06T01:54:06Z",
+          "comments": [
+            {
+              "originalPosition": 171,
+              "body": "If we use template defined in RFC8238, this paragraph is not needed.",
+              "createdAt": "2026-05-06T01:54:06Z",
+              "updatedAt": "2026-05-06T01:54:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78fhJz",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T12:44:55Z",
+          "updatedAt": "2026-05-06T12:44:55Z",
+          "comments": [
+            {
+              "originalPosition": 101,
+              "body": "wanted to add it to all three documents, started with this one - the training and inference should follow,  \r\n\r\nwould you recommend removing it from here and adding it ONLY to training and inference?  that'd work for me, please advise ",
+              "createdAt": "2026-05-06T12:44:55Z",
+              "updatedAt": "2026-05-06T12:44:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78fzdW",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T12:55:41Z",
+          "updatedAt": "2026-05-06T12:55:41Z",
+          "comments": [
+            {
+              "originalPosition": 169,
+              "body": " thank you !  let me add a new PR for this (just the security section) ",
+              "createdAt": "2026-05-06T12:55:41Z",
+              "updatedAt": "2026-05-06T12:55:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78gCGD",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T13:04:29Z",
+          "updatedAt": "2026-05-06T13:04:29Z",
+          "comments": [
+            {
+              "originalPosition": 169,
+              "body": "please check commit edfb63cde82412c4c3d4e5aba5d4bcb2ef3d9171",
+              "createdAt": "2026-05-06T13:04:29Z",
+              "updatedAt": "2026-05-06T13:04:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78gbjA",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T13:18:55Z",
+          "updatedAt": "2026-05-06T13:18:55Z",
+          "comments": [
+            {
+              "originalPosition": 127,
+              "body": "wanted to use it as a guideline as we received feedback that BusBW algo_factor was  ambiguous ,  and makes sense since the whole point of BusBW is being algorithm-invariant. The original definition contradicted this and may  produce inconsistent reports.\r\n\r\nSee these examples from the previous definition-> \r\n\r\n-> The same hardware moving the same bytes in the same  time can report different BusBW just because NCCL switched from tree to ring at the size-threshold boundary.\r\n-> A library upgrade (e.g., NCCL 2.18 \u2192 2.22) re-tunes thresholds and shifts the BusBW curve without any hardware change.\r\n-> A vendor that ships a custom CCL with a more aggressive tree algorithm appears \"faster\" in BusBW terms even when on-wire bytes per second are identical.\r\n\r\nSo on this new definition a   fixed-ring algo_factor convention considers these situations, , so  for example benchmarkiing two fabrics / DUTs  that move the same data in the same time provide same results.",
+              "createdAt": "2026-05-06T13:18:55Z",
+              "updatedAt": "2026-05-06T13:18:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs78gn_O",
+          "commit": {
+            "abbreviatedOid": "52748cf"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-05-06T13:25:09Z",
+          "updatedAt": "2026-05-06T13:25:09Z",
+          "comments": [
+            {
+              "originalPosition": 171,
+              "body": "understood, please see the last commit with the new / updated security considerations , ",
+              "createdAt": "2026-05-06T13:25:09Z",
+              "updatedAt": "2026-05-06T13:25:09Z"
+            }
+          ]
         }
       ]
     }
