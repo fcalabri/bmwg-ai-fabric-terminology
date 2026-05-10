@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-07T02:48:09.652018+00:00",
+  "timestamp": "2026-05-10T02:52:58.632862+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -999,7 +999,7 @@
       "id": "PR_kwDORX8iVs7YbNeA",
       "title": "Editorial review",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/32",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -1008,17 +1008,19 @@
       "labels": [],
       "body": "IANA and Security Considerations -  typo on BMWG IPPM ",
       "createdAt": "2026-05-05T14:09:44Z",
-      "updatedAt": "2026-05-06T13:25:36Z",
+      "updatedAt": "2026-05-07T14:12:09Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "1fbc20bac0f7282d9fb9915aab45202a5199d11b",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "Editorial_Review",
       "headRefOid": "42091b6a85e920ab415bc3f60e7dbaf1c2a5856b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-05-07T12:43:00Z",
+      "mergedAt": "2026-05-07T12:43:00Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "f28238e15f7f345de6b54bead62271213e4535a8"
+      },
       "comments": [],
       "reviews": [
         {
