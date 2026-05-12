@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-10T02:52:58.632862+00:00",
+  "timestamp": "2026-05-12T02:53:47.717032+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -386,6 +386,30 @@
           "body": "Cloned from 4 Fixes PR -  ",
           "createdAt": "2026-05-05T13:50:23Z",
           "updatedAt": "2026-05-05T13:50:23Z"
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "I_kwDORX8iVs8AAAABB5FHZg",
+      "title": "Acronyms table - and cross reference with training and inference docs",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/33",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Acronyms before first use and cross-reference (manage drift of terms) between all 3 docs ",
+      "createdAt": "2026-05-11T15:07:31Z",
+      "updatedAt": "2026-05-11T15:08:48Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "pointer-paragraph language for the ## Acronyms section (all documents) ",
+          "createdAt": "2026-05-11T15:08:48Z",
+          "updatedAt": "2026-05-11T15:08:48Z"
         }
       ]
     }
