@@ -405,7 +405,9 @@ companion methodology documents.
 
 The following abbreviations refer to normative and informative IETF
 documents referenced throughout this document and the companion
-methodology documents.
+methodology documents. Expansions for technical acronyms used
+across the companion documents are listed in the Acronyms appendix
+({{tab-acronyms}}).
 
 | Reference | Definition |
 |---|---|
@@ -433,6 +435,76 @@ The benchmarking network topology will be an independent test setup and MUST NOT
 Benchmarking is performed on a "black-box" basis, relying solely on measurements observable external to the DUT or SUT as defined in {{tab-gen-bench}}.
 
 Special capabilities SHOULD NOT exist in the DUT specifically for benchmarking purposes. Any implications for network security arising from the DUT SHOULD be identical in the lab and in production networks. In particular, RDMA memory-region permissions and KV cache telemetry exposure are properties of the deployed configuration, not of the benchmarking methodology, and SHOULD reflect production posture during testing. Synthetic inputs SHOULD be used for the inference benchmarks referencing the KV Cache and S_KV terms in {{tab-infer-specific}} so that no production prompt content is processed in the test environment.
+
+# Acronyms
+{:numbered="false"}
+
+The following acronyms are used in this document and in the companion
+methodology documents
+({{?I-D.calabria-bmwg-ai-fabric-training-bench}} and
+{{?I-D.calabria-bmwg-ai-fabric-inference-bench}}).
+Substantive definitions for protocol- and benchmarking-relevant
+terms are provided in the body of this document; the table below
+provides expansions only.
+
+Acronyms specific to only one companion methodology document are
+expanded on first use within that document and are not duplicated
+here.
+
+| Acronym | Expansion |
+|---|---|
+| AI    | Artificial Intelligence |
+| API   | Application Programming Interface |
+| ASIC  | Application-Specific Integrated Circuit |
+| BGP   | Border Gateway Protocol |
+| BTH   | Base Transport Header |
+| BusBW | Bus Bandwidth |
+| CBFC  | Credit-Based Flow Control |
+| CCL   | Collective Communications Library |
+| CDF   | Cumulative Distribution Function |
+| CMS   | Congestion Management Sub-layer (UET) |
+| CRC   | Cyclic Redundancy Check |
+| CV    | Coefficient of Variation |
+| DCQCN | Data Center Quantized Congestion Notification |
+| DLB   | Dynamic Load Balancing |
+| DMA   | Direct Memory Access |
+| DSCP  | Differentiated Services Code Point |
+| ECMP  | Equal-Cost Multi-Path |
+| ECN   | Explicit Congestion Notification |
+| EP    | Expert Parallelism |
+| HBM   | High Bandwidth Memory |
+| HOL   | Head-of-Line |
+| HPC   | High-Performance Computing |
+| ICRC  | Invariant CRC |
+| INT   | In-band Network Telemetry |
+| JCT   | Job Completion Time |
+| MAC   | Media Access Control |
+| ML    | Machine Learning |
+| MoE   | Mixture of Experts |
+| MTU   | Maximum Transmission Unit |
+| NIC   | Network Interface Controller |
+| NOS   | Network Operating System |
+| OFED  | OpenFabrics Enterprise Distribution |
+| OOO   | Out-of-Order |
+| OSPF  | Open Shortest Path First |
+| PDC   | Packet Delivery Context |
+| PDS   | Packet Delivery Sub-layer (UET) |
+| PFC   | Priority Flow Control |
+| PSN   | Packet Sequence Number |
+| QP    | Queue Pair |
+| RDMA  | Remote Direct Memory Access |
+| RoCEv2 | RDMA over Converged Ethernet version 2 |
+| RTT   | Round-Trip Time |
+| SES   | Semantic Sub-layer (UET) |
+| SUT   | System Under Test |
+| TCAM  | Ternary Content-Addressable Memory |
+| TSS   | Transport Security Sub-layer (UET) |
+| UEC   | Ultra Ethernet Consortium |
+| UET   | Ultra Ethernet Transport |
+| VLAN  | Virtual LAN |
+| VOQ   | Virtual Output Queue |
+| XPU   | accelerator processing unit (generic) |
+{: #tab-acronyms title="Acronyms"}
 
 # Acknowledgments
 {:numbered="false"}
