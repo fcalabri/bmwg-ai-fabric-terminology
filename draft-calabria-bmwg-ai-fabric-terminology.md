@@ -453,57 +453,57 @@ here.
 
 | Acronym | Expansion |
 |---|---|
-| AI    | Artificial Intelligence |
-| API   | Application Programming Interface |
-| ASIC  | Application-Specific Integrated Circuit |
-| BGP   | Border Gateway Protocol |
-| BTH   | Base Transport Header |
+| AI | Artificial Intelligence |
+| API | Application Programming Interface |
+| ASIC | Application-Specific Integrated Circuit |
+| BGP | Border Gateway Protocol |
+| BTH | Base Transport Header |
 | BusBW | Bus Bandwidth |
-| CBFC  | Credit-Based Flow Control |
-| CCL   | Collective Communications Library |
-| CDF   | Cumulative Distribution Function |
-| CMS   | Congestion Management Sub-layer (UET) |
-| CRC   | Cyclic Redundancy Check |
-| CV    | Coefficient of Variation |
+| CBFC | Credit-Based Flow Control |
+| CCL | Collective Communications Library |
+| CDF | Cumulative Distribution Function |
+| CMS | Congestion Management Sub-layer (UET) |
+| CRC | Cyclic Redundancy Check |
+| CV | Coefficient of Variation |
 | DCQCN | Data Center Quantized Congestion Notification |
-| DLB   | Dynamic Load Balancing |
-| DMA   | Direct Memory Access |
-| DSCP  | Differentiated Services Code Point |
-| ECMP  | Equal-Cost Multi-Path |
-| ECN   | Explicit Congestion Notification |
-| EP    | Expert Parallelism |
-| HBM   | High Bandwidth Memory |
-| HOL   | Head-of-Line |
-| HPC   | High-Performance Computing |
-| ICRC  | Invariant CRC |
-| INT   | In-band Network Telemetry |
-| JCT   | Job Completion Time |
-| MAC   | Media Access Control |
-| ML    | Machine Learning |
-| MoE   | Mixture of Experts |
-| MTU   | Maximum Transmission Unit |
-| NIC   | Network Interface Controller |
-| NOS   | Network Operating System |
-| OFED  | OpenFabrics Enterprise Distribution |
-| OOO   | Out-of-Order |
-| OSPF  | Open Shortest Path First |
-| PDC   | Packet Delivery Context |
-| PDS   | Packet Delivery Sub-layer (UET) |
-| PFC   | Priority Flow Control |
-| PSN   | Packet Sequence Number |
-| QP    | Queue Pair |
-| RDMA  | Remote Direct Memory Access |
+| DLB | Dynamic Load Balancing |
+| DMA | Direct Memory Access |
+| DSCP | Differentiated Services Code Point |
+| ECMP | Equal-Cost Multi-Path |
+| ECN | Explicit Congestion Notification |
+| EP | Expert Parallelism |
+| HBM | High Bandwidth Memory |
+| HOL | Head-of-Line |
+| HPC | High-Performance Computing |
+| ICRC | Invariant CRC |
+| INT | In-band Network Telemetry |
+| JCT | Job Completion Time |
+| MAC | Media Access Control |
+| ML | Machine Learning |
+| MoE | Mixture of Experts |
+| MTU | Maximum Transmission Unit |
+| NIC | Network Interface Controller |
+| NOS | Network Operating System |
+| OFED | OpenFabrics Enterprise Distribution |
+| OOO | Out-of-Order |
+| OSPF | Open Shortest Path First |
+| PDC | Packet Delivery Context |
+| PDS | Packet Delivery Sub-layer (UET) |
+| PFC | Priority Flow Control |
+| PSN | Packet Sequence Number |
+| QP | Queue Pair |
+| RDMA | Remote Direct Memory Access |
 | RoCEv2 | RDMA over Converged Ethernet version 2 |
-| RTT   | Round-Trip Time |
-| SES   | Semantic Sub-layer (UET) |
-| SUT   | System Under Test |
-| TCAM  | Ternary Content-Addressable Memory |
-| TSS   | Transport Security Sub-layer (UET) |
-| UEC   | Ultra Ethernet Consortium |
-| UET   | Ultra Ethernet Transport |
-| VLAN  | Virtual LAN |
-| VOQ   | Virtual Output Queue |
-| XPU   | accelerator processing unit (generic) |
+| RTT | Round-Trip Time |
+| SES | Semantic Sub-layer (UET) |
+| SUT | System Under Test |
+| TCAM | Ternary Content-Addressable Memory |
+| TSS | Transport Security Sub-layer (UET) |
+| UEC | Ultra Ethernet Consortium |
+| UET | Ultra Ethernet Transport |
+| VLAN | Virtual LAN |
+| VOQ | Virtual Output Queue |
+| XPU | accelerator processing unit (generic) |
 {: #tab-acronyms title="Acronyms"}
 
 # Acknowledgments
