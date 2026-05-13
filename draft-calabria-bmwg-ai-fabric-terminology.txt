@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 8 November 2026                            Blue Fern Consulting
+Expires: 14 November 2026                           Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                              7 May 2026
+                                                             13 May 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -64,7 +64,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 November 2026.
+   This Internet-Draft will expire on 14 November 2026.
 
 Copyright Notice
 
@@ -105,6 +105,7 @@ Table of Contents
    11. Referenced Standards Abbreviations
    12. IANA Considerations
    13. Security Considerations
+   Acronyms
    Acknowledgments
    References
      Normative References
@@ -1244,7 +1245,9 @@ Table of Contents
 
    The following abbreviations refer to normative and informative IETF
    documents referenced throughout this document and the companion
-   methodology documents.
+   methodology documents.  Expansions for technical acronyms used across
+   the companion documents are listed in the Acronyms appendix
+   (Table 16).
 
     +===========+=====================================================+
     | Reference | Definition                                          |
@@ -1336,6 +1339,127 @@ Table of Contents
    inference benchmarks referencing the KV Cache and S_KV terms in
    Table 11 so that no production prompt content is processed in the
    test environment.
+
+Acronyms
+
+   The following acronyms are used in this document and in the companion
+   methodology documents ([I-D.calabria-bmwg-ai-fabric-training-bench]
+   and [I-D.calabria-bmwg-ai-fabric-inference-bench]).  Substantive
+   definitions for protocol- and benchmarking-relevant terms are
+   provided in the body of this document; the table below provides
+   expansions only.
+
+   Acronyms specific to only one companion methodology document are
+   expanded on first use within that document and are not duplicated
+   here.
+
+        +=========+===============================================+
+        | Acronym | Expansion                                     |
+        +=========+===============================================+
+        | AI      | Artificial Intelligence                       |
+        +---------+-----------------------------------------------+
+        | API     | Application Programming Interface             |
+        +---------+-----------------------------------------------+
+        | ASIC    | Application-Specific Integrated Circuit       |
+        +---------+-----------------------------------------------+
+        | BGP     | Border Gateway Protocol                       |
+        +---------+-----------------------------------------------+
+        | BTH     | Base Transport Header                         |
+        +---------+-----------------------------------------------+
+        | BusBW   | Bus Bandwidth                                 |
+        +---------+-----------------------------------------------+
+        | CBFC    | Credit-Based Flow Control                     |
+        +---------+-----------------------------------------------+
+        | CCL     | Collective Communications Library             |
+        +---------+-----------------------------------------------+
+        | CDF     | Cumulative Distribution Function              |
+        +---------+-----------------------------------------------+
+        | CMS     | Congestion Management Sub-layer (UET)         |
+        +---------+-----------------------------------------------+
+        | CRC     | Cyclic Redundancy Check                       |
+        +---------+-----------------------------------------------+
+        | CV      | Coefficient of Variation                      |
+        +---------+-----------------------------------------------+
+        | DCQCN   | Data Center Quantized Congestion Notification |
+        +---------+-----------------------------------------------+
+        | DLB     | Dynamic Load Balancing                        |
+        +---------+-----------------------------------------------+
+        | DMA     | Direct Memory Access                          |
+        +---------+-----------------------------------------------+
+        | DSCP    | Differentiated Services Code Point            |
+        +---------+-----------------------------------------------+
+        | ECMP    | Equal-Cost Multi-Path                         |
+        +---------+-----------------------------------------------+
+        | ECN     | Explicit Congestion Notification              |
+        +---------+-----------------------------------------------+
+        | EP      | Expert Parallelism                            |
+        +---------+-----------------------------------------------+
+        | HBM     | High Bandwidth Memory                         |
+        +---------+-----------------------------------------------+
+        | HOL     | Head-of-Line                                  |
+        +---------+-----------------------------------------------+
+        | HPC     | High-Performance Computing                    |
+        +---------+-----------------------------------------------+
+        | ICRC    | Invariant CRC                                 |
+        +---------+-----------------------------------------------+
+        | INT     | In-band Network Telemetry                     |
+        +---------+-----------------------------------------------+
+        | JCT     | Job Completion Time                           |
+        +---------+-----------------------------------------------+
+        | MAC     | Media Access Control                          |
+        +---------+-----------------------------------------------+
+        | ML      | Machine Learning                              |
+        +---------+-----------------------------------------------+
+        | MoE     | Mixture of Experts                            |
+        +---------+-----------------------------------------------+
+        | MTU     | Maximum Transmission Unit                     |
+        +---------+-----------------------------------------------+
+        | NIC     | Network Interface Controller                  |
+        +---------+-----------------------------------------------+
+        | NOS     | Network Operating System                      |
+        +---------+-----------------------------------------------+
+        | OFED    | OpenFabrics Enterprise Distribution           |
+        +---------+-----------------------------------------------+
+        | OOO     | Out-of-Order                                  |
+        +---------+-----------------------------------------------+
+        | OSPF    | Open Shortest Path First                      |
+        +---------+-----------------------------------------------+
+        | PDC     | Packet Delivery Context                       |
+        +---------+-----------------------------------------------+
+        | PDS     | Packet Delivery Sub-layer (UET)               |
+        +---------+-----------------------------------------------+
+        | PFC     | Priority Flow Control                         |
+        +---------+-----------------------------------------------+
+        | PSN     | Packet Sequence Number                        |
+        +---------+-----------------------------------------------+
+        | QP      | Queue Pair                                    |
+        +---------+-----------------------------------------------+
+        | RDMA    | Remote Direct Memory Access                   |
+        +---------+-----------------------------------------------+
+        | RoCEv2  | RDMA over Converged Ethernet version 2        |
+        +---------+-----------------------------------------------+
+        | RTT     | Round-Trip Time                               |
+        +---------+-----------------------------------------------+
+        | SES     | Semantic Sub-layer (UET)                      |
+        +---------+-----------------------------------------------+
+        | SUT     | System Under Test                             |
+        +---------+-----------------------------------------------+
+        | TCAM    | Ternary Content-Addressable Memory            |
+        +---------+-----------------------------------------------+
+        | TSS     | Transport Security Sub-layer (UET)            |
+        +---------+-----------------------------------------------+
+        | UEC     | Ultra Ethernet Consortium                     |
+        +---------+-----------------------------------------------+
+        | UET     | Ultra Ethernet Transport                      |
+        +---------+-----------------------------------------------+
+        | VLAN    | Virtual LAN                                   |
+        +---------+-----------------------------------------------+
+        | VOQ     | Virtual Output Queue                          |
+        +---------+-----------------------------------------------+
+        | XPU     | accelerator processing unit (generic)         |
+        +---------+-----------------------------------------------+
+
+                             Table 16: Acronyms
 
 Acknowledgments
 
@@ -1495,7 +1619,7 @@ Appendix A: Term Cross-Reference to Companion Documents
     |                    | Packet Loss        |                       |
     +--------------------+--------------------+-----------------------+
 
-           Table 16: Term Cross-Reference to Companion Documents
+           Table 17: Term Cross-Reference to Companion Documents
 
 Appendix B: Term Taxonomy Summary
 
@@ -1569,7 +1693,7 @@ Appendix B: Term Taxonomy Summary
    |         | 2119/8174                          |                    |
    +---------+------------------------------------+--------------------+
 
-                      Table 17: Complete Term Taxonomy
+                      Table 18: Complete Term Taxonomy
 
 Authors' Addresses
 
