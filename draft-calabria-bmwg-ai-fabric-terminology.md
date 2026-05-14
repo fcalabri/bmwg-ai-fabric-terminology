@@ -91,17 +91,22 @@ informative:
 This document defines benchmarking terminology for evaluating
 Ethernet-based network fabrics used in distributed Artificial
 Intelligence (AI) training and inference workloads. It provides a
-unified vocabulary consolidating and extending terms from RFC 1242,
-RFC 8238, and the companion AI fabric methodology documents,
+unified vocabulary consolidating and extending terms from
+"Benchmarking Terminology for Network Interconnect Devices" {{RFC1242}}
+and "Data Center Benchmarking Terminology" {{RFC8238}}, and the
+companion AI fabric methodology documents,
 establishing precise, vendor-neutral definitions for collective
 communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
 Ethernet Transport), congestion control behaviors, AI-specific Key
 Performance Indicators (KPIs), and fabric topology concepts.
 
-This document is a companion to {{?I-D.calabria-bmwg-ai-fabric-training-bench}}
-and {{?I-D.calabria-bmwg-ai-fabric-inference-bench}}. Those documents
+This document is a companion to the AI training fabric benchmarking
+methodology {{?I-D.calabria-bmwg-ai-fabric-training-bench}} and the
+AI inference fabric benchmarking methodology
+{{?I-D.calabria-bmwg-ai-fabric-inference-bench}}. Those documents
 SHOULD NOT be applied without first consulting the terminology defined
-herein. Where definitions herein overlap with RFC 1242 or RFC 8238, this
+herein. Where definitions herein overlap with the foundational
+benchmarking terminology in {{RFC1242}} or {{RFC8238}}, this
 document provides AI fabric context extensions and refinements;
 the foundational definitions in those RFCs remain authoritative
 for general network benchmarking.
