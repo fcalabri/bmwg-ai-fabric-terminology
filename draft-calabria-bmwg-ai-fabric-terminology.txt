@@ -5,11 +5,11 @@
 BMWG Working Group                                           F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 14 November 2026                           Blue Fern Consulting
+Expires: 15 November 2026                           Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                             13 May 2026
+                                                             14 May 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -20,21 +20,25 @@ Abstract
    This document defines benchmarking terminology for evaluating
    Ethernet-based network fabrics used in distributed Artificial
    Intelligence (AI) training and inference workloads.  It provides a
-   unified vocabulary consolidating and extending terms from RFC 1242,
-   RFC 8238, and the companion AI fabric methodology documents,
-   establishing precise, vendor-neutral definitions for collective
-   communication primitives, RDMA transport mechanisms (RoCEv2 and Ultra
-   Ethernet Transport), congestion control behaviors, AI-specific Key
-   Performance Indicators (KPIs), and fabric topology concepts.
+   unified vocabulary consolidating and extending terms from
+   "Benchmarking Terminology for Network Interconnect Devices" [RFC1242]
+   and "Data Center Benchmarking Terminology" [RFC8238], and the
+   companion AI fabric methodology documents, establishing precise,
+   vendor-neutral definitions for collective communication primitives,
+   RDMA transport mechanisms (RoCEv2 and Ultra Ethernet Transport),
+   congestion control behaviors, AI-specific Key Performance Indicators
+   (KPIs), and fabric topology concepts.
 
-   This document is a companion to
-   [I-D.calabria-bmwg-ai-fabric-training-bench] and
+   This document is a companion to the AI training fabric benchmarking
+   methodology [I-D.calabria-bmwg-ai-fabric-training-bench] and the AI
+   inference fabric benchmarking methodology
    [I-D.calabria-bmwg-ai-fabric-inference-bench].  Those documents
    SHOULD NOT be applied without first consulting the terminology
-   defined herein.  Where definitions herein overlap with RFC 1242 or
-   RFC 8238, this document provides AI fabric context extensions and
-   refinements; the foundational definitions in those RFCs remain
-   authoritative for general network benchmarking.
+   defined herein.  Where definitions herein overlap with the
+   foundational benchmarking terminology in [RFC1242] or [RFC8238], this
+   document provides AI fabric context extensions and refinements; the
+   foundational definitions in those RFCs remain authoritative for
+   general network benchmarking.
 
 About This Document
 
@@ -64,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 November 2026.
+   This Internet-Draft will expire on 15 November 2026.
 
 Copyright Notice
 
