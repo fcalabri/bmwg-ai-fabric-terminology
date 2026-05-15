@@ -5,12 +5,12 @@ category: info
 
 docname: draft-calabria-bmwg-ai-fabric-terminology-latest
 submissiontype: IETF
+ipr: trust200902
 number:
-date:
 consensus: true
 v: 3
 area: "Operations and Management"
-workgroup: "BMWG Working Group"
+workgroup: "BMWG"
 keyword:
  - benchmarking
  - terminology
@@ -31,38 +31,34 @@ venue:
   latest: "https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-bmwg-ai-fabric-terminology.html"
 
 author:
- -
-    fullname: "Fernando Calabria"
-    initials: "F."
-    surname: "Calabria"
-    organization: Cisco
-    email: "fcalabri@cisco.com"
- -
-    fullname: "Carlos Pignataro"
-    initials: "C."
-    surname: "Pignataro"
-    organization: Blue Fern Consulting
-    email: "carlos@bluefern.consulting"
- -
-    fullname: "Qin Wu"
-    initials: "Q."
-    surname: "Wu"
-    organization: Huawei
-    email: "bill.wu@huawei.com"
- -
-    fullname: "Giuseppe Fioccola"
-    initials: "G."
-    surname: "Fioccola"
-    organization: Huawei
-    email: "giuseppe.fioccola@huawei.com"
+  - name: Fernando Calabria
+    ins: F. Calabria
+    org: Cisco
+    country: United States
+    email: fcalabri@cisco.com
+  - name: Carlos Pignataro
+    ins: C. Pignataro
+    org: Blue Fern Consulting
+    country: United States
+    email: carlos@bluefern.consulting
+  - name: Qin Wu
+    ins: Q. Wu
+    org: Huawei
+    country: China
+    email: bill.wu@huawei.com
+  - name: Giuseppe Fioccola
+    ins: G. Fioccola
+    org: Huawei
+    country: Italy
+    email: giuseppe.fioccola@huawei.com
 
 normative:
-  UEC-SPEC-1.0:
-    title: "Ultra Ethernet Specification 1.0"
-    target: https://ultraethernet.org
+  UEC-1.0:
+    title: "Ultra Ethernet Transport (UET) Specification 1.0"
     author:
       - org: Ultra Ethernet Consortium
-    date: 2024
+    date: 2025-06
+    target: "https://ultraethernet.org"
 
 informative:
   Jain1984:
@@ -245,7 +241,7 @@ terms are defined in Section 5.2.
 
 The following terms define UET-specific concepts introduced by the
 Ultra Ethernet Consortium (UEC) Specification 1.0
-{{UEC-SPEC-1.0}}.
+{{UEC-1.0}}.
 
 | Term | Definition |
 |---|---|
@@ -399,6 +395,8 @@ companion methodology documents.
 
 ## KPI Tier Summary
 
+The examples below are illustrative and non-exhaustive; the companion methodology documents may add KPIs at each tier as appropriate to their specific workload focus, provided the tier semantics described above are preserved.
+
 | Tier | Training Examples | Inference Examples | Purpose |
 |---|---|---|---|
 | **Primary KPI** | JCT Ratio, BusBW | TTFT, ITL, TPS | Direct end-user experience / business impact |
@@ -427,7 +425,7 @@ across the companion documents are listed in the Acronyms appendix
 
 This document is a terminology document and has no IANA actions.
 
-Note that the UET UDP destination port 4793 referenced in {{tab-rocev2}} is expected to be assigned through the Ultra Ethernet Specification {{UEC-SPEC-1.0}}; this document does not request any IANA assignment.
+Note that the UET UDP destination port 4793 referenced in {{tab-rocev2}} is expected to be assigned through the Ultra Ethernet Specification {{UEC-1.0}}; this document does not request any IANA assignment.
 
 # Security Considerations
 
