@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-14T03:23:14.925346+00:00",
+  "timestamp": "2026-05-17T03:23:03.139165+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -1323,7 +1323,7 @@
       "labels": [],
       "body": "Acronnyms table - prevent drift for terminology and inference",
       "createdAt": "2026-05-12T17:34:24Z",
-      "updatedAt": "2026-05-13T23:44:51Z",
+      "updatedAt": "2026-05-14T12:02:21Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "f28238e15f7f345de6b54bead62271213e4535a8",
@@ -1350,6 +1350,13 @@
           "body": "> are you referring to the ones on the Acronyms table ? - wanted them to align , let me try again ... and let me know if its better / what you are looking for ..\r\n\r\nYes, i am  wondeirng expanision acronyms table in this terminology, whether it is needed.",
           "createdAt": "2026-05-13T23:44:50Z",
           "updatedAt": "2026-05-13T23:44:50Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "Struggle on this one ....   Spirent / Vivai reviewers  suggested it,  and  the primary reason  I was able to come up with was mainly  consistency across the three-document set.\r\n\r\nThe  terminology draft is the anchor, and if we do not add it to a shared acronym table,  each companion\r\nmay expand  on a definition  on first use independently and will  drift over time. That\u2019s why I believe adding it to the terminology as an appendix and being sure that is not there. The term is defined on each of the companion drafts. \r\n\r\n---> (See last 2 PRs) (expanded all terms / definitions) \u2026\r\n\r\n _\r\n\r\nRFC 7322 RFC Style Guide, Section 3.6 \"Abbreviation Rules\" \u2014 every abbreviation must be expanded on first occurrence. \r\n\r\nRFC Editor \"Terms List\" (rfc-editor.org/styleguide/part2) \u2014 the curated list of well-known abbreviations and which still need expansion; documents with many domain-specific acronyms are routinely asked during AUTH48 to either expand inline or add a glossary/appendix.\r\n\r\n_\r\n\r\n\r\nMore than open to explore any idea / proposal you may have \u2026 \r\n\r\n",
+          "createdAt": "2026-05-14T12:02:21Z",
+          "updatedAt": "2026-05-14T12:02:21Z"
         }
       ],
       "reviews": [
@@ -1377,6 +1384,76 @@
           "body": "",
           "createdAt": "2026-05-13T19:12:31Z",
           "updatedAt": "2026-05-13T19:12:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDORX8iVs7blqpf",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/35",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "convert hardcoded RFC refs",
+      "createdAt": "2026-05-14T16:06:09Z",
+      "updatedAt": "2026-05-14T17:35:03Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "0645fb9588c52ff71bfc827c5b13364423308cd2",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "hardcode-RFCs",
+      "headRefOid": "31e8ebf597f2cc9492a6394183b29e2fed790b46",
+      "closedAt": "2026-05-14T17:35:03Z",
+      "mergedAt": "2026-05-14T17:35:03Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "707c781979b650e763a2f463ee2683446731a8cb"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDORX8iVs7bouWp",
+      "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/36",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "02_Edits and consistency between docs",
+      "createdAt": "2026-05-14T18:37:36Z",
+      "updatedAt": "2026-05-15T12:51:12Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "707c781979b650e763a2f463ee2683446731a8cb",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "02_Edits",
+      "headRefOid": "72c28f92965bacdc5a30f9d737017a5e803e06fb",
+      "closedAt": "2026-05-15T12:51:08Z",
+      "mergedAt": "2026-05-15T12:51:08Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "eb803c75c9935fed076c804a48cfcbbcb3811b35"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs7_9q9k",
+          "commit": {
+            "abbreviatedOid": "72c28f9"
+          },
+          "author": "billwuqin",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-15T00:15:23Z",
+          "updatedAt": "2026-05-15T00:15:23Z",
           "comments": []
         }
       ]
