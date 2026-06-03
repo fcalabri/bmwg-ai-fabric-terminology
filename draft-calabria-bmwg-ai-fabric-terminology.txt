@@ -5,11 +5,11 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 16 November 2026                           Blue Fern Consulting
+Expires: 5 December 2026                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
-                                                             15 May 2026
+                                                             3 June 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 November 2026.
+   This Internet-Draft will expire on 5 December 2026.
 
 Copyright Notice
 
@@ -1191,8 +1191,10 @@ Table of Contents
    |            | reported throughout all test categories.            |
    +------------+-----------------------------------------------------+
    | *Goodput*  | The application-useful data delivered per unit      |
-   |            | Benchmark reports MUST use the qualified term to    |
-   |            | avoid ambiguity.                                    |
+   |            | time, excluding retransmissions, protocol overhead, |
+   |            | and padding.  Benchmark reports MUST specify the    |
+   |            | qualified Goodput metric (e.g., Inference_Goodput   |
+   |            | or Fabric_Goodput) to avoid ambiguity.              |
    |            | *Fabric_Goodput:* RDMA message payload bytes        |
    |            | successfully delivered per unit time at the DUT     |
    |            | boundary, excluding transport headers, framing      |
