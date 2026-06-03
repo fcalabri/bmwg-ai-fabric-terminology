@@ -9,6 +9,8 @@ Expires: 5 December 2026                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
+                                                                S. Reddy
+                                                                   Apple
                                                              3 June 2026
 
 
@@ -1730,3 +1732,9 @@ Authors' Addresses
    Huawei
    Italy
    Email: giuseppe.fioccola@huawei.com
+
+
+   Sowjanya Reddy
+   Apple
+   United States
+   Email: sowjredd@gmail.com
