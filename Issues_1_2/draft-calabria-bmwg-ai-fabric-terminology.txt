@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 18 December 2026                           Blue Fern Consulting
+Expires: 19 December 2026                           Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                            16 June 2026
+                                                            17 June 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2026.
+   This Internet-Draft will expire on 19 December 2026.
 
 Copyright Notice
 
@@ -1222,14 +1222,13 @@ Table of Contents
    |            | measures Fabric_Goodput; it does not measure        |
    |            | Inference_Goodput.                                  |
    +------------+-----------------------------------------------------+
-   | *Zero      | time, excluding retransmitted packets, protocol.  A |
-   | Packet     | test acceptance criterion requiring that no packets |
-   | Loss*      | are dropped by the DUT during the measurement       |
-   |            | interval.  For RoCEv2 and UET transports, zero      |
-   |            | packet loss is the target operating condition.  The |
-   |            | binary search procedure in the companion            |
-   |            | methodology documents determines the maximum        |
-   |            | offered load satisfying this criterion.             |
+   | *Zero      | A test acceptance criterion requiring that no       |
+   | Packet     | packets are dropped by the DUT during the           |
+   | Loss*      | measurement interval.  For RoCEv2 and UET           |
+   |            | transports, zero packet loss is the target          |
+   |            | operating condition.  The binary search procedure   |
+   |            | in the companion methodology documents determines   |
+   |            | the maximum offered load satisfying this criterion. |
    +------------+-----------------------------------------------------+
 
                     Table 13: KPI Classification Terms
