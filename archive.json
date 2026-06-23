@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-18T03:54:14.389587+00:00",
+  "timestamp": "2026-06-23T03:30:19.745777+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -1504,7 +1504,7 @@
       "labels": [],
       "body": "addresses issues 1 and 2 - Zero-Impact Failover and Roofline JCT assumptions ",
       "createdAt": "2026-06-16T13:30:04Z",
-      "updatedAt": "2026-06-17T23:50:24Z",
+      "updatedAt": "2026-06-23T02:13:47Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "389bc454aed1d666ebac6040d47fddd4b480e2c3",
@@ -1553,6 +1553,86 @@
               "body": "perfect seems like a marketing word, just delete as a suggestion.",
               "createdAt": "2026-06-17T23:42:04Z",
               "updatedAt": "2026-06-17T23:43:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs8AAAABDyseaA",
+          "commit": {
+            "abbreviatedOid": "274a735"
+          },
+          "author": "sowjanyadreddy",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T02:02:18Z",
+          "updatedAt": "2026-06-23T02:02:18Z",
+          "comments": [
+            {
+              "originalPosition": 22,
+              "body": "\"time, excluding retransmitted packets, protocol\" . This looks like a fragment left over from an earlier edit of the Goodput definition.",
+              "createdAt": "2026-06-23T02:02:18Z",
+              "updatedAt": "2026-06-23T02:02:18Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs8AAAABDytxGw",
+          "commit": {
+            "abbreviatedOid": "274a735"
+          },
+          "author": "sowjanyadreddy",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T02:08:22Z",
+          "updatedAt": "2026-06-23T02:08:22Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "\"Example deployment objective: ITL < 50 ms at P99. This value is provided for illustrative purposes only and is not a benchmark requirement or acceptance criterion.\"",
+              "createdAt": "2026-06-23T02:08:22Z",
+              "updatedAt": "2026-06-23T02:08:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs8AAAABDyuCPw",
+          "commit": {
+            "abbreviatedOid": "274a735"
+          },
+          "author": "sowjanyadreddy",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T02:09:36Z",
+          "updatedAt": "2026-06-23T02:09:36Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "\"Example deployment objective: TTFT < 500 ms at P99. This value is provided for illustrative purposes only and is not a benchmark requirement or acceptance criterion.\"",
+              "createdAt": "2026-06-23T02:09:36Z",
+              "updatedAt": "2026-06-23T02:09:36Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORX8iVs8AAAABDyu1Bw",
+          "commit": {
+            "abbreviatedOid": "274a735"
+          },
+          "author": "sowjanyadreddy",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-06-23T02:13:47Z",
+          "updatedAt": "2026-06-23T02:13:47Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Remove my name from this section as I was added in the author section. ",
+              "createdAt": "2026-06-23T02:13:47Z",
+              "updatedAt": "2026-06-23T02:13:47Z"
             }
           ]
         }
