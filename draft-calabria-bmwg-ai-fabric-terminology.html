@@ -33,7 +33,7 @@ document provides AI fabric context extensions and refinements;
 the foundational definitions in those RFCs remain authoritative
 for general network benchmarking. 
     ' name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="benchmarking" name="keyword">
 <meta content="terminology" name="keyword">
 <meta content="AI training" name="keyword">
@@ -49,18 +49,19 @@ for general network benchmarking.
 <meta content="KV cache" name="keyword">
 <meta content="draft-calabria-bmwg-ai-fabric-terminology-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.1
 -->
 <link href="draft-calabria-bmwg-ai-fabric-terminology.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1083,7 +1084,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Calabria, et al.</td>
-<td class="center">Expires 5 December 2026</td>
+<td class="center">Expires 25 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1096,12 +1097,12 @@ svg {
 <dd class="internet-draft">draft-calabria-bmwg-ai-fabric-terminology-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-03" class="published">3 June 2026</time>
+<time datetime="2026-06-23" class="published">23 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-05">5 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-25">25 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1182,7 +1183,7 @@ for general network benchmarking.<a href="#section-abstract-2" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2113,7 +2114,7 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Zero-Impact Failover</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Sub-microsecond automatic path convergence upon a link or switch failure resulting in no measurable increase to JCT or TTFT. Requires pre-programmed alternate paths and hardware-level fast reroute (FRR) with sub-microsecond detection, not relying on routing protocol convergence.</td>
+            <td class="text-left" rowspan="1" colspan="1">A failover event during which no statistically significant increase in JCT or TTFT is observed, within the measurement tolerance specified by the companion methodology. The term denotes the measured outcome, not a specific mechanism.<br><br>NOTE: This outcome is typically achieved via pre-programmed alternate paths and hardware-level fast reroute (FRR) with sub-microsecond detection, rather than routing-protocol convergence. The mechanism is informative and not part of the definition.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2156,7 +2157,7 @@ and are used normatively in <span>[<a href="#I-D.calabria-bmwg-ai-fabric-trainin
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Roofline JCT</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The theoretical minimum JCT assuming perfect (zero-contention, zero-queuing) network behavior: <code>Roofline JCT = computation_time + serialization_delay</code>, where <code>serialization_delay = message_size / link_rate</code>. Provides a reference for evaluating fabric overhead.</td>
+            <td class="text-left" rowspan="1" colspan="1">The theoretical minimum JCT under ideal network conditions, namely: load balancing across all paths, zero contention and queuing, no retransmissions, and no fabric failures. Computed as <code>Roofline JCT = computation_time + serialization_delay</code>, where <code>serialization_delay = message_size / link_rate</code>. Stating these assumptions explicitly ensures the reference is reproducible across implementations. Provides a baseline for evaluating fabric overhead.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2426,7 +2427,7 @@ companion methodology documents.<a href="#section-10-1" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Zero Packet Loss</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">time, excluding retransmitted packets, protocol.  A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
+            <td class="text-left" rowspan="1" colspan="1">A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
           </tr>
         </tbody>
       </table>
@@ -2861,15 +2862,15 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
 <dl class="references">
 <dt id="I-D.calabria-bmwg-ai-fabric-inference-bench">[I-D.calabria-bmwg-ai-fabric-inference-bench]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Methodology for AI Inference Serving Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-inference-bench-01</span>, <time datetime="2026-04-21" class="refDate">21 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-01">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Methodology for AI Inference Serving Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-inference-bench-02</span>, <time datetime="2026-06-04" class="refDate">4 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-02">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.calabria-bmwg-ai-fabric-terminology">[I-D.calabria-bmwg-ai-fabric-terminology]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Terminology for AI Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-terminology-01</span>, <time datetime="2026-04-21" class="refDate">21 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-01">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Terminology for AI Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-terminology-02</span>, <time datetime="2026-06-04" class="refDate">4 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-02">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.calabria-bmwg-ai-fabric-training-bench">[I-D.calabria-bmwg-ai-fabric-training-bench]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, and <span class="refAuthor">G. Fioccola</span>, <span class="refTitle">"Benchmarking Methodology for AI Training Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-training-bench-01</span>, <time datetime="2026-04-21" class="refDate">21 April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-01">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Methodology for AI Training Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-training-bench-02</span>, <time datetime="2026-06-04" class="refDate">4 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-02">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IBTA-ROCE">[IBTA-ROCE]</dt>
         <dd>

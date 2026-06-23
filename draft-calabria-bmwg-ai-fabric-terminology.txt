@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 5 December 2026                            Blue Fern Consulting
+Expires: 25 December 2026                           Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                             3 June 2026
+                                                            23 June 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -70,7 +70,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 December 2026.
+   This Internet-Draft will expire on 25 December 2026.
 
 Copyright Notice
 
@@ -770,123 +770,124 @@ Table of Contents
    infrastructure components referenced in the companion methodology
    documents.
 
-     +===================+===========================================+
-     | Term              | Definition                                |
-     +===================+===========================================+
-     | *Fabric DUT       | The precise measurement boundary for BMWG |
-     | Boundary*         | AI fabric benchmarks.  Defined as the NIC |
-     |                   | Ethernet port (transmit side at source,   |
-     |                   | receive side at destination).  All        |
-     |                   | benchmarked metrics (throughput, latency, |
-     |                   | loss, congestion) are measured at or      |
-     |                   | between NIC Ethernet ports.  Intra-node   |
-     |                   | segments (NVLink, PCIe Gen4/5, CXL) are   |
-     |                   | outside the DUT boundary and MUST NOT be  |
-     |                   | included in fabric benchmark results      |
-     |                   | without explicit labelling as a separate  |
-     |                   | measurement component.                    |
-     +-------------------+-------------------------------------------+
-     | *Intra-Node       | The latency and bandwidth consumed by     |
-     | Transfer          | data movement within a single server      |
-     | Overhead*         | node: specifically, the GPU-to-NIC path   |
-     |                   | via PCIe or CXL, and GPU-to-GPU           |
-     |                   | communication via NVLink.  Intra-node     |
-     |                   | transfer overhead is a contextual         |
-     |                   | measurement reported alongside fabric     |
-     |                   | benchmarks in end-to-end decomposition    |
-     |                   | tests but is not itself the benchmarked   |
-     |                   | entity in any test in this document       |
-     +-------------------+-------------------------------------------+
-     | *Clos / Fat-Tree  | A multi-stage switch topology providing   |
-     | Topology*         | non-blocking or oversubscribed            |
-     |                   | connectivity between all leaf-to-leaf     |
-     |                   | pairs.  In AI fabric deployments, a two-  |
-     |                   | tier (leaf-spine) or three-tier (leaf-    |
-     |                   | spine-superspine) Clos is standard.  Full |
-     |                   | bisection bandwidth (1:1) is the target   |
-     |                   | for training fabrics; 2:1 or 4:1          |
-     |                   | oversubscription may be acceptable for    |
-     |                   | inference fabrics.                        |
-     +-------------------+-------------------------------------------+
-     | *Rail-Optimized   | A topology in which the NIC ports of each |
-     | Topology*         | server are distributed across multiple    |
-     |                   | ToR switches (one NIC port per switch),   |
-     |                   | such that collective traffic between      |
-     |                   | adjacent servers traverses different      |
-     |                   | physical paths.  Minimizes switch-to-     |
-     |                   | switch traffic during ring AllReduce,     |
-     |                   | maximizing effective BusBW.  Requires     |
-     |                   | ECMP-aware collective placement.          |
-     +-------------------+-------------------------------------------+
-     | *Bisection        | The aggregate bandwidth across the        |
-     | Bandwidth*        | minimum cut that divides the fabric into  |
-     |                   | two equal halves.  Non-blocking fabrics   |
-     |                   | provide bisection bandwidth equal to half |
-     |                   | the total edge (server-facing) bandwidth. |
-     |                   | Limits worst-case all-to-all              |
-     |                   | communication throughput.                 |
-     +-------------------+-------------------------------------------+
-     | *Oversubscription | The ratio of total edge (server-facing)   |
-     | Ratio*            | bandwidth to total bisection bandwidth in |
-     |                   | a Clos fabric.  A 1:1 ratio is non-       |
-     |                   | blocking; higher ratios (e.g., 2:1, 4:1)  |
-     |                   | reduce fabric cost but may bottleneck     |
-     |                   | all-to-all and AllReduce patterns when    |
-     |                   | all server ports are active               |
-     |                   | simultaneously.                           |
-     +-------------------+-------------------------------------------+
-     | *ToR Switch*      | Top-of-Rack switch.  The first-hop        |
-     |                   | aggregation switch connecting accelerator |
-     |                   | servers in a rack to the spine layer of   |
-     |                   | the fabric.  In rail-optimized            |
-     |                   | topologies, multiple ToR switches serve a |
-     |                   | single rack, with each server's NICs      |
-     |                   | distributed across ToRs.                  |
-     +-------------------+-------------------------------------------+
-     | *Spine /          | Intermediate and top-layer switches in a  |
-     | Superspine*       | multi-tier Clos fabric, providing inter-  |
-     |                   | rack and inter-pod connectivity           |
-     |                   | respectively.  Spine switches aggregate   |
-     |                   | multiple ToR switches; superspine         |
-     |                   | switches aggregate multiple spine pods.   |
-     +-------------------+-------------------------------------------+
-     | *NIC*             | Network Interface Controller.  The        |
-     |                   | hardware device providing network         |
-     |                   | connectivity for an accelerator host.  AI |
-     |                   | fabric NICs support RDMA (RoCEv2 or UET), |
-     |                   | hardware offload for collective           |
-     |                   | operations, and, optionally, GPU-         |
-     |                   | Initiated Networking (GIN).  NIC model    |
-     |                   | and firmware version *MUST* be documented |
-     |                   | in all benchmark reports.                 |
-     +-------------------+-------------------------------------------+
-     | *Buffer           | The instantaneous or time-averaged fill   |
-     | Occupancy*        | level of a switch port's packet buffer,   |
-     |                   | expressed in bytes or as a fraction of    |
-     |                   | total buffer capacity.  Elevated          |
-     |                   | sustained buffer occupancy indicates      |
-     |                   | congestion.  P99 buffer occupancy is a    |
-     |                   | Fabric Health Indicator in the companion  |
-     |                   | methodology documents.                    |
-     +-------------------+-------------------------------------------+
-     | *Zero-Impact      | Sub-microsecond automatic path            |
-     | Failover*         | convergence upon a link or switch failure |
-     |                   | resulting in no measurable increase to    |
-     |                   | JCT or TTFT.  Requires pre-programmed     |
-     |                   | alternate paths and hardware-level fast   |
-     |                   | reroute (FRR) with sub-microsecond        |
-     |                   | detection, not relying on routing         |
-     |                   | protocol convergence.                     |
-     +-------------------+-------------------------------------------+
-     | *Link             | The fraction of the nominal link capacity |
-     | Utilization*      | actually used for data transmission over  |
-     |                   | a measurement interval, expressed as a    |
-     |                   | percentage.  Reported as mean, P95, and   |
-     |                   | P99 per link.  High asymmetric link       |
-     |                   | utilization (low average but high peak)   |
-     |                   | is characteristic of bursty AI inference  |
-     |                   | traffic.                                  |
-     +-------------------+-------------------------------------------+
+    +===================+=============================================+
+    | Term              | Definition                                  |
+    +===================+=============================================+
+    | *Fabric DUT       | The precise measurement boundary for BMWG   |
+    | Boundary*         | AI fabric benchmarks.  Defined as the NIC   |
+    |                   | Ethernet port (transmit side at source,     |
+    |                   | receive side at destination).  All          |
+    |                   | benchmarked metrics (throughput, latency,   |
+    |                   | loss, congestion) are measured at or        |
+    |                   | between NIC Ethernet ports.  Intra-node     |
+    |                   | segments (NVLink, PCIe Gen4/5, CXL) are     |
+    |                   | outside the DUT boundary and MUST NOT be    |
+    |                   | included in fabric benchmark results        |
+    |                   | without explicit labelling as a separate    |
+    |                   | measurement component.                      |
+    +-------------------+---------------------------------------------+
+    | *Intra-Node       | The latency and bandwidth consumed by data  |
+    | Transfer          | movement within a single server node:       |
+    | Overhead*         | specifically, the GPU-to-NIC path via PCIe  |
+    |                   | or CXL, and GPU-to-GPU communication via    |
+    |                   | NVLink.  Intra-node transfer overhead is a  |
+    |                   | contextual measurement reported alongside   |
+    |                   | fabric benchmarks in end-to-end             |
+    |                   | decomposition tests but is not itself the   |
+    |                   | benchmarked entity in any test in this      |
+    |                   | document                                    |
+    +-------------------+---------------------------------------------+
+    | *Clos / Fat-Tree  | A multi-stage switch topology providing     |
+    | Topology*         | non-blocking or oversubscribed connectivity |
+    |                   | between all leaf-to-leaf pairs.  In AI      |
+    |                   | fabric deployments, a two-tier (leaf-spine) |
+    |                   | or three-tier (leaf-spine-superspine) Clos  |
+    |                   | is standard.  Full bisection bandwidth      |
+    |                   | (1:1) is the target for training fabrics;   |
+    |                   | 2:1 or 4:1 oversubscription may be          |
+    |                   | acceptable for inference fabrics.           |
+    +-------------------+---------------------------------------------+
+    | *Rail-Optimized   | A topology in which the NIC ports of each   |
+    | Topology*         | server are distributed across multiple ToR  |
+    |                   | switches (one NIC port per switch), such    |
+    |                   | that collective traffic between adjacent    |
+    |                   | servers traverses different physical paths. |
+    |                   | Minimizes switch-to-switch traffic during   |
+    |                   | ring AllReduce, maximizing effective BusBW. |
+    |                   | Requires ECMP-aware collective placement.   |
+    +-------------------+---------------------------------------------+
+    | *Bisection        | The aggregate bandwidth across the minimum  |
+    | Bandwidth*        | cut that divides the fabric into two equal  |
+    |                   | halves.  Non-blocking fabrics provide       |
+    |                   | bisection bandwidth equal to half the total |
+    |                   | edge (server-facing) bandwidth.  Limits     |
+    |                   | worst-case all-to-all communication         |
+    |                   | throughput.                                 |
+    +-------------------+---------------------------------------------+
+    | *Oversubscription | The ratio of total edge (server-facing)     |
+    | Ratio*            | bandwidth to total bisection bandwidth in a |
+    |                   | Clos fabric.  A 1:1 ratio is non-blocking;  |
+    |                   | higher ratios (e.g., 2:1, 4:1) reduce       |
+    |                   | fabric cost but may bottleneck all-to-all   |
+    |                   | and AllReduce patterns when all server      |
+    |                   | ports are active simultaneously.            |
+    +-------------------+---------------------------------------------+
+    | *ToR Switch*      | Top-of-Rack switch.  The first-hop          |
+    |                   | aggregation switch connecting accelerator   |
+    |                   | servers in a rack to the spine layer of the |
+    |                   | fabric.  In rail-optimized topologies,      |
+    |                   | multiple ToR switches serve a single rack,  |
+    |                   | with each server's NICs distributed across  |
+    |                   | ToRs.                                       |
+    +-------------------+---------------------------------------------+
+    | *Spine /          | Intermediate and top-layer switches in a    |
+    | Superspine*       | multi-tier Clos fabric, providing inter-    |
+    |                   | rack and inter-pod connectivity             |
+    |                   | respectively.  Spine switches aggregate     |
+    |                   | multiple ToR switches; superspine switches  |
+    |                   | aggregate multiple spine pods.              |
+    +-------------------+---------------------------------------------+
+    | *NIC*             | Network Interface Controller.  The hardware |
+    |                   | device providing network connectivity for   |
+    |                   | an accelerator host.  AI fabric NICs        |
+    |                   | support RDMA (RoCEv2 or UET), hardware      |
+    |                   | offload for collective operations, and,     |
+    |                   | optionally, GPU-Initiated Networking (GIN). |
+    |                   | NIC model and firmware version *MUST* be    |
+    |                   | documented in all benchmark reports.        |
+    +-------------------+---------------------------------------------+
+    | *Buffer           | The instantaneous or time-averaged fill     |
+    | Occupancy*        | level of a switch port's packet buffer,     |
+    |                   | expressed in bytes or as a fraction of      |
+    |                   | total buffer capacity.  Elevated sustained  |
+    |                   | buffer occupancy indicates congestion.  P99 |
+    |                   | buffer occupancy is a Fabric Health         |
+    |                   | Indicator in the companion methodology      |
+    |                   | documents.                                  |
+    +-------------------+---------------------------------------------+
+    | *Zero-Impact      | A failover event during which no            |
+    | Failover*         | statistically significant increase in JCT   |
+    |                   | or TTFT is observed, within the measurement |
+    |                   | tolerance specified by the companion        |
+    |                   | methodology.  The term denotes the measured |
+    |                   | outcome, not a specific mechanism.          |
+    |                   |                                             |
+    |                   | NOTE: This outcome is typically achieved    |
+    |                   | via pre-programmed alternate paths and      |
+    |                   | hardware-level fast reroute (FRR) with sub- |
+    |                   | microsecond detection, rather than routing- |
+    |                   | protocol convergence.  The mechanism is     |
+    |                   | informative and not part of the definition. |
+    +-------------------+---------------------------------------------+
+    | *Link             | The fraction of the nominal link capacity   |
+    | Utilization*      | actually used for data transmission over a  |
+    |                   | measurement interval, expressed as a        |
+    |                   | percentage.  Reported as mean, P95, and P99 |
+    |                   | per link.  High asymmetric link utilization |
+    |                   | (low average but high peak) is              |
+    |                   | characteristic of bursty AI inference       |
+    |                   | traffic.                                    |
+    +-------------------+---------------------------------------------+
 
              Table 9: Fabric Topology and Infrastructure Terms
 
@@ -896,57 +897,65 @@ Table of Contents
    and are used normatively in
    [I-D.calabria-bmwg-ai-fabric-training-bench].
 
-    +==================+==============================================+
-    | Term             | Definition                                   |
-    +==================+==============================================+
-    | *JCT*            | Job Completion Time.  The wall-clock elapsed |
-    |                  | time from the start of a training job (or    |
-    |                  | benchmark iteration) until all participating |
-    |                  | accelerators complete their work, inclusive  |
-    |                  | of all forward pass, backward pass, and      |
-    |                  | collective communication phases.  JCT is the |
-    |                  | primary end-to-end training efficiency KPI.  |
-    +------------------+----------------------------------------------+
-    | *Roofline JCT*   | The theoretical minimum JCT assuming perfect |
-    |                  | (zero-contention, zero-queuing) network      |
-    |                  | behavior: Roofline JCT = computation_time +  |
-    |                  | serialization_delay, where                   |
-    |                  | serialization_delay = message_size /         |
-    |                  | link_rate.  Provides a reference for         |
-    |                  | evaluating fabric overhead.                  |
-    +------------------+----------------------------------------------+
-    | *JCT Ratio*      | The ratio of measured JCT to Roofline JCT.   |
-    |                  | A value of 1.0 indicates no network-induced  |
-    |                  | overhead.  Values > 1.0 quantify fabric      |
-    |                  | inefficiency: JCT Ratio = JCT_measured /     |
-    |                  | JCT_roofline.  The JCT Ratio is the primary  |
-    |                  | comparative metric for AI training fabric    |
-    |                  | benchmarking.                                |
-    +------------------+----------------------------------------------+
-    | *Gradient        | The AllReduce collective operation performed |
-    | Synchronization* | after the backward pass of each training     |
-    |                  | step to sum the locally computed gradients   |
-    |                  | across all data-parallel replicas.  The      |
-    |                  | dominant communication event in data-        |
-    |                  | parallel training, occurring once per        |
-    |                  | training step per layer.                     |
-    +------------------+----------------------------------------------+
-    | *Step Time*      | The wall-clock duration of a single training |
-    |                  | iteration (forward pass + backward pass +    |
-    |                  | gradient synchronization + optimizer step).  |
-    |                  | Step time = computation time + communication |
-    |                  | time, where the communication time is        |
-    |                  | dominated by the AllReduce collective.       |
-    +------------------+----------------------------------------------+
-    | *Soak Test*      | A sustained-load test run for an extended    |
-    |                  | period (minimum 24 hours for stability       |
-    |                  | evaluation) at a defined offered load        |
-    |                  | fraction (e.g., 70% or 90% of maximum        |
-    |                  | throughput).  Soak tests detect buffer       |
-    |                  | leaks, ECMP imbalance drift, PFC storm       |
-    |                  | initiation, and long-tail error accumulation |
-    |                  | not visible in short-duration tests.         |
-    +------------------+----------------------------------------------+
+   +==================+================================================+
+   | Term             | Definition                                     |
+   +==================+================================================+
+   | *JCT*            | Job Completion Time.  The wall-clock           |
+   |                  | elapsed time from the start of a training      |
+   |                  | job (or benchmark iteration) until all         |
+   |                  | participating accelerators complete their      |
+   |                  | work, inclusive of all forward pass,           |
+   |                  | backward pass, and collective                  |
+   |                  | communication phases.  JCT is the primary      |
+   |                  | end-to-end training efficiency KPI.            |
+   +------------------+------------------------------------------------+
+   | *Roofline JCT*   | The theoretical minimum JCT under ideal        |
+   |                  | network conditions, namely: load balancing     |
+   |                  | across all paths, zero contention and          |
+   |                  | queuing, no retransmissions, and no fabric     |
+   |                  | failures.  Computed as Roofline JCT =          |
+   |                  | computation_time + serialization_delay,        |
+   |                  | where serialization_delay = message_size /     |
+   |                  | link_rate.  Stating these assumptions          |
+   |                  | explicitly ensures the reference is            |
+   |                  | reproducible across implementations.           |
+   |                  | Provides a baseline for evaluating fabric      |
+   |                  | overhead.                                      |
+   +------------------+------------------------------------------------+
+   | *JCT Ratio*      | The ratio of measured JCT to Roofline JCT.     |
+   |                  | A value of 1.0 indicates no network-           |
+   |                  | induced overhead.  Values > 1.0 quantify       |
+   |                  | fabric inefficiency: JCT Ratio =               |
+   |                  | JCT_measured / JCT_roofline.  The JCT          |
+   |                  | Ratio is the primary comparative metric        |
+   |                  | for AI training fabric benchmarking.           |
+   +------------------+------------------------------------------------+
+   | *Gradient        | The AllReduce collective operation             |
+   | Synchronization* | performed after the backward pass of each      |
+   |                  | training step to sum the locally computed      |
+   |                  | gradients across all data-parallel             |
+   |                  | replicas.  The dominant communication          |
+   |                  | event in data-parallel training, occurring     |
+   |                  | once per training step per layer.              |
+   +------------------+------------------------------------------------+
+   | *Step Time*      | The wall-clock duration of a single            |
+   |                  | training iteration (forward pass +             |
+   |                  | backward pass + gradient synchronization +     |
+   |                  | optimizer step).  Step time = computation      |
+   |                  | time + communication time, where the           |
+   |                  | communication time is dominated by the         |
+   |                  | AllReduce collective.                          |
+   +------------------+------------------------------------------------+
+   | *Soak Test*      | A sustained-load test run for an extended      |
+   |                  | period (minimum 24 hours for stability         |
+   |                  | evaluation) at a defined offered load          |
+   |                  | fraction (e.g., 70% or 90% of maximum          |
+   |                  | throughput).  Soak tests detect buffer         |
+   |                  | leaks, ECMP imbalance drift, PFC storm         |
+   |                  | initiation, and long-tail error                |
+   |                  | accumulation not visible in short-duration     |
+   |                  | tests.                                         |
+   +------------------+------------------------------------------------+
 
                      Table 10: Training-Specific Terms
 
@@ -1213,14 +1222,13 @@ Table of Contents
    |            | measures Fabric_Goodput; it does not measure        |
    |            | Inference_Goodput.                                  |
    +------------+-----------------------------------------------------+
-   | *Zero      | time, excluding retransmitted packets, protocol.  A |
-   | Packet     | test acceptance criterion requiring that no packets |
-   | Loss*      | are dropped by the DUT during the measurement       |
-   |            | interval.  For RoCEv2 and UET transports, zero      |
-   |            | packet loss is the target operating condition.  The |
-   |            | binary search procedure in the companion            |
-   |            | methodology documents determines the maximum        |
-   |            | offered load satisfying this criterion.             |
+   | *Zero      | A test acceptance criterion requiring that no       |
+   | Packet     | packets are dropped by the DUT during the           |
+   | Loss*      | measurement interval.  For RoCEv2 and UET           |
+   |            | transports, zero packet loss is the target          |
+   |            | operating condition.  The binary search procedure   |
+   |            | in the companion methodology documents determines   |
+   |            | the maximum offered load satisfying this criterion. |
    +------------+-----------------------------------------------------+
 
                     Table 13: KPI Classification Terms
@@ -1523,28 +1531,28 @@ Normative References
 Informative References
 
    [I-D.calabria-bmwg-ai-fabric-inference-bench]
-              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
-              "Benchmarking Methodology for AI Inference Serving Network
-              Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-inference-bench-01, 21 April 2026,
+              Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
+              Reddy, "Benchmarking Methodology for AI Inference Serving
+              Network Fabrics", Work in Progress, Internet-Draft, draft-
+              calabria-bmwg-ai-fabric-inference-bench-02, 4 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-inference-bench-01>.
+              bmwg-ai-fabric-inference-bench-02>.
 
    [I-D.calabria-bmwg-ai-fabric-terminology]
-              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
-              "Benchmarking Terminology for AI Network Fabrics", Work in
-              Progress, Internet-Draft, draft-calabria-bmwg-ai-fabric-
-              terminology-01, 21 April 2026,
+              Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
+              Reddy, "Benchmarking Terminology for AI Network Fabrics",
+              Work in Progress, Internet-Draft, draft-calabria-bmwg-ai-
+              fabric-terminology-02, 4 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-terminology-01>.
+              bmwg-ai-fabric-terminology-02>.
 
    [I-D.calabria-bmwg-ai-fabric-training-bench]
-              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
-              "Benchmarking Methodology for AI Training Network
+              Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
+              Reddy, "Benchmarking Methodology for AI Training Network
               Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-training-bench-01, 21 April 2026,
+              calabria-bmwg-ai-fabric-training-bench-02, 4 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-training-bench-01>.
+              bmwg-ai-fabric-training-bench-02>.
 
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
