@@ -517,7 +517,7 @@ here.
 # Acknowledgments
 {:numbered="false"}
 
-This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel, Mohamed Boucadair, and Sowjanya Reddy for valuable review and comments.
+This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel, and Mohamed Boucadair, for valuable reviews and comments.
 
 --- back
 
