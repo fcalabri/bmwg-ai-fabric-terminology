@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 6 December 2026                            Blue Fern Consulting
+Expires: 5 January 2027                             Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                             4 June 2026
+                                                             4 July 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -21,26 +21,21 @@ Abstract
 
    This document defines benchmarking terminology for evaluating
    Ethernet-based network fabrics used in distributed Artificial
-   Intelligence (AI) training and inference workloads.  It provides a
-   unified vocabulary consolidating and extending terms from
-   "Benchmarking Terminology for Network Interconnect Devices" [RFC1242]
-   and "Data Center Benchmarking Terminology" [RFC8238], and the
-   companion AI fabric methodology documents, establishing precise,
-   vendor-neutral definitions for collective communication primitives,
-   RDMA transport mechanisms (RoCEv2 and Ultra Ethernet Transport),
-   congestion control behaviors, AI-specific Key Performance Indicators
-   (KPIs), and fabric topology concepts.
+   Intelligence (AI) training and inference workloads.  It consolidates
+   and extends terms from "Benchmarking Terminology for Network
+   Interconnect Devices" (RFC 1242) and "Data Center Benchmarking
+   Terminology" (RFC 8238).  Definitions cover collective communication
+   primitives, RDMA transport mechanisms (RoCEv2 and Ultra Ethernet
+   Transport), congestion control behaviors, AI-specific Key Performance
+   Indicators (KPIs), and fabric topology concepts.
 
-   This document is a companion to the AI training fabric benchmarking
-   methodology [I-D.calabria-bmwg-ai-fabric-training-bench] and the AI
-   inference fabric benchmarking methodology
-   [I-D.calabria-bmwg-ai-fabric-inference-bench].  Those documents
-   SHOULD NOT be applied without first consulting the terminology
-   defined herein.  Where definitions herein overlap with the
-   foundational benchmarking terminology in [RFC1242] or [RFC8238], this
-   document provides AI fabric context extensions and refinements; the
-   foundational definitions in those RFCs remain authoritative for
-   general network benchmarking.
+   This document is a companion to the AI training and inference fabric
+   benchmarking methodology documents.  Those documents are intended to
+   be read together with the terminology defined here.  Where
+   definitions herein overlap with the foundational benchmarking
+   terminology in RFC 1242 or RFC 8238, this document provides AI fabric
+   context extensions and refinements; the foundational definitions in
+   those RFCs remain authoritative for general network benchmarking.
 
 About This Document
 
@@ -70,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 December 2026.
+   This Internet-Draft will expire on 5 January 2027.
 
 Copyright Notice
 
@@ -132,13 +127,12 @@ Table of Contents
 
 1.2.  Scope and Purpose
 
-   This document defines terminology specifically for benchmarking
-   Ethernet-based AI network fabrics in controlled laboratory
-   environments.  The defined terms cover: distributed AI training
-   collective communication patterns, LLM inference serving
-   architectures, RDMA transport semantics (RoCEv2 and UET), congestion
-   control mechanisms, fabric topology characteristics, and performance
-   metric definitions.
+   This document defines terminology for benchmarking Ethernet-based AI
+   network fabrics in controlled laboratory environments.  The defined
+   terms cover: distributed AI training collective communication
+   patterns, LLM inference serving architectures, RDMA transport
+   semantics (RoCEv2 and UET), congestion control mechanisms, fabric
+   topology characteristics, and performance metric definitions.
 
    This document does not define acceptance criteria, performance
    requirements, or configuration recommendations.  It does not address
@@ -161,8 +155,7 @@ Table of Contents
    This document is one of three companion Internet-Drafts addressing AI
    fabric benchmarking:
 
-   *  [I-D.calabria-bmwg-ai-fabric-terminology] (this document):
-      Terminology definitions.
+   *  This document: Terminology definitions.
 
    *  [I-D.calabria-bmwg-ai-fabric-training-bench]: Benchmarking
       methodology for AI training workloads.
@@ -181,78 +174,85 @@ Table of Contents
    The following terms establish the general measurement framework
    applicable to all AI fabric benchmarking activities.
 
-   +=============+====================================================+
-   | Term        | Definition                                         |
-   +=============+====================================================+
-   | *AI Fabric* | The dedicated Ethernet backend network             |
-   |             | interconnecting accelerators (GPUs/XPUs) for       |
-   |             | distributed AI training and inference workloads.   |
-   |             | Typically implemented as a non-blocking Clos (fat- |
-   |             | tree) topology running RoCEv2 or UET transport.    |
-   |             | Distinct from the front-end (management/storage)   |
-   |             | network.                                           |
-   +-------------+----------------------------------------------------+
-   | *DUT*       | Device Under Test.  The network element(s) whose   |
-   |             | performance characteristics are being measured.    |
-   |             | In AI fabric benchmarking the DUT is one or more   |
-   |             | fabric elements: leaf switches, spine switches,    |
-   |             | NICs, or the complete fabric assembly.             |
-   +-------------+----------------------------------------------------+
-   | *SUT*       | System Under Test.  The complete AI compute system |
-   |             | including accelerators, NICs, the fabric DUT, and  |
-   |             | serving/training software, when end-to-end metrics |
-   |             | are the measurement objective.                     |
-   +-------------+----------------------------------------------------+
-   | *RT*        | Router Tester / Traffic Generator.  Test equipment |
-   |             | capable of generating and receiving network        |
-   |             | traffic at specified rates with nanosecond-        |
-   |             | resolution timestamping sufficient for the         |
-   |             | measurements defined in the companion methodology  |
-   |             | documents.                                         |
-   +-------------+----------------------------------------------------+
-   | *JFI*       | Fairness Index.  A scalar measure of flow-level    |
-   |             | throughput fairness across n flows [Jain1984]: JFI |
-   |             | = (Σxᵢ)² / (n · Σxᵢ²) where xᵢ is the throughput   |
-   |             | of flow i.  A value of 1.0 indicates perfect       |
-   |             | fairness; lower values indicate disparity.         |
-   |             | *SHOULD* be reported alongside throughput          |
-   |             | measurements for all multi-flow AI fabric tests.   |
-   +-------------+----------------------------------------------------+
-   | *Offered    | The total traffic rate presented to the DUT from   |
-   | Load*       | test equipment, expressed as a fraction of line    |
-   |             | rate (0–100%) or as absolute bit/s.  Offered load  |
-   |             | is controlled independently of DUT absorption,     |
-   |             | enabling characterization of saturation behavior.  |
-   +-------------+----------------------------------------------------+
-   | *Trial      | The time interval over which a single measurement  |
-   | Duration*   | is conducted.  For AI fabric tests, the            |
-   |             | *RECOMMENDED* minimum is 60 seconds for throughput |
-   |             | tests and 300 seconds for soak/stability tests,    |
-   |             | per the methodology in [RFC2544] as extended       |
-   |             | herein.                                            |
-   +-------------+----------------------------------------------------+
-   | *Warmup     | A mandatory pre-measurement interval during which  |
-   | Period*     | traffic is sent but results are not recorded.      |
-   |             | Ensures adaptive routing tables, PFC watermarks,   |
-   |             | and DCQCN/UET congestion controllers reach steady  |
-   |             | state before measurement begins. *RECOMMENDED*     |
-   |             | minimum: 10 seconds.                               |
-   +-------------+----------------------------------------------------+
-   | *Binary     | An iterative test procedure for determining the    |
-   | Search*     | maximum offered load at which a DUT meets a        |
-   |             | specified acceptance criterion (e.g., zero packet  |
-   |             | loss).  The search halves the candidate load range |
-   |             | at each iteration, converging to a resolution of   |
-   |             | 0.1% offered load within 10 iterations.            |
-   +-------------+----------------------------------------------------+
-   | *Percentile | A latency statistic expressing that the specified  |
-   | Latency*    | fraction of all measured latency samples fall at   |
-   |             | or below the reported value.  Denoted Pxx (e.g.,   |
-   |             | P50, P95, P99, P99.9).  Tail latency (P99 and      |
-   |             | above) is especially relevant for AI fabric        |
-   |             | benchmarking because SLO violations are determined |
-   |             | by worst-case, not median, performance.            |
-   +-------------+----------------------------------------------------+
+    +=============+==================================================+
+    | Term        | Definition                                       |
+    +=============+==================================================+
+    | *AI Fabric* | The dedicated Ethernet backend network           |
+    |             | interconnecting accelerators (GPUs/XPUs) for     |
+    |             | distributed AI training and inference workloads. |
+    |             | Implemented as a non-blocking Clos (fat-tree)    |
+    |             | topology running RoCEv2 or UET.  The AI fabric   |
+    |             | is separate from the front-end management and    |
+    |             | storage network.                                 |
+    +-------------+--------------------------------------------------+
+    | *DUT*       | Device Under Test.  The network element(s) whose |
+    |             | performance characteristics are being measured.  |
+    |             | In AI fabric benchmarking the DUT is one or more |
+    |             | fabric elements: leaf switches, spine switches,  |
+    |             | NICs, or the complete fabric assembly.           |
+    +-------------+--------------------------------------------------+
+    | *SUT*       | System Under Test.  The complete AI compute      |
+    |             | system including accelerators, NICs, the fabric  |
+    |             | DUT, and serving/training software, when end-to- |
+    |             | end metrics are the measurement objective.       |
+    +-------------+--------------------------------------------------+
+    | *RT*        | Router Tester / Traffic Generator.  Test         |
+    |             | equipment capable of generating and receiving    |
+    |             | network traffic at specified rates with          |
+    |             | nanosecond-resolution timestamping sufficient    |
+    |             | for the measurements defined in the companion    |
+    |             | methodology documents.                           |
+    +-------------+--------------------------------------------------+
+    | *JFI*       | Jain's Fairness Index.  A scalar measure of      |
+    |             | flow-level throughput fairness across n flows    |
+    |             | [Jain1984]: JFI = (Σxᵢ)² / (n · Σxᵢ²) where xᵢ   |
+    |             | is the throughput of flow i.  A value of 1.0     |
+    |             | indicates perfect fairness; lower values         |
+    |             | indicate disparity. *SHOULD* be reported         |
+    |             | alongside throughput measurements for all multi- |
+    |             | flow AI fabric tests.                            |
+    +-------------+--------------------------------------------------+
+    | *Offered    | The total traffic rate presented to the DUT from |
+    | Load*       | test equipment, expressed as a fraction of line  |
+    |             | rate (0–100%) or as absolute bit/s.  Offered     |
+    |             | load is controlled independently of DUT          |
+    |             | absorption, enabling characterization of         |
+    |             | saturation behavior.                             |
+    +-------------+--------------------------------------------------+
+    | *Trial      | The time interval over which a single            |
+    | Duration*   | measurement is conducted.  For AI fabric tests,  |
+    |             | the *RECOMMENDED* minimum is 60 seconds for      |
+    |             | throughput tests and 300 seconds for congestion  |
+    |             | and stability sub-tests, per the methodology in  |
+    |             | [RFC2544] as extended in the companion           |
+    |             | methodology documents.  Soak tests use a         |
+    |             | substantially longer duration (minimum 24 hours) |
+    |             | per the Soak Test definition in Table 10.        |
+    +-------------+--------------------------------------------------+
+    | *Warmup     | A mandatory pre-measurement interval during      |
+    | Period*     | which traffic is sent but results are not        |
+    |             | recorded.  Ensures adaptive routing tables, PFC  |
+    |             | watermarks, and DCQCN/UET congestion controllers |
+    |             | reach steady state before measurement begins.    |
+    |             | *RECOMMENDED* minimum: 10 seconds.               |
+    +-------------+--------------------------------------------------+
+    | *Binary     | An iterative test procedure for determining the  |
+    | Search*     | maximum offered load at which a DUT meets a      |
+    |             | specified acceptance criterion (e.g., zero       |
+    |             | packet loss).  The search halves the candidate   |
+    |             | load range at each iteration, converging to a    |
+    |             | resolution of 0.1% offered load within 10        |
+    |             | iterations.                                      |
+    +-------------+--------------------------------------------------+
+    | *Percentile | A latency statistic expressing that the          |
+    | Latency*    | specified fraction of all measured latency       |
+    |             | samples fall at or below the reported value.     |
+    |             | Denoted Pxx (e.g., P50, P95, P99, P99.9).  Tail  |
+    |             | latency (P99 and above) is especially relevant   |
+    |             | for AI fabric benchmarking because SLO           |
+    |             | violations are determined by worst-case, not     |
+    |             | median, performance.                             |
+    +-------------+--------------------------------------------------+
 
                    Table 1: General Benchmarking Terms
 
@@ -284,8 +284,8 @@ Table of Contents
     | *AllGather*     | A collective in which each participant        |
     |                 | contributes a shard of a tensor and all       |
     |                 | participants receive the concatenation of all |
-    |                 | shards.  Used in tensor-parallel (Megatron-   |
-    |                 | style) layers to reconstruct distributed      |
+    |                 | shards.  Used in tensor-parallel layer        |
+    |                 | sharding to reconstruct distributed           |
     |                 | activations or parameters.                    |
     +-----------------+-----------------------------------------------+
     | *ReduceScatter* | A collective combining an element-wise        |
@@ -307,10 +307,12 @@ Table of Contents
     | Algorithm*      | algorithm structured as a logical ring of     |
     |                 | participants.  Each participant sends to its  |
     |                 | right neighbor and receives from its left     |
-    |                 | neighbor in 2(N−1) steps.  Bus bandwidth      |
-    |                 | efficiency = 2(N−1)/N, approaching 100% for   |
-    |                 | large N.  Standard baseline for BusBW         |
-    |                 | calculation.                                  |
+    |                 | neighbor in 2(N−1) steps.  Ring AllReduce     |
+    |                 | transfers 2(N−1)/N times the message size per |
+    |                 | accelerator (the AllReduce algo_factor in the |
+    |                 | BusBW definition), approaching 2× for large   |
+    |                 | N, and is bandwidth-optimal.  Standard        |
+    |                 | baseline for BusBW calculation.               |
     +-----------------+-----------------------------------------------+
     | *BusBW*         | The effective data throughput per accelerator |
     |                 | during a collective operation, computed as:   |
@@ -503,8 +505,8 @@ Table of Contents
    |           | supports native packet spraying (RUD), and            |
    |           | integrates multipath load balancing and               |
    |           | congestion control.  Transported over UDP             |
-   |           | destination port 4793 (pending IANA                   |
-   |           | verification).                                        |
+   |           | destination port 4793 (IANA registration              |
+   |           | pending).                                             |
    +-----------+-------------------------------------------------------+
    | *PDC*     | Packet Delivery Context.  The ephemeral,              |
    |           | lightweight transport endpoint in UET, analogous      |
@@ -573,6 +575,13 @@ Table of Contents
    |           | receiver to detect loss and initiate selective        |
    |           | retransmission more rapidly, reducing bandwidth       |
    |           | waste versus silent drop.                             |
+   +-----------+-------------------------------------------------------+
+   | *PRI*     | Packet Rate Improvement.  An optional UEC link-       |
+   |           | layer feature that compresses redundant Ethernet      |
+   |           | and IP header fields on a link, reducing per-packet   |
+   |           | overhead and increasing the effective packet rate,    |
+   |           | particularly for the small packets characteristic     |
+   |           | of AI/HPC synchronization traffic.                    |
    +-----------+-------------------------------------------------------+
    | *CBFC*    | Credit-Based Flow Control.  An optional UEC link-     |
    |           | layer buffer management mechanism using explicit      |
@@ -678,11 +687,10 @@ Table of Contents
    |           | An end-to-end congestion control algorithm for        |
    |           | RoCEv2 flows, combining ECN marking at                |
    |           | congested switches with rate-based sender             |
-   |           | reduction using an AIMD scheme.  Note: PFC            |
-   |           | serves as a separate, orthogonal backstop to          |
-   |           | prevent packet loss during DCQCN convergence;         |
-   |           | PFC is *not* a component of the DCQCN algorithm       |
-   |           | itself.                                               |
+   |           | reduction using an AIMD scheme.  PFC and DCQCN        |
+   |           | are distinct mechanisms.  PFC prevents packet         |
+   |           | loss during DCQCN convergence; it is *not* part       |
+   |           | of the DCQCN algorithm.                               |
    +-----------+-------------------------------------------------------+
    | *ECN      | The fraction of packets (expressed as a               |
    | Marking   | percentage) that are marked with the CE               |
@@ -770,123 +778,124 @@ Table of Contents
    infrastructure components referenced in the companion methodology
    documents.
 
-     +===================+===========================================+
-     | Term              | Definition                                |
-     +===================+===========================================+
-     | *Fabric DUT       | The precise measurement boundary for BMWG |
-     | Boundary*         | AI fabric benchmarks.  Defined as the NIC |
-     |                   | Ethernet port (transmit side at source,   |
-     |                   | receive side at destination).  All        |
-     |                   | benchmarked metrics (throughput, latency, |
-     |                   | loss, congestion) are measured at or      |
-     |                   | between NIC Ethernet ports.  Intra-node   |
-     |                   | segments (NVLink, PCIe Gen4/5, CXL) are   |
-     |                   | outside the DUT boundary and MUST NOT be  |
-     |                   | included in fabric benchmark results      |
-     |                   | without explicit labelling as a separate  |
-     |                   | measurement component.                    |
-     +-------------------+-------------------------------------------+
-     | *Intra-Node       | The latency and bandwidth consumed by     |
-     | Transfer          | data movement within a single server      |
-     | Overhead*         | node: specifically, the GPU-to-NIC path   |
-     |                   | via PCIe or CXL, and GPU-to-GPU           |
-     |                   | communication via NVLink.  Intra-node     |
-     |                   | transfer overhead is a contextual         |
-     |                   | measurement reported alongside fabric     |
-     |                   | benchmarks in end-to-end decomposition    |
-     |                   | tests but is not itself the benchmarked   |
-     |                   | entity in any test in this document       |
-     +-------------------+-------------------------------------------+
-     | *Clos / Fat-Tree  | A multi-stage switch topology providing   |
-     | Topology*         | non-blocking or oversubscribed            |
-     |                   | connectivity between all leaf-to-leaf     |
-     |                   | pairs.  In AI fabric deployments, a two-  |
-     |                   | tier (leaf-spine) or three-tier (leaf-    |
-     |                   | spine-superspine) Clos is standard.  Full |
-     |                   | bisection bandwidth (1:1) is the target   |
-     |                   | for training fabrics; 2:1 or 4:1          |
-     |                   | oversubscription may be acceptable for    |
-     |                   | inference fabrics.                        |
-     +-------------------+-------------------------------------------+
-     | *Rail-Optimized   | A topology in which the NIC ports of each |
-     | Topology*         | server are distributed across multiple    |
-     |                   | ToR switches (one NIC port per switch),   |
-     |                   | such that collective traffic between      |
-     |                   | adjacent servers traverses different      |
-     |                   | physical paths.  Minimizes switch-to-     |
-     |                   | switch traffic during ring AllReduce,     |
-     |                   | maximizing effective BusBW.  Requires     |
-     |                   | ECMP-aware collective placement.          |
-     +-------------------+-------------------------------------------+
-     | *Bisection        | The aggregate bandwidth across the        |
-     | Bandwidth*        | minimum cut that divides the fabric into  |
-     |                   | two equal halves.  Non-blocking fabrics   |
-     |                   | provide bisection bandwidth equal to half |
-     |                   | the total edge (server-facing) bandwidth. |
-     |                   | Limits worst-case all-to-all              |
-     |                   | communication throughput.                 |
-     +-------------------+-------------------------------------------+
-     | *Oversubscription | The ratio of total edge (server-facing)   |
-     | Ratio*            | bandwidth to total bisection bandwidth in |
-     |                   | a Clos fabric.  A 1:1 ratio is non-       |
-     |                   | blocking; higher ratios (e.g., 2:1, 4:1)  |
-     |                   | reduce fabric cost but may bottleneck     |
-     |                   | all-to-all and AllReduce patterns when    |
-     |                   | all server ports are active               |
-     |                   | simultaneously.                           |
-     +-------------------+-------------------------------------------+
-     | *ToR Switch*      | Top-of-Rack switch.  The first-hop        |
-     |                   | aggregation switch connecting accelerator |
-     |                   | servers in a rack to the spine layer of   |
-     |                   | the fabric.  In rail-optimized            |
-     |                   | topologies, multiple ToR switches serve a |
-     |                   | single rack, with each server's NICs      |
-     |                   | distributed across ToRs.                  |
-     +-------------------+-------------------------------------------+
-     | *Spine /          | Intermediate and top-layer switches in a  |
-     | Superspine*       | multi-tier Clos fabric, providing inter-  |
-     |                   | rack and inter-pod connectivity           |
-     |                   | respectively.  Spine switches aggregate   |
-     |                   | multiple ToR switches; superspine         |
-     |                   | switches aggregate multiple spine pods.   |
-     +-------------------+-------------------------------------------+
-     | *NIC*             | Network Interface Controller.  The        |
-     |                   | hardware device providing network         |
-     |                   | connectivity for an accelerator host.  AI |
-     |                   | fabric NICs support RDMA (RoCEv2 or UET), |
-     |                   | hardware offload for collective           |
-     |                   | operations, and, optionally, GPU-         |
-     |                   | Initiated Networking (GIN).  NIC model    |
-     |                   | and firmware version *MUST* be documented |
-     |                   | in all benchmark reports.                 |
-     +-------------------+-------------------------------------------+
-     | *Buffer           | The instantaneous or time-averaged fill   |
-     | Occupancy*        | level of a switch port's packet buffer,   |
-     |                   | expressed in bytes or as a fraction of    |
-     |                   | total buffer capacity.  Elevated          |
-     |                   | sustained buffer occupancy indicates      |
-     |                   | congestion.  P99 buffer occupancy is a    |
-     |                   | Fabric Health Indicator in the companion  |
-     |                   | methodology documents.                    |
-     +-------------------+-------------------------------------------+
-     | *Zero-Impact      | Sub-microsecond automatic path            |
-     | Failover*         | convergence upon a link or switch failure |
-     |                   | resulting in no measurable increase to    |
-     |                   | JCT or TTFT.  Requires pre-programmed     |
-     |                   | alternate paths and hardware-level fast   |
-     |                   | reroute (FRR) with sub-microsecond        |
-     |                   | detection, not relying on routing         |
-     |                   | protocol convergence.                     |
-     +-------------------+-------------------------------------------+
-     | *Link             | The fraction of the nominal link capacity |
-     | Utilization*      | actually used for data transmission over  |
-     |                   | a measurement interval, expressed as a    |
-     |                   | percentage.  Reported as mean, P95, and   |
-     |                   | P99 per link.  High asymmetric link       |
-     |                   | utilization (low average but high peak)   |
-     |                   | is characteristic of bursty AI inference  |
-     |                   | traffic.                                  |
-     +-------------------+-------------------------------------------+
+    +===================+=============================================+
+    | Term              | Definition                                  |
+    +===================+=============================================+
+    | *Fabric DUT       | The precise measurement boundary for BMWG   |
+    | Boundary*         | AI fabric benchmarks.  Defined as the NIC   |
+    |                   | Ethernet port (transmit side at source,     |
+    |                   | receive side at destination).  All          |
+    |                   | benchmarked metrics (throughput, latency,   |
+    |                   | loss, congestion) are measured at or        |
+    |                   | between NIC Ethernet ports.  Intra-node     |
+    |                   | segments (NVLink, PCIe Gen4/5, CXL) are     |
+    |                   | outside the DUT boundary and MUST NOT be    |
+    |                   | included in fabric benchmark results        |
+    |                   | without explicit labelling as a separate    |
+    |                   | measurement component.                      |
+    +-------------------+---------------------------------------------+
+    | *Intra-Node       | The latency and bandwidth consumed by data  |
+    | Transfer          | movement within a single server node:       |
+    | Overhead*         | specifically, the GPU-to-NIC path via PCIe  |
+    |                   | or CXL, and GPU-to-GPU communication via    |
+    |                   | NVLink.  Intra-node transfer overhead is a  |
+    |                   | contextual measurement reported alongside   |
+    |                   | fabric benchmarks in end-to-end             |
+    |                   | decomposition tests but is not itself the   |
+    |                   | benchmarked entity in any test in this      |
+    |                   | document                                    |
+    +-------------------+---------------------------------------------+
+    | *Clos / Fat-Tree  | A multi-stage switch topology providing     |
+    | Topology*         | non-blocking or oversubscribed connectivity |
+    |                   | between all leaf-to-leaf pairs.  In AI      |
+    |                   | fabric deployments, a two-tier (leaf-spine) |
+    |                   | or three-tier (leaf-spine-superspine) Clos  |
+    |                   | is standard.  Full bisection bandwidth      |
+    |                   | (1:1) is the target for training fabrics;   |
+    |                   | 2:1 or 4:1 oversubscription may be          |
+    |                   | acceptable for inference fabrics.           |
+    +-------------------+---------------------------------------------+
+    | *Rail-Optimized   | A topology in which the NIC ports of each   |
+    | Topology*         | server are distributed across multiple ToR  |
+    |                   | switches (one NIC port per switch), such    |
+    |                   | that collective traffic between adjacent    |
+    |                   | servers traverses different physical paths. |
+    |                   | Minimizes switch-to-switch traffic during   |
+    |                   | ring AllReduce, maximizing effective BusBW. |
+    |                   | Requires ECMP-aware collective placement.   |
+    +-------------------+---------------------------------------------+
+    | *Bisection        | The aggregate bandwidth across the minimum  |
+    | Bandwidth*        | cut that divides the fabric into two equal  |
+    |                   | halves.  Non-blocking fabrics provide       |
+    |                   | bisection bandwidth equal to half the total |
+    |                   | edge (server-facing) bandwidth.  Limits     |
+    |                   | worst-case all-to-all communication         |
+    |                   | throughput.                                 |
+    +-------------------+---------------------------------------------+
+    | *Oversubscription | The ratio of total edge (server-facing)     |
+    | Ratio*            | bandwidth to total bisection bandwidth in a |
+    |                   | Clos fabric.  A 1:1 ratio is non-blocking;  |
+    |                   | higher ratios (e.g., 2:1, 4:1) reduce       |
+    |                   | fabric cost but may bottleneck all-to-all   |
+    |                   | and AllReduce patterns when all server      |
+    |                   | ports are active simultaneously.            |
+    +-------------------+---------------------------------------------+
+    | *ToR Switch*      | Top-of-Rack switch.  The first-hop          |
+    |                   | aggregation switch connecting accelerator   |
+    |                   | servers in a rack to the spine layer of the |
+    |                   | fabric.  In rail-optimized topologies,      |
+    |                   | multiple ToR switches serve a single rack,  |
+    |                   | with each server's NICs distributed across  |
+    |                   | ToRs.                                       |
+    +-------------------+---------------------------------------------+
+    | *Spine /          | Intermediate and top-layer switches in a    |
+    | Superspine*       | multi-tier Clos fabric, providing inter-    |
+    |                   | rack and inter-pod connectivity             |
+    |                   | respectively.  Spine switches aggregate     |
+    |                   | multiple ToR switches; superspine switches  |
+    |                   | aggregate multiple spine pods.              |
+    +-------------------+---------------------------------------------+
+    | *NIC*             | Network Interface Controller.  The hardware |
+    |                   | device providing network connectivity for   |
+    |                   | an accelerator host.  AI fabric NICs        |
+    |                   | support RDMA (RoCEv2 or UET), hardware      |
+    |                   | offload for collective operations, and,     |
+    |                   | optionally, GPU-Initiated Networking (GIN). |
+    |                   | NIC model and firmware version *MUST* be    |
+    |                   | documented in all benchmark reports.        |
+    +-------------------+---------------------------------------------+
+    | *Buffer           | The instantaneous or time-averaged fill     |
+    | Occupancy*        | level of a switch port's packet buffer,     |
+    |                   | expressed in bytes or as a fraction of      |
+    |                   | total buffer capacity.  Elevated sustained  |
+    |                   | buffer occupancy indicates congestion.  P99 |
+    |                   | buffer occupancy is a Fabric Health         |
+    |                   | Indicator in the companion methodology      |
+    |                   | documents.                                  |
+    +-------------------+---------------------------------------------+
+    | *Zero-Impact      | A failover event during which no            |
+    | Failover*         | statistically significant increase in JCT   |
+    |                   | or TTFT is observed, within the measurement |
+    |                   | tolerance specified by the companion        |
+    |                   | methodology.  The term denotes the measured |
+    |                   | outcome, not a specific mechanism.          |
+    |                   |                                             |
+    |                   | NOTE: This outcome is typically achieved    |
+    |                   | via pre-programmed alternate paths and      |
+    |                   | hardware-level fast reroute (FRR) with sub- |
+    |                   | microsecond detection, rather than routing- |
+    |                   | protocol convergence.  The mechanism is     |
+    |                   | informative and not part of the definition. |
+    +-------------------+---------------------------------------------+
+    | *Link             | The fraction of the nominal link capacity   |
+    | Utilization*      | actually used for data transmission over a  |
+    |                   | measurement interval, expressed as a        |
+    |                   | percentage.  Reported as mean, P95, and P99 |
+    |                   | per link.  High asymmetric link utilization |
+    |                   | (low average but high peak) is              |
+    |                   | characteristic of bursty AI inference       |
+    |                   | traffic.                                    |
+    +-------------------+---------------------------------------------+
 
              Table 9: Fabric Topology and Infrastructure Terms
 
@@ -896,57 +905,70 @@ Table of Contents
    and are used normatively in
    [I-D.calabria-bmwg-ai-fabric-training-bench].
 
-    +==================+==============================================+
-    | Term             | Definition                                   |
-    +==================+==============================================+
-    | *JCT*            | Job Completion Time.  The wall-clock elapsed |
-    |                  | time from the start of a training job (or    |
-    |                  | benchmark iteration) until all participating |
-    |                  | accelerators complete their work, inclusive  |
-    |                  | of all forward pass, backward pass, and      |
-    |                  | collective communication phases.  JCT is the |
-    |                  | primary end-to-end training efficiency KPI.  |
-    +------------------+----------------------------------------------+
-    | *Roofline JCT*   | The theoretical minimum JCT assuming perfect |
-    |                  | (zero-contention, zero-queuing) network      |
-    |                  | behavior: Roofline JCT = computation_time +  |
-    |                  | serialization_delay, where                   |
-    |                  | serialization_delay = message_size /         |
-    |                  | link_rate.  Provides a reference for         |
-    |                  | evaluating fabric overhead.                  |
-    +------------------+----------------------------------------------+
-    | *JCT Ratio*      | The ratio of measured JCT to Roofline JCT.   |
-    |                  | A value of 1.0 indicates no network-induced  |
-    |                  | overhead.  Values > 1.0 quantify fabric      |
-    |                  | inefficiency: JCT Ratio = JCT_measured /     |
-    |                  | JCT_roofline.  The JCT Ratio is the primary  |
-    |                  | comparative metric for AI training fabric    |
-    |                  | benchmarking.                                |
-    +------------------+----------------------------------------------+
-    | *Gradient        | The AllReduce collective operation performed |
-    | Synchronization* | after the backward pass of each training     |
-    |                  | step to sum the locally computed gradients   |
-    |                  | across all data-parallel replicas.  The      |
-    |                  | dominant communication event in data-        |
-    |                  | parallel training, occurring once per        |
-    |                  | training step per layer.                     |
-    +------------------+----------------------------------------------+
-    | *Step Time*      | The wall-clock duration of a single training |
-    |                  | iteration (forward pass + backward pass +    |
-    |                  | gradient synchronization + optimizer step).  |
-    |                  | Step time = computation time + communication |
-    |                  | time, where the communication time is        |
-    |                  | dominated by the AllReduce collective.       |
-    +------------------+----------------------------------------------+
-    | *Soak Test*      | A sustained-load test run for an extended    |
-    |                  | period (minimum 24 hours for stability       |
-    |                  | evaluation) at a defined offered load        |
-    |                  | fraction (e.g., 70% or 90% of maximum        |
-    |                  | throughput).  Soak tests detect buffer       |
-    |                  | leaks, ECMP imbalance drift, PFC storm       |
-    |                  | initiation, and long-tail error accumulation |
-    |                  | not visible in short-duration tests.         |
-    +------------------+----------------------------------------------+
+   +==================+================================================+
+   | Term             | Definition                                     |
+   +==================+================================================+
+   | *JCT*            | Job Completion Time.  The wall-clock           |
+   |                  | elapsed time from the start of a training      |
+   |                  | job (or benchmark iteration) until all         |
+   |                  | participating accelerators complete their      |
+   |                  | work, inclusive of all forward pass,           |
+   |                  | backward pass, and collective communication    |
+   |                  | phases.  JCT is the primary end-to-end         |
+   |                  | training efficiency KPI.                       |
+   +------------------+------------------------------------------------+
+   | *Roofline JCT*   | The theoretical minimum JCT under ideal        |
+   |                  | network conditions, namely: load balancing     |
+   |                  | across all paths, zero contention and          |
+   |                  | queuing, no retransmissions, and no fabric     |
+   |                  | failures.  Computed as Roofline JCT =          |
+   |                  | computation_time + serialization_delay,        |
+   |                  | where serialization_delay = (8 × S ×           |
+   |                  | algo_factor) / B_acc, with S = message size    |
+   |                  | in bytes, algo_factor = the fixed per-         |
+   |                  | collective normalization constant from the     |
+   |                  | BusBW definition, and B_acc = aggregate        |
+   |                  | per-accelerator NIC line rate in bits/         |
+   |                  | second; the factor 8 converts bytes to         |
+   |                  | bits.  Stating these assumptions explicitly    |
+   |                  | ensures the reference is reproducible          |
+   |                  | across implementations.  Provides a            |
+   |                  | baseline for evaluating fabric overhead.       |
+   +------------------+------------------------------------------------+
+   | *JCT Ratio*      | The ratio of measured JCT to Roofline JCT.     |
+   |                  | A value of 1.0 indicates no network-induced    |
+   |                  | overhead.  Values > 1.0 quantify fabric        |
+   |                  | inefficiency: JCT Ratio = JCT_measured /       |
+   |                  | JCT_roofline.  The JCT Ratio is the primary    |
+   |                  | comparative metric for AI training fabric      |
+   |                  | benchmarking.                                  |
+   +------------------+------------------------------------------------+
+   | *Gradient        | The AllReduce collective operation             |
+   | Synchronization* | performed after the backward pass of each      |
+   |                  | training step to sum the locally computed      |
+   |                  | gradients across all data-parallel             |
+   |                  | replicas.  The dominant communication event    |
+   |                  | in data-parallel training, occurring once      |
+   |                  | per training step per layer.                   |
+   +------------------+------------------------------------------------+
+   | *Step Time*      | The wall-clock duration of a single            |
+   |                  | training iteration (forward pass + backward    |
+   |                  | pass + gradient synchronization + optimizer    |
+   |                  | step).  Step time = computation time +         |
+   |                  | communication time, where the communication    |
+   |                  | time is dominated by the AllReduce             |
+   |                  | collective.                                    |
+   +------------------+------------------------------------------------+
+   | *Soak Test*      | A sustained-load test run for an extended      |
+   |                  | period (minimum 24 hours for stability         |
+   |                  | evaluation) at a defined offered load          |
+   |                  | fraction (e.g., 70% or 90% of maximum          |
+   |                  | throughput).  Soak tests detect buffer         |
+   |                  | leaks, ECMP imbalance drift, PFC storm         |
+   |                  | initiation, and long-tail error                |
+   |                  | accumulation not visible in short-duration     |
+   |                  | tests.                                         |
+   +------------------+------------------------------------------------+
 
                      Table 10: Training-Specific Terms
 
@@ -967,14 +989,18 @@ Table of Contents
    |                  | optional KV cache transfer (in                 |
    |                  | disaggregated architectures), and the          |
    |                  | initial decode step.  Interactive serving      |
-   |                  | target: TTFT < 500 ms at P99.                  |
+   |                  | deployments typically target TTFT < 500 ms     |
+   |                  | at P99 (informative; not a requirement of      |
+   |                  | this document).                                |
    +------------------+------------------------------------------------+
    | *ITL*            | Inter-Token Latency.  The elapsed time         |
    |                  | between successive output tokens during the    |
    |                  | autoregressive decode phase.  Measured at      |
    |                  | P50, P95, P99, and P99.9 to characterize       |
    |                  | tail latency behavior.  Interactive serving    |
-   |                  | target: ITL < 50 ms at P99.                    |
+   |                  | deployments typically target ITL < 50 ms at    |
+   |                  | P99 (informative; not a requirement of this    |
+   |                  | document).                                     |
    +------------------+------------------------------------------------+
    | *TPS*            | Tokens Per Second.  Aggregate throughput of    |
    |                  | the inference serving system, measured as      |
@@ -989,10 +1015,14 @@ Table of Contents
    |                  | computed during the prefill phase and          |
    |                  | reused during each decode step to avoid        |
    |                  | redundant recomputation.  KV cache size        |
-   |                  | scales with: layers × attention_heads ×        |
-   |                  | head_dim × sequence_length × precision.        |
-   |                  | The attention head configuration *MUST* be     |
-   |                  | reported in all benchmark results.             |
+   |                  | scales with: layers × KV_attention_heads       |
+   |                  | (H_kv) × head_dim × sequence_length ×          |
+   |                  | precision.  Under GQA/MQA the number of KV     |
+   |                  | heads (H_kv) differs from the total number     |
+   |                  | of attention heads (see the S_KV               |
+   |                  | definition).  The attention head               |
+   |                  | configuration *MUST* be reported in all        |
+   |                  | benchmark results.                             |
    +------------------+------------------------------------------------+
    | *Prefill Phase*  | The compute-bound phase of LLM inference in    |
    |                  | which the entire input prompt is processed     |
@@ -1209,18 +1239,17 @@ Table of Contents
    |            | that complete without preemption, eviction, or      |
    |            | error.  Corresponds to TPS_output over successfully |
    |            | completed requests only.  Units: tokens/second.     |
-   |            | The two planes MUST NOT be conflated.  KV_BW        |
-   |            | measures Fabric_Goodput; it does not measure        |
-   |            | Inference_Goodput.                                  |
+   |            | The two planes MUST NOT be conflated.               |
+   |            | KV_xfer_bandwidth measures Fabric_Goodput; it does  |
+   |            | not measure Inference_Goodput.                      |
    +------------+-----------------------------------------------------+
-   | *Zero      | time, excluding retransmitted packets, protocol.  A |
-   | Packet     | test acceptance criterion requiring that no packets |
-   | Loss*      | are dropped by the DUT during the measurement       |
-   |            | interval.  For RoCEv2 and UET transports, zero      |
-   |            | packet loss is the target operating condition.  The |
-   |            | binary search procedure in the companion            |
-   |            | methodology documents determines the maximum        |
-   |            | offered load satisfying this criterion.             |
+   | *Zero      | A test acceptance criterion requiring that no       |
+   | Packet     | packets are dropped by the DUT during the           |
+   | Loss*      | measurement interval.  For RoCEv2 and UET           |
+   |            | transports, zero packet loss is the target          |
+   |            | operating condition.  The binary search procedure   |
+   |            | in the companion methodology documents determines   |
+   |            | the maximum offered load satisfying this criterion. |
    +------------+-----------------------------------------------------+
 
                     Table 13: KPI Classification Terms
@@ -1282,15 +1311,17 @@ Table of Contents
     |           | for AI-specific traffic patterns and test           |
     |           | durations.                                          |
     +-----------+-----------------------------------------------------+
-    | *RFC      | "Data Center Benchmarking Terminology" (Bitar et    |
-    | 8238*     | al., 2017).  Extends RFC 1242 with data center-     |
-    |           | relevant terms including forwarding table scaling,  |
-    |           | congestion, and VM/SDN.  Incast, ECN, and buffer    |
-    |           | occupancy concepts in this document align with RFC  |
-    |           | 8238 definitions.                                   |
+    | *RFC      | "Data Center Benchmarking Terminology" (Avramov &   |
+    | 8238*     | Rapp, 2017).  Extends RFC 1242 with data-center     |
+    |           | benchmarking terminology, including latency and     |
+    |           | jitter definitions, physical-layer calibration,     |
+    |           | line rate, buffering, microburst, and application   |
+    |           | throughput.  Incast, ECN, and buffer occupancy      |
+    |           | concepts in this document align with RFC 8238       |
+    |           | definitions.                                        |
     +-----------+-----------------------------------------------------+
-    | *RFC      | "Data Center Benchmarking Methodology" (Bitar et    |
-    | 8239*     | al., 2017).  Defines test methodologies for data    |
+    | *RFC      | "Data Center Benchmarking Methodology" (Avramov &   |
+    | 8239*     | Rapp, 2017).  Defines test methodologies for data   |
     |           | center network functions including incast, ECN      |
     |           | marking, and lossless behavior.  The AI fabric      |
     |           | companion methodology documents extend RFC 8239 for |
@@ -1311,9 +1342,10 @@ Table of Contents
 
    This document is a terminology document and has no IANA actions.
 
-   Note that the UET UDP destination port 4793 referenced in Table 4 is
-   expected to be assigned through the Ultra Ethernet Specification
-   [UEC-1.0]; this document does not request any IANA assignment.
+   Note that IANA registration of the UET UDP destination port 4793
+   referenced in Table 4, specified in the Ultra Ethernet Specification
+   [UEC-1.0], is pending; this document does not request any IANA
+   assignment.
 
 13.  Security Considerations
 
@@ -1334,9 +1366,9 @@ Table of Contents
    traffic into a production network or misroute traffic to the test
    management network.  This isolation requirement is particularly
    important for AI fabric benchmarking because the lossless transport
-   modes referenced in Table 7 (PFC, DCQCN, CBFC) propagate congestion
-   hop-by-hop and can extend the blast radius of a misconfigured test
-   beyond the immediate DUT.
+   modes referenced in Table 7 (PFC, DCQCN) and in Table 5 (CBFC)
+   propagate congestion hop-by-hop and can extend the blast radius of a
+   misconfigured test beyond the immediate DUT.
 
    Benchmarking is performed on a "black-box" basis, relying solely on
    measurements observable external to the DUT or SUT as defined in
@@ -1366,111 +1398,162 @@ Acronyms
    expanded on first use within that document and are not duplicated
    here.
 
-        +=========+===============================================+
-        | Acronym | Expansion                                     |
-        +=========+===============================================+
-        | AI      | Artificial Intelligence                       |
-        +---------+-----------------------------------------------+
-        | API     | Application Programming Interface             |
-        +---------+-----------------------------------------------+
-        | ASIC    | Application-Specific Integrated Circuit       |
-        +---------+-----------------------------------------------+
-        | BGP     | Border Gateway Protocol                       |
-        +---------+-----------------------------------------------+
-        | BTH     | Base Transport Header                         |
-        +---------+-----------------------------------------------+
-        | BusBW   | Bus Bandwidth                                 |
-        +---------+-----------------------------------------------+
-        | CBFC    | Credit-Based Flow Control                     |
-        +---------+-----------------------------------------------+
-        | CCL     | Collective Communications Library             |
-        +---------+-----------------------------------------------+
-        | CDF     | Cumulative Distribution Function              |
-        +---------+-----------------------------------------------+
-        | CMS     | Congestion Management Sub-layer (UET)         |
-        +---------+-----------------------------------------------+
-        | CRC     | Cyclic Redundancy Check                       |
-        +---------+-----------------------------------------------+
-        | CV      | Coefficient of Variation                      |
-        +---------+-----------------------------------------------+
-        | DCQCN   | Data Center Quantized Congestion Notification |
-        +---------+-----------------------------------------------+
-        | DLB     | Dynamic Load Balancing                        |
-        +---------+-----------------------------------------------+
-        | DMA     | Direct Memory Access                          |
-        +---------+-----------------------------------------------+
-        | DSCP    | Differentiated Services Code Point            |
-        +---------+-----------------------------------------------+
-        | ECMP    | Equal-Cost Multi-Path                         |
-        +---------+-----------------------------------------------+
-        | ECN     | Explicit Congestion Notification              |
-        +---------+-----------------------------------------------+
-        | EP      | Expert Parallelism                            |
-        +---------+-----------------------------------------------+
-        | HBM     | High Bandwidth Memory                         |
-        +---------+-----------------------------------------------+
-        | HOL     | Head-of-Line                                  |
-        +---------+-----------------------------------------------+
-        | HPC     | High-Performance Computing                    |
-        +---------+-----------------------------------------------+
-        | ICRC    | Invariant CRC                                 |
-        +---------+-----------------------------------------------+
-        | INT     | In-band Network Telemetry                     |
-        +---------+-----------------------------------------------+
-        | JCT     | Job Completion Time                           |
-        +---------+-----------------------------------------------+
-        | MAC     | Media Access Control                          |
-        +---------+-----------------------------------------------+
-        | ML      | Machine Learning                              |
-        +---------+-----------------------------------------------+
-        | MoE     | Mixture of Experts                            |
-        +---------+-----------------------------------------------+
-        | MTU     | Maximum Transmission Unit                     |
-        +---------+-----------------------------------------------+
-        | NIC     | Network Interface Controller                  |
-        +---------+-----------------------------------------------+
-        | NOS     | Network Operating System                      |
-        +---------+-----------------------------------------------+
-        | OFED    | OpenFabrics Enterprise Distribution           |
-        +---------+-----------------------------------------------+
-        | OOO     | Out-of-Order                                  |
-        +---------+-----------------------------------------------+
-        | OSPF    | Open Shortest Path First                      |
-        +---------+-----------------------------------------------+
-        | PDC     | Packet Delivery Context                       |
-        +---------+-----------------------------------------------+
-        | PDS     | Packet Delivery Sub-layer (UET)               |
-        +---------+-----------------------------------------------+
-        | PFC     | Priority Flow Control                         |
-        +---------+-----------------------------------------------+
-        | PSN     | Packet Sequence Number                        |
-        +---------+-----------------------------------------------+
-        | QP      | Queue Pair                                    |
-        +---------+-----------------------------------------------+
-        | RDMA    | Remote Direct Memory Access                   |
-        +---------+-----------------------------------------------+
-        | RoCEv2  | RDMA over Converged Ethernet version 2        |
-        +---------+-----------------------------------------------+
-        | RTT     | Round-Trip Time                               |
-        +---------+-----------------------------------------------+
-        | SES     | Semantic Sub-layer (UET)                      |
-        +---------+-----------------------------------------------+
-        | SUT     | System Under Test                             |
-        +---------+-----------------------------------------------+
-        | TCAM    | Ternary Content-Addressable Memory            |
-        +---------+-----------------------------------------------+
-        | TSS     | Transport Security Sub-layer (UET)            |
-        +---------+-----------------------------------------------+
-        | UEC     | Ultra Ethernet Consortium                     |
-        +---------+-----------------------------------------------+
-        | UET     | Ultra Ethernet Transport                      |
-        +---------+-----------------------------------------------+
-        | VLAN    | Virtual LAN                                   |
-        +---------+-----------------------------------------------+
-        | VOQ     | Virtual Output Queue                          |
-        +---------+-----------------------------------------------+
-        | XPU     | accelerator processing unit (generic)         |
-        +---------+-----------------------------------------------+
+    +=========+=======================================================+
+    | Acronym | Expansion                                             |
+    +=========+=======================================================+
+    | AI      | Artificial Intelligence                               |
+    +---------+-------------------------------------------------------+
+    | AIMD    | Additive Increase Multiplicative Decrease             |
+    +---------+-------------------------------------------------------+
+    | API     | Application Programming Interface                     |
+    +---------+-------------------------------------------------------+
+    | ASIC    | Application-Specific Integrated Circuit               |
+    +---------+-------------------------------------------------------+
+    | BGP     | Border Gateway Protocol                               |
+    +---------+-------------------------------------------------------+
+    | BTH     | Base Transport Header                                 |
+    +---------+-------------------------------------------------------+
+    | BusBW   | Bus Bandwidth                                         |
+    +---------+-------------------------------------------------------+
+    | CBFC    | Credit-Based Flow Control                             |
+    +---------+-------------------------------------------------------+
+    | CCL     | Collective Communication Library                      |
+    +---------+-------------------------------------------------------+
+    | CDF     | Cumulative Distribution Function                      |
+    +---------+-------------------------------------------------------+
+    | CMS     | Congestion Management Sub-layer (UET)                 |
+    +---------+-------------------------------------------------------+
+    | CRC     | Cyclic Redundancy Check                               |
+    +---------+-------------------------------------------------------+
+    | CV      | Coefficient of Variation                              |
+    +---------+-------------------------------------------------------+
+    | DCQCN   | Data Center Quantized Congestion Notification         |
+    +---------+-------------------------------------------------------+
+    | DLB     | Dynamic Load Balancing                                |
+    +---------+-------------------------------------------------------+
+    | DMA     | Direct Memory Access                                  |
+    +---------+-------------------------------------------------------+
+    | DP      | Data Parallelism                                      |
+    +---------+-------------------------------------------------------+
+    | DSCP    | Differentiated Services Code Point                    |
+    +---------+-------------------------------------------------------+
+    | DUT     | Device Under Test                                     |
+    +---------+-------------------------------------------------------+
+    | ECMP    | Equal-Cost Multi-Path                                 |
+    +---------+-------------------------------------------------------+
+    | ECN     | Explicit Congestion Notification                      |
+    +---------+-------------------------------------------------------+
+    | EP      | Expert Parallelism                                    |
+    +---------+-------------------------------------------------------+
+    | FEC     | Forward Error Correction                              |
+    +---------+-------------------------------------------------------+
+    | FHI     | Fabric Health Indicator                               |
+    +---------+-------------------------------------------------------+
+    | GIN     | GPU-Initiated Networking                              |
+    +---------+-------------------------------------------------------+
+    | GQA     | Grouped-Query Attention                               |
+    +---------+-------------------------------------------------------+
+    | HBM     | High Bandwidth Memory                                 |
+    +---------+-------------------------------------------------------+
+    | HOL     | Head-of-Line                                          |
+    +---------+-------------------------------------------------------+
+    | HPC     | High-Performance Computing                            |
+    +---------+-------------------------------------------------------+
+    | ICRC    | Invariant CRC                                         |
+    +---------+-------------------------------------------------------+
+    | INT     | In-band Network Telemetry                             |
+    +---------+-------------------------------------------------------+
+    | ITL     | Inter-Token Latency                                   |
+    +---------+-------------------------------------------------------+
+    | JCT     | Job Completion Time                                   |
+    +---------+-------------------------------------------------------+
+    | JFI     | Jain's Fairness Index                                 |
+    +---------+-------------------------------------------------------+
+    | KPI     | Key Performance Indicator                             |
+    +---------+-------------------------------------------------------+
+    | KVCXL   | KV Cache Transfer Library                             |
+    +---------+-------------------------------------------------------+
+    | LLR     | Link Layer Retry                                      |
+    +---------+-------------------------------------------------------+
+    | MAC     | Media Access Control                                  |
+    +---------+-------------------------------------------------------+
+    | ML      | Machine Learning                                      |
+    +---------+-------------------------------------------------------+
+    | MMR     | Max-Mean Ratio                                        |
+    +---------+-------------------------------------------------------+
+    | MoE     | Mixture of Experts                                    |
+    +---------+-------------------------------------------------------+
+    | MQA     | Multi-Query Attention                                 |
+    +---------+-------------------------------------------------------+
+    | MTU     | Maximum Transmission Unit                             |
+    +---------+-------------------------------------------------------+
+    | NIC     | Network Interface Controller                          |
+    +---------+-------------------------------------------------------+
+    | NOS     | Network Operating System                              |
+    +---------+-------------------------------------------------------+
+    | OFED    | OpenFabrics Enterprise Distribution                   |
+    +---------+-------------------------------------------------------+
+    | OOO     | Out-of-Order                                          |
+    +---------+-------------------------------------------------------+
+    | OSPF    | Open Shortest Path First                              |
+    +---------+-------------------------------------------------------+
+    | PDC     | Packet Delivery Context                               |
+    +---------+-------------------------------------------------------+
+    | PDS     | Packet Delivery Sub-layer (UET)                       |
+    +---------+-------------------------------------------------------+
+    | PFC     | Priority Flow Control                                 |
+    +---------+-------------------------------------------------------+
+    | PP      | Pipeline Parallelism                                  |
+    +---------+-------------------------------------------------------+
+    | PRI     | Packet Rate Improvement                               |
+    +---------+-------------------------------------------------------+
+    | PSN     | Packet Sequence Number                                |
+    +---------+-------------------------------------------------------+
+    | QP      | Queue Pair                                            |
+    +---------+-------------------------------------------------------+
+    | RDMA    | Remote Direct Memory Access                           |
+    +---------+-------------------------------------------------------+
+    | RoCEv2  | RDMA over Converged Ethernet version 2                |
+    +---------+-------------------------------------------------------+
+    | ROD     | Reliable Ordered Delivery                             |
+    +---------+-------------------------------------------------------+
+    | RTT     | Round-Trip Time                                       |
+    +---------+-------------------------------------------------------+
+    | RUD     | Reliable Unordered Delivery                           |
+    +---------+-------------------------------------------------------+
+    | RUDI    | Reliable Unordered Delivery for Idempotent operations |
+    +---------+-------------------------------------------------------+
+    | SES     | Semantic Sub-layer (UET)                              |
+    +---------+-------------------------------------------------------+
+    | SLO     | Service Level Objective                               |
+    +---------+-------------------------------------------------------+
+    | SUT     | System Under Test                                     |
+    +---------+-------------------------------------------------------+
+    | TCAM    | Ternary Content-Addressable Memory                    |
+    +---------+-------------------------------------------------------+
+    | TP      | Tensor Parallelism                                    |
+    +---------+-------------------------------------------------------+
+    | TPS     | Tokens Per Second                                     |
+    +---------+-------------------------------------------------------+
+    | TSS     | Transport Security Sub-layer (UET)                    |
+    +---------+-------------------------------------------------------+
+    | TTFT    | Time to First Token                                   |
+    +---------+-------------------------------------------------------+
+    | UEC     | Ultra Ethernet Consortium                             |
+    +---------+-------------------------------------------------------+
+    | UET     | Ultra Ethernet Transport                              |
+    +---------+-------------------------------------------------------+
+    | UUD     | Unreliable Unordered Delivery                         |
+    +---------+-------------------------------------------------------+
+    | VLAN    | Virtual LAN                                           |
+    +---------+-------------------------------------------------------+
+    | VOQ     | Virtual Output Queue                                  |
+    +---------+-------------------------------------------------------+
+    | XPU     | accelerator processing unit (generic)                 |
+    +---------+-------------------------------------------------------+
+    | xPyD    | x Prefill workers : y Decode workers (disaggregated   |
+    |         | serving ratio)                                        |
+    +---------+-------------------------------------------------------+
 
                              Table 16: Acronyms
 
@@ -1478,8 +1561,8 @@ Acknowledgments
 
    This work has benefited from the discussions that occurred during the
    joint IPPM and BMWG meeting and on the BMWG mailing list.  Thanks to
-   Carsten Rossenhoevel, Mohamed Boucadair, and Sowjanya Reddy for
-   valuable review and comments.
+   Carsten Rossenhoevel and Mohamed Boucadair for valuable reviews and
+   comments.
 
 References
 
@@ -1523,28 +1606,20 @@ Normative References
 Informative References
 
    [I-D.calabria-bmwg-ai-fabric-inference-bench]
-              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
-              "Benchmarking Methodology for AI Inference Serving Network
-              Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-inference-bench-01, 21 April 2026,
+              Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
+              Reddy, "Benchmarking Methodology for AI Inference Serving
+              Network Fabrics", Work in Progress, Internet-Draft, draft-
+              calabria-bmwg-ai-fabric-inference-bench-02, 4 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-inference-bench-01>.
-
-   [I-D.calabria-bmwg-ai-fabric-terminology]
-              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
-              "Benchmarking Terminology for AI Network Fabrics", Work in
-              Progress, Internet-Draft, draft-calabria-bmwg-ai-fabric-
-              terminology-01, 21 April 2026,
-              <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-terminology-01>.
+              bmwg-ai-fabric-inference-bench-02>.
 
    [I-D.calabria-bmwg-ai-fabric-training-bench]
-              Calabria, F., Pignataro, C., Wu, Q., and G. Fioccola,
-              "Benchmarking Methodology for AI Training Network
+              Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
+              Reddy, "Benchmarking Methodology for AI Training Network
               Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-training-bench-01, 21 April 2026,
+              calabria-bmwg-ai-fabric-training-bench-02, 4 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-training-bench-01>.
+              bmwg-ai-fabric-training-bench-02>.
 
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
@@ -1572,23 +1647,20 @@ Appendix A: Term Cross-Reference to Companion Documents
     +--------------------+--------------------+-----------------------+
     | Collective         | AllReduce,         | AllToAll, BusBW       |
     | Communication (§3) | AllGather,         |                       |
-    |                    | ReduceScatter,     |                       |
     |                    | AllToAll, BusBW,   |                       |
-    |                    | CCL, Ring          |                       |
-    |                    | Algorithm, BSP,    |                       |
-    |                    | SPMD               |                       |
+    |                    | CCL                |                       |
     +--------------------+--------------------+-----------------------+
     | Parallelism        | DP, TP, PP, EP,    | EP, MoE, DP Attention |
     | Strategies (§4)    | MoE, ZeRO          |                       |
     +--------------------+--------------------+-----------------------+
     | RDMA / RoCEv2      | RDMA, RoCEv2, QP,  | RDMA, RoCEv2, QP, RC  |
-    | (§5.1)             | RC mode, RDMA Verb | mode, GIN, KVCXL      |
+    | (§5.1)             | RC mode, RDMA Verb | mode                  |
     +--------------------+--------------------+-----------------------+
     | UET Terms (§5.2)   | UET, PDC, ROD,     | UET, RUD, GIN         |
     |                    | RUD, RUDI, UUD,    |                       |
     |                    | LLR, Packet        |                       |
-    |                    | Trimming, CBFC,    |                       |
-    |                    | UEC Profile,       |                       |
+    |                    | Trimming, PRI,     |                       |
+    |                    | CBFC, UEC Profile, |                       |
     |                    | Entropy Value      |                       |
     +--------------------+--------------------+-----------------------+
     | Congestion Control | PFC, PFC Storm,    | PFC, ECN, DCQCN,      |
@@ -1643,67 +1715,64 @@ Appendix B: Term Taxonomy Summary
    +=========+====================================+====================+
    | Section | Term(s)                            | Category           |
    +=========+====================================+====================+
-   | 2       | DUT, SUT, RT, JFI, Offered         | General            |
-   |         | Load, Trial Duration, Warmup       | Benchmarking       |
-   |         | Period, Binary Search,             |                    |
-   |         | Percentile Latency, AI             |                    |
-   |         | Fabric                             |                    |
+   | 2       | DUT, SUT, RT, JFI, Offered Load,   | General            |
+   |         | Trial Duration, Warmup Period,     | Benchmarking       |
+   |         | Binary Search, Percentile          |                    |
+   |         | Latency, AI Fabric                 |                    |
    +---------+------------------------------------+--------------------+
-   | 3       | Collective Operation,              | Collective         |
-   |         | AllReduce, AllGather,              | Communication      |
-   |         | ReduceScatter, AllToAll,           |                    |
-   |         | Ring Algorithm, BusBW, CCL,        |                    |
-   |         | SPMD, BSP                          |                    |
+   | 3       | Collective Operation, AllReduce,   | Collective         |
+   |         | AllGather, ReduceScatter,          | Communication      |
+   |         | AllToAll, Ring Algorithm, BusBW,   |                    |
+   |         | CCL, SPMD, BSP                     |                    |
    +---------+------------------------------------+--------------------+
    | 4       | Data Parallelism, Tensor           | Parallelism        |
    |         | Parallelism, Pipeline              | Strategies         |
-   |         | Parallelism, Expert                |                    |
-   |         | Parallelism, MoE, DP               |                    |
-   |         | Attention, ZeRO                    |                    |
+   |         | Parallelism, Expert Parallelism,   |                    |
+   |         | MoE, DP Attention, ZeRO            |                    |
    +---------+------------------------------------+--------------------+
    | 5.1     | RDMA, RoCEv2, QP, Reliable         | Transport — RDMA / |
-   |         | Connected (RC), RDMA Verb,         | RoCEv2             |
-   |         | UET, PDC, ROD                      |                    |
+   |         | Connected (RC), RDMA Verb, UET,    | RoCEv2             |
+   |         | PDC, ROD                           |                    |
    +---------+------------------------------------+--------------------+
    | 5.2     | RUD, RUDI, UUD, UEC Profile,       | Transport — UET    |
-   |         | LLR, Packet Trimming, CBFC,        |                    |
+   |         | LLR, Packet Trimming, PRI, CBFC,   |                    |
    |         | Entropy Value, GIN, KVCXL          |                    |
    +---------+------------------------------------+--------------------+
-   | 6       | PFC, PFC Storm, PFC                | Congestion Control |
-   |         | Deadlock, ECN, DCQCN, ECN          |                    |
-   |         | Marking Ratio, Incast,             |                    |
-   |         | Incast Ratio, Packet Spray,        |                    |
-   |         | DLB/Flowlet, ECMP, MMR             |                    |
+   | 6       | PFC, PFC Storm, PFC Deadlock,      | Congestion Control |
+   |         | ECN, DCQCN, ECN Marking Ratio,     |                    |
+   |         | Incast, Incast Ratio, Packet       |                    |
+   |         | Spray, DLB/Flowlet, ECMP, MMR      |                    |
    +---------+------------------------------------+--------------------+
-   | 7       | Clos/Fat-Tree, Rail-               | Fabric Topology    |
-   |         | Optimized, Bisection               |                    |
+   | 7       | Fabric DUT Boundary, Intra-Node    | Fabric Topology    |
+   |         | Transfer Overhead, Clos/Fat-       |                    |
+   |         | Tree, Rail-Optimized, Bisection    |                    |
    |         | Bandwidth, Oversubscription        |                    |
    |         | Ratio, ToR Switch, Spine/          |                    |
    |         | Superspine, NIC, Buffer            |                    |
-   |         | Occupancy, Zero-Impact             |                    |
-   |         | Failover, Link Utilization         |                    |
+   |         | Occupancy, Zero-Impact Failover,   |                    |
+   |         | Link Utilization                   |                    |
    +---------+------------------------------------+--------------------+
-   | 8       | JCT, Roofline JCT, JCT             | Training-Specific  |
-   |         | Ratio, Gradient                    |                    |
-   |         | Synchronization, Step Time,        |                    |
-   |         | Soak Test                          |                    |
+   | 8       | JCT, Roofline JCT, JCT Ratio,      | Training-Specific  |
+   |         | Gradient Synchronization, Step     |                    |
+   |         | Time, Soak Test                    |                    |
    +---------+------------------------------------+--------------------+
    | 9       | TTFT, ITL, TPS, KV Cache,          | Inference-Specific |
    |         | Prefill Phase, Decode Phase,       |                    |
    |         | Disaggregated Serving, xPyD        |                    |
    |         | Ratio, Continuous Batching,        |                    |
-   |         | PagedAttention, Prefix             |                    |
-   |         | Caching, Normal Dispatch,          |                    |
-   |         | Low-Latency Dispatch, SLO,         |                    |
-   |         | Speculative Decoding               |                    |
+   |         | PagedAttention, Prefix Caching,    |                    |
+   |         | Normal Dispatch, Low-Latency       |                    |
+   |         | Dispatch, Expert Choice Routing,   |                    |
+   |         | Auxiliary Loss Top-k, Top-k with   |                    |
+   |         | Token Drop, T_dispatch, SLO,       |                    |
+   |         | Speculative Decoding, S_KV         |                    |
    +---------+------------------------------------+--------------------+
    | 10      | Primary KPI, Secondary KPI,        | KPI Classification |
    |         | Fabric Health Indicator,           |                    |
    |         | Goodput, Zero Packet Loss          |                    |
    +---------+------------------------------------+--------------------+
-   | 11      | RFC 1242, RFC 2544, RFC            | Referenced         |
-   |         | 8238, RFC 8239, RFC                | Standards          |
-   |         | 2119/8174                          |                    |
+   | 11      | RFC 1242, RFC 2544, RFC 8238,      | Referenced         |
+   |         | RFC 8239, RFC 2119/8174            | Standards          |
    +---------+------------------------------------+--------------------+
 
                       Table 18: Complete Term Taxonomy
