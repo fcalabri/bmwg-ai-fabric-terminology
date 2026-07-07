@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-05T03:19:12.588428+00:00",
+  "timestamp": "2026-07-07T03:17:32.751651+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -1645,7 +1645,7 @@
       "id": "PR_kwDORX8iVs7t78Ie",
       "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/40",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -1654,17 +1654,19 @@
       "labels": [],
       "body": "Normalize text (voice and grammar) across all 3 documents, idnits and formulas edits\r\n\r\nUET new Edits and Packet Rate Improvement (feedback from KeySight)  \r\n\r\nRoofline JCT expand serialization delay ",
       "createdAt": "2026-07-04T21:54:34Z",
-      "updatedAt": "2026-07-04T22:07:00Z",
+      "updatedAt": "2026-07-06T15:35:49Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "e0223e6faf46249a391da93f3b613896da9bb32b",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "Terminology-03-Edits",
       "headRefOid": "a605824e17ce3cfe9d92e94f6003e63bbac3ba7b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-06T15:35:45Z",
+      "mergedAt": "2026-07-06T15:35:44Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "4c7d8db56806d8d716e181dac299c85be2234949"
+      },
       "comments": [],
       "reviews": [
         {
