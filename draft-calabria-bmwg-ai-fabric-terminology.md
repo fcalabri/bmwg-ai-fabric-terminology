@@ -86,6 +86,105 @@ informative:
       - org: InfiniBand Trade Association
     date: 2014-09
 
+  DCQCN-PAPER:
+    title: "Congestion Control for Large-Scale RDMA Deployments"
+    author:
+      - ins: Y. Zhu
+        name: Yibo Zhu
+      - ins: H. Eran
+        name: Haggai Eran
+      - ins: D. Firestone
+        name: Daniel Firestone
+      - ins: C. Guo
+        name: Chuanxiong Guo
+      - ins: M. Lipshteyn
+        name: Marina Lipshteyn
+      - ins: Y. Liron
+        name: Yehonatan Liron
+      - ins: J. Padhye
+        name: Jitendra Padhye
+      - ins: S. Raindel
+        name: Shachar Raindel
+      - ins: M. H. Yahia
+        name: Mohamad Haj Yahia
+      - ins: M. Zhang
+        name: Ming Zhang
+    date: 2015
+    seriesinfo:
+      "ACM SIGCOMM": "pp. 523-536"
+      DOI: 10.1145/2785956.2787484
+
+  ZERO-PAPER:
+    title: "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models"
+    author:
+      - ins: S. Rajbhandari
+        name: Samyam Rajbhandari
+      - ins: J. Rasley
+        name: Jeff Rasley
+      - ins: O. Ruwase
+        name: Olatunji Ruwase
+      - ins: Y. He
+        name: Yuxiong He
+    date: 2020
+    target: https://arxiv.org/abs/1910.02054
+
+  PAGEDATTENTION-PAPER:
+    title: "Efficient Memory Management for Large Language Model Serving with PagedAttention"
+    author:
+      - ins: W. Kwon
+        name: Woosuk Kwon
+      - ins: Z. Li
+        name: Zhuohan Li
+      - ins: S. Zheng
+        name: Siyuan Zheng
+    date: 2023
+    seriesinfo:
+      "ACM SOSP": ""
+      DOI: 10.1145/3600006.3613165
+
+  ORCA-PAPER:
+    title: "Orca: A Distributed Serving System for Transformer-Based Generative Models"
+    author:
+      - ins: G.-I. Yu
+        name: Gyeong-In Yu
+      - ins: J. S. Jeong
+        name: Joo Seong Jeong
+      - ins: G.-W. Kim
+        name: Geon-Woo Kim
+    date: 2022
+    seriesinfo:
+      "USENIX OSDI": ""
+    target: https://www.usenix.org/conference/osdi22/presentation/yu
+
+  EXPERT-CHOICE-PAPER:
+    title: "Mixture-of-Experts with Expert Choice Routing"
+    author:
+      - ins: Y. Zhou
+        name: Yanqi Zhou
+      - ins: T. Lei
+        name: Tao Lei
+    date: 2022
+    target: https://arxiv.org/abs/2202.09368
+
+  SPEC-DECODE-PAPER:
+    title: "Fast Inference from Transformers via Speculative Decoding"
+    author:
+      - ins: Y. Leviathan
+        name: Yaniv Leviathan
+      - ins: M. Kalman
+        name: Matan Kalman
+      - ins: Y. Matias
+        name: Yossi Matias
+    date: 2023
+    target: https://arxiv.org/abs/2211.17192
+
+  DEEPEP:
+    title: "DeepEP: an efficient expert-parallel communication library"
+    author:
+      - org: DeepSeek AI
+    date: 2025
+    target: https://github.com/deepseek-ai/DeepEP
+
 
 --- abstract
 
@@ -176,8 +275,8 @@ applicable to all AI fabric benchmarking activities.
 | **JFI** | Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows {{Jain1984}}: `JFI = (Σxᵢ)² / (n · Σxᵢ²)` where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. SHOULD be reported alongside throughput measurements for all multi-flow AI fabric tests. |
 | **Offered Load** | The total traffic rate presented to the DUT from test equipment, expressed as a fraction of line rate (0–100%) or as absolute bit/s. Offered load is controlled independently of DUT absorption, enabling characterization of saturation behavior. |
 | **Trial Duration** | The time interval over which a single measurement is conducted. For AI fabric tests, the RECOMMENDED minimum is 60 seconds for throughput tests and 300 seconds for congestion and stability sub-tests, per the methodology in {{!RFC2544}} as extended in the companion methodology documents. Soak tests use a substantially longer duration (minimum 24 hours) per the Soak Test definition in {{tab-training-specific}}. |
-| **Warmup Period** | A mandatory pre-measurement interval during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. RECOMMENDED minimum: 10 seconds. |
-| **Binary Search** | An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations. |
+| **Warmup Period** | A pre-measurement interval, used when specified by a test procedure, during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. RECOMMENDED minimum: 10 seconds. |
+| **Binary Search** | An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations, assuming an initial search range of 0-100% offered load. |
 | **Percentile Latency** | A latency statistic expressing that the specified fraction of all measured latency samples fall at or below the reported value. Denoted Pxx (e.g., P50, P95, P99, P99.9). Tail latency (P99 and above) is especially relevant for AI fabric benchmarking because SLO violations are determined by worst-case, not median, performance. |
 {: #tab-gen-bench title="General Benchmarking Terms"}
 
@@ -194,7 +293,7 @@ are the primary traffic sources in distributed AI workloads.
 | **ReduceScatter** | A collective combining an element-wise reduction with a scatter, so each participant receives a distinct slice of the reduced result. Used in ZeRO-stage optimizer strategies and as the first half of a ring-AllReduce. |
 | **AllToAll** | A collective in which each participant sends a distinct payload to every other participant and receives a distinct payload from every other participant. The critical collective for Mixture-of-Experts token dispatch. Generates N(N−1) independent point-to-point flows for N participants. |
 | **Ring Algorithm** | An AllReduce (or AllGather/ReduceScatter) algorithm structured as a logical ring of participants. Each participant sends to its right neighbor and receives from its left neighbor, taking N−1 steps for AllGather or ReduceScatter alone, and 2(N−1) steps for AllReduce (a ReduceScatter phase followed by an AllGather phase). Ring AllReduce transfers 2(N−1)/N times the message size per accelerator (the AllReduce algo_factor in the BusBW definition), approaching 2× for large N, and is bandwidth-optimal. Standard baseline for BusBW calculation. |
-| **BusBW** | The effective data throughput per accelerator during a collective operation, computed as:<br/><br/>BusBW = (data_size × algo_factor) / time<br/><br/>algo_factor is a fixed normalization constant derived from the ideal ring algorithm for each collective type, applied regardless of the algorithm actually selected by the collective library at runtime. This makes BusBW algorithm-invariant: the same hardware moving the same data volume in the same time yields the same BusBW whether the library selects ring, tree, or recursive doubling. The algo_factor calculation MUST conform to the formula specified here.<br/><br/>Collective       algo_factor<br/>AllReduce        2 × (n−1) / n<br/>AllGather        (n−1) / n<br/>ReduceScatter    (n−1) / n<br/>AllToAll         (n−1) / n<br/><br/>n = number of participating accelerators.<br/><br/>Worked example — AllReduce, n=8, data_size=1 GB, time=10 ms:<br/>algo_factor = 2 × (8−1) / 8 = 1.75<br/>BusBW = (1 GB × 1.75) / 10 ms = 175 GB/s<br/><br/>Reports MUST state: collective type, algo_factor value, collective library name and version, and n. The algorithm actually selected by the library SHOULD be reported as diagnostic information when known. Units: GB/s or Gbps; reports MUST state which. |
+| **BusBW** | The effective data throughput per accelerator during a collective operation, computed as:<br/><br/>BusBW = (data_size × algo_factor) / time<br/><br/>algo_factor is a fixed normalization constant defined per collective type below (derived from the ideal ring algorithm for AllReduce, AllGather, and ReduceScatter; representing the non-local data fraction for AllToAll), applied regardless of the algorithm actually selected by the collective library at runtime. This makes BusBW algorithm-invariant: the same hardware moving the same data volume in the same time yields the same BusBW whether the library selects ring, tree, or recursive doubling. The algo_factor calculation MUST conform to the formula specified here.<br/><br/>Collective       algo_factor<br/>AllReduce        2 × (n−1) / n<br/>AllGather        (n−1) / n<br/>ReduceScatter    (n−1) / n<br/>AllToAll         (n−1) / n<br/><br/>n = number of participating accelerators.<br/><br/>Worked example — AllReduce, n=8, data_size=1 GB, time=10 ms:<br/>algo_factor = 2 × (8−1) / 8 = 1.75<br/>BusBW = (1 GB × 1.75) / 10 ms = 175 GB/s<br/><br/>Reports MUST state: collective type, algo_factor value, collective library name and version, and n. The algorithm actually selected by the library SHOULD be reported as diagnostic information when known. Units: GB/s or Gbps; reports MUST state which. |
 | **CCL** | Collective Communication Library. A software library providing optimized implementations of collective operations (AllReduce, AllGather, etc.) over a specific transport. The CCL implementation MUST be documented in the test report. |
 | **SPMD** | Single Program Multiple Data. The execution model underlying bulk-synchronous distributed training, in which all accelerators execute identical computation on distinct data partitions, synchronizing at collective barriers between steps. |
 | **Bulk Synchronous Parallel (BSP)** | A distributed computation model structured as alternating compute and communicate phases with a global synchronization barrier between phases. Standard training workloads follow BSP: forward pass → backward pass → AllReduce gradient sync → optimizer step. |
@@ -212,9 +311,9 @@ patterns and fabric requirements.
 | **Tensor Parallelism (TP)** | A distributed training and inference strategy partitioning individual weight matrices across multiple accelerators. Each rank computes a partial result; AllGather or ReduceScatter collectives are required within each layer to aggregate results. Dominant parallelism within a node (intra-node). |
 | **Pipeline Parallelism (PP)** | A distributed strategy assigning contiguous groups of transformer layers to distinct stages (accelerators or nodes). Each stage processes one microbatch and forwards activations to the next stage. Generates point-to-point inter-stage traffic across the fabric (activations and gradients). |
 | **Expert Parallelism (EP)** | A parallelism strategy for Mixture-of-Experts models distributing expert sub-networks across accelerators. Each token is routed to its designated experts (typically top-K of E total experts), requiring AllToAll communication for dispatch. Wide EP (e.g., 96-way) generates dense inter-node AllToAll at every MoE layer. |
-| **MoE** | Mixture of Experts. A transformer architecture replacing dense feed-forward layers with a set of E expert sub-networks, of which only top-K experts (typically K=2 or K=4) are activated per token via a learned router. MoE enables large model capacity with sub-linear compute, but introduces AllToAll communication requirements proportional to E and sequence length. |
+| **MoE** | Mixture of Experts. A transformer architecture replacing dense feed-forward layers with a set of E expert sub-networks, of which only top-K experts (K commonly ranges from 2 to 8 depending on the architecture) are activated per token via a learned router. MoE enables large model capacity with sub-linear compute, but introduces AllToAll communication requirements proportional to E and sequence length. |
 | **DP Attention** | Data Parallelism applied to the attention computation, where the KV cache is partitioned across data-parallel ranks. Each rank holds 1/DP_SIZE of the KV cache; AllToAll communication exchanges attention outputs. Used in inference to reduce per-accelerator memory footprint for long contexts. |
-| **ZeRO** | Zero Redundancy Optimizer. A memory optimization strategy for data-parallel training that shards model states (parameters, gradients, optimizer states) across DP ranks instead of replicating them. Stage 1 shards optimizer states; Stage 2 adds gradient sharding; Stage 3 adds parameter sharding. Each stage increases AllGather/ReduceScatter communication. |
+| **ZeRO** | Zero Redundancy Optimizer {{ZERO-PAPER}}. A memory optimization strategy for data-parallel training that shards model states (parameters, gradients, optimizer states) across DP ranks instead of replicating them. Stage 1 shards optimizer states; Stage 2 adds gradient sharding; Stage 3 adds parameter sharding. Each stage increases AllGather/ReduceScatter communication. |
 {: #tab-distri-parallel title="Distributed Parallelism Strategy Terms"}
 
 # Network Transport Terms
@@ -233,8 +332,8 @@ terms are defined in Section 5.2.
 | **QP** | Queue Pair. The fundamental RDMA communication endpoint comprising a Send Queue (SQ) and Receive Queue (RQ). QPs are connection-oriented in Reliable Connected (RC) mode. Multiple QPs per source-destination pair are used to increase ECMP entropy in fabric load balancing. |
 | **Reliable Connected (RC)** | An RDMA QP transport service type providing reliable, in-order delivery between exactly two endpoints. The primary QP type for AI collective operations via RoCEv2. Requires connection setup before data transfer and maintains per-QP state for retransmission. |
 | **RDMA Verb** | An operation primitive of the RDMA programming model. Key verbs: SEND/RECV (two-sided, receiver must post a buffer), WRITE (one-sided, target memory written directly), READ (one-sided, remote memory read), and Atomic (compare-and-swap, fetch-and-add). AI collectives predominantly use WRITE and SEND. |
-| **UET** | Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET is connectionless, supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793 (IANA registration pending). |
-| **PDC** | Packet Delivery Context. The ephemeral, lightweight transport endpoint in UET, analogous to but distinct from an RDMA Queue Pair. PDCs are connectionless (no setup handshake), enabling low-latency initiation and reduced per-flow state in the NIC and switch. |
+| **UET** | Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET uses lightweight, in-band connection setup (no separate handshake round-trip) rather than RoCEv2-style pre-established connections, and supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793 (IANA registration pending). |
+| **PDC** | Packet Delivery Context. The ephemeral, lightweight transport endpoint in UET, analogous to but distinct from an RDMA Queue Pair. PDCs establish state in-band, with setup piggybacked on the first data packet rather than a separate handshake round-trip, enabling low-latency initiation and reduced per-flow state in the NIC and switch. |
 | **ROD** | Reliable Ordered Delivery. A UET transport service providing reliable, in-order packet delivery, semantically equivalent to RoCEv2 RC mode. Suitable for legacy RDMA applications requiring strict ordering guarantees. |
 {: #tab-rocev2 title="RoCEv2 and RDMA Terms"}
 
@@ -255,15 +354,15 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
 | **PRI** | Packet Rate Improvement. An optional UEC link-layer feature that compresses redundant Ethernet and IP header fields on a link, reducing per-packet overhead and increasing the effective packet rate, particularly for the small packets characteristic of AI/HPC synchronization traffic. |
 | **CBFC** | Credit-Based Flow Control. An optional UEC link-layer buffer management mechanism using explicit credit grants from downstream to upstream devices. CBFC provides backpressure without transmitting PFC PAUSE frames, eliminating the head-of-line blocking and storm propagation risks associated with PFC. |
 | **Entropy Value** | A per-packet field in the UET header used to distribute packets of a single message across available ECMP paths, providing explicit spray entropy independent of the IP 5-tuple. Enables hardware-assisted packet spraying without requiring transport-layer state in the switch. |
-| **GIN** | GPU-Initiated Networking. A communication paradigm in which GPU threads directly initiate network RDMA operations (sends, one-sided writes/reads) to the NIC hardware without CPU involvement, eliminating the CPU-GPU synchronization round-trip. Reduces effective latency by several microseconds for fine-grained operations. |
-| **KVCXL** | KV Cache Transfer Library. A software library providing standardized point-to-point data transfer primitives (register, transfer, notify) for inference engines, abstracting underlying transport mechanisms (intra-node interconnect, RDMA, PCIe, storage interfaces). Enables transport-agnostic KV cache migration in disaggregated serving architectures. |
+| **GIN** | GPU-Initiated Networking. A communication paradigm in which GPU threads directly initiate network RDMA operations (sends, one-sided writes/reads) to the NIC hardware without CPU involvement, eliminating the CPU-GPU synchronization round-trip. GIN predates UEC and is not specific to UET; established implementations include NVSHMEM and InfiniBand GPUDirect Async (IBGDA) on RDMA/RoCEv2 fabrics. Reduces effective latency by several microseconds for fine-grained operations. |
+| **KVCXL** | KV Cache Transfer Library. A term of art used by this document set for a software library providing standardized point-to-point data transfer primitives (register, transfer, notify) for inference engines, abstracting underlying transport mechanisms (intra-node interconnect, RDMA, PCIe, storage interfaces); it is not itself specific to UET or to any single transport. Comparable production libraries with similar goals include NVIDIA NIXL, Mooncake TransferEngine, and LMCache. Enables transport-agnostic KV cache migration in disaggregated serving architectures. |
 {: #tab-uet title="Ultra Ethernet Transport (UET) Terms"}
 
 ### UET Transport Services Comparison
 
 | Service | Ordered | Reliable | Retransmission Complexity | Primary Use Case |
 |---|---|---|---|---|
-| **ROD** | Yes | Yes | Full per-QP state | Legacy RDMA / ordered AI ops |
+| **ROD** | Yes | Yes | Full per-PDC state | Legacy RDMA / ordered AI ops |
 | **RUD** | No | Yes | Reduced (unordered) | AI training collectives with spray |
 | **RUDI** | No | Yes | Minimal (idempotent) | RDMA Writes; simple retransmit |
 | **UUD** | No | No | None | Telemetry, speculative ops |
@@ -280,9 +379,9 @@ associated fabric behaviors critical to AI workload performance.
 | **PFC Storm** | A pathological condition in which PFC PAUSE frames propagate across multiple hops, causing widespread throughput degradation or deadlock unrelated to the original congestion source. Detection and mitigation SHOULD be part of soak test evaluation per the companion methodology documents. |
 | **PFC Deadlock** | A circular PFC dependency in which sets of flows mutually pause each other indefinitely, resulting in zero progress for affected traffic classes. Deadlock risk is elevated in non-tree topologies and MUST be evaluated in fabric-level soak tests. |
 | **ECN** | Explicit Congestion Notification ({{!RFC3168}}). An IP-layer mechanism in which a congested router marks packets with the Congestion Experienced (CE) codepoint in the IP ECN field instead of dropping them. The receiver echoes congestion feedback to the sender via the transport protocol, triggering rate reduction. Used with RoCEv2 as part of DCQCN. |
-| **DCQCN** | Data Center Quantized Congestion Notification. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. PFC and DCQCN are distinct mechanisms. PFC prevents packet loss during DCQCN convergence; it is **not** part of the DCQCN algorithm. |
+| **DCQCN** | Data Center Quantized Congestion Notification {{DCQCN-PAPER}}. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. PFC and DCQCN are distinct mechanisms. PFC prevents packet loss during DCQCN convergence; it is **not** part of the DCQCN algorithm. |
 | **ECN Marking Ratio** | The fraction of packets (expressed as a percentage) that are marked with the CE codepoint in the IP ECN field over a measurement interval. A high ECN Marking Ratio indicates persistent congestion and is a primary Fabric Health Indicator. |
-| **Incast** | A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in AllReduce and collective operations. |
+| **Incast** | A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in tree-based reductions, AllGather fan-in, and AllToAll hotspots; ring-based AllReduce, by construction, does not create incast since each participant exchanges only with its immediate neighbors. |
 | **Incast Ratio** | The ratio of concurrent senders to receivers in an incast communication pattern (N:1). The incast ratio determines the oversubscription factor at the destination port and is a primary test parameter for congestion characterization. |
 | **Packet Spray** | A load balancing strategy distributing individual packets of a single RDMA message across all available ECMP paths, maximizing link utilization at the cost of potential out-of-order delivery at the receiver. Native in UET (RUD mode); requires NIC reorder buffering for RoCEv2 RC mode. |
 | **DLB / Flowlet** | Dynamic Load Balancing using flowlet detection. A per-flow rerouting mechanism that reassigns a flow to a new ECMP path when the flow has been idle longer than the flowlet gap threshold (typically 500 ns–2 µs), reducing out-of-order packet risk compared to packet spray while improving utilization over static per-flow ECMP. |
@@ -330,9 +429,9 @@ and are used normatively in {{?I-D.calabria-bmwg-ai-fabric-training-bench}}.
 | Term | Definition |
 |---|---|
 | **JCT** | Job Completion Time. The wall-clock elapsed time from the start of a training job (or benchmark iteration) until all participating accelerators complete their work, inclusive of all forward pass, backward pass, and collective communication phases. JCT is the primary end-to-end training efficiency KPI. |
-| **Roofline JCT** | The theoretical minimum JCT under ideal network conditions, namely: load balancing across all paths, zero contention and queuing, no retransmissions, and no fabric failures. Computed as `Roofline JCT = computation_time + serialization_delay`, where `serialization_delay = (8 × S × algo_factor) / B_acc`, with S = message size in bytes, algo_factor = the fixed per-collective normalization constant from the BusBW definition, and B_acc = aggregate per-accelerator NIC line rate in bits/second; the factor 8 converts bytes to bits. Stating these assumptions explicitly ensures the reference is reproducible across implementations. Provides a baseline for evaluating fabric overhead. |
+| **Roofline JCT** | The theoretical minimum JCT under ideal network conditions, namely: load balancing across all paths, zero contention and queuing, no retransmissions, and no fabric failures. Computed as `Roofline JCT = computation_time + serialization_delay`, where `serialization_delay = (8 × S × algo_factor) / B_acc`, with S = message size in bytes, algo_factor = the fixed per-collective normalization constant from the BusBW definition, and B_acc = the sum of NIC line rates for that accelerator's own NICs, in bits/second (not aggregated across accelerators); the factor 8 converts bytes to bits. Stating these assumptions explicitly ensures the reference is reproducible across implementations. Provides a baseline for evaluating fabric overhead. |
 | **JCT Ratio** | The ratio of measured JCT to Roofline JCT. A value of 1.0 indicates no network-induced overhead. Values > 1.0 quantify fabric inefficiency: `JCT Ratio = JCT_measured / JCT_roofline`. The JCT Ratio is the primary comparative metric for AI training fabric benchmarking. |
-| **Gradient Synchronization** | The AllReduce collective operation performed after the backward pass of each training step to sum the locally computed gradients across all data-parallel replicas. The dominant communication event in data-parallel training, occurring once per training step per layer. |
+| **Gradient Synchronization** | The AllReduce collective operation performed after the backward pass of each training step to sum the locally computed gradients across all data-parallel replicas. The dominant communication event in data-parallel training, occurring once per training step (often split across multiple AllReduce calls when gradients are bucketed across layers). |
 | **Step Time** | The wall-clock duration of a single training iteration (forward pass + backward pass + gradient synchronization + optimizer step). Step time = computation time + communication time, where the communication time is dominated by the AllReduce collective. |
 | **Soak Test** | A sustained-load test run for an extended period (minimum 24 hours for stability evaluation) at a defined offered load fraction (e.g., 70% or 90% of maximum throughput). Soak tests detect buffer leaks, ECMP imbalance drift, PFC storm initiation, and long-tail error accumulation not visible in short-duration tests. |
 {: #tab-training-specific title="Training-Specific Terms"}
@@ -345,25 +444,25 @@ benchmarking and are used normatively in
 
 | Term | Definition |
 |---|---|
-| **TTFT** | Time to First Token. The elapsed time from receipt of an inference request by the serving system to emission of the first output token. Encompasses prompt processing (prefill), KV cache generation, optional KV cache transfer (in disaggregated architectures), and the initial decode step. Interactive serving deployments typically target TTFT < 500 ms at P99 (informative; not a requirement of this document). |
+| **TTFT** | Time to First Token. The elapsed time from receipt of an inference request by the serving system to emission of the first output token. Encompasses prompt processing (prefill), KV cache generation, optional KV cache transfer (in disaggregated architectures), and emission of the first output token at the end of the prefill phase. Interactive serving deployments typically target TTFT < 500 ms at P99 (informative; not a requirement of this document). |
 | **ITL** | Inter-Token Latency. The elapsed time between successive output tokens during the autoregressive decode phase. Measured at P50, P95, P99, and P99.9 to characterize tail latency behavior. Interactive serving deployments typically target ITL < 50 ms at P99 (informative; not a requirement of this document). |
 | **TPS** | Tokens Per Second. Aggregate throughput of the inference serving system, measured as the total number of tokens processed per second across all concurrent requests. Reported separately for input-side (prefill) TPS and output-side (decode) TPS. |
 | **KV Cache** | Key-Value Cache. The intermediate attention state (key and value projection matrices from multi-head attention layers) computed during the prefill phase and reused during each decode step to avoid redundant recomputation. KV cache size scales with: `layers × KV_attention_heads (H_kv) × head_dim × sequence_length × precision`. Under GQA/MQA the number of KV heads (H_kv) differs from the total number of attention heads (see the S_KV definition). The attention head configuration MUST be reported in all benchmark results. |
 | **Prefill Phase** | The compute-bound phase of LLM inference in which the entire input prompt is processed in parallel to generate the KV cache and the first output token. Characterized by high arithmetic intensity (200–400 ops/byte), high accelerator utilization (90–95%), and large activation tensors. Prefill latency dominates TTFT for long prompts. |
 | **Decode Phase** | The memory-bandwidth-bound phase of LLM inference in which output tokens are generated autoregressively, one token per forward pass, by reading the KV cache. Characterized by low arithmetic intensity (60–80 ops/byte), lower accelerator utilization (20–40%), and memory-bandwidth-limited KV cache reads. Decode throughput limits TPS. |
 | **Disaggregated Serving** | An inference serving architecture in which the prefill phase and decode phase are executed on physically separate groups of accelerators (workers), connected by a network fabric. Allows independent scaling of prefill and decode resources (xPyD) but introduces KV cache transfer as a fabric-critical data movement. |
-| **xPyD Ratio** | The allocation ratio of x prefill workers to y decode workers in a disaggregated serving cluster. Example: 3P9D denotes 3 prefill nodes and 9 decode nodes. The optimal xPyD ratio depends on model size, prompt/output length distributions, and TTFT/ITL SLO targets. |
-| **Continuous Batching** | A dynamic inference scheduling technique that inserts new requests into an active decode batch as slots become available (without waiting for the current batch to complete), improving accelerator utilization compared to static batching. Generates variable batch sizes that affect fabric traffic burstiness. |
-| **PagedAttention** | A KV cache memory management technique storing attention keys and values in fixed-size, non-contiguous virtual pages (typically 16–64 KB), inspired by OS virtual memory management. Reduces memory fragmentation and enables efficient KV cache sharing across requests with common prefixes. |
+| **xPyD Ratio** | The allocation ratio of x prefill workers to y decode workers in a disaggregated serving cluster. Example: 3P9D denotes 3 prefill workers and 9 decode workers. xPyD is informal notation in wide use across disaggregated-serving implementations; it has no single canonical source. The optimal xPyD ratio depends on model size, prompt/output length distributions, and TTFT/ITL SLO targets. |
+| **Continuous Batching** | {{ORCA-PAPER}} A dynamic inference scheduling technique that inserts new requests into an active decode batch as slots become available (without waiting for the current batch to complete), improving accelerator utilization compared to static batching. Generates variable batch sizes that affect fabric traffic burstiness. |
+| **PagedAttention** | {{PAGEDATTENTION-PAPER}} A KV cache memory management technique storing attention keys and values in fixed-size, non-contiguous virtual pages (typically 16–64 KB), inspired by OS virtual memory management. Reduces memory fragmentation and enables efficient KV cache sharing across requests with common prefixes. |
 | **Prefix Caching** | Reuse of previously computed KV cache segments for inference requests sharing a common prompt prefix (e.g., a fixed system prompt), eliminating redundant prefill computation. Prefix cache hit rate is a secondary KPI for inference serving efficiency. |
-| **Normal Dispatch** | An AllToAll MoE dispatch communication mode optimized for the prefill phase. Payload sizes are variable (depending on token-to-expert routing), generating dynamic tensor shapes incompatible with static graph capture. Maximizes throughput for large batches at the cost of higher per-dispatch latency. |
-| **Low-Latency Dispatch** | An AllToAll MoE dispatch communication mode optimized for the decode phase. Payload sizes are padded to fixed maximum dimensions (compatible with static graph capture), enabling lower kernel-launch overhead at the cost of slight bandwidth inefficiency. Target: < 200 µs per dispatch round trip. |
-| **Expert Choice Routing** | A token routing strategy in which experts select which tokens to process, rather than tokens selecting experts. Each expert accepts its top-C tokens by affinity score, producing perfect load balance but non-uniform AllToAll message sizes across EP ranks. |
+| **Normal Dispatch** | {{DEEPEP}} An AllToAll MoE dispatch communication mode optimized for the prefill phase. Payload sizes are variable (depending on token-to-expert routing), generating dynamic tensor shapes incompatible with static graph capture. Maximizes throughput for large batches at the cost of higher per-dispatch latency. |
+| **Low-Latency Dispatch** | {{DEEPEP}} An AllToAll MoE dispatch communication mode optimized for the decode phase. Payload sizes are padded to fixed maximum dimensions (compatible with static graph capture), enabling lower kernel-launch overhead at the cost of slight bandwidth inefficiency. Target: < 200 µs per dispatch round trip. |
+| **Expert Choice Routing** | {{EXPERT-CHOICE-PAPER}} A token routing strategy in which experts select which tokens to process, rather than tokens selecting experts. Each expert accepts its top-C tokens by affinity score, producing perfect load balance but non-uniform AllToAll message sizes across EP ranks. |
 | **Auxiliary Loss Top-k** | A top-k routing variant that adds a load-balancing auxiliary loss during training to encourage uniform token distribution across experts. Produces near-uniform  AllToAll traffic in inference and reduces hot-spot risk on the fabric. |
 | **Top-k with Token Drop** | A top-k routing variant in which tokens destined for  overloaded experts are dropped or redirected to a fallback. Reduces worst-case dispatch traffic volume at the cost of model output quality under load. |
-| **T_dispatch** | The dispatch payload per accelerator per MoE layer, computed as: T_dispatch = (B × k × H_model × P_bytes) / N where B = batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. Used as the canonical traffic volume parameter in the MoE test matrix (see Section 7.1 of the companion inference benchmarking draft). |
+| **T_dispatch** | The dispatch payload per accelerator per MoE layer, computed as: T_dispatch = (B × k × H_model × P_bytes) / N where B = per-GPU batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. Used as the canonical traffic volume parameter in the MoE test matrix (see Section 7.1 of the companion inference benchmarking draft). |
 | **SLO** | Service Level Objective. A quantitative target for an inference serving KPI. AI inference SLOs typically specify maximum TTFT (e.g., < 500 ms P99) and maximum ITL (e.g., < 50 ms P99) under a specified request arrival rate. |
-| **Speculative Decoding** | An inference acceleration technique using a small draft model to generate candidate token sequences verified in parallel by the target model. Reduces effective ITL but generates bursty, variable-length KV cache traffic; noted as a future benchmarking area not fully specified in the current companion documents. |
+| **Speculative Decoding** | {{SPEC-DECODE-PAPER}} An inference acceleration technique using a small draft model to generate candidate token sequences verified in parallel by the target model. Reduces effective ITL but generates bursty, variable-length KV cache traffic; noted as a future benchmarking area not fully specified in the current companion documents. |
 | **S_KV** | The total size in bytes of the KV cache state generated by a single inference request across all transformer layers and all context tokens, computed as: S_KV = 2 × L × H_kv × D × C × P_bytes. Where: L = number of transformer layers; H_kv = number of KV attention heads per layer (H_kv ≤ H_total for GQA/MQA); D = per-head key/value dimension (head_dim), typically model_dim / H_total; C = context length in tokens (prompt + generated tokens); P_bytes = precision in bytes per element (FP16/BF16 = 2, FP8/INT8 = 1); Factor 2 accounts for both K and V tensors, each of shape \[H_kv, D\] per layer per token. |
 {: #tab-infer-specific title="Inference-Specific Terms"}
 
@@ -384,10 +483,10 @@ companion methodology documents.
 
 | Term | Definition |
 |---|---|
-| **Primary KPI** | A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT and ITL. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations. |
-| **Secondary KPI** | A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: collective operation throughput (BusBW), KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations. |
+| **Primary KPI** | A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT, ITL, and TPS. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations. |
+| **Secondary KPI** | A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: per-phase collective throughput breakdown, KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations. |
 | **Fabric Health Indicator (FHI)** | An operational metric characterizing fabric stability and anomaly conditions rather than peak performance. FHIs include: PFC event rate, PFC storm occurrence, ECN marking ratio, packet loss rate, buffer occupancy (P99), and retransmission rate. FHIs SHOULD be continuously monitored and reported throughout all test categories. |
-| **Goodput** | The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports MUST specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth. Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput. |
+| **Goodput** | The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports MUST specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document ({{?I-D.calabria-bmwg-ai-fabric-inference-bench}}). Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput. |
 | **Zero Packet Loss** | A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion. |
 {: #tab-kpi-class title="KPI Classification Terms"}
 
@@ -464,6 +563,7 @@ here.
 | ASIC | Application-Specific Integrated Circuit |
 | BGP | Border Gateway Protocol |
 | BMWG | Benchmarking Methodology Working Group |
+| BSP | Bulk Synchronous Parallel |
 | BTH | Base Transport Header |
 | BusBW | Bus Bandwidth |
 | CBFC | Credit-Based Flow Control |
@@ -472,6 +572,7 @@ here.
 | CMS | Congestion Management Sub-layer (UET) |
 | CRC | Cyclic Redundancy Check |
 | CV | Coefficient of Variation |
+| CXL | Compute Express Link |
 | DCQCN | Data Center Quantized Congestion Notification |
 | DLB | Dynamic Load Balancing |
 | DMA | Direct Memory Access |
@@ -483,7 +584,9 @@ here.
 | EP | Expert Parallelism |
 | FEC | Forward Error Correction |
 | FHI | Fabric Health Indicator |
+| FRR | Fast Reroute |
 | GIN | GPU-Initiated Networking |
+| GPU | Graphics Processing Unit |
 | GQA | Grouped-Query Attention |
 | HBM | High Bandwidth Memory |
 | HOL | Head-of-Line |
@@ -495,6 +598,7 @@ here.
 | JFI | Jain's Fairness Index |
 | KPI | Key Performance Indicator |
 | KVCXL | KV Cache Transfer Library |
+| LLM | Large Language Model |
 | LLR | Link Layer Retry |
 | MAC | Media Access Control |
 | ML | Machine Learning |
@@ -507,6 +611,7 @@ here.
 | OFED | OpenFabrics Enterprise Distribution |
 | OOO | Out-of-Order |
 | OSPF | Open Shortest Path First |
+| PCIe | Peripheral Component Interconnect Express |
 | PDC | Packet Delivery Context |
 | PDS | Packet Delivery Sub-layer (UET) |
 | PFC | Priority Flow Control |
@@ -514,6 +619,7 @@ here.
 | PRI | Packet Rate Improvement |
 | PSN | Packet Sequence Number |
 | QP | Queue Pair |
+| RC | Reliable Connected |
 | RDMA | Remote Direct Memory Access |
 | RoCEv2 | RDMA over Converged Ethernet version 2 |
 | ROD | Reliable Ordered Delivery |
@@ -522,8 +628,10 @@ here.
 | RUDI | Reliable Unordered Delivery for Idempotent operations |
 | SES | Semantic Sub-layer (UET) |
 | SLO | Service Level Objective |
+| SPMD | Single Program Multiple Data |
 | SUT | System Under Test |
 | TCAM | Ternary Content-Addressable Memory |
+| ToR | Top-of-Rack |
 | TP | Tensor Parallelism |
 | TPS | Tokens Per Second |
 | TSS | Transport Security Sub-layer (UET) |
@@ -535,6 +643,7 @@ here.
 | VOQ | Virtual Output Queue |
 | XPU | accelerator processing unit (generic) |
 | xPyD | x Prefill workers : y Decode workers (disaggregated serving ratio) |
+| ZeRO | Zero Redundancy Optimizer |
 {: #tab-acronyms title="Acronyms"}
 
 # Acknowledgments
