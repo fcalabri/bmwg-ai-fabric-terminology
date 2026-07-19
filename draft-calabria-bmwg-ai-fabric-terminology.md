@@ -463,6 +463,7 @@ here.
 | API | Application Programming Interface |
 | ASIC | Application-Specific Integrated Circuit |
 | BGP | Border Gateway Protocol |
+| BMWG | Benchmarking Methodology Working Group |
 | BTH | Base Transport Header |
 | BusBW | Bus Bandwidth |
 | CBFC | Credit-Based Flow Control |
