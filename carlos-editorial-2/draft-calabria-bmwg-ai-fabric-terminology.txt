@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 20 January 2027                            Blue Fern Consulting
+Expires: 21 January 2027                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                            19 July 2026
+                                                            20 July 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 January 2027.
+   This Internet-Draft will expire on 21 January 2027.
 
 Copyright Notice
 
@@ -180,10 +180,11 @@ Table of Contents
    | *AI Fabric* | The dedicated Ethernet backend network              |
    |             | interconnecting accelerators (GPUs/XPUs) for        |
    |             | distributed AI training and inference workloads.    |
-   |             | Implemented as a non-blocking Clos (fat-tree)       |
-   |             | topology running RoCEv2 or UET.  The AI fabric      |
-   |             | is separate from the front-end management and       |
-   |             | storage network.                                    |
+   |             | Typically implemented as a Clos (fat-tree)          |
+   |             | topology, non-blocking or oversubscribed (see       |
+   |             | Oversubscription Ratio), running RoCEv2 or UET.     |
+   |             | The AI fabric is separate from the front-end        |
+   |             | management and storage network.                     |
    +-------------+-----------------------------------------------------+
    | *DUT*       | Device Under Test.  The network element(s) whose    |
    |             | performance characteristics are being measured.     |
@@ -461,77 +462,83 @@ Table of Contents
    for direct comparison with their RoCEv2 counterparts; full UET-
    specific terms are defined in Section 5.2.
 
-    +===========+====================================================+
-    | Term      | Definition                                         |
-    +===========+====================================================+
-    | *RDMA*    | Remote Direct Memory Access.  A transport          |
-    |           | mechanism enabling direct memory-to-memory data    |
-    |           | transfer between hosts without involving the       |
-    |           | destination CPU, providing zero-copy semantics and |
-    |           | kernel bypass.  Implementations include InfiniBand |
-    |           | Verbs (native IB), iWARP (RDMA over TCP), and      |
-    |           | RoCEv2 (RDMA over Converged Ethernet v2).          |
-    +-----------+----------------------------------------------------+
-    | *RoCEv2*  | RDMA over Converged Ethernet version 2.  An RDMA   |
-    |           | transport encapsulating InfiniBand transport layer |
-    |           | (BTH) over UDP/IP, enabling RDMA semantics on      |
-    |           | standard Ethernet infrastructure.  Requires        |
-    |           | lossless fabric operation (PFC or equivalent) for  |
-    |           | correctness.  Standardized in IBTA InfiniBand      |
-    |           | Architecture Volume 1, Annex A17 (RoCEv2,          |
-    |           | September 2014) [IBTA-ROCE]; transported over UDP  |
-    |           | destination port 4791.                             |
-    +-----------+----------------------------------------------------+
-    | *QP*      | Queue Pair.  The fundamental RDMA communication    |
-    |           | endpoint comprising a Send Queue (SQ) and Receive  |
-    |           | Queue (RQ).  QPs are connection-oriented in        |
-    |           | Reliable Connected (RC) mode.  Multiple QPs per    |
-    |           | source-destination pair are used to increase ECMP  |
-    |           | entropy in fabric load balancing.                  |
-    +-----------+----------------------------------------------------+
-    | *Reliable | An RDMA QP transport service type providing        |
-    | Connected | reliable, in-order delivery between exactly two    |
-    | (RC)*     | endpoints.  The primary QP type for AI collective  |
-    |           | operations via RoCEv2.  Requires connection setup  |
-    |           | before data transfer and maintains per-QP state    |
-    |           | for retransmission.                                |
-    +-----------+----------------------------------------------------+
-    | *RDMA     | An operation primitive of the RDMA programming     |
-    | Verb*     | model.  Key verbs: SEND/RECV (two-sided, receiver  |
-    |           | must post a buffer), WRITE (one-sided, target      |
-    |           | memory written directly), READ (one-sided, remote  |
-    |           | memory read), and Atomic (compare-and-swap, fetch- |
-    |           | and-add).  AI collectives predominantly use WRITE  |
-    |           | and SEND.                                          |
-    +-----------+----------------------------------------------------+
-    | *UET*     | Ultra Ethernet Transport.  A transport protocol    |
-    |           | defined by the Ultra Ethernet Consortium (UEC)     |
-    |           | Specification 1.0 as a next-generation AI/HPC      |
-    |           | fabric transport.  UET uses lightweight, in-band   |
-    |           | connection setup (no separate handshake round-     |
-    |           | trip) rather than RoCEv2-style pre-established     |
-    |           | connections, and supports native packet spraying   |
-    |           | (RUD), and integrates multipath load balancing and |
-    |           | congestion control.  Transported over UDP          |
-    |           | destination port 4793 (IANA registration pending). |
-    +-----------+----------------------------------------------------+
-    | *PDC*     | Packet Delivery Context.  The ephemeral,           |
-    |           | lightweight transport endpoint in UET, analogous   |
-    |           | to but distinct from an RDMA Queue Pair.  PDCs     |
-    |           | establish state in-band, with setup piggybacked on |
-    |           | the first data packet rather than a separate       |
-    |           | handshake round-trip, enabling low-latency         |
-    |           | initiation and reduced per-flow state in the NIC   |
-    |           | and switch.                                        |
-    +-----------+----------------------------------------------------+
-    | *ROD*     | Reliable Ordered Delivery.  A UET transport        |
-    |           | service providing reliable, in-order packet        |
-    |           | delivery, semantically equivalent to RoCEv2 RC     |
-    |           | mode.  Suitable for legacy RDMA applications       |
-    |           | requiring strict ordering guarantees.              |
-    +-----------+----------------------------------------------------+
+    +===========+=====================================================+
+    | Term      | Definition                                          |
+    +===========+=====================================================+
+    | *RDMA*    | Remote Direct Memory Access.  A transport mechanism |
+    |           | enabling direct memory-to-memory data transfer      |
+    |           | between hosts without involving the destination     |
+    |           | CPU, providing zero-copy semantics and kernel       |
+    |           | bypass.  Implementations include InfiniBand Verbs   |
+    |           | (native IB), iWARP (RDMA over TCP), and RoCEv2      |
+    |           | (RDMA over Converged Ethernet v2).                  |
+    +-----------+-----------------------------------------------------+
+    | *RoCEv2*  | RDMA over Converged Ethernet version 2.  An RDMA    |
+    |           | transport encapsulating InfiniBand transport layer  |
+    |           | (BTH) over UDP/IP, enabling RDMA semantics on       |
+    |           | standard Ethernet infrastructure.  Reliable         |
+    |           | Connected (RC) mode recovers packet loss via PSN-   |
+    |           | based retransmission, so losslessness is a          |
+    |           | performance necessity rather than a strict          |
+    |           | correctness requirement; lossless fabric operation  |
+    |           | (PFC or equivalent) is nonetheless the deployed     |
+    |           | norm because loss-driven retransmission incurs a    |
+    |           | substantial latency and throughput penalty at scale |
+    |           | (cf. loss-resilient RoCE variants such as IRN).     |
+    |           | Standardized in IBTA InfiniBand Architecture Volume |
+    |           | 1, Annex A17 (RoCEv2, September 2014) [IBTA-ROCE];  |
+    |           | transported over UDP destination port 4791.         |
+    +-----------+-----------------------------------------------------+
+    | *QP*      | Queue Pair.  The fundamental RDMA communication     |
+    |           | endpoint comprising a Send Queue (SQ) and Receive   |
+    |           | Queue (RQ).  QPs are connection-oriented in         |
+    |           | Reliable Connected (RC) mode.  Multiple QPs per     |
+    |           | source-destination pair are used to increase ECMP   |
+    |           | entropy in fabric load balancing.                   |
+    +-----------+-----------------------------------------------------+
+    | *Reliable | An RDMA QP transport service type providing         |
+    | Connected | reliable, in-order delivery between exactly two     |
+    | (RC)*     | endpoints.  The primary QP type for AI collective   |
+    |           | operations via RoCEv2.  Requires connection setup   |
+    |           | before data transfer and maintains per-QP state for |
+    |           | retransmission.                                     |
+    +-----------+-----------------------------------------------------+
+    | *RDMA     | An operation primitive of the RDMA programming      |
+    | Verb*     | model.  Key verbs: SEND/RECV (two-sided, receiver   |
+    |           | must post a buffer), WRITE (one-sided, target       |
+    |           | memory written directly), READ (one-sided, remote   |
+    |           | memory read), and Atomic (compare-and-swap, fetch-  |
+    |           | and-add).  AI collectives predominantly use WRITE   |
+    |           | and SEND.                                           |
+    +-----------+-----------------------------------------------------+
+    | *UET*     | Ultra Ethernet Transport.  A transport protocol     |
+    |           | defined by the Ultra Ethernet Consortium (UEC)      |
+    |           | Specification 1.0 as a next-generation AI/HPC       |
+    |           | fabric transport.  UET uses lightweight, in-band    |
+    |           | connection setup (no separate handshake round-trip) |
+    |           | rather than RoCEv2-style pre-established            |
+    |           | connections, and supports native packet spraying    |
+    |           | (RUD), and integrates multipath load balancing and  |
+    |           | congestion control.  Transported over UDP           |
+    |           | destination port 4793 (IANA registration pending).  |
+    +-----------+-----------------------------------------------------+
+    | *PDC*     | Packet Delivery Context.  The ephemeral,            |
+    |           | lightweight transport endpoint in UET, analogous to |
+    |           | but distinct from an RDMA Queue Pair.  PDCs         |
+    |           | establish state in-band, with setup piggybacked on  |
+    |           | the first data packet rather than a separate        |
+    |           | handshake round-trip, enabling low-latency          |
+    |           | initiation and reduced per-flow state in the NIC    |
+    |           | and switch.                                         |
+    +-----------+-----------------------------------------------------+
+    | *ROD*     | Reliable Ordered Delivery.  A UET transport service |
+    |           | providing reliable, in-order packet delivery,       |
+    |           | semantically equivalent to RoCEv2 RC mode.          |
+    |           | Suitable for legacy RDMA applications requiring     |
+    |           | strict ordering guarantees.                         |
+    +-----------+-----------------------------------------------------+
 
-                      Table 4: RoCEv2 and RDMA Terms
+                       Table 4: RoCEv2 and RDMA Terms
 
 5.2.  Ultra Ethernet Transport (UET) Terms
 
@@ -601,12 +608,17 @@ Table of Contents
     |           | blocking and storm propagation risks associated    |
     |           | with PFC.                                          |
     +-----------+----------------------------------------------------+
-    | *Entropy  | A per-packet field in the UET header used to       |
-    | Value*    | distribute packets of a single message across      |
-    |           | available ECMP paths, providing explicit spray     |
-    |           | entropy independent of the IP 5-tuple.  Enables    |
-    |           | hardware-assisted packet spraying without          |
-    |           | requiring transport-layer state in the switch.     |
+    | *Entropy  | Carried in the UDP source port field when UDP      |
+    | Value*    | encapsulation is used (or the equivalent-position  |
+    |           | PDS Entropy Header field in IP-only mode), used to |
+    |           | distribute packets of a single message across      |
+    |           | available ECMP paths.  Unlike RoCEv2's fixed-per-  |
+    |           | connection source port, UET varies this field per  |
+    |           | packet, providing explicit spray entropy as part   |
+    |           | of the standard IP 5-tuple.  Enables hardware-     |
+    |           | assisted packet spraying using existing ECMP       |
+    |           | hashing without requiring transport-layer state in |
+    |           | the switch.                                        |
     +-----------+----------------------------------------------------+
     | *GIN*     | GPU-Initiated Networking.  A communication         |
     |           | paradigm in which GPU threads directly initiate    |
@@ -848,13 +860,17 @@ Table of Contents
     |                   | worst-case all-to-all communication         |
     |                   | throughput.                                 |
     +-------------------+---------------------------------------------+
-    | *Oversubscription | The ratio of total edge (server-facing)     |
-    | Ratio*            | bandwidth to total bisection bandwidth in a |
-    |                   | Clos fabric.  A 1:1 ratio is non-blocking;  |
-    |                   | higher ratios (e.g., 2:1, 4:1) reduce       |
-    |                   | fabric cost but may bottleneck all-to-all   |
-    |                   | and AllReduce patterns when all server      |
-    |                   | ports are active simultaneously.            |
+    | *Oversubscription | The ratio of a leaf switch's total server-  |
+    | Ratio*            | facing (downlink) bandwidth to its total    |
+    |                   | uplink bandwidth toward the spine layer.  A |
+    |                   | 1:1 ratio is non-blocking; higher ratios    |
+    |                   | (e.g., 2:1, 4:1) reduce fabric cost but may |
+    |                   | bottleneck all-to-all and AllReduce         |
+    |                   | patterns when all server ports are active   |
+    |                   | simultaneously.  Distinct from the edge-to- |
+    |                   | bisection-bandwidth ratio described under   |
+    |                   | Bisection Bandwidth, which is 2:1 even for  |
+    |                   | a non-blocking fabric.                      |
     +-------------------+---------------------------------------------+
     | *ToR Switch*      | Top-of-Rack switch.  The first-hop          |
     |                   | aggregation switch connecting accelerator   |
@@ -1271,11 +1287,16 @@ Table of Contents
    +------------+-----------------------------------------------------+
    | *Zero      | A test acceptance criterion requiring that no       |
    | Packet     | packets are dropped by the DUT during the           |
-   | Loss*      | measurement interval.  For RoCEv2 and UET           |
-   |            | transports, zero packet loss is the target          |
-   |            | operating condition.  The binary search procedure   |
-   |            | in the companion methodology documents determines   |
-   |            | the maximum offered load satisfying this criterion. |
+   | Loss*      | measurement interval.  For RoCEv2, zero packet loss |
+   |            | is the target operating condition.  UET is designed |
+   |            | to tolerate loss (RUD retransmission across sprayed |
+   |            | paths, packet trimming); the applicable acceptance  |
+   |            | criterion for UET is zero application-visible loss  |
+   |            | rather than zero wire-level loss, and it depends on |
+   |            | the transport service (ROD/RUD/RUDI/UUD) under      |
+   |            | test.  The binary search procedure in the companion |
+   |            | methodology documents determines the maximum        |
+   |            | offered load satisfying this criterion.             |
    +------------+-----------------------------------------------------+
 
                     Table 13: KPI Classification Terms

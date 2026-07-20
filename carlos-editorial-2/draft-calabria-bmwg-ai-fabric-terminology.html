@@ -1081,7 +1081,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Calabria, et al.</td>
-<td class="center">Expires 20 January 2027</td>
+<td class="center">Expires 21 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1094,12 +1094,12 @@ svg {
 <dd class="internet-draft">draft-calabria-bmwg-ai-fabric-terminology-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-19" class="published">19 July 2026</time>
+<time datetime="2026-07-20" class="published">20 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-20">20 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-21">21 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1177,7 +1177,7 @@ for general network benchmarking.<a href="#section-abstract-2" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 21 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1419,7 +1419,7 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
             <td class="text-left" rowspan="1" colspan="1">
               <strong>AI Fabric</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The dedicated Ethernet backend network interconnecting accelerators (GPUs/XPUs) for distributed AI training and inference workloads. Implemented as a non-blocking Clos (fat-tree) topology running RoCEv2 or UET. The AI fabric is separate from the front-end management and storage network.</td>
+            <td class="text-left" rowspan="1" colspan="1">The dedicated Ethernet backend network interconnecting accelerators (GPUs/XPUs) for distributed AI training and inference workloads. Typically implemented as a Clos (fat-tree) topology, non-blocking or oversubscribed (see Oversubscription Ratio), running RoCEv2 or UET. The AI fabric is separate from the front-end management and storage network.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1670,7 +1670,7 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>RoCEv2</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Requires lossless fabric operation (PFC or equivalent) for correctness. Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
+              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Reliable Connected (RC) mode recovers packet loss via PSN-based retransmission, so losslessness is a performance necessity rather than a strict correctness requirement; lossless fabric operation (PFC or equivalent) is nonetheless the deployed norm because loss-driven retransmission incurs a substantial latency and throughput penalty at scale (cf. loss-resilient RoCE variants such as IRN). Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1786,7 +1786,7 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>Entropy Value</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">A per-packet field in the UET header used to distribute packets of a single message across available ECMP paths, providing explicit spray entropy independent of the IP 5-tuple. Enables hardware-assisted packet spraying without requiring transport-layer state in the switch.</td>
+              <td class="text-left" rowspan="1" colspan="1">Carried in the UDP source port field when UDP encapsulation is used (or the equivalent-position PDS Entropy Header field in IP-only mode), used to distribute packets of a single message across available ECMP paths. Unlike RoCEv2's fixed-per-connection source port, UET varies this field per packet, providing explicit spray entropy as part of the standard IP 5-tuple. Enables hardware-assisted packet spraying using existing ECMP hashing without requiring transport-layer state in the switch.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -2083,7 +2083,7 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Oversubscription Ratio</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The ratio of total edge (server-facing) bandwidth to total bisection bandwidth in a Clos fabric. A 1:1 ratio is non-blocking; higher ratios (e.g., 2:1, 4:1) reduce fabric cost but may bottleneck all-to-all and AllReduce patterns when all server ports are active simultaneously.</td>
+            <td class="text-left" rowspan="1" colspan="1">The ratio of a leaf switch's total server-facing (downlink) bandwidth to its total uplink bandwidth toward the spine layer. A 1:1 ratio is non-blocking; higher ratios (e.g., 2:1, 4:1) reduce fabric cost but may bottleneck all-to-all and AllReduce patterns when all server ports are active simultaneously. Distinct from the edge-to-bisection-bandwidth ratio described under Bisection Bandwidth, which is 2:1 even for a non-blocking fabric.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2432,7 +2432,7 @@ companion methodology documents.<a href="#section-10-1" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Zero Packet Loss</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
+            <td class="text-left" rowspan="1" colspan="1">A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2, zero packet loss is the target operating condition. UET is designed to tolerate loss (RUD retransmission across sprayed paths, packet trimming); the applicable acceptance criterion for UET is zero application-visible loss rather than zero wire-level loss, and it depends on the transport service (ROD/RUD/RUDI/UUD) under test. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
           </tr>
         </tbody>
       </table>
