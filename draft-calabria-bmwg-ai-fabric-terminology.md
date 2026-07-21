@@ -440,10 +440,9 @@ and are used normatively in {{?I-D.calabria-bmwg-ai-fabric-training-bench}}.
 
 The following terms are specific to AI inference serving workload
 benchmarking. Most are used normatively in
-{{?I-D.calabria-bmwg-ai-fabric-inference-bench}}; the remainder (for example
-Speculative Decoding, PagedAttention, and Prefix Caching) are defined
-here for completeness and to support future benchmarking work, and are not
-currently referenced by that document.
+{{?I-D.calabria-bmwg-ai-fabric-inference-bench}}; Speculative Decoding and
+PagedAttention are defined here for completeness and to support future
+benchmarking work, and are not currently referenced by that document.
 
 | Term | Definition |
 |---|---|
