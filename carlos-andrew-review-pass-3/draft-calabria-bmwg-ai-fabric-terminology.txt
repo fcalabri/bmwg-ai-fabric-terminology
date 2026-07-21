@@ -520,7 +520,8 @@ Table of Contents
     |           | connections, and supports native packet spraying    |
     |           | (RUD), and integrates multipath load balancing and  |
     |           | congestion control.  Transported over UDP           |
-    |           | destination port 4793 (IANA registration pending).  |
+    |           | destination port 4793, IANA-assigned to Ultra       |
+    |           | Ethernet Transport.                                 |
     +-----------+-----------------------------------------------------+
     | *PDC*     | Packet Delivery Context.  The ephemeral,            |
     |           | lightweight transport endpoint in UET, analogous to |
@@ -584,10 +585,10 @@ Table of Contents
     |           | dropping it, reducing the frequency of transport-   |
     |           | layer retransmission and improving tail latency.    |
     +-----------+-----------------------------------------------------+
-    | *Packet   | An optional UEC link-layer behavior in which a      |
+    | *Packet   | An optional UEC network-layer behavior in which a   |
     | Trimming* | congested switch, rather than dropping the full     |
-    |           | packet, transmits only the packet header (trimmed   |
-    |           | packet) to the receiver.  Trimming enables the      |
+    |           | packet, forwards only the packet header (trimmed    |
+    |           | packet) toward the receiver.  Trimming enables the  |
     |           | receiver to detect loss and initiate selective      |
     |           | retransmission more rapidly, reducing bandwidth     |
     |           | waste versus silent drop.                           |
@@ -630,7 +631,7 @@ Table of Contents
     |           | and platform-dependent and is not fixed by this     |
     |           | definition.                                         |
     +-----------+-----------------------------------------------------+
-    | *KVCXL*   | KV Cache Transfer Library.  A term of art used by   |
+    | *KVTL*    | KV Cache Transfer Library.  A term of art used by   |
     |           | this document set for a software library providing  |
     |           | standardized point-to-point data transfer           |
     |           | primitives (register, transfer, notify) for         |
@@ -1008,10 +1009,9 @@ Table of Contents
    The following terms are specific to AI inference serving workload
    benchmarking.  Most are used normatively in
    [I-D.calabria-bmwg-ai-fabric-inference-bench]; the remainder (for
-   example Expert Choice Routing, Speculative Decoding, and
-   PagedAttention) are defined here for completeness and to support
-   future benchmarking work, and are not currently referenced by that
-   document.
+   example Speculative Decoding, PagedAttention, and Prefix Caching) are
+   defined here for completeness and to support future benchmarking
+   work, and are not currently referenced by that document.
 
    +==================+================================================+
    | Term             | Definition                                     |
@@ -1407,10 +1407,10 @@ Table of Contents
 
    This document has no IANA actions.
 
-   Note that IANA registration of the UET UDP destination port 4793
-   referenced in Table 4, specified in the Ultra Ethernet Specification
-   [UEC-1.0], is pending; this document does not request any IANA
-   assignment.
+   Note that UDP destination port 4793, referenced in Table 4 and
+   specified in the Ultra Ethernet Specification [UEC-1.0], has been
+   assigned by IANA to the Ultra Ethernet Transport (assignment date
+   2025-06-16); this document does not request any IANA assignment.
 
 13.  Security Considerations
 
@@ -1546,7 +1546,7 @@ Acronyms
     +---------+-------------------------------------------------------+
     | KPI     | Key Performance Indicator                             |
     +---------+-------------------------------------------------------+
-    | KVCXL   | KV Cache Transfer Library                             |
+    | KVTL    | KV Cache Transfer Library                             |
     +---------+-------------------------------------------------------+
     | LLM     | Large Language Model                                  |
     +---------+-------------------------------------------------------+
@@ -1764,74 +1764,79 @@ Appendix A: Term Cross-Reference to Companion Documents
    The following table identifies which terms from this document are
    used in each companion methodology document.
 
-    +====================+====================+=======================+
-    | Term Category      | Used in Training   | Used in Inference     |
-    |                    | Bench              | Bench                 |
-    +====================+====================+=======================+
-    | General            | All terms          | All terms             |
-    | Benchmarking Terms |                    |                       |
-    | (§2)               |                    |                       |
-    +--------------------+--------------------+-----------------------+
-    | Collective         | AllReduce,         | AllToAll, BusBW       |
-    | Communication (§3) | AllGather,         |                       |
-    |                    | AllToAll, BusBW,   |                       |
-    |                    | CCL                |                       |
-    +--------------------+--------------------+-----------------------+
-    | Parallelism        | DP, TP, PP, EP,    | EP, MoE, DP Attention |
-    | Strategies (§4)    | MoE, ZeRO          |                       |
-    +--------------------+--------------------+-----------------------+
-    | RDMA / RoCEv2      | RDMA, RoCEv2, QP,  | RDMA, RoCEv2, QP, RC  |
-    | (§5.1)             | RC mode, RDMA Verb | mode                  |
-    +--------------------+--------------------+-----------------------+
-    | UET Terms (§5.2)   | UET, PDC, ROD,     | UET, RUD, GIN         |
-    |                    | RUD, RUDI, UUD,    |                       |
-    |                    | LLR, Packet        |                       |
-    |                    | Trimming, PRI,     |                       |
-    |                    | CBFC, UEC Profile, |                       |
-    |                    | Entropy Value      |                       |
-    +--------------------+--------------------+-----------------------+
-    | Congestion Control | PFC, PFC Storm,    | PFC, ECN, DCQCN,      |
-    | (§6)               | PFC Deadlock, ECN, | Incast, Packet Spray, |
-    |                    | DCQCN, ECN Marking | ECMP                  |
-    |                    | Ratio, Incast,     |                       |
-    |                    | Incast Ratio,      |                       |
-    |                    | Packet Spray, DLB/ |                       |
-    |                    | Flowlet, ECMP, MMR |                       |
-    +--------------------+--------------------+-----------------------+
-    | Fabric Topology    | Clos, Rail-        | Clos, Bisection BW,   |
-    | (§7)               | Optimized,         | ToR, NIC, Buffer      |
-    |                    | Bisection BW,      | Occupancy, Link       |
-    |                    | Oversubscription,  | Utilization           |
-    |                    | ToR, Spine, NIC,   |                       |
-    |                    | Buffer Occupancy,  |                       |
-    |                    | Zero-Impact        |                       |
-    |                    | Failover, Link     |                       |
-    |                    | Utilization        |                       |
-    +--------------------+--------------------+-----------------------+
-    | Training-Specific  | JCT, Roofline JCT, | Soak Test             |
-    | (§8)               | JCT Ratio,         |                       |
-    |                    | Gradient Sync,     |                       |
-    |                    | Step Time, Soak    |                       |
-    |                    | Test               |                       |
-    +--------------------+--------------------+-----------------------+
-    | Inference-Specific | —                  | TTFT, ITL, TPS, KV    |
-    | (§9)               |                    | Cache, Prefill,       |
-    |                    |                    | Decode, Disaggregated |
-    |                    |                    | Serving, xPyD,        |
-    |                    |                    | Continuous Batching,  |
-    |                    |                    | PagedAttention,       |
-    |                    |                    | Prefix Caching,       |
-    |                    |                    | Normal/Low-Latency    |
-    |                    |                    | Dispatch, SLO         |
-    +--------------------+--------------------+-----------------------+
-    | KPI Classification | Primary KPI (JCT   | Primary KPI (TTFT,    |
-    | (§10)              | Ratio, BusBW),     | ITL), Secondary KPI,  |
-    |                    | Secondary KPI,     | FHI, Goodput, Zero    |
-    |                    | FHI, Goodput, Zero | Packet Loss           |
-    |                    | Packet Loss        |                       |
-    +--------------------+--------------------+-----------------------+
+   +====================+===================+=========================+
+   | Term Category      | Used in Training  | Used in Inference Bench |
+   |                    | Bench             |                         |
+   +====================+===================+=========================+
+   | General            | All terms         | All terms               |
+   | Benchmarking Terms |                   |                         |
+   | (§2)               |                   |                         |
+   +--------------------+-------------------+-------------------------+
+   | Collective         | AllReduce,        | AllToAll, BusBW         |
+   | Communication (§3) | AllGather,        |                         |
+   |                    | AllToAll, BusBW,  |                         |
+   |                    | CCL               |                         |
+   +--------------------+-------------------+-------------------------+
+   | Parallelism        | DP, TP, PP, EP,   | EP, MoE, DP Attention   |
+   | Strategies (§4)    | MoE, ZeRO         |                         |
+   +--------------------+-------------------+-------------------------+
+   | RDMA / RoCEv2      | RDMA, RoCEv2, QP, | RDMA, RoCEv2, QP, RC    |
+   | (§5.1)             | RC mode, RDMA     | mode                    |
+   |                    | Verb              |                         |
+   +--------------------+-------------------+-------------------------+
+   | UET Terms (§5.2)   | UET, PDC, ROD,    | UET, RUD, GIN           |
+   |                    | RUD, RUDI, UUD,   |                         |
+   |                    | LLR, Packet       |                         |
+   |                    | Trimming, PRI,    |                         |
+   |                    | CBFC, UEC         |                         |
+   |                    | Profile, Entropy  |                         |
+   |                    | Value             |                         |
+   +--------------------+-------------------+-------------------------+
+   | Congestion Control | PFC, PFC Storm,   | PFC, ECN, DCQCN,        |
+   | (§6)               | PFC Deadlock,     | Incast, Packet Spray,   |
+   |                    | ECN, DCQCN, ECN   | ECMP                    |
+   |                    | Marking Ratio,    |                         |
+   |                    | Incast, Incast    |                         |
+   |                    | Ratio, Packet     |                         |
+   |                    | Spray, DLB/       |                         |
+   |                    | Flowlet, ECMP,    |                         |
+   |                    | MMR               |                         |
+   +--------------------+-------------------+-------------------------+
+   | Fabric Topology    | Clos, Rail-       | Clos, Bisection BW,     |
+   | (§7)               | Optimized,        | ToR, NIC, Buffer        |
+   |                    | Bisection BW,     | Occupancy, Link         |
+   |                    | Oversubscription, | Utilization             |
+   |                    | ToR, Spine, NIC,  |                         |
+   |                    | Buffer Occupancy, |                         |
+   |                    | Zero-Impact       |                         |
+   |                    | Failover, Link    |                         |
+   |                    | Utilization       |                         |
+   +--------------------+-------------------+-------------------------+
+   | Training-Specific  | JCT, Roofline     | Soak Test               |
+   | (§8)               | JCT, JCT Ratio,   |                         |
+   |                    | Gradient Sync,    |                         |
+   |                    | Step Time, Soak   |                         |
+   |                    | Test              |                         |
+   +--------------------+-------------------+-------------------------+
+   | Inference-Specific | —                 | TTFT, ITL, TPS, KV      |
+   | (§9)               |                   | Cache, Prefill, Decode, |
+   |                    |                   | Disaggregated Serving,  |
+   |                    |                   | xPyD, Continuous        |
+   |                    |                   | Batching, Normal/Low-   |
+   |                    |                   | Latency Dispatch,       |
+   |                    |                   | Expert Choice Routing,  |
+   |                    |                   | Top-k with Token Drop,  |
+   |                    |                   | Auxiliary Loss Top-k,   |
+   |                    |                   | T_dispatch, S_KV, SLO   |
+   +--------------------+-------------------+-------------------------+
+   | KPI Classification | Primary KPI (JCT  | Primary KPI (TTFT,      |
+   | (§10)              | Ratio, BusBW),    | ITL), Secondary KPI,    |
+   |                    | Secondary KPI,    | FHI, Goodput, Zero      |
+   |                    | FHI, Goodput,     | Packet Loss             |
+   |                    | Zero Packet Loss  |                         |
+   +--------------------+-------------------+-------------------------+
 
-           Table 17: Term Cross-Reference to Companion Documents
+          Table 17: Term Cross-Reference to Companion Documents
 
 Appendix B: Term Taxonomy Summary
 
@@ -1863,7 +1868,7 @@ Appendix B: Term Taxonomy Summary
    +---------+------------------------------------+--------------------+
    | 5.2     | RUD, RUDI, UUD, UEC Profile,       | Transport — UET    |
    |         | LLR, Packet Trimming, PRI, CBFC,   |                    |
-   |         | Entropy Value, GIN, KVCXL          |                    |
+   |         | Entropy Value, GIN, KVTL           |                    |
    +---------+------------------------------------+--------------------+
    | 6       | PFC, PFC Storm, PFC Deadlock,      | Congestion Control |
    |         | ECN, DCQCN, ECN Marking Ratio,     |                    |

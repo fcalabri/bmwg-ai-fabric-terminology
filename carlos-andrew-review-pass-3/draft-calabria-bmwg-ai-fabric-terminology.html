@@ -1694,7 +1694,7 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>UET</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET uses lightweight, in-band connection setup (no separate handshake round-trip) rather than RoCEv2-style pre-established connections, and supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793 (IANA registration pending).</td>
+              <td class="text-left" rowspan="1" colspan="1">Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET uses lightweight, in-band connection setup (no separate handshake round-trip) rather than RoCEv2-style pre-established connections, and supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793, IANA-assigned to Ultra Ethernet Transport.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1768,7 +1768,7 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>Packet Trimming</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">An optional UEC link-layer behavior in which a congested switch, rather than dropping the full packet, transmits only the packet header (trimmed packet) to the receiver. Trimming enables the receiver to detect loss and initiate selective retransmission more rapidly, reducing bandwidth waste versus silent drop.</td>
+              <td class="text-left" rowspan="1" colspan="1">An optional UEC network-layer behavior in which a congested switch, rather than dropping the full packet, forwards only the packet header (trimmed packet) toward the receiver. Trimming enables the receiver to detect loss and initiate selective retransmission more rapidly, reducing bandwidth waste versus silent drop.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1796,7 +1796,7 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
-                <strong>KVCXL</strong>
+                <strong>KVTL</strong>
 </td>
               <td class="text-left" rowspan="1" colspan="1">KV Cache Transfer Library. A term of art used by this document set for a software library providing standardized point-to-point data transfer primitives (register, transfer, notify) for inference engines, abstracting underlying transport mechanisms (intra-node interconnect, RDMA, PCIe, storage interfaces); it is not itself specific to UET or to any single transport. Comparable production libraries with similar goals include NVIDIA NIXL, Mooncake TransferEngine, and LMCache. Enables transport-agnostic KV cache migration in disaggregated serving architectures.</td>
             </tr>
@@ -2195,7 +2195,7 @@ and are used normatively in <span>[<a href="#I-D.calabria-bmwg-ai-fabric-trainin
 <p id="section-9-1">The following terms are specific to AI inference serving workload
 benchmarking. Most are used normatively in
 <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>; the remainder (for example
-Expert Choice Routing, Speculative Decoding, and PagedAttention) are defined
+Speculative Decoding, PagedAttention, and Prefix Caching) are defined
 here for completeness and to support future benchmarking work, and are not
 currently referenced by that document.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <span id="name-inference-specific-terms-2"></span><div id="tab-infer-specific">
@@ -2557,7 +2557,7 @@ across the companion documents are listed in the Acronyms appendix
 <a href="#section-12" class="section-number selfRef">12. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
 <p id="section-12-1">This document has no IANA actions.<a href="#section-12-1" class="pilcrow">¶</a></p>
-<p id="section-12-2">Note that IANA registration of the UET UDP destination port 4793 referenced in <a href="#tab-rocev2" class="auto internal xref">Table 4</a>, specified in the Ultra Ethernet Specification <span>[<a href="#UEC-1.0" class="cite xref">UEC-1.0</a>]</span>, is pending; this document does not request any IANA assignment.<a href="#section-12-2" class="pilcrow">¶</a></p>
+<p id="section-12-2">Note that UDP destination port 4793, referenced in <a href="#tab-rocev2" class="auto internal xref">Table 4</a> and specified in the Ultra Ethernet Specification <span>[<a href="#UEC-1.0" class="cite xref">UEC-1.0</a>]</span>, has been assigned by IANA to the Ultra Ethernet Transport (assignment date 2025-06-16); this document does not request any IANA assignment.<a href="#section-12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -2761,7 +2761,7 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Key Performance Indicator</td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">KVCXL</td>
+            <td class="text-left" rowspan="1" colspan="1">KVTL</td>
             <td class="text-left" rowspan="1" colspan="1">KV Cache Transfer Library</td>
           </tr>
           <tr>
@@ -3126,7 +3126,7 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Inference-Specific (§9)</td>
             <td class="text-left" rowspan="1" colspan="1">—</td>
-            <td class="text-left" rowspan="1" colspan="1">TTFT, ITL, TPS, KV Cache, Prefill, Decode, Disaggregated Serving, xPyD, Continuous Batching, PagedAttention, Prefix Caching, Normal/Low-Latency Dispatch, SLO</td>
+            <td class="text-left" rowspan="1" colspan="1">TTFT, ITL, TPS, KV Cache, Prefill, Decode, Disaggregated Serving, xPyD, Continuous Batching, Normal/Low-Latency Dispatch, Expert Choice Routing, Top-k with Token Drop, Auxiliary Loss Top-k, T_dispatch, S_KV, SLO</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">KPI Classification (§10)</td>
@@ -3182,7 +3182,7 @@ definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">5.2</td>
-            <td class="text-left" rowspan="1" colspan="1">RUD, RUDI, UUD, UEC Profile, LLR, Packet Trimming, PRI, CBFC, Entropy Value, GIN, KVCXL</td>
+            <td class="text-left" rowspan="1" colspan="1">RUD, RUDI, UUD, UEC Profile, LLR, Packet Trimming, PRI, CBFC, Entropy Value, GIN, KVTL</td>
             <td class="text-left" rowspan="1" colspan="1">Transport — UET</td>
           </tr>
           <tr>
