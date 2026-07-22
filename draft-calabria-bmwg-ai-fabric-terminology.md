@@ -323,7 +323,7 @@ patterns and fabric requirements.
 The following terms define RDMA and RoCEv2 transport semantics as
 used in AI fabric benchmarking. UET, PDC, and ROD are included here
 for direct comparison with their RoCEv2 counterparts; full UET-specific
-terms are defined in Section 5.2.
+terms are defined in {{uet-terms}}.
 
 | Term | Definition |
 |---|---|
@@ -337,7 +337,7 @@ terms are defined in Section 5.2.
 | **ROD** | Reliable Ordered Delivery. A UET transport service providing reliable, in-order packet delivery, semantically equivalent to RoCEv2 RC mode. Suitable for legacy RDMA applications requiring strict ordering guarantees. |
 {: #tab-rocev2 title="RoCEv2 and RDMA Terms"}
 
-## Ultra Ethernet Transport (UET) Terms
+## Ultra Ethernet Transport (UET) Terms {#uet-terms}
 
 The following terms define UET-specific concepts introduced by the
 Ultra Ethernet Consortium (UEC) Specification 1.0
