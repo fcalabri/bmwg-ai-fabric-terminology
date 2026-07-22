@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 22 January 2027                            Blue Fern Consulting
+Expires: 23 January 2027                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                            21 July 2026
+                                                            22 July 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 January 2027.
+   This Internet-Draft will expire on 23 January 2027.
 
 Copyright Notice
 
@@ -197,7 +197,7 @@ Table of Contents
    |             | DUT, and serving/training software, when end-to-    |
    |             | end metrics are the measurement objective.          |
    +-------------+-----------------------------------------------------+
-   | *RT*        | Traffic Generator.  Test equipment capable of       |
+   | *TG*        | Traffic Generator.  Test equipment capable of       |
    |             | generating and receiving network traffic at         |
    |             | specified rates with nanosecond-resolution          |
    |             | timestamping sufficient for the measurements        |
@@ -462,84 +462,85 @@ Table of Contents
    for direct comparison with their RoCEv2 counterparts; full UET-
    specific terms are defined in Section 5.2.
 
-    +===========+=====================================================+
-    | Term      | Definition                                          |
-    +===========+=====================================================+
-    | *RDMA*    | Remote Direct Memory Access.  A transport mechanism |
-    |           | enabling direct memory-to-memory data transfer      |
-    |           | between hosts without involving the destination     |
-    |           | CPU, providing zero-copy semantics and kernel       |
-    |           | bypass.  Implementations include InfiniBand Verbs   |
-    |           | (native IB), iWARP (RDMA over TCP), and RoCEv2      |
-    |           | (RDMA over Converged Ethernet v2).                  |
-    +-----------+-----------------------------------------------------+
-    | *RoCEv2*  | RDMA over Converged Ethernet version 2.  An RDMA    |
-    |           | transport encapsulating InfiniBand transport layer  |
-    |           | (BTH) over UDP/IP, enabling RDMA semantics on       |
-    |           | standard Ethernet infrastructure.  Reliable         |
-    |           | Connected (RC) mode recovers packet loss via PSN-   |
-    |           | based retransmission, so losslessness is a          |
-    |           | performance necessity rather than a strict          |
-    |           | correctness requirement; lossless fabric operation  |
-    |           | (PFC or equivalent) is nonetheless the deployed     |
-    |           | norm because loss-driven retransmission incurs a    |
-    |           | substantial latency and throughput penalty at scale |
-    |           | (cf. loss-resilient RoCE variants such as IRN).     |
-    |           | Standardized in IBTA InfiniBand Architecture Volume |
-    |           | 1, Annex A17 (RoCEv2, September 2014) [IBTA-ROCE];  |
-    |           | transported over UDP destination port 4791.         |
-    +-----------+-----------------------------------------------------+
-    | *QP*      | Queue Pair.  The fundamental RDMA communication     |
-    |           | endpoint comprising a Send Queue (SQ) and Receive   |
-    |           | Queue (RQ).  QPs are connection-oriented in         |
-    |           | Reliable Connected (RC) mode.  Multiple QPs per     |
-    |           | source-destination pair are used to increase ECMP   |
-    |           | entropy in fabric load balancing.                   |
-    +-----------+-----------------------------------------------------+
-    | *Reliable | An RDMA QP transport service type providing         |
-    | Connected | reliable, in-order delivery between exactly two     |
-    | (RC)*     | endpoints.  The primary QP type for AI collective   |
-    |           | operations via RoCEv2.  Requires connection setup   |
-    |           | before data transfer and maintains per-QP state for |
-    |           | retransmission.                                     |
-    +-----------+-----------------------------------------------------+
-    | *RDMA     | An operation primitive of the RDMA programming      |
-    | Verb*     | model.  Key verbs: SEND/RECV (two-sided, receiver   |
-    |           | must post a buffer), WRITE (one-sided, target       |
-    |           | memory written directly), READ (one-sided, remote   |
-    |           | memory read), and Atomic (compare-and-swap, fetch-  |
-    |           | and-add).  AI collectives predominantly use WRITE   |
-    |           | and SEND.                                           |
-    +-----------+-----------------------------------------------------+
-    | *UET*     | Ultra Ethernet Transport.  A transport protocol     |
-    |           | defined by the Ultra Ethernet Consortium (UEC)      |
-    |           | Specification 1.0 as a next-generation AI/HPC       |
-    |           | fabric transport.  UET uses lightweight, in-band    |
-    |           | connection setup (no separate handshake round-trip) |
-    |           | rather than RoCEv2-style pre-established            |
-    |           | connections, and supports native packet spraying    |
-    |           | (RUD), and integrates multipath load balancing and  |
-    |           | congestion control.  Transported over UDP           |
-    |           | destination port 4793, IANA-assigned to Ultra       |
-    |           | Ethernet Transport.                                 |
-    +-----------+-----------------------------------------------------+
-    | *PDC*     | Packet Delivery Context.  The ephemeral,            |
-    |           | lightweight transport endpoint in UET, analogous to |
-    |           | but distinct from an RDMA Queue Pair.  PDCs         |
-    |           | establish state in-band, with setup piggybacked on  |
-    |           | the first data packet rather than a separate        |
-    |           | handshake round-trip, enabling low-latency          |
-    |           | initiation and reduced per-flow state in the NIC    |
-    |           | and switch.                                         |
-    +-----------+-----------------------------------------------------+
-    | *ROD*     | Reliable Ordered Delivery.  A UET transport service |
-    |           | providing reliable, in-order packet delivery,       |
-    |           | semantically equivalent to RoCEv2 RC mode.          |
-    |           | Suitable for legacy RDMA applications requiring     |
-    |           | strict ordering guarantees.                         |
-    +-----------+-----------------------------------------------------+
+    +===========+====================================================+
+    | Term      | Definition                                         |
+    +===========+====================================================+
+    | *RDMA*    | Remote Direct Memory Access.  A transport          |
+    |           | mechanism enabling direct memory-to-memory data    |
+    |           | transfer between hosts without involving the       |
+    |           | destination CPU, providing zero-copy semantics and |
+    |           | kernel bypass.  Implementations include InfiniBand |
+    |           | Verbs (native IB), iWARP (RDMA over TCP), and      |
+    |           | RoCEv2 (RDMA over Converged Ethernet v2).          |
+    +-----------+----------------------------------------------------+
+    | *RoCEv2*  | RDMA over Converged Ethernet version 2.  An RDMA   |
+    |           | transport encapsulating InfiniBand transport layer |
+    |           | (BTH) over UDP/IP, enabling RDMA semantics on      |
+    |           | standard Ethernet infrastructure.  Reliable        |
+    |           | Connected (RC) mode recovers packet loss via PSN-  |
+    |           | based retransmission, so losslessness is a         |
+    |           | performance necessity rather than a strict         |
+    |           | correctness requirement; lossless fabric operation |
+    |           | (PFC or equivalent) is nonetheless the deployed    |
+    |           | norm because loss-driven retransmission incurs a   |
+    |           | substantial latency and throughput penalty at      |
+    |           | scale (cf. loss-resilient RoCE variants such as    |
+    |           | Improved RoCE NIC (IRN)).  Standardized in IBTA    |
+    |           | InfiniBand Architecture Volume 1, Annex A17        |
+    |           | (RoCEv2, September 2014) [IBTA-ROCE]; transported  |
+    |           | over UDP destination port 4791.                    |
+    +-----------+----------------------------------------------------+
+    | *QP*      | Queue Pair.  The fundamental RDMA communication    |
+    |           | endpoint comprising a Send Queue (SQ) and Receive  |
+    |           | Queue (RQ).  QPs are connection-oriented in        |
+    |           | Reliable Connected (RC) mode.  Multiple QPs per    |
+    |           | source-destination pair are used to increase ECMP  |
+    |           | entropy in fabric load balancing.                  |
+    +-----------+----------------------------------------------------+
+    | *Reliable | An RDMA QP transport service type providing        |
+    | Connected | reliable, in-order delivery between exactly two    |
+    | (RC)*     | endpoints.  The primary QP type for AI collective  |
+    |           | operations via RoCEv2.  Requires connection setup  |
+    |           | before data transfer and maintains per-QP state    |
+    |           | for retransmission.                                |
+    +-----------+----------------------------------------------------+
+    | *RDMA     | An operation primitive of the RDMA programming     |
+    | Verb*     | model.  Key verbs: SEND/RECV (two-sided, receiver  |
+    |           | must post a buffer), WRITE (one-sided, target      |
+    |           | memory written directly), READ (one-sided, remote  |
+    |           | memory read), and Atomic (compare-and-swap, fetch- |
+    |           | and-add).  AI collectives predominantly use WRITE  |
+    |           | and SEND.                                          |
+    +-----------+----------------------------------------------------+
+    | *UET*     | Ultra Ethernet Transport.  A transport protocol    |
+    |           | defined by the Ultra Ethernet Consortium (UEC)     |
+    |           | Specification 1.0 as a next-generation AI/HPC      |
+    |           | fabric transport.  UET uses lightweight, in-band   |
+    |           | connection setup (no separate handshake round-     |
+    |           | trip) rather than RoCEv2-style pre-established     |
+    |           | connections, and supports native packet spraying   |
+    |           | (RUD), and integrates multipath load balancing and |
+    |           | congestion control.  Transported over UDP          |
+    |           | destination port 4793, IANA-assigned to Ultra      |
+    |           | Ethernet Transport.                                |
+    +-----------+----------------------------------------------------+
+    | *PDC*     | Packet Delivery Context.  The ephemeral,           |
+    |           | lightweight transport endpoint in UET, analogous   |
+    |           | to but distinct from an RDMA Queue Pair.  PDCs     |
+    |           | establish state in-band, with setup piggybacked on |
+    |           | the first data packet rather than a separate       |
+    |           | handshake round-trip, enabling low-latency         |
+    |           | initiation and reduced per-flow state in the NIC   |
+    |           | and switch.                                        |
+    +-----------+----------------------------------------------------+
+    | *ROD*     | Reliable Ordered Delivery.  A UET transport        |
+    |           | service providing reliable, in-order packet        |
+    |           | delivery, semantically equivalent to RoCEv2 RC     |
+    |           | mode.  Suitable for legacy RDMA applications       |
+    |           | requiring strict ordering guarantees.              |
+    +-----------+----------------------------------------------------+
 
-                       Table 4: RoCEv2 and RDMA Terms
+                      Table 4: RoCEv2 and RDMA Terms
 
 5.2.  Ultra Ethernet Transport (UET) Terms
 
@@ -1016,35 +1017,34 @@ Table of Contents
    +==================+================================================+
    | Term             | Definition                                     |
    +==================+================================================+
-   | *TTFT*           | Time to First Token.  The elapsed time         |
-   |                  | from receipt of an inference request by        |
-   |                  | the serving system to emission of the          |
-   |                  | first output token.  Encompasses prompt        |
+   | *TTFT*           | Time to First Token.  The elapsed time from    |
+   |                  | receipt of an inference request by the         |
+   |                  | serving system to emission of the first        |
+   |                  | output token.  Encompasses prompt              |
    |                  | processing (prefill), KV cache generation,     |
    |                  | optional KV cache transfer (in                 |
    |                  | disaggregated architectures), and emission     |
-   |                  | of the first output token at the end of        |
-   |                  | the prefill phase.  Interactive serving        |
+   |                  | of the first output token at the end of the    |
+   |                  | prefill phase.  Interactive serving            |
    |                  | deployments typically target TTFT < 500 ms     |
    |                  | at P99 (informative; not a requirement of      |
    |                  | this document).                                |
    +------------------+------------------------------------------------+
    | *ITL*            | Inter-Token Latency.  The elapsed time         |
-   |                  | between successive output tokens during        |
-   |                  | the autoregressive decode phase.  Measured     |
-   |                  | at P50, P95, P99, and P99.9 to                 |
-   |                  | characterize tail latency behavior.            |
-   |                  | Interactive serving deployments typically      |
-   |                  | target ITL < 50 ms at P99 (informative;        |
-   |                  | not a requirement of this document).           |
+   |                  | between successive output tokens during the    |
+   |                  | autoregressive decode phase.  Measured at      |
+   |                  | P50, P95, P99, and P99.9 to characterize       |
+   |                  | tail latency behavior.  Interactive serving    |
+   |                  | deployments typically target ITL < 50 ms at    |
+   |                  | P99 (informative; not a requirement of this    |
+   |                  | document).                                     |
    +------------------+------------------------------------------------+
-   | *TPS*            | Tokens Per Second.  Aggregate throughput       |
-   |                  | of the inference serving system, measured      |
-   |                  | as the total number of tokens processed        |
-   |                  | per second across all concurrent requests.     |
+   | *TPS*            | Tokens Per Second.  Aggregate throughput of    |
+   |                  | the inference serving system, measured as      |
+   |                  | the total number of tokens processed per       |
+   |                  | second across all concurrent requests.         |
    |                  | Reported separately for input-side             |
-   |                  | (prefill) TPS and output-side (decode)         |
-   |                  | TPS.                                           |
+   |                  | (prefill) TPS and output-side (decode) TPS.    |
    +------------------+------------------------------------------------+
    | *KV Cache*       | Key-Value Cache.  The intermediate             |
    |                  | attention state (key and value projection      |
@@ -1061,19 +1061,19 @@ Table of Contents
    |                  | configuration MUST be reported in all          |
    |                  | benchmark results.                             |
    +------------------+------------------------------------------------+
-   | *Prefill Phase*  | The compute-bound phase of LLM inference       |
-   |                  | in which the entire input prompt is            |
-   |                  | processed in parallel to generate the KV       |
-   |                  | cache and the first output token.              |
-   |                  | Characterized by high arithmetic intensity     |
-   |                  | and high accelerator utilization; values       |
-   |                  | in the range of 200–400 ops/byte and           |
-   |                  | 90–95% utilization are commonly observed       |
-   |                  | on current-generation hardware, but these      |
-   |                  | are illustrative and vary with model,          |
-   |                  | batch size, and accelerator, and are not       |
-   |                  | part of the definition.  Prefill latency       |
-   |                  | dominates TTFT for long prompts.               |
+   | *Prefill Phase*  | The compute-bound phase of LLM inference in    |
+   |                  | which the entire input prompt is processed     |
+   |                  | in parallel to generate the KV cache and       |
+   |                  | the first output token.  Characterized by      |
+   |                  | high arithmetic intensity and high             |
+   |                  | accelerator utilization; values in the         |
+   |                  | range of 200–400 ops/byte and 90–95%           |
+   |                  | utilization are commonly observed on           |
+   |                  | current-generation hardware, but these are     |
+   |                  | illustrative and vary with model, batch        |
+   |                  | size, and accelerator, and are not part of     |
+   |                  | the definition.  Prefill latency dominates     |
+   |                  | TTFT for long prompts.                         |
    +------------------+------------------------------------------------+
    | *Decode Phase*   | The memory-bandwidth-bound phase of LLM        |
    |                  | inference in which output tokens are           |
@@ -1093,10 +1093,10 @@ Table of Contents
    | Serving*         | the prefill phase and decode phase are         |
    |                  | executed on physically separate groups of      |
    |                  | accelerators (workers), connected by a         |
-   |                  | network fabric.  Allows independent            |
-   |                  | scaling of prefill and decode resources        |
-   |                  | (xPyD) but introduces KV cache transfer as     |
-   |                  | a fabric-critical data movement.               |
+   |                  | network fabric.  Allows independent scaling    |
+   |                  | of prefill and decode resources (xPyD) but     |
+   |                  | introduces KV cache transfer as a fabric-      |
+   |                  | critical data movement.                        |
    +------------------+------------------------------------------------+
    | *xPyD Ratio*     | The allocation ratio of x prefill workers      |
    |                  | to y decode workers in a disaggregated         |
@@ -1109,24 +1109,23 @@ Table of Contents
    |                  | prompt/output length distributions, and        |
    |                  | TTFT/ITL SLO targets.                          |
    +------------------+------------------------------------------------+
-   | *Continuous      | [ORCA-PAPER] A dynamic inference               |
-   | Batching*        | scheduling technique that inserts new          |
-   |                  | requests into an active decode batch as        |
-   |                  | slots become available (without waiting        |
-   |                  | for the current batch to complete),            |
-   |                  | improving accelerator utilization compared     |
-   |                  | to static batching.  Generates variable        |
-   |                  | batch sizes that affect fabric traffic         |
-   |                  | burstiness.                                    |
+   | *Continuous      | [ORCA-PAPER] A dynamic inference scheduling    |
+   | Batching*        | technique that inserts new requests into an    |
+   |                  | active decode batch as slots become            |
+   |                  | available (without waiting for the current     |
+   |                  | batch to complete), improving accelerator      |
+   |                  | utilization compared to static batching.       |
+   |                  | Generates variable batch sizes that affect     |
+   |                  | fabric traffic burstiness.                     |
    +------------------+------------------------------------------------+
    | *PagedAttention* | [PAGEDATTENTION-PAPER] A KV cache memory       |
-   |                  | management technique storing attention         |
-   |                  | keys and values in fixed-size, non-            |
-   |                  | contiguous virtual pages (typically 16–64      |
-   |                  | KB), inspired by OS virtual memory             |
-   |                  | management.  Reduces memory fragmentation      |
-   |                  | and enables efficient KV cache sharing         |
-   |                  | across requests with common prefixes.          |
+   |                  | management technique storing attention keys    |
+   |                  | and values in fixed-size, non-contiguous       |
+   |                  | virtual pages (typically 16–64 KB),            |
+   |                  | inspired by OS virtual memory management.      |
+   |                  | Reduces memory fragmentation and enables       |
+   |                  | efficient KV cache sharing across requests     |
+   |                  | with common prefixes.                          |
    +------------------+------------------------------------------------+
    | *Prefix Caching* | Reuse of previously computed KV cache          |
    |                  | segments for inference requests sharing a      |
@@ -1146,47 +1145,49 @@ Table of Contents
    |                  | the cost of higher per-dispatch latency.       |
    +------------------+------------------------------------------------+
    | *Low-Latency     | [DEEPEP] An AllToAll MoE dispatch              |
-   | Dispatch*        | communication mode optimized for the           |
-   |                  | decode phase.  Payload sizes are padded to     |
-   |                  | fixed maximum dimensions (compatible with      |
-   |                  | static graph capture), enabling lower          |
-   |                  | kernel-launch overhead at the cost of          |
-   |                  | slight bandwidth inefficiency.  Target: <      |
-   |                  | 200 µs per dispatch round trip.                |
+   | Dispatch*        | communication mode optimized for the decode    |
+   |                  | phase.  Payload sizes are padded to fixed      |
+   |                  | maximum dimensions (compatible with static     |
+   |                  | graph capture), enabling lower kernel-         |
+   |                  | launch overhead at the cost of slight          |
+   |                  | bandwidth inefficiency.  Target: < 200 µs      |
+   |                  | per dispatch round trip.                       |
    +------------------+------------------------------------------------+
    | *Expert Choice   | [EXPERT-CHOICE-PAPER] A token routing          |
    | Routing*         | strategy in which experts select which         |
    |                  | tokens to process, rather than tokens          |
-   |                  | selecting experts.  Each expert accepts        |
-   |                  | its top-C tokens by affinity score,            |
-   |                  | producing perfect load balance but non-        |
-   |                  | uniform AllToAll message sizes across EP       |
-   |                  | ranks.                                         |
+   |                  | selecting experts.  Each expert accepts its    |
+   |                  | top-C tokens by affinity score, producing      |
+   |                  | perfect load balance but non-uniform           |
+   |                  | AllToAll message sizes across EP ranks.        |
    +------------------+------------------------------------------------+
    | *Auxiliary Loss  | A top-k routing variant that adds a load-      |
-   | Top-k*           | balancing auxiliary loss during training       |
-   |                  | to encourage uniform token distribution        |
-   |                  | across experts.  Produces near-uniform         |
-   |                  | AllToAll traffic in inference and reduces      |
-   |                  | hot-spot risk on the fabric.                   |
+   | Top-k*           | balancing auxiliary loss during training to    |
+   |                  | encourage uniform token distribution across    |
+   |                  | experts.  Produces near-uniform AllToAll       |
+   |                  | traffic in inference and reduces hot-spot      |
+   |                  | risk on the fabric.                            |
    +------------------+------------------------------------------------+
    | *Top-k with      | A top-k routing variant in which tokens        |
-   | Token Drop*      | destined for overloaded experts are            |
-   |                  | dropped or redirected to a fallback.           |
-   |                  | Reduces worst-case dispatch traffic volume     |
-   |                  | at the cost of model output quality under      |
-   |                  | load.                                          |
+   | Token Drop*      | destined for overloaded experts are dropped    |
+   |                  | or redirected to a fallback.  Reduces          |
+   |                  | worst-case dispatch traffic volume at the      |
+   |                  | cost of model output quality under load.       |
    +------------------+------------------------------------------------+
-   | *T_dispatch*     | The dispatch payload per accelerator per       |
-   |                  | MoE layer, computed as: T_dispatch = (B ×      |
-   |                  | k × H_model × P_bytes) / N where B = per-      |
-   |                  | GPU batch size (tokens), k = top-k routing     |
-   |                  | count, H_model = hidden dimension, P_bytes     |
-   |                  | = bytes per element (BF16=2, FP8=1), N =       |
-   |                  | EP group size.  Used as the canonical          |
-   |                  | traffic volume parameter in the MoE test       |
-   |                  | matrix (see Section 7.1 of the companion       |
-   |                  | inference benchmarking draft).                 |
+   | *T_dispatch*     | The dispatch payload per source-destination    |
+   |                  | accelerator pair per MoE layer, computed       |
+   |                  | as: T_dispatch = (B × k × H_model ×            |
+   |                  | P_bytes) / N where B = per-GPU batch size      |
+   |                  | (tokens), k = top-k routing count, H_model     |
+   |                  | = hidden dimension, P_bytes = bytes per        |
+   |                  | element (BF16=2, FP8=1), N = EP group size.    |
+   |                  | The corresponding total egress per             |
+   |                  | accelerator per MoE layer, summed over its     |
+   |                  | N-1 destination peers, is T_dispatch × (N -    |
+   |                  | 1), defined as T_egress in the companion       |
+   |                  | inference benchmarking document.  Used as      |
+   |                  | the canonical traffic volume parameter in      |
+   |                  | that document's MoE test matrix.               |
    +------------------+------------------------------------------------+
    | *SLO*            | Service Level Objective.  A quantitative       |
    |                  | target for an inference serving KPI.  AI       |
@@ -1197,35 +1198,36 @@ Table of Contents
    +------------------+------------------------------------------------+
    | *Speculative     | [SPEC-DECODE-PAPER] An inference               |
    | Decoding*        | acceleration technique using a small draft     |
-   |                  | model to generate candidate token              |
-   |                  | sequences verified in parallel by the          |
-   |                  | target model.  Reduces effective ITL but       |
-   |                  | generates bursty, variable-length KV cache     |
-   |                  | traffic; noted as a future benchmarking        |
-   |                  | area not fully specified in the current        |
-   |                  | companion documents.                           |
+   |                  | model to generate candidate token sequences    |
+   |                  | verified in parallel by the target model.      |
+   |                  | Reduces effective ITL but generates bursty,    |
+   |                  | variable-length KV cache traffic; noted as     |
+   |                  | a future benchmarking area not fully           |
+   |                  | specified in the current companion             |
+   |                  | documents.                                     |
    +------------------+------------------------------------------------+
    | *S_KV*           | The total size in bytes of the KV cache        |
    |                  | state generated by a single inference          |
    |                  | request across all transformer layers and      |
-   |                  | all context tokens, computed as: S_KV = 2      |
-   |                  | × L × H_kv × D × C × P_bytes.  Where: L =      |
-   |                  | number of transformer layers; H_kv =           |
-   |                  | number of KV attention heads per layer         |
-   |                  | (H_kv ≤ H_total for GQA/MQA); D = per-head     |
-   |                  | key/value dimension (head_dim), typically      |
+   |                  | all context tokens, computed as: S_KV = 2 ×    |
+   |                  | L × H_kv × D × C × P_bytes.  Where: L =        |
+   |                  | number of transformer layers; H_kv = number    |
+   |                  | of KV attention heads per layer (H_kv ≤        |
+   |                  | H_total for GQA/MQA); D = per-head key/        |
+   |                  | value dimension (head_dim), typically          |
    |                  | model_dim / H_total; C = context length in     |
-   |                  | tokens (prompt + generated tokens);            |
-   |                  | P_bytes = precision in bytes per element       |
-   |                  | (FP16/BF16 = 2, FP8/INT8 = 1); Factor 2        |
-   |                  | accounts for both K and V tensors, each of     |
-   |                  | shape [H_kv, D] per layer per token.           |
+   |                  | tokens (prompt + generated tokens); P_bytes    |
+   |                  | = precision in bytes per element (FP16/BF16    |
+   |                  | = 2, FP8/INT8 = 1); Factor 2 accounts for      |
+   |                  | both K and V tensors, each of shape [H_kv,     |
+   |                  | D] per layer per token.                        |
    +------------------+------------------------------------------------+
 
                      Table 11: Inference-Specific Terms
 
-   See Section 7.1 of [I-D.calabria-bmwg-ai-fabric-inference-bench] for
-   the MoE test matrix referenced by T_dispatch above.
+   See the Canonical MoE Test Matrix in the AllToAll Dispatch Throughput
+   test of [I-D.calabria-bmwg-ai-fabric-inference-bench] for the test
+   matrix referenced by T_dispatch above.
 
 9.1.  Inference Phase Characteristics
 
@@ -1430,10 +1432,12 @@ Table of Contents
    and MUST NOT be connected to devices that may forward the test
    traffic into a production network or misroute traffic to the test
    management network.  This isolation requirement is particularly
-   important for AI fabric benchmarking because the lossless transport
-   modes referenced in Table 7 (PFC, DCQCN) and in Table 5 (CBFC)
-   propagate congestion hop-by-hop and can extend the blast radius of a
-   misconfigured test beyond the immediate DUT.
+   important for AI fabric benchmarking because the hop-by-hop flow-
+   control mechanisms referenced in Table 7 (PFC) and in Table 5 (CBFC)
+   propagate backpressure toward traffic sources and can extend the
+   blast radius of a misconfigured test beyond the immediate DUT; DCQCN
+   (Table 7) reduces, but does not eliminate, reliance on these
+   mechanisms.
 
    Benchmarking is performed on a "black-box" basis, relying solely on
    measurements observable external to the DUT or SUT as defined in
@@ -1536,7 +1540,11 @@ Acronyms
     +---------+-------------------------------------------------------+
     | ICRC    | Invariant CRC                                         |
     +---------+-------------------------------------------------------+
+    | ImmDt   | Immediate Data                                        |
+    +---------+-------------------------------------------------------+
     | INT     | In-band Network Telemetry                             |
+    +---------+-------------------------------------------------------+
+    | IRN     | Improved RoCE NIC                                     |
     +---------+-------------------------------------------------------+
     | ITL     | Inter-Token Latency                                   |
     +---------+-------------------------------------------------------+
@@ -1553,6 +1561,8 @@ Acronyms
     | LLR     | Link Layer Retry                                      |
     +---------+-------------------------------------------------------+
     | MAC     | Media Access Control                                  |
+    +---------+-------------------------------------------------------+
+    | MHA     | Multi-Head Attention                                  |
     +---------+-------------------------------------------------------+
     | ML      | Machine Learning                                      |
     +---------+-------------------------------------------------------+
@@ -1594,6 +1604,8 @@ Acronyms
     +---------+-------------------------------------------------------+
     | RDMA    | Remote Direct Memory Access                           |
     +---------+-------------------------------------------------------+
+    | RETH    | RDMA Extended Transport Header                        |
+    +---------+-------------------------------------------------------+
     | RoCEv2  | RDMA over Converged Ethernet version 2                |
     +---------+-------------------------------------------------------+
     | ROD     | Reliable Ordered Delivery                             |
@@ -1614,6 +1626,8 @@ Acronyms
     +---------+-------------------------------------------------------+
     | TCAM    | Ternary Content-Addressable Memory                    |
     +---------+-------------------------------------------------------+
+    | TG      | Traffic Generator                                     |
+    +---------+-------------------------------------------------------+
     | ToR     | Top-of-Rack                                           |
     +---------+-------------------------------------------------------+
     | TP      | Tensor Parallelism                                    |
@@ -1633,6 +1647,8 @@ Acronyms
     | VLAN    | Virtual LAN                                           |
     +---------+-------------------------------------------------------+
     | VOQ     | Virtual Output Queue                                  |
+    +---------+-------------------------------------------------------+
+    | WE      | Workload Emulator                                     |
     +---------+-------------------------------------------------------+
     | XPU     | accelerator processing unit (generic)                 |
     +---------+-------------------------------------------------------+
@@ -1781,11 +1797,11 @@ Appendix A: Term Cross-Reference to Companion Documents
    | Strategies (§4)    | MoE, ZeRO         |                         |
    +--------------------+-------------------+-------------------------+
    | RDMA / RoCEv2      | RDMA, RoCEv2, QP, | RDMA, RoCEv2, QP, RC    |
-   | (§5.1)             | RC mode, RDMA     | mode                    |
-   |                    | Verb              |                         |
+   | (§5.1)             | RC mode, RDMA     | mode, UET, PDC, ROD     |
+   |                    | Verb, UET, PDC,   |                         |
+   |                    | ROD               |                         |
    +--------------------+-------------------+-------------------------+
-   | UET Terms (§5.2)   | UET, PDC, ROD,    | UET, RUD, GIN           |
-   |                    | RUD, RUDI, UUD,   |                         |
+   | UET Terms (§5.2)   | RUD, RUDI, UUD,   | RUD, GIN                |
    |                    | LLR, Packet       |                         |
    |                    | Trimming, PRI,    |                         |
    |                    | CBFC, UEC         |                         |
@@ -1829,8 +1845,8 @@ Appendix A: Term Cross-Reference to Companion Documents
    |                    |                   | Auxiliary Loss Top-k,   |
    |                    |                   | T_dispatch, S_KV, SLO   |
    +--------------------+-------------------+-------------------------+
-   | KPI Classification | Primary KPI (JCT  | Primary KPI (TTFT,      |
-   | (§10)              | Ratio, BusBW),    | ITL), Secondary KPI,    |
+   | KPI Classification | Primary KPI (JCT  | Primary KPI (TTFT, ITL, |
+   | (§10)              | Ratio, BusBW),    | TPS), Secondary KPI,    |
    |                    | Secondary KPI,    | FHI, Goodput, Zero      |
    |                    | FHI, Goodput,     | Packet Loss             |
    |                    | Zero Packet Loss  |                         |
@@ -1847,7 +1863,7 @@ Appendix B: Term Taxonomy Summary
    +=========+====================================+====================+
    | Section | Term(s)                            | Category           |
    +=========+====================================+====================+
-   | 2       | DUT, SUT, RT, JFI, Offered Load,   | General            |
+   | 2       | DUT, SUT, TG, JFI, Offered Load,   | General            |
    |         | Trial Duration, Warmup Period,     | Benchmarking       |
    |         | Binary Search, Percentile          |                    |
    |         | Latency, AI Fabric                 |                    |

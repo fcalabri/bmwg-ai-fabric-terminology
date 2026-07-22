@@ -1081,7 +1081,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Calabria, et al.</td>
-<td class="center">Expires 22 January 2027</td>
+<td class="center">Expires 23 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1094,12 +1094,12 @@ svg {
 <dd class="internet-draft">draft-calabria-bmwg-ai-fabric-terminology-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-21" class="published">21 July 2026</time>
+<time datetime="2026-07-22" class="published">22 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-22">22 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-23">23 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1177,7 +1177,7 @@ for general network benchmarking.<a href="#section-abstract-2" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1435,7 +1435,7 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
-              <strong>RT</strong>
+              <strong>TG</strong>
 </td>
             <td class="text-left" rowspan="1" colspan="1">Traffic Generator. Test equipment capable of generating and receiving network traffic at specified rates with nanosecond-resolution timestamping sufficient for the measurements defined in the companion methodology documents.</td>
           </tr>
@@ -1670,7 +1670,7 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>RoCEv2</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Reliable Connected (RC) mode recovers packet loss via PSN-based retransmission, so losslessness is a performance necessity rather than a strict correctness requirement; lossless fabric operation (PFC or equivalent) is nonetheless the deployed norm because loss-driven retransmission incurs a substantial latency and throughput penalty at scale (cf. loss-resilient RoCE variants such as IRN). Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
+              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Reliable Connected (RC) mode recovers packet loss via PSN-based retransmission, so losslessness is a performance necessity rather than a strict correctness requirement; lossless fabric operation (PFC or equivalent) is nonetheless the deployed norm because loss-driven retransmission incurs a substantial latency and throughput penalty at scale (cf. loss-resilient RoCE variants such as Improved RoCE NIC (IRN)). Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -2315,7 +2315,7 @@ benchmarking work, and are not currently referenced by that document.<a href="#s
             <td class="text-left" rowspan="1" colspan="1">
               <strong>T_dispatch</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The dispatch payload per accelerator per MoE layer, computed as: T_dispatch = (B × k × H_model × P_bytes) / N where B = per-GPU batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. Used as the canonical traffic volume parameter in the MoE test matrix (see Section 7.1 of the companion inference benchmarking draft).</td>
+            <td class="text-left" rowspan="1" colspan="1">The dispatch payload per source-destination accelerator pair per MoE layer, computed as: T_dispatch = (B × k × H_model × P_bytes) / N where B = per-GPU batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. The corresponding total egress per accelerator per MoE layer, summed over its N-1 destination peers, is T_dispatch × (N - 1), defined as T_egress in the companion inference benchmarking document. Used as the canonical traffic volume parameter in that document's MoE test matrix.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2339,7 +2339,7 @@ benchmarking work, and are not currently referenced by that document.<a href="#s
         </tbody>
       </table>
 </div>
-<p id="section-9-3">See Section 7.1 of <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span> for the MoE test matrix referenced by T_dispatch above.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<p id="section-9-3">See the Canonical MoE Test Matrix in the AllToAll Dispatch Throughput test of <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span> for the test matrix referenced by T_dispatch above.<a href="#section-9-3" class="pilcrow">¶</a></p>
 <div id="inference-phase-characteristics">
 <section id="section-9.1">
         <h3 id="name-inference-phase-characteris">
@@ -2566,7 +2566,7 @@ across the companion documents are listed in the Acronyms appendix
       </h2>
 <p id="section-13-1">This document defines terminology and does not specify any protocol mechanism. It therefore introduces no new protocol-level security considerations beyond those of the underlying technologies it references. The considerations below follow the BMWG convention established in <span>[<a href="#RFC8238" class="cite xref">RFC8238</a>]</span> and apply to any benchmarking activity conducted using the terms defined herein.<a href="#section-13-1" class="pilcrow">¶</a></p>
 <p id="section-13-2">Benchmarking activities as described in the companion methodology documents are limited to technology characterization of AI fabrics using controlled stimuli in a laboratory environment, with dedicated address space and the constraints specified in those documents.<a href="#section-13-2" class="pilcrow">¶</a></p>
-<p id="section-13-3">The benchmarking network topology will be an independent test setup and <span class="bcp14">MUST NOT</span> be connected to devices that may forward the test traffic into a production network or misroute traffic to the test management network. This isolation requirement is particularly important for AI fabric benchmarking because the lossless transport modes referenced in <a href="#tab-congest-control" class="auto internal xref">Table 7</a> (PFC, DCQCN) and in <a href="#tab-uet" class="auto internal xref">Table 5</a> (CBFC) propagate congestion hop-by-hop and can extend the blast radius of a misconfigured test beyond the immediate DUT.<a href="#section-13-3" class="pilcrow">¶</a></p>
+<p id="section-13-3">The benchmarking network topology will be an independent test setup and <span class="bcp14">MUST NOT</span> be connected to devices that may forward the test traffic into a production network or misroute traffic to the test management network. This isolation requirement is particularly important for AI fabric benchmarking because the hop-by-hop flow-control mechanisms referenced in <a href="#tab-congest-control" class="auto internal xref">Table 7</a> (PFC) and in <a href="#tab-uet" class="auto internal xref">Table 5</a> (CBFC) propagate backpressure toward traffic sources and can extend the blast radius of a misconfigured test beyond the immediate DUT; DCQCN (<a href="#tab-congest-control" class="auto internal xref">Table 7</a>) reduces, but does not eliminate, reliance on these mechanisms.<a href="#section-13-3" class="pilcrow">¶</a></p>
 <p id="section-13-4">Benchmarking is performed on a "black-box" basis, relying solely on measurements observable external to the DUT or SUT as defined in <a href="#tab-gen-bench" class="auto internal xref">Table 1</a>.<a href="#section-13-4" class="pilcrow">¶</a></p>
 <p id="section-13-5">Special capabilities <span class="bcp14">SHOULD NOT</span> exist in the DUT specifically for benchmarking purposes. Any implications for network security arising from the DUT <span class="bcp14">SHOULD</span> be identical in the lab and in production networks. In particular, RDMA memory-region permissions and KV cache telemetry exposure are properties of the deployed configuration, not of the benchmarking methodology, and <span class="bcp14">SHOULD</span> reflect production posture during testing. Synthetic inputs <span class="bcp14">SHOULD</span> be used for the inference benchmarks referencing the KV Cache and S_KV terms in <a href="#tab-infer-specific" class="auto internal xref">Table 11</a> so that no production prompt content is processed in the test environment.<a href="#section-13-5" class="pilcrow">¶</a></p>
 </section>
@@ -2740,8 +2740,16 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Invariant CRC</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">ImmDt</td>
+            <td class="text-left" rowspan="1" colspan="1">Immediate Data</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">INT</td>
             <td class="text-left" rowspan="1" colspan="1">In-band Network Telemetry</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">IRN</td>
+            <td class="text-left" rowspan="1" colspan="1">Improved RoCE NIC</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">ITL</td>
@@ -2774,6 +2782,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">MAC</td>
             <td class="text-left" rowspan="1" colspan="1">Media Access Control</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">MHA</td>
+            <td class="text-left" rowspan="1" colspan="1">Multi-Head Attention</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">ML</td>
@@ -2856,6 +2868,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Remote Direct Memory Access</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">RETH</td>
+            <td class="text-left" rowspan="1" colspan="1">RDMA Extended Transport Header</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">RoCEv2</td>
             <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2</td>
           </tr>
@@ -2896,6 +2912,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Ternary Content-Addressable Memory</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">TG</td>
+            <td class="text-left" rowspan="1" colspan="1">Traffic Generator</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">ToR</td>
             <td class="text-left" rowspan="1" colspan="1">Top-of-Rack</td>
           </tr>
@@ -2934,6 +2954,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">VOQ</td>
             <td class="text-left" rowspan="1" colspan="1">Virtual Output Queue</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">WE</td>
+            <td class="text-left" rowspan="1" colspan="1">Workload Emulator</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">XPU</td>
@@ -3099,13 +3123,13 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">RDMA / RoCEv2 (§5.1)</td>
-            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode, RDMA Verb</td>
-            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode</td>
+            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode, RDMA Verb, UET, PDC, ROD</td>
+            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode, UET, PDC, ROD</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">UET Terms (§5.2)</td>
-            <td class="text-left" rowspan="1" colspan="1">UET, PDC, ROD, RUD, RUDI, UUD, LLR, Packet Trimming, PRI, CBFC, UEC Profile, Entropy Value</td>
-            <td class="text-left" rowspan="1" colspan="1">UET, RUD, GIN</td>
+            <td class="text-left" rowspan="1" colspan="1">RUD, RUDI, UUD, LLR, Packet Trimming, PRI, CBFC, UEC Profile, Entropy Value</td>
+            <td class="text-left" rowspan="1" colspan="1">RUD, GIN</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Congestion Control (§6)</td>
@@ -3130,7 +3154,7 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
           <tr>
             <td class="text-left" rowspan="1" colspan="1">KPI Classification (§10)</td>
             <td class="text-left" rowspan="1" colspan="1">Primary KPI (JCT Ratio, BusBW), Secondary KPI, FHI, Goodput, Zero Packet Loss</td>
-            <td class="text-left" rowspan="1" colspan="1">Primary KPI (TTFT, ITL), Secondary KPI, FHI, Goodput, Zero Packet Loss</td>
+            <td class="text-left" rowspan="1" colspan="1">Primary KPI (TTFT, ITL, TPS), Secondary KPI, FHI, Goodput, Zero Packet Loss</td>
           </tr>
         </tbody>
       </table>
@@ -3161,7 +3185,7 @@ definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">2</td>
-            <td class="text-left" rowspan="1" colspan="1">DUT, SUT, RT, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, AI Fabric</td>
+            <td class="text-left" rowspan="1" colspan="1">DUT, SUT, TG, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, AI Fabric</td>
             <td class="text-left" rowspan="1" colspan="1">General Benchmarking</td>
           </tr>
           <tr>
