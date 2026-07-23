@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-21T02:34:27.172138+00:00",
+  "timestamp": "2026-07-23T02:38:26.846041+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -457,7 +457,7 @@
       "id": "I_kwDORX8iVs8AAAABJfMnjw",
       "title": "AI Fabric definition mandates non-blocking Clos, contradicted by Oversubscription Ratio",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/42",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -466,8 +466,8 @@
       "labels": [],
       "body": "Actually found and reported by @ayourtch (Andrew Yourtchenko) in his review of the -03 draft set (Major finding [F01]):\n\nThe **AI Fabric** definition says: \"Implemented as a non-blocking Clos (fat-tree) topology running RoCEv2 or UET.\" But the doc's own **Oversubscription Ratio** entry explicitly allows 2:1/4:1 oversubscription \"for inference fabrics\" \u2014 such a fabric would fail its own AI Fabric definition.\n\nFix: make topology descriptive rather than mandatory.",
       "createdAt": "2026-07-20T18:00:50Z",
-      "updatedAt": "2026-07-20T23:08:16Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-21T15:32:51Z",
+      "closedAt": "2026-07-21T15:32:51Z",
       "comments": [
         {
           "author": "cpignata",
@@ -483,7 +483,7 @@
       "id": "I_kwDORX8iVs8AAAABJfMpbw",
       "title": "Oversubscription Ratio and Bisection Bandwidth definitions mutually inconsistent",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -492,8 +492,8 @@
       "labels": [],
       "body": "Actually found and reported by @ayourtch (Andrew Yourtchenko) in his review of the -03 draft set (Major finding [F02]):\n\nPer the **Bisection Bandwidth** entry, a non-blocking fabric's bisection bandwidth equals half the total edge bandwidth, i.e. edge:bisection = 2:1. But the **Oversubscription Ratio** entry says a 1:1 ratio (of the same edge/bisection quantities) is non-blocking \u2014 a direct contradiction.\n\nFix: redefine Oversubscription Ratio using the conventional leaf downlink:uplink definition, and note explicitly that it is distinct from the edge-to-bisection-bandwidth ratio.",
       "createdAt": "2026-07-20T18:00:54Z",
-      "updatedAt": "2026-07-20T23:08:19Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-21T15:32:52Z",
+      "closedAt": "2026-07-21T15:32:52Z",
       "comments": [
         {
           "author": "cpignata",
@@ -509,7 +509,7 @@
       "id": "I_kwDORX8iVs8AAAABJfMyPA",
       "title": "Zero Packet Loss target for UET contradicts its designed-for-lossy operation",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/44",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -518,8 +518,8 @@
       "labels": [],
       "body": "Actually found and reported by @ayourtch (Andrew Yourtchenko) in his review of the -03 draft set (Major finding [F03]):\n\n**Zero Packet Loss** says \"For RoCEv2 and UET transports, zero packet loss is the target operating condition.\" This contradicts UET's designed-for-lossy operation (RUD retransmission across sprayed paths, packet trimming deliberately truncating packets), and conflates wire-level with application-visible loss.\n\nFix: restrict the zero-loss criterion to lossless RoCEv2 and define UET's loss treatment (zero application-visible loss, depending on transport service) separately.",
       "createdAt": "2026-07-20T18:01:09Z",
-      "updatedAt": "2026-07-20T23:08:22Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-21T15:32:52Z",
+      "closedAt": "2026-07-21T15:32:52Z",
       "comments": [
         {
           "author": "cpignata",
@@ -535,7 +535,7 @@
       "id": "I_kwDORX8iVs8AAAABJfM0Tw",
       "title": "RoCEv2 \"requires lossless fabric operation for correctness\" is wrong",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/45",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -544,8 +544,8 @@
       "labels": [],
       "body": "Actually found and reported by @ayourtch (Andrew Yourtchenko) in his review of the -03 draft set (Major finding [F06]):\n\n**RoCEv2** says it \"requires lossless fabric operation (PFC or equivalent) for correctness.\" This is technically wrong: Reliable Connected (RC) mode recovers loss via PSN-based go-back-N retransmission; losslessness is a performance necessity, not a correctness requirement (cf. Resilient RoCE, IRN). The companion tests themselves run RoCEv2 under loss.\n\nFix: reword to reflect losslessness as a performance necessity rather than a correctness requirement.",
       "createdAt": "2026-07-20T18:01:12Z",
-      "updatedAt": "2026-07-20T23:08:25Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-21T15:32:52Z",
+      "closedAt": "2026-07-21T15:32:52Z",
       "comments": [
         {
           "author": "cpignata",
@@ -561,7 +561,7 @@
       "id": "I_kwDORX8iVs8AAAABJfM6Og",
       "title": "Entropy Value carriage misdescribed vs UEC 1.0 specification",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/46",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -570,8 +570,8 @@
       "labels": [],
       "body": "Actually found and reported by @ayourtch (Andrew Yourtchenko) in his review of the -03 draft set (Major finding [F07]):\n\n**Entropy Value** was described as \"A per-packet field in the UET header ... providing explicit spray entropy independent of the IP 5-tuple.\" This is externally verified wrong against the published UEC 1.0 materials: the Entropy Value is carried in the UDP source port (or the equivalent position in IP-only mode), which IS part of the IP 5-tuple. Test equipment built from the old definition would vary the wrong bytes.\n\nVerified directly against the UEC 1.0.2 specification PDF before fixing (direct quote: \"When UDP encapsulation is used, the udp.src_port field is used as the entropy\").\n\nFix: corrected to reflect the entropy value is carried in the UDP source port field (or PDS Entropy Header in IP-only mode), as part of the 5-tuple.",
       "createdAt": "2026-07-20T18:01:26Z",
-      "updatedAt": "2026-07-20T23:08:28Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-21T15:32:53Z",
+      "closedAt": "2026-07-21T15:32:53Z",
       "comments": [
         {
           "author": "cpignata",
@@ -581,6 +581,42 @@
           "updatedAt": "2026-07-20T18:01:27Z"
         }
       ]
+    },
+    {
+      "number": 48,
+      "id": "I_kwDORX8iVs8AAAABJog9Xg",
+      "title": "Not all inference-specific terms are actually used in the inference draft",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/48",
+      "state": "CLOSED",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "cpignata"
+      ],
+      "labels": [],
+      "body": "Section 9 says these terms \"are used normatively in\" the inference benchmarking draft. Expert Choice Routing, Speculative Decoding and PagedAttention don't appear in it at all.\n\nEither drop them or soften the claim.\n\nFound by @ayourtch in his -03 review (F51).",
+      "createdAt": "2026-07-21T17:24:17Z",
+      "updatedAt": "2026-07-22T09:57:11Z",
+      "closedAt": "2026-07-22T09:57:11Z",
+      "comments": []
+    },
+    {
+      "number": 49,
+      "id": "I_kwDORX8iVs8AAAABJog-QQ",
+      "title": "Empirical numbers in definitions read as if they were definitional",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/49",
+      "state": "CLOSED",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "cpignata"
+      ],
+      "labels": [],
+      "body": "A few figures are stated inside definitions as if they were part of the definition:\n\n- Prefill 200-400 ops/byte, 90-95% utilization\n- Decode 60-80 ops/byte, 20-40% utilization\n- Flowlet gap 500 ns - 2 us\n- GIN saving \"several microseconds\"\n\nThese all depend on model, batch size and hardware, and will age badly. Mark them illustrative.\n\nFound by @ayourtch in his -03 review (F28).",
+      "createdAt": "2026-07-21T17:24:19Z",
+      "updatedAt": "2026-07-22T09:57:11Z",
+      "closedAt": "2026-07-22T09:57:11Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -1862,26 +1898,113 @@
       "id": "PR_kwDORX8iVs7z_RMD",
       "title": "Fix five Major findings from Andrew Yourtchenko's review",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Summary\n\nFixes the five Major findings from Andrew Yourtchenko's review of the -03 draft set that weren't included in the earlier editorial PR (#41, already merged).\n\n- AI Fabric definition mandated non-blocking Clos, contradicted by the doc's own Oversubscription Ratio entry allowing 2:1/4:1 for inference fabrics; made topology descriptive rather than mandatory. Closes #42\n- Oversubscription Ratio and Bisection Bandwidth were mutually inconsistent; Oversubscription Ratio now uses the conventional leaf downlink:uplink definition and explicitly notes the distinction. Closes #43\n- Zero Packet Loss listed UET's target as zero wire-level loss, contradicting UET's designed-for-lossy operation (RUD retransmission, packet trimming); restricted the zero-loss criterion to RoCEv2 and defined UET's loss treatment separately. Closes #44\n- RoCEv2 \"requires lossless fabric operation for correctness\" was wrong; RC recovers loss via PSN-based retransmission, so losslessness is a performance necessity, not a correctness requirement. Closes #45\n- Entropy Value was described as independent of the IP 5-tuple; verified against the UEC 1.0.2 specification (direct quote: \"the udp.src_port field is used as the entropy\") and corrected to reflect it is carried in the UDP source port field. Closes #46",
       "createdAt": "2026-07-20T18:14:06Z",
-      "updatedAt": "2026-07-20T18:14:07Z",
+      "updatedAt": "2026-07-21T17:01:34Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "94a674dd429148705165cb997361c03effed97ff",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "carlos-major-issues-1",
       "headRefOid": "30c3f4bde9366815c8a18b8acc15385ed3aa2727",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-07-21T15:32:50Z",
+      "mergedAt": "2026-07-21T15:32:50Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "acb67391f36197b085f8ccd19947380ed865db67"
+      },
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "looks great, nothing to add on this one ",
+          "createdAt": "2026-07-21T15:32:45Z",
+          "updatedAt": "2026-07-21T15:32:45Z"
+        }
+      ],
       "reviews": []
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDORX8iVs70e-l_",
+      "title": "Third pass on Andrew's -03 review",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/50",
+      "state": "MERGED",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Two more from Andrew's review, both in the terminology tables.\n\n- Section 9 claimed all its inference terms are used normatively in the inference draft. Three of them aren't used there at all. Closes #48\n- The ops/byte, utilization, flowlet-gap and GIN latency figures were stated as if definitional. They depend on model, batch size and hardware, so they're now marked illustrative. Closes #49\n\nBuilds clean, idnits unchanged.",
+      "createdAt": "2026-07-21T17:25:15Z",
+      "updatedAt": "2026-07-22T09:57:12Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "acb67391f36197b085f8ccd19947380ed865db67",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "carlos-andrew-review-pass-3",
+      "headRefOid": "94ac0e404fddab44609e6d5b45293f4ea8ed1edb",
+      "closedAt": "2026-07-22T09:57:10Z",
+      "mergedAt": "2026-07-22T09:57:10Z",
+      "mergedBy": "cpignata",
+      "mergeCommit": {
+        "oid": "bcea9df5d50201beaf065fc1a4f85f05f75f7c71"
+      },
+      "comments": [
+        {
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@fcalabri , please review! :-)",
+          "createdAt": "2026-07-21T17:32:10Z",
+          "updatedAt": "2026-07-21T17:32:10Z"
+        },
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "see my last commit with comment - if you agree ",
+          "createdAt": "2026-07-21T20:24:43Z",
+          "updatedAt": "2026-07-21T20:24:43Z"
+        },
+        {
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Pushed d35284c on top of your commit.\n\nYou're right about Expert Choice, it's in there as \"Expert Choice (EC)\" and my grep for the full term missed it.\n\nPrefix Caching is referenced too though, section 9.2 is a whole test for it and Prefix_cache_hit_rate is a listed KPI. Only the exact capitalised string is missing. So I took it back out, which leaves Speculative Decoding and PagedAttention (both at zero occurrences) and makes the list exhaustive rather than an example.",
+          "createdAt": "2026-07-21T22:25:54Z",
+          "updatedAt": "2026-07-21T22:25:54Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs8AAAABGww7sQ",
+          "commit": {
+            "abbreviatedOid": "9d5b42b"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "\u2014UDP port 4793 assignment. Two \u201ciana registration pending\u201d statements were revised for both of the UET definitions: the \u201cUET definition\u201d now states \u201ciana-assigned to ultra ethernet transport\u201d, mirroring the other training document; and the \u201ciana considerations\u201d section still indicates there should be no iana action requested on this document (while documenting the assignment (2025\u201306\u201316)).\r\n\r\n\u2013 packet trimming recategorizes network-layer. The packet trimming was referred to as a \u201cUEC link layer behavior\u201d within the UET entry; however packet trimming is a congested switch forwarding behavior performed by the UEC at the network layer (as opposed to LLR/PRI/CBFC, which are true link layer behaviors, and therefore unaltered). Also \u201ctransmitter\u201d was changed to \u201c\u2026toward the receiver\u201d. The other training document is consistent with these changes.\r\n\r\n \u2013 KVCXL renamed kvtl. This renaming applies to three items: 1) the definition row in the definitions section, 2) the kvtl entry in the Acronyms appendix, and 3) kvtl as an item in the appendix b taxonomy. As previously stated, the coined term cxl (which means Compute Express Link) is used here with its standard meaning; and after the re-glossing of -03, it will be using its own expansion (\u201cKV Cache Transfer Library\u201d). Neither of the two training documents use either of these names anymore; therefore this change has zero cross-document impacts.",
+          "createdAt": "2026-07-21T20:24:12Z",
+          "updatedAt": "2026-07-21T20:24:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDORX8iVs8AAAABGx6V_A",
+          "commit": {
+            "abbreviatedOid": "bd69e98"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": " TERMINOLOGY T_dispatch (F04 residue): relabeled per source-destination\r\n  accelerator pair per MoE layer, matching the formula and the inference\r\n  companion; per-accelerator total stated as T_dispatch \u00d7 (N-1) (= T_egress in\r\n  the companion). Numeric \"Section 7.1\" citations replaced with named\r\n  references.\r\n\r\n- All three docs, Security Considerations: PFC/CBFC are the hop-by-hop\r\n  flow-control mechanisms that propagate backpressure; DCQCN (end-to-end CC)\r\n  no longer listed as a \"lossless transport mode\".\r\n\r\n- TERMINOLOGY acronyms/cross-refs: RT renamed TG (acronym now matches its\r\n  expansion); ImmDt, IRN, MHA, RETH, TG, WE added to the Acronyms appendix;\r\n  IRN expanded at first use; Appendix A corrected (UET/PDC/ROD attributed to\r\n  Section 5.1; PDC/ROD added to the inference column per actual usage;\r\n  Primary KPI row now includes TPS).\r\n\r\n- TRAINING/INFERENCE: \"Section 3/1.2 of TERMINOLOGY\" citations replaced with\r\n  named section references; inference generator heading updated to (TG).",
+          "createdAt": "2026-07-22T00:14:32Z",
+          "updatedAt": "2026-07-22T00:14:32Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
