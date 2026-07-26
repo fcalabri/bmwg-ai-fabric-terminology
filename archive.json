@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-23T02:38:26.846041+00:00",
+  "timestamp": "2026-07-26T02:41:02.120078+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -616,6 +616,22 @@
       "createdAt": "2026-07-21T17:24:19Z",
       "updatedAt": "2026-07-22T09:57:11Z",
       "closedAt": "2026-07-22T09:57:11Z",
+      "comments": []
+    },
+    {
+      "number": 52,
+      "id": "I_kwDORX8iVs8AAAABJ9aMKg",
+      "title": "Appendix A cross-reference table doesn't match actual term usage",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/52",
+      "state": "OPEN",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Andrew flagged (F50) that the Appendix A cross-reference table is out of sync with the companion docs. Checked it cell by cell against both:\n\n- DP/TP are listed under training-bench but appear zero times there \u2014 they're used in inference-bench's prefill/decode parallelism discussion\n- \"RDMA Verb\" is listed under training-bench, actually used in inference-bench\n- \"ToR\" and \"Buffer Occupancy\" don't appear literally in either doc (they use \"leaf switch\" and \"Buffer_utilization\")\n- \"Bisection BW\" was listed under both, only actually used in training-bench\n- \"Spine\" and \"Oversubscription\" are used in inference-bench but weren't listed\n\nSee #51",
+      "createdAt": "2026-07-23T22:16:10Z",
+      "updatedAt": "2026-07-23T22:16:22Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -2005,6 +2021,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDORX8iVs71l8ir",
+      "title": "Pass 4: cross-reference table accuracy fixes",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/51",
+      "state": "OPEN",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Summary\n\nFixes the Appendix A term cross-reference table so it matches actual usage in the two companion documents, per Andrew's review.\n\n- DP/TP moved from the Training column to Inference (0 occurrences in training-bench; used throughout inference-bench's prefill/decode layer)\n- RDMA Verb moved from Training to Inference (same reason)\n- ToR and Buffer Occupancy removed \u2014 neither term appears in either companion doc; both use \"leaf switch\" and \"Buffer_utilization\" respectively\n- Bisection BW removed from the Inference column (training-only)\n- Spine and Oversubscription added to the Inference column (both are used there but were missing)\n\n(F50)\n\nCloses #52",
+      "createdAt": "2026-07-23T22:15:42Z",
+      "updatedAt": "2026-07-23T22:16:24Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "bcea9df5d50201beaf065fc1a4f85f05f75f7c71",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "carlos-andrew-review-pass-4",
+      "headRefOid": "e7d5309ba47b835a0b23974367e4f2a459552f4a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
