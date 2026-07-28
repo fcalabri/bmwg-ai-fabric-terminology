@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 23 January 2027                            Blue Fern Consulting
+Expires: 29 January 2027                            Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                            22 July 2026
+                                                            28 July 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 January 2027.
+   This Internet-Draft will expire on 29 January 2027.
 
 Copyright Notice
 
@@ -1793,13 +1793,12 @@ Appendix A: Term Cross-Reference to Companion Documents
    |                    | AllToAll, BusBW,  |                         |
    |                    | CCL               |                         |
    +--------------------+-------------------+-------------------------+
-   | Parallelism        | DP, TP, PP, EP,   | EP, MoE, DP Attention   |
-   | Strategies (§4)    | MoE, ZeRO         |                         |
+   | Parallelism        | PP, EP, MoE, ZeRO | DP, TP, EP, MoE, DP     |
+   | Strategies (§4)    |                   | Attention               |
    +--------------------+-------------------+-------------------------+
    | RDMA / RoCEv2      | RDMA, RoCEv2, QP, | RDMA, RoCEv2, QP, RC    |
-   | (§5.1)             | RC mode, RDMA     | mode, UET, PDC, ROD     |
-   |                    | Verb, UET, PDC,   |                         |
-   |                    | ROD               |                         |
+   | (§5.1)             | RC mode, UET,     | mode, RDMA Verb, UET,   |
+   |                    | PDC, ROD          | PDC, ROD                |
    +--------------------+-------------------+-------------------------+
    | UET Terms (§5.2)   | RUD, RUDI, UUD,   | RUD, GIN                |
    |                    | LLR, Packet       |                         |
@@ -1818,15 +1817,13 @@ Appendix A: Term Cross-Reference to Companion Documents
    |                    | Flowlet, ECMP,    |                         |
    |                    | MMR               |                         |
    +--------------------+-------------------+-------------------------+
-   | Fabric Topology    | Clos, Rail-       | Clos, Bisection BW,     |
-   | (§7)               | Optimized,        | ToR, NIC, Buffer        |
-   |                    | Bisection BW,     | Occupancy, Link         |
-   |                    | Oversubscription, | Utilization             |
-   |                    | ToR, Spine, NIC,  |                         |
-   |                    | Buffer Occupancy, |                         |
-   |                    | Zero-Impact       |                         |
-   |                    | Failover, Link    |                         |
-   |                    | Utilization       |                         |
+   | Fabric Topology    | Clos, Rail-       | Clos, Oversubscription, |
+   | (§7)               | Optimized,        | Spine, NIC, Link        |
+   |                    | Bisection BW,     | Utilization             |
+   |                    | Oversubscription, |                         |
+   |                    | Spine, NIC, Zero- |                         |
+   |                    | Impact Failover,  |                         |
+   |                    | Link Utilization  |                         |
    +--------------------+-------------------+-------------------------+
    | Training-Specific  | JCT, Roofline     | Soak Test               |
    | (§8)               | JCT, JCT Ratio,   |                         |
