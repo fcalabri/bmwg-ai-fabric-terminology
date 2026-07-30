@@ -678,7 +678,7 @@ in each companion methodology document.
 | RDMA / RoCEv2 (§5.1) | RDMA, RoCEv2, QP, RC mode, UET, PDC, ROD | RDMA, RoCEv2, QP, RC mode, RDMA Verb, UET, PDC, ROD |
 | UET Terms (§5.2) | RUD, RUDI, UUD, LLR, Packet Trimming, PRI, CBFC, UEC Profile, Entropy Value | RUD, GIN |
 | Congestion Control (§6) | PFC, PFC Storm, PFC Deadlock, ECN, DCQCN, ECN Marking Ratio, Incast, Incast Ratio, Packet Spray, DLB/Flowlet, ECMP, MMR | PFC, ECN, DCQCN, Incast, Packet Spray, ECMP |
-| Fabric Topology (§7) | Fabric DUT Boundary, Intra-Node Transfer Overhead, Fabric-Visible Data Volume, Clos, Rail-Optimized, Bisection BW, Oversubscription, Spine, NIC, Zero-Impact Failover, Link Utilization | Clos, Oversubscription, Spine, NIC, Link Utilization |
+| Fabric Topology (§7) | Fabric DUT Boundary, Intra-Node Transfer Overhead, Fabric-Visible Data Volume, Clos, Rail-Optimized, Bisection BW, Oversubscription, Spine, NIC, Zero-Impact Failover, Link Utilization | Fabric DUT Boundary, Fabric-Visible Data Volume, Clos, Oversubscription, Spine, NIC, Link Utilization |
 | Training-Specific (§8) | JCT, Roofline JCT, JCT Ratio, Gradient Sync, Step Time, Soak Test | Soak Test |
 | Inference-Specific (§9) | — | TTFT, ITL, TPS, KV Cache, Prefill, Decode, Disaggregated Serving, xPyD, Continuous Batching, Normal/Low-Latency Dispatch, Expert Choice Routing, Top-k with Token Drop, Auxiliary Loss Top-k, T_dispatch, S_KV, SLO |
 | KPI Classification (§10) | Primary KPI (JCT Ratio, BusBW), Secondary KPI, FHI, Goodput, Zero Packet Loss | Primary KPI (TTFT, ITL, TPS), Secondary KPI, FHI, Goodput, Zero Packet Loss |
