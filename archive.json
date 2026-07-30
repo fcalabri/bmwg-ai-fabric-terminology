@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-26T02:41:02.120078+00:00",
+  "timestamp": "2026-07-30T02:14:31.842992+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -623,15 +623,15 @@
       "id": "I_kwDORX8iVs8AAAABJ9aMKg",
       "title": "Appendix A cross-reference table doesn't match actual term usage",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/52",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Andrew flagged (F50) that the Appendix A cross-reference table is out of sync with the companion docs. Checked it cell by cell against both:\n\n- DP/TP are listed under training-bench but appear zero times there \u2014 they're used in inference-bench's prefill/decode parallelism discussion\n- \"RDMA Verb\" is listed under training-bench, actually used in inference-bench\n- \"ToR\" and \"Buffer Occupancy\" don't appear literally in either doc (they use \"leaf switch\" and \"Buffer_utilization\")\n- \"Bisection BW\" was listed under both, only actually used in training-bench\n- \"Spine\" and \"Oversubscription\" are used in inference-bench but weren't listed\n\nSee #51",
       "createdAt": "2026-07-23T22:16:10Z",
-      "updatedAt": "2026-07-23T22:16:22Z",
-      "closedAt": null,
+      "updatedAt": "2026-07-28T19:49:12Z",
+      "closedAt": "2026-07-28T19:49:12Z",
       "comments": []
     }
   ],
@@ -816,7 +816,7 @@
       "labels": [],
       "body": "## Summary\n\n- The `#tab-rocev2` table had the wrong title: \"Distributed Parallelism Strategy Terms\" (copy-paste error from the section above)\n- Corrected to \"RoCEv2 and RDMA Terms\" to match the section heading at \u00a75.1\n\n## Test plan\n\n- [ ] Verify rendered HTML shows correct table caption",
       "createdAt": "2026-03-21T09:41:31Z",
-      "updatedAt": "2026-03-21T11:53:08Z",
+      "updatedAt": "2026-07-28T20:50:08Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "5be0e17401953454aacbbb836bc1a019e130c106",
@@ -2027,24 +2027,26 @@
       "id": "PR_kwDORX8iVs71l8ir",
       "title": "Pass 4: cross-reference table accuracy fixes",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "cpignata",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "## Summary\n\nFixes the Appendix A term cross-reference table so it matches actual usage in the two companion documents, per Andrew's review.\n\n- DP/TP moved from the Training column to Inference (0 occurrences in training-bench; used throughout inference-bench's prefill/decode layer)\n- RDMA Verb moved from Training to Inference (same reason)\n- ToR and Buffer Occupancy removed \u2014 neither term appears in either companion doc; both use \"leaf switch\" and \"Buffer_utilization\" respectively\n- Bisection BW removed from the Inference column (training-only)\n- Spine and Oversubscription added to the Inference column (both are used there but were missing)\n\n(F50)\n\nCloses #52",
       "createdAt": "2026-07-23T22:15:42Z",
-      "updatedAt": "2026-07-23T22:16:24Z",
+      "updatedAt": "2026-07-28T20:50:08Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "bcea9df5d50201beaf065fc1a4f85f05f75f7c71",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "carlos-andrew-review-pass-4",
       "headRefOid": "e7d5309ba47b835a0b23974367e4f2a459552f4a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-07-28T19:49:11Z",
+      "mergedAt": "2026-07-28T19:49:11Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "3ba213fb73ca2a3f4c0c74e3445ca6454b84b050"
+      },
       "comments": [],
       "reviews": []
     }
