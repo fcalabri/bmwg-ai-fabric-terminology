@@ -1832,12 +1832,12 @@ Appendix A: Term Cross-Reference to Companion Documents
    |                    | Flowlet, ECMP,       |                       |
    |                    | MMR                  |                       |
    +--------------------+----------------------+-----------------------+
-   | Fabric Topology    | Fabric DUT           | Clos,                 |
-   | (§7)               | Boundary, Intra-     | Oversubscription,     |
-   |                    | Node Transfer        | Spine, NIC, Link      |
-   |                    | Overhead, Fabric-    | Utilization           |
-   |                    | Visible Data         |                       |
-   |                    | Volume, Clos,        |                       |
+   | Fabric Topology    | Fabric DUT           | Fabric DUT Boundary,  |
+   | (§7)               | Boundary, Intra-     | Fabric-Visible Data   |
+   |                    | Node Transfer        | Volume, Clos,         |
+   |                    | Overhead, Fabric-    | Oversubscription,     |
+   |                    | Visible Data         | Spine, NIC, Link      |
+   |                    | Volume, Clos,        | Utilization           |
    |                    | Rail-Optimized,      |                       |
    |                    | Bisection BW,        |                       |
    |                    | Oversubscription,    |                       |
