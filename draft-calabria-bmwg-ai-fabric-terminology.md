@@ -86,6 +86,21 @@ informative:
       - org: InfiniBand Trade Association
     date: 2014-09
 
+  SWITCHING-EFF:
+    title: "Switching Efficiency: A Metric Framework for AI Data Center Networks"
+    author:
+      - ins: N. Ye
+        name: Niangen Ye
+      - ins: W. Sun
+        name: Weiqiang Sun
+      - ins: D. Wang
+        name: Dong Wang
+      - ins: J. Sun
+        name: Jiang Sun
+    date: 2026-04
+    seriesinfo:
+      Internet-Draft: draft-ye-ippm-switching-efficiency-02
+
   DCQCN-PAPER:
     title: "Congestion Control for Large-Scale RDMA Deployments"
     author:
@@ -409,7 +424,7 @@ documents.
 |---|---|
 | **Fabric DUT Boundary** | The precise measurement boundary for BMWG AI fabric benchmarks. Defined as the NIC Ethernet port (transmit side at source, receive side at destination). All benchmarked metrics (throughput, latency, loss, congestion) are measured at or between NIC Ethernet ports. Intra-node segments (NVLink, PCIe Gen4/5, CXL) are outside the DUT boundary and MUST NOT be included in fabric benchmark results without explicit labelling as a separate measurement component. |
 | **Intra-Node Transfer Overhead** | The latency and bandwidth consumed by data movement within a single server node: specifically, the GPU-to-NIC path via PCIe or CXL, and GPU-to-GPU communication via NVLink. Intra-node transfer overhead is a contextual measurement reported alongside fabric benchmarks as a separate measurement component wherever the companion methodology documents require it, but is not itself the benchmarked entity in any test defined in those documents. |
-| **Fabric-Visible Data Volume (S_fabric)** | The data volume per participant that crosses the Fabric DUT Boundary during a collective operation. S_fabric may be less than the application-level data size when collective placement satisfies part of the operation within a node, as in a hierarchical AllReduce that reduces across an intra-node accelerator interconnect before reducing across the fabric. S_fabric is the quantity against which fabric-boundary collective results are interpreted; the application-level data size and S_fabric are distinct and are reported separately by the companion methodology documents. |
+| **Fabric-Visible Data Volume (S_fabric)** | The data volume per participant that crosses the Fabric DUT Boundary during a collective operation, counted in application payload bytes with each byte counted once, using the byte-counting rule of the Fabric_Goodput definition in §10: transport headers, framing overhead, padding, and retransmitted or duplicate bytes are excluded. S_fabric may be less than the application-level data size when collective placement satisfies part of the operation within a node, as in a hierarchical AllReduce that reduces across an intra-node accelerator interconnect before reducing across the fabric. S_fabric describes the workload offered to the fabric and is not a measurement of the traffic the fabric carried; retransmission, replication, and multi-hop forwarding are behaviours of the Fabric DUT and are reported by the companion methodology documents as separate quantities. S_fabric is the quantity against which fabric-boundary collective results are interpreted; the application-level data size and S_fabric are distinct and are reported separately by the companion methodology documents. |
 | **Clos / Fat-Tree Topology** | A multi-stage switch topology providing non-blocking or oversubscribed connectivity between all leaf-to-leaf pairs. In AI fabric deployments, a two-tier (leaf-spine) or three-tier (leaf-spine-superspine) Clos is standard. Full bisection bandwidth (1:1) is the target for training fabrics; 2:1 or 4:1 oversubscription may be acceptable for inference fabrics. |
 | **Rail-Optimized Topology** | A topology in which the NIC ports of each server are distributed across multiple ToR switches (one NIC port per switch), such that collective traffic between adjacent servers traverses different physical paths. Minimizes switch-to-switch traffic during ring AllReduce, maximizing effective BusBW. Requires rail-aware (topology-aware) collective placement. |
 | **Bisection Bandwidth** | The aggregate bandwidth across the minimum cut that divides the fabric into two equal halves. Non-blocking fabrics provide bisection bandwidth equal to half the total edge (server-facing) bandwidth. Limits worst-case all-to-all communication throughput. |
@@ -491,7 +506,7 @@ companion methodology documents.
 | **Primary KPI** | A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT, ITL, and TPS. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations. |
 | **Secondary KPI** | A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: per-phase collective throughput breakdown, KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations. |
 | **Fabric Health Indicator (FHI)** | An operational metric characterizing fabric stability and anomaly conditions rather than peak performance. FHIs include: PFC event rate, PFC storm occurrence, ECN marking ratio, packet loss rate, buffer occupancy (P99), and retransmission rate. FHIs SHOULD be continuously monitored and reported throughout all test categories. |
-| **Goodput** | The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports MUST specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document ({{?I-D.calabria-bmwg-ai-fabric-inference-bench}}). Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput. |
+| **Goodput** | The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports MUST specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document ({{?I-D.calabria-bmwg-ai-fabric-inference-bench}}). Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput.<br />**Relationship to Computationally Effective Data (CED):**  CED as defined in {{SWITCHING-EFF}} is not equivalent to Fabric_Goodput.  Fabric_Goodput integrated over an observation window equals the received volume of that document with duplicate and retransmitted receipts removed; CED counts only the retained output of a communication primitive, which for a reduction collective is the final reduced result alone.  For an ideal ring AllReduce the two therefore differ by approximately the algo_factor of the BusBW definition in §3. |
 | **Zero Packet Loss** | A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2, zero packet loss is the target operating condition. UET is designed to tolerate loss (RUD retransmission across sprayed paths, packet trimming); the applicable acceptance criterion for UET is zero application-visible loss rather than zero wire-level loss, and it depends on the transport service (ROD/RUD/RUDI/UUD) under test. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion. |
 {: #tab-kpi-class title="KPI Classification Terms"}
 
@@ -660,7 +675,7 @@ here.
 # Acknowledgments
 {:numbered="false"}
 
-This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel and Mohamed Boucadair for valuable review and comments. Thanks to Andrew Yourtchenko for a thorough review of the document set.
+This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel and Mohamed Boucadair for valuable review and comments. Thanks to Andrew Yourtchenko for a thorough review of the document set. Thanks to Niangen Ye for the review comments on Fabric-Visible Data Volume provenance and on forwarding-work accounting, which prompted the byte-counting rule stated in this document.
 
 --- back
 
