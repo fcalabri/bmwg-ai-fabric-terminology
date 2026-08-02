@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-30T02:14:31.842992+00:00",
+  "timestamp": "2026-08-02T02:40:27.310721+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -632,6 +632,46 @@
       "createdAt": "2026-07-23T22:16:10Z",
       "updatedAt": "2026-07-28T19:49:12Z",
       "closedAt": "2026-07-28T19:49:12Z",
+      "comments": []
+    },
+    {
+      "number": 53,
+      "id": "I_kwDORX8iVs8AAAABK0bfGQ",
+      "title": "Normalization - to match training",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/53",
+      "state": "CLOSED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-07-30T14:54:54Z",
+      "updatedAt": "2026-07-31T20:03:52Z",
+      "closedAt": "2026-07-31T20:03:42Z",
+      "comments": [
+        {
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "body": "Pull request #54 from fcalabri/Normalization",
+          "createdAt": "2026-07-31T20:03:42Z",
+          "updatedAt": "2026-07-31T20:03:52Z"
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "I_kwDORX8iVs8AAAABLDoYKQ",
+      "title": "ML-02 (Niangen Ye, BMWG list \u2014 s_fabric provenance; companion accounting profile",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/55",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "address Niangen comment , add him on the acks and his draft as reference ",
+      "createdAt": "2026-08-01T12:20:30Z",
+      "updatedAt": "2026-08-01T12:20:30Z",
+      "closedAt": null,
       "comments": []
     }
   ],
@@ -2049,6 +2089,88 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 54,
+      "id": "PR_kwDORX8iVs74mBKQ",
+      "title": "Align Section 7 with training-bench normalization section",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/54",
+      "state": "MERGED",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Follows the new \"Result Comparability and Normalization\" section in training doc \r\n\r\nRegister Fabric-Visible Data Volume (S_fabric) in Section 7, positioned after Intra-Node Transfer Overhead so the three boundary-related terms sit together. The definition carries no BCP 14 keyword; the obligation to report S_fabric lives in the methodology document.\r\n\r\nWiden the scope qualifier on Intra-Node Transfer Overhead. It read \"reported alongside fabric benchmarks in end-to-end decomposition tests\", but the companion methodology defines no decomposition test and now requires this component for every collective result across three test categories.\r\n\r\nUpdate both index tables, which fall out of sync otherwise:\r\n\r\n- Appendix A, Fabric Topology row: add Fabric DUT Boundary, Intra-Node Transfer Overhead, and Fabric-Visible Data Volume to the training-bench column. Intra-Node Transfer Overhead is a first use by that document; Fabric DUT Boundary was already used there and was missing from this row.\r\n- Appendix B, row 7: add Fabric-Visible Data Volume.\r\n\r\n",
+      "createdAt": "2026-07-30T15:25:57Z",
+      "updatedAt": "2026-07-31T20:03:33Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "3ba213fb73ca2a3f4c0c74e3445ca6454b84b050",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "Normalization",
+      "headRefOid": "bd3af90a8ae261899b24e2a69321f81cce7ab39e",
+      "closedAt": "2026-07-31T20:03:29Z",
+      "mergedAt": "2026-07-31T20:03:29Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "b1b42f584d347d5c5c18810a2b0611f1b5d03ffc"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs8AAAABH_IvUw",
+          "commit": {
+            "abbreviatedOid": "bd3af90"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-07-31T17:50:15Z",
+          "updatedAt": "2026-07-31T17:50:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 56,
+      "id": "PR_kwDORX8iVs75YViR",
+      "title": "04 - Ye, N. email exchange on list",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/56",
+      "state": "OPEN",
+      "author": "fcalabri",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "04 - Ye, N. email exchange on list",
+      "createdAt": "2026-08-01T12:46:33Z",
+      "updatedAt": "2026-08-01T12:55:12Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "b1b42f584d347d5c5c18810a2b0611f1b5d03ffc",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "04/sfabric-provenance",
+      "headRefOid": "562dc24d7f261800784eff6f3a059749b4891ad6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs8AAAABICuIdg",
+          "commit": {
+            "abbreviatedOid": "562dc24"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-08-01T12:55:12Z",
+          "updatedAt": "2026-08-01T12:55:12Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
