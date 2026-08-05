@@ -54,7 +54,7 @@ for general network benchmarking.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.1
+    platformdirs 4.11.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -1074,11 +1074,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">AI Fabric Benchmarking Terminology</td>
-<td class="right">July 2026</td>
+<td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Calabria, et al.</td>
-<td class="center">Expires 1 February 2027</td>
+<td class="center">Expires 6 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1091,12 +1091,12 @@ svg {
 <dd class="internet-draft">draft-calabria-bmwg-ai-fabric-terminology-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-31" class="published">31 July 2026</time>
+<time datetime="2026-08-05" class="published">5 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-02-01">1 February 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-06">6 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1174,7 +1174,7 @@ for general network benchmarking.<a href="#section-abstract-2" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2062,7 +2062,7 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Fabric-Visible Data Volume (S_fabric)</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The data volume per participant that crosses the Fabric DUT Boundary during a collective operation. S_fabric may be less than the application-level data size when collective placement satisfies part of the operation within a node, as in a hierarchical AllReduce that reduces across an intra-node accelerator interconnect before reducing across the fabric. S_fabric is the quantity against which fabric-boundary collective results are interpreted; the application-level data size and S_fabric are distinct and are reported separately by the companion methodology documents.</td>
+            <td class="text-left" rowspan="1" colspan="1">The data volume per participant that crosses the Fabric DUT Boundary during a collective operation, counted in application payload bytes with each byte counted once, using the byte-counting rule of the Fabric_Goodput definition in §10: transport headers, framing overhead, padding, and retransmitted or duplicate bytes are excluded. S_fabric may be less than the application-level data size when collective placement satisfies part of the operation within a node, as in a hierarchical AllReduce that reduces across an intra-node accelerator interconnect before reducing across the fabric. S_fabric describes the workload offered to the fabric and is not a measurement of the traffic the fabric carried; retransmission, replication, and multi-hop forwarding are behaviours of the Fabric DUT and are reported by the companion methodology documents as separate quantities. S_fabric is the quantity against which fabric-boundary collective results are interpreted; the application-level data size and S_fabric are distinct and are reported separately by the companion methodology documents.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2432,7 +2432,7 @@ companion methodology documents.<a href="#section-10-1" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Goodput</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports <span class="bcp14">MUST</span> specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br><strong>Fabric_Goodput:</strong>  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document (<span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>). Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.<br><strong>Inference_Goodput:</strong>  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br>The two planes <span class="bcp14">MUST NOT</span> be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput.</td>
+            <td class="text-left" rowspan="1" colspan="1">The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports <span class="bcp14">MUST</span> specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br><strong>Fabric_Goodput:</strong>  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document (<span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>). Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.<br><strong>Inference_Goodput:</strong>  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br>The two planes <span class="bcp14">MUST NOT</span> be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput.<br><strong>Relationship to Computationally Effective Data (CED):</strong>  CED as defined in <span>[<a href="#SWITCHING-EFF" class="cite xref">SWITCHING-EFF</a>]</span> is not equivalent to Fabric_Goodput.  Fabric_Goodput integrated over an observation window equals the received volume of that document with duplicate and retransmitted receipts removed; CED counts only the retained output of a communication primitive, which for a reduction collective is the final reduced result alone.  For an ideal ring AllReduce the two therefore differ by approximately the algo_factor of the BusBW definition in §3.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2984,7 +2984,7 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-15-1">This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel and Mohamed Boucadair for valuable review and comments. Thanks to Andrew Yourtchenko for a thorough review of the document set.<a href="#section-15-1" class="pilcrow">¶</a></p>
+<p id="section-15-1">This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel and Mohamed Boucadair for valuable review and comments. Thanks to Andrew Yourtchenko for a thorough review of the document set. Thanks to Niangen Ye for the review comments on Fabric-Visible Data Volume provenance and on forwarding-work accounting, which prompted the byte-counting rule stated in this document.<a href="#section-15-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -3078,6 +3078,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
 <dt id="SPEC-DECODE-PAPER">[SPEC-DECODE-PAPER]</dt>
         <dd>
 <span class="refAuthor">Leviathan, Y.</span>, <span class="refAuthor">Kalman, M.</span>, and <span class="refAuthor">Y. Matias</span>, <span class="refTitle">"Fast Inference from Transformers via Speculative Decoding"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://arxiv.org/abs/2211.17192">https://arxiv.org/abs/2211.17192</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SWITCHING-EFF">[SWITCHING-EFF]</dt>
+        <dd>
+<span class="refAuthor">Ye, N.</span>, <span class="refAuthor">Sun, W.</span>, <span class="refAuthor">Wang, D.</span>, and <span class="refAuthor">J. Sun</span>, <span class="refTitle">"Switching Efficiency: A Metric Framework for AI Data Center Networks"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ye-ippm-switching-efficiency-02</span>, <time datetime="2026-04" class="refDate">April 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ye-ippm-switching-efficiency-02">https://datatracker.ietf.org/doc/html/draft-ye-ippm-switching-efficiency-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="ZERO-PAPER">[ZERO-PAPER]</dt>
       <dd>
