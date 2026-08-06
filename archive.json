@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-02T02:40:27.310721+00:00",
+  "timestamp": "2026-08-06T02:27:50.792034+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -663,15 +663,15 @@
       "id": "I_kwDORX8iVs8AAAABLDoYKQ",
       "title": "ML-02 (Niangen Ye, BMWG list \u2014 s_fabric provenance; companion accounting profile",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "address Niangen comment , add him on the acks and his draft as reference ",
       "createdAt": "2026-08-01T12:20:30Z",
-      "updatedAt": "2026-08-01T12:20:30Z",
-      "closedAt": null,
+      "updatedAt": "2026-08-05T15:24:07Z",
+      "closedAt": "2026-08-05T15:24:07Z",
       "comments": []
     }
   ],
@@ -2137,24 +2137,26 @@
       "id": "PR_kwDORX8iVs75YViR",
       "title": "04 - Ye, N. email exchange on list",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/56",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "04 - Ye, N. email exchange on list",
       "createdAt": "2026-08-01T12:46:33Z",
-      "updatedAt": "2026-08-01T12:55:12Z",
+      "updatedAt": "2026-08-05T15:23:46Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "b1b42f584d347d5c5c18810a2b0611f1b5d03ffc",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "04/sfabric-provenance",
       "headRefOid": "562dc24d7f261800784eff6f3a059749b4891ad6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-08-05T15:23:46Z",
+      "mergedAt": "2026-08-05T15:23:45Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "f63d6a10b590e1c4bbc562953311c29dd21424ce"
+      },
       "comments": [],
       "reviews": [
         {
