@@ -54,7 +54,7 @@ for general network benchmarking.
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.11.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -94,7 +94,6 @@ for general network benchmarking.
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -143,7 +142,6 @@ for general network benchmarking.
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -208,7 +206,6 @@ for general network benchmarking.
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1077,11 +1074,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">AI Fabric Benchmarking Terminology</td>
-<td class="right">July 2026</td>
+<td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Calabria, et al.</td>
-<td class="center">Expires 7 January 2027</td>
+<td class="center">Expires 11 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1094,12 +1091,12 @@ svg {
 <dd class="internet-draft">draft-calabria-bmwg-ai-fabric-terminology-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-06" class="published">6 July 2026</time>
+<time datetime="2026-08-10" class="published">10 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-07">7 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-11">11 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1177,7 +1174,7 @@ for general network benchmarking.<a href="#section-abstract-2" class="pilcrow">�
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1419,7 +1416,7 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
             <td class="text-left" rowspan="1" colspan="1">
               <strong>AI Fabric</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The dedicated Ethernet backend network interconnecting accelerators (GPUs/XPUs) for distributed AI training and inference workloads. Implemented as a non-blocking Clos (fat-tree) topology running RoCEv2 or UET. The AI fabric is separate from the front-end management and storage network.</td>
+            <td class="text-left" rowspan="1" colspan="1">The dedicated Ethernet backend network interconnecting accelerators (GPUs/XPUs) for distributed AI training and inference workloads. Typically implemented as a Clos (fat-tree) topology, non-blocking or oversubscribed (see Oversubscription Ratio), running RoCEv2 or UET. The AI fabric is separate from the front-end management and storage network.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1435,15 +1432,15 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
-              <strong>RT</strong>
+              <strong>TG</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Router Tester / Traffic Generator. Test equipment capable of generating and receiving network traffic at specified rates with nanosecond-resolution timestamping sufficient for the measurements defined in the companion methodology documents.</td>
+            <td class="text-left" rowspan="1" colspan="1">Traffic Generator. Test equipment capable of generating and receiving network traffic at specified rates with nanosecond-resolution timestamping sufficient for the measurements defined in the companion methodology documents.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>JFI</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows <span>[<a href="#Jain1984" class="cite xref">Jain1984</a>]</span>: <code>JFI = (Σxᵢ)² / (n · Σxᵢ²)</code> where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. <strong><span class="bcp14">SHOULD</span></strong> be reported alongside throughput measurements for all multi-flow AI fabric tests.</td>
+            <td class="text-left" rowspan="1" colspan="1">Jain's Fairness Index. A scalar measure of flow-level throughput fairness across n flows <span>[<a href="#Jain1984" class="cite xref">Jain1984</a>]</span>: <code>JFI = (Σxᵢ)² / (n · Σxᵢ²)</code> where xᵢ is the throughput of flow i. A value of 1.0 indicates perfect fairness; lower values indicate disparity. <span class="bcp14">SHOULD</span> be reported alongside throughput measurements for all multi-flow AI fabric tests.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1455,19 +1452,19 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Trial Duration</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The time interval over which a single measurement is conducted. For AI fabric tests, the <strong><span class="bcp14">RECOMMENDED</span></strong> minimum is 60 seconds for throughput tests and 300 seconds for congestion and stability sub-tests, per the methodology in <span>[<a href="#RFC2544" class="cite xref">RFC2544</a>]</span> as extended in the companion methodology documents. Soak tests use a substantially longer duration (minimum 24 hours) per the Soak Test definition in <a href="#tab-training-specific" class="auto internal xref">Table 10</a>.</td>
+            <td class="text-left" rowspan="1" colspan="1">The time interval over which a single measurement is conducted. For AI fabric tests, the <span class="bcp14">RECOMMENDED</span> minimum is 60 seconds for throughput tests and 300 seconds for congestion and stability sub-tests, per the methodology in <span>[<a href="#RFC2544" class="cite xref">RFC2544</a>]</span> as extended in the companion methodology documents. Soak tests use a substantially longer duration (minimum 24 hours) per the Soak Test definition in <a href="#tab-training-specific" class="auto internal xref">Table 10</a>.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Warmup Period</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A mandatory pre-measurement interval during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. <strong><span class="bcp14">RECOMMENDED</span></strong> minimum: 10 seconds.</td>
+            <td class="text-left" rowspan="1" colspan="1">A pre-measurement interval, used when specified by a test procedure, during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. <span class="bcp14">RECOMMENDED</span> minimum: 10 seconds.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Binary Search</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations.</td>
+            <td class="text-left" rowspan="1" colspan="1">An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations, assuming an initial search range of 0-100% offered load.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1534,19 +1531,19 @@ are the primary traffic sources in distributed AI workloads.<a href="#section-3-
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Ring Algorithm</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">An AllReduce (or AllGather/ReduceScatter) algorithm structured as a logical ring of participants. Each participant sends to its right neighbor and receives from its left neighbor in 2(N−1) steps. Ring AllReduce transfers 2(N−1)/N times the message size per accelerator (the AllReduce algo_factor in the BusBW definition), approaching 2× for large N, and is bandwidth-optimal. Standard baseline for BusBW calculation.</td>
+            <td class="text-left" rowspan="1" colspan="1">An AllReduce (or AllGather/ReduceScatter) algorithm structured as a logical ring of participants. Each participant sends to its right neighbor and receives from its left neighbor, taking N−1 steps for AllGather or ReduceScatter alone, and 2(N−1) steps for AllReduce (a ReduceScatter phase followed by an AllGather phase). Ring AllReduce transfers 2(N−1)/N times the message size per accelerator (the AllReduce algo_factor in the BusBW definition), approaching 2× for large N, and is bandwidth-optimal. Standard baseline for BusBW calculation.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>BusBW</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The effective data throughput per accelerator during a collective operation, computed as:<br><br>BusBW = (data_size × algo_factor) / time<br><br>algo_factor is a fixed normalization constant derived from the ideal ring algorithm for each collective type, applied regardless of the algorithm actually selected by the collective library at runtime. This makes BusBW algorithm-invariant: the same hardware moving the same data volume in the same time yields the same BusBW whether the library selects ring, tree, or recursive doubling. The algo_factor calculation <span class="bcp14">MUST</span> conform to the formula specified here.<br><br>Collective       algo_factor<br>AllReduce        2 × (n−1) / n<br>AllGather        (n−1) / n<br>ReduceScatter    (n−1) / n<br>AllToAll         (n−1) / n<br><br>n = number of participating accelerators.<br><br>Worked example — AllReduce, n=8, data_size=1 GB, time=10 ms:<br>algo_factor = 2 × (8−1) / 8 = 1.75<br>BusBW = (1 GB × 1.75) / 10 ms = 175 GB/s<br><br>Reports <span class="bcp14">MUST</span> state: collective type, algo_factor value, collective library name and version, and n. The algorithm actually selected by the library <span class="bcp14">SHOULD</span> be reported as diagnostic information when known. Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.</td>
+            <td class="text-left" rowspan="1" colspan="1">The effective data throughput per accelerator during a collective operation, computed as:<br><br>BusBW = (data_size × algo_factor) / time<br><br>algo_factor is a fixed normalization constant defined per collective type below (derived from the ideal ring algorithm for AllReduce, AllGather, and ReduceScatter; representing the non-local data fraction for AllToAll), applied regardless of the algorithm actually selected by the collective library at runtime. This makes BusBW algorithm-invariant: the same hardware moving the same data volume in the same time yields the same BusBW whether the library selects ring, tree, or recursive doubling. The algo_factor calculation <span class="bcp14">MUST</span> conform to the formula specified here.<br><br>Collective       algo_factor<br>AllReduce        2 × (n−1) / n<br>AllGather        (n−1) / n<br>ReduceScatter    (n−1) / n<br>AllToAll         (n−1) / n<br><br>n = number of participating accelerators.<br><br>Worked example — AllReduce, n=8, data_size=1 GB, time=10 ms:<br>algo_factor = 2 × (8−1) / 8 = 1.75<br>BusBW = (1 GB × 1.75) / 10 ms = 175 GB/s<br><br>Reports <span class="bcp14">MUST</span> state: collective type, algo_factor value, collective library name and version, and n. The algorithm actually selected by the library <span class="bcp14">SHOULD</span> be reported as diagnostic information when known. Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>CCL</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Collective Communication Library. A software library providing optimized implementations of collective operations (AllReduce, AllGather, etc.) over a specific transport. The CCL implementation <strong><span class="bcp14">MUST</span></strong> be documented in the test report.</td>
+            <td class="text-left" rowspan="1" colspan="1">Collective Communication Library. A software library providing optimized implementations of collective operations (AllReduce, AllGather, etc.) over a specific transport. The CCL implementation <span class="bcp14">MUST</span> be documented in the test report.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1614,7 +1611,7 @@ patterns and fabric requirements.<a href="#section-4-1" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">
               <strong>MoE</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Mixture of Experts. A transformer architecture replacing dense feed-forward layers with a set of E expert sub-networks, of which only top-K experts (typically K=2 or K=4) are activated per token via a learned router. MoE enables large model capacity with sub-linear compute, but introduces AllToAll communication requirements proportional to E and sequence length.</td>
+            <td class="text-left" rowspan="1" colspan="1">Mixture of Experts. A transformer architecture replacing dense feed-forward layers with a set of E expert sub-networks, of which only top-K experts (K commonly ranges from 2 to 8 depending on the architecture) are activated per token via a learned router. MoE enables large model capacity with sub-linear compute, but introduces AllToAll communication requirements proportional to E and sequence length.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1626,7 +1623,7 @@ patterns and fabric requirements.<a href="#section-4-1" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">
               <strong>ZeRO</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Zero Redundancy Optimizer. A memory optimization strategy for data-parallel training that shards model states (parameters, gradients, optimizer states) across DP ranks instead of replicating them. Stage 1 shards optimizer states; Stage 2 adds gradient sharding; Stage 3 adds parameter sharding. Each stage increases AllGather/ReduceScatter communication.</td>
+            <td class="text-left" rowspan="1" colspan="1">Zero Redundancy Optimizer <span>[<a href="#ZERO-PAPER" class="cite xref">ZERO-PAPER</a>]</span>. A memory optimization strategy for data-parallel training that shards model states (parameters, gradients, optimizer states) across DP ranks instead of replicating them. Stage 1 shards optimizer states; Stage 2 adds gradient sharding; Stage 3 adds parameter sharding. Each stage increases AllGather/ReduceScatter communication.</td>
           </tr>
         </tbody>
       </table>
@@ -1646,7 +1643,7 @@ patterns and fabric requirements.<a href="#section-4-1" class="pilcrow">¶</a></
 <p id="section-5.1-1">The following terms define RDMA and RoCEv2 transport semantics as
 used in AI fabric benchmarking. UET, PDC, and ROD are included here
 for direct comparison with their RoCEv2 counterparts; full UET-specific
-terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+terms are defined in <a href="#uet-terms" class="auto internal xref">Section 5.2</a>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <span id="name-rocev2-and-rdma-terms-2"></span><div id="tab-rocev2">
 <table class="center" id="table-4">
           <caption>
@@ -1670,7 +1667,7 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>RoCEv2</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Requires lossless fabric operation (PFC or equivalent) for correctness. Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
+              <td class="text-left" rowspan="1" colspan="1">RDMA over Converged Ethernet version 2. An RDMA transport encapsulating InfiniBand transport layer (BTH) over UDP/IP, enabling RDMA semantics on standard Ethernet infrastructure. Reliable Connected (RC) mode recovers packet loss via PSN-based retransmission, so losslessness is a performance necessity rather than a strict correctness requirement; lossless fabric operation (PFC or equivalent) is nonetheless the deployed norm because loss-driven retransmission incurs a substantial latency and throughput penalty at scale (cf. loss-resilient RoCE variants such as Improved RoCE NIC (IRN)). Standardized in IBTA InfiniBand Architecture Volume 1, Annex A17 (RoCEv2, September 2014) <span>[<a href="#IBTA-ROCE" class="cite xref">IBTA-ROCE</a>]</span>; transported over UDP destination port 4791.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1694,13 +1691,13 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>UET</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET is connectionless, supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793 (IANA registration pending).</td>
+              <td class="text-left" rowspan="1" colspan="1">Ultra Ethernet Transport. A transport protocol defined by the Ultra Ethernet Consortium (UEC) Specification 1.0 as a next-generation AI/HPC fabric transport. UET uses lightweight, in-band connection setup (no separate handshake round-trip) rather than RoCEv2-style pre-established connections, and supports native packet spraying (RUD), and integrates multipath load balancing and congestion control. Transported over UDP destination port 4793, IANA-assigned to Ultra Ethernet Transport.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>PDC</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">Packet Delivery Context. The ephemeral, lightweight transport endpoint in UET, analogous to but distinct from an RDMA Queue Pair. PDCs are connectionless (no setup handshake), enabling low-latency initiation and reduced per-flow state in the NIC and switch.</td>
+              <td class="text-left" rowspan="1" colspan="1">Packet Delivery Context. The ephemeral, lightweight transport endpoint in UET, analogous to but distinct from an RDMA Queue Pair. PDCs establish state in-band, with setup piggybacked on the first data packet rather than a separate handshake round-trip, enabling low-latency initiation and reduced per-flow state in the NIC and switch.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1713,7 +1710,7 @@ terms are defined in Section 5.2.<a href="#section-5.1-1" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="ultra-ethernet-transport-uet-terms">
+<div id="uet-terms">
 <section id="section-5.2">
         <h3 id="name-ultra-ethernet-transport-ue">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-ultra-ethernet-transport-ue" class="section-name selfRef">Ultra Ethernet Transport (UET) Terms</a>
@@ -1762,13 +1759,13 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>LLR</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">Link Layer Retry. An optional UEC link-layer enhancement providing fast per-hop error recovery at the Ethernet link layer. LLR detects symbol errors at the FEC level and retransmits the affected frame before it is dropped, reducing the frequency of transport-layer retransmission and improving tail latency.</td>
+              <td class="text-left" rowspan="1" colspan="1">Link Layer Retry. An optional UEC link-layer enhancement providing fast per-hop error recovery at the Ethernet link layer. LLR detects symbol errors at the FEC level and replays the affected frame from a local replay buffer instead of dropping it, reducing the frequency of transport-layer retransmission and improving tail latency.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>Packet Trimming</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">An optional UEC link-layer behavior in which a congested switch, rather than dropping the full packet, transmits only the packet header (trimmed packet) to the receiver. Trimming enables the receiver to detect loss and initiate selective retransmission more rapidly, reducing bandwidth waste versus silent drop.</td>
+              <td class="text-left" rowspan="1" colspan="1">An optional UEC network-layer behavior in which a congested switch, rather than dropping the full packet, forwards only the packet header (trimmed packet) toward the receiver. Trimming enables the receiver to detect loss and initiate selective retransmission more rapidly, reducing bandwidth waste versus silent drop.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
@@ -1786,19 +1783,19 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>Entropy Value</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">A per-packet field in the UET header used to distribute packets of a single message across available ECMP paths, providing explicit spray entropy independent of the IP 5-tuple. Enables hardware-assisted packet spraying without requiring transport-layer state in the switch.</td>
+              <td class="text-left" rowspan="1" colspan="1">Carried in the UDP source port field when UDP encapsulation is used (or the equivalent-position PDS Entropy Header field in IP-only mode), used to distribute packets of a single message across available ECMP paths. Unlike RoCEv2's fixed-per-connection source port, UET varies this field per packet, providing explicit spray entropy as part of the standard IP 5-tuple. Enables hardware-assisted packet spraying using existing ECMP hashing without requiring transport-layer state in the switch.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
                 <strong>GIN</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">GPU-Initiated Networking. A communication paradigm in which GPU threads directly initiate network RDMA operations (sends, one-sided writes/reads) to the NIC hardware without CPU involvement, eliminating the CPU-GPU synchronization round-trip. Reduces effective latency by several microseconds for fine-grained operations.</td>
+              <td class="text-left" rowspan="1" colspan="1">GPU-Initiated Networking. A communication paradigm in which GPU threads directly initiate network RDMA operations (sends, one-sided writes/reads) to the NIC hardware without CPU involvement, eliminating the CPU-GPU synchronization round-trip. GIN predates UEC and is not specific to UET; established implementations include NVSHMEM and InfiniBand GPUDirect Async (IBGDA) on RDMA/RoCEv2 fabrics. Reduces effective latency for fine-grained operations; the saving is implementation- and platform-dependent and is not fixed by this definition.</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">
-                <strong>KVCXL</strong>
+                <strong>KVTL</strong>
 </td>
-              <td class="text-left" rowspan="1" colspan="1">KV Cache Transfer Library. A software library providing standardized point-to-point data transfer primitives (register, transfer, notify) for inference engines, abstracting underlying transport mechanisms (intra-node interconnect, RDMA, PCIe, storage interfaces). Enables transport-agnostic KV cache migration in disaggregated serving architectures.</td>
+              <td class="text-left" rowspan="1" colspan="1">KV Cache Transfer Library. A term of art used by this document set for a software library providing standardized point-to-point data transfer primitives (register, transfer, notify) for inference engines, abstracting underlying transport mechanisms (intra-node interconnect, RDMA, PCIe, storage interfaces); it is not itself specific to UET or to any single transport. Comparable production libraries with similar goals include NVIDIA NIXL, Mooncake TransferEngine, and LMCache. Enables transport-agnostic KV cache migration in disaggregated serving architectures.</td>
             </tr>
           </tbody>
         </table>
@@ -1830,7 +1827,7 @@ Ultra Ethernet Consortium (UEC) Specification 1.0
 </td>
                 <td class="text-left" rowspan="1" colspan="1">Yes</td>
                 <td class="text-left" rowspan="1" colspan="1">Yes</td>
-                <td class="text-left" rowspan="1" colspan="1">Full per-QP state</td>
+                <td class="text-left" rowspan="1" colspan="1">Full per-PDC state</td>
                 <td class="text-left" rowspan="1" colspan="1">Legacy RDMA / ordered AI ops</td>
               </tr>
               <tr>
@@ -1899,13 +1896,13 @@ associated fabric behaviors critical to AI workload performance.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">
               <strong>PFC Storm</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A pathological condition in which PFC PAUSE frames propagate across multiple hops, causing widespread throughput degradation or deadlock unrelated to the original congestion source. Detection and mitigation <strong><span class="bcp14">SHOULD</span></strong> be part of soak test evaluation per the companion methodology documents.</td>
+            <td class="text-left" rowspan="1" colspan="1">A pathological condition in which PFC PAUSE frames propagate across multiple hops, causing widespread throughput degradation or deadlock unrelated to the original congestion source. Detection and mitigation <span class="bcp14">SHOULD</span> be part of soak test evaluation per the companion methodology documents.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>PFC Deadlock</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A circular PFC dependency in which sets of flows mutually pause each other indefinitely, resulting in zero progress for affected traffic classes. Deadlock risk is elevated in non-tree topologies and <strong><span class="bcp14">MUST</span></strong> be evaluated in fabric-level soak tests.</td>
+            <td class="text-left" rowspan="1" colspan="1">A circular PFC dependency in which sets of flows mutually pause each other indefinitely, resulting in zero progress for affected traffic classes. Deadlock risk is elevated in non-tree topologies and <span class="bcp14">MUST</span> be evaluated in fabric-level soak tests.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1917,7 +1914,7 @@ associated fabric behaviors critical to AI workload performance.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">
               <strong>DCQCN</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Data Center Quantized Congestion Notification. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. PFC and DCQCN are distinct mechanisms. PFC prevents packet loss during DCQCN convergence; it is <strong>not</strong> part of the DCQCN algorithm.</td>
+            <td class="text-left" rowspan="1" colspan="1">Data Center Quantized Congestion Notification <span>[<a href="#DCQCN-PAPER" class="cite xref">DCQCN-PAPER</a>]</span>. An end-to-end congestion control algorithm for RoCEv2 flows, combining ECN marking at congested switches with rate-based sender reduction using an AIMD scheme. PFC and DCQCN are distinct mechanisms. PFC prevents packet loss during DCQCN convergence; it is <strong>not</strong> part of the DCQCN algorithm.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1929,7 +1926,7 @@ associated fabric behaviors critical to AI workload performance.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Incast</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in AllReduce and collective operations.</td>
+            <td class="text-left" rowspan="1" colspan="1">A traffic pattern in which multiple sources simultaneously send to a single destination, potentially overwhelming the destination's NIC receive buffer and the switch's egress port buffer. Incast is a dominant congestion mechanism in tree-based reductions, AllGather fan-in, and AllToAll hotspots; ring-based AllReduce, by construction, does not create incast since each participant exchanges only with its immediate neighbors.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -1947,7 +1944,7 @@ associated fabric behaviors critical to AI workload performance.<a href="#sectio
             <td class="text-left" rowspan="1" colspan="1">
               <strong>DLB / Flowlet</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Dynamic Load Balancing using flowlet detection. A per-flow rerouting mechanism that reassigns a flow to a new ECMP path when the flow has been idle longer than the flowlet gap threshold (typically 500 ns–2 µs), reducing out-of-order packet risk compared to packet spray while improving utilization over static per-flow ECMP.</td>
+            <td class="text-left" rowspan="1" colspan="1">Dynamic Load Balancing using flowlet detection. A per-flow rerouting mechanism that reassigns a flow to a new ECMP path when the flow has been idle longer than the flowlet gap threshold (implementation-configurable; values of roughly 500 ns–2 µs are typical, but the threshold is not fixed by this definition), reducing out-of-order packet risk compared to packet spray while improving utilization over static per-flow ECMP.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2059,7 +2056,13 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Intra-Node Transfer Overhead</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The latency and bandwidth consumed by data movement within a single server node: specifically, the GPU-to-NIC path via PCIe or CXL, and GPU-to-GPU communication via NVLink. Intra-node transfer overhead is a contextual measurement reported alongside fabric benchmarks in end-to-end decomposition tests but is not itself the benchmarked entity in any test in this document</td>
+            <td class="text-left" rowspan="1" colspan="1">The latency and bandwidth consumed by data movement within a single server node: specifically, the GPU-to-NIC path via PCIe or CXL, and GPU-to-GPU communication via NVLink. Intra-node transfer overhead is a contextual measurement reported alongside fabric benchmarks as a separate measurement component wherever the companion methodology documents require it, but is not itself the benchmarked entity in any test defined in those documents.</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Fabric-Visible Data Volume (S_fabric)</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">The data volume per participant that crosses the Fabric DUT Boundary during a collective operation, counted in application payload bytes with each byte counted once, using the byte-counting rule of the Fabric_Goodput definition in §10: transport headers, framing overhead, padding, and retransmitted or duplicate bytes are excluded. S_fabric may be less than the application-level data size when collective placement satisfies part of the operation within a node, as in a hierarchical AllReduce that reduces across an intra-node accelerator interconnect before reducing across the fabric. S_fabric describes the workload offered to the fabric and is not a measurement of the traffic the fabric carried; retransmission, replication, and multi-hop forwarding are behaviours of the Fabric DUT and are reported by the companion methodology documents as separate quantities. S_fabric is the quantity against which fabric-boundary collective results are interpreted; the application-level data size and S_fabric are distinct and are reported separately by the companion methodology documents.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2071,7 +2074,7 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Rail-Optimized Topology</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A topology in which the NIC ports of each server are distributed across multiple ToR switches (one NIC port per switch), such that collective traffic between adjacent servers traverses different physical paths. Minimizes switch-to-switch traffic during ring AllReduce, maximizing effective BusBW. Requires ECMP-aware collective placement.</td>
+            <td class="text-left" rowspan="1" colspan="1">A topology in which the NIC ports of each server are distributed across multiple ToR switches (one NIC port per switch), such that collective traffic between adjacent servers traverses different physical paths. Minimizes switch-to-switch traffic during ring AllReduce, maximizing effective BusBW. Requires rail-aware (topology-aware) collective placement.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2083,7 +2086,7 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Oversubscription Ratio</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The ratio of total edge (server-facing) bandwidth to total bisection bandwidth in a Clos fabric. A 1:1 ratio is non-blocking; higher ratios (e.g., 2:1, 4:1) reduce fabric cost but may bottleneck all-to-all and AllReduce patterns when all server ports are active simultaneously.</td>
+            <td class="text-left" rowspan="1" colspan="1">The ratio of a leaf switch's total server-facing (downlink) bandwidth to its total uplink bandwidth toward the spine layer. A 1:1 ratio is non-blocking; higher ratios (e.g., 2:1, 4:1) reduce fabric cost but may bottleneck all-to-all and AllReduce patterns when all server ports are active simultaneously. Distinct from the edge-to-bisection-bandwidth ratio described under Bisection Bandwidth, which is 2:1 even for a non-blocking fabric.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2101,7 +2104,7 @@ documents.<a href="#section-7-1" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>NIC</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Network Interface Controller. The hardware device providing network connectivity for an accelerator host. AI fabric NICs support RDMA (RoCEv2 or UET), hardware offload for collective operations, and, optionally, GPU-Initiated Networking (GIN). NIC model and firmware version <strong><span class="bcp14">MUST</span></strong> be documented in all benchmark reports.</td>
+            <td class="text-left" rowspan="1" colspan="1">Network Interface Controller. The hardware device providing network connectivity for an accelerator host. AI fabric NICs support RDMA (RoCEv2 or UET), hardware offload for collective operations, and, optionally, GPU-Initiated Networking (GIN). NIC model and firmware version <span class="bcp14">MUST</span> be documented in all benchmark reports.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2156,7 +2159,7 @@ and are used normatively in <span>[<a href="#I-D.calabria-bmwg-ai-fabric-trainin
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Roofline JCT</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The theoretical minimum JCT under ideal network conditions, namely: load balancing across all paths, zero contention and queuing, no retransmissions, and no fabric failures. Computed as <code>Roofline JCT = computation_time + serialization_delay</code>, where <code>serialization_delay = (8 × S × algo_factor) / B_acc</code>, with S = message size in bytes, algo_factor = the fixed per-collective normalization constant from the BusBW definition, and B_acc = aggregate per-accelerator NIC line rate in bits/second; the factor 8 converts bytes to bits. Stating these assumptions explicitly ensures the reference is reproducible across implementations. Provides a baseline for evaluating fabric overhead.</td>
+            <td class="text-left" rowspan="1" colspan="1">The theoretical minimum JCT under ideal network conditions, namely: load balancing across all paths, zero contention and queuing, no retransmissions, and no fabric failures. Computed as <code>Roofline JCT = computation_time + serialization_delay</code>, where <code>serialization_delay = (8 × S × algo_factor) / B_acc</code>, with S = message size in bytes, algo_factor = the fixed per-collective normalization constant from the BusBW definition, and B_acc = the sum of NIC line rates for that accelerator's own NICs, in bits/second (not aggregated across accelerators); the factor 8 converts bytes to bits. Stating these assumptions explicitly ensures the reference is reproducible across implementations. Provides a baseline for evaluating fabric overhead.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2168,7 +2171,7 @@ and are used normatively in <span>[<a href="#I-D.calabria-bmwg-ai-fabric-trainin
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Gradient Synchronization</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The AllReduce collective operation performed after the backward pass of each training step to sum the locally computed gradients across all data-parallel replicas. The dominant communication event in data-parallel training, occurring once per training step per layer.</td>
+            <td class="text-left" rowspan="1" colspan="1">The AllReduce collective operation performed after the backward pass of each training step to sum the locally computed gradients across all data-parallel replicas. The dominant communication event in data-parallel training, occurring once per training step (often split across multiple AllReduce calls when gradients are bucketed across layers).</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2193,8 +2196,10 @@ and are used normatively in <span>[<a href="#I-D.calabria-bmwg-ai-fabric-trainin
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-inference-specific-terms" class="section-name selfRef">Inference-Specific Terms</a>
       </h2>
 <p id="section-9-1">The following terms are specific to AI inference serving workload
-benchmarking and are used normatively in
-<span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>.<a href="#section-9-1" class="pilcrow">¶</a></p>
+benchmarking. Most are used normatively in
+<span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>; Speculative Decoding and
+PagedAttention are defined here for completeness and to support future
+benchmarking work, and are not currently referenced by that document.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <span id="name-inference-specific-terms-2"></span><div id="tab-infer-specific">
 <table class="center" id="table-11">
         <caption>
@@ -2212,7 +2217,7 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>TTFT</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Time to First Token. The elapsed time from receipt of an inference request by the serving system to emission of the first output token. Encompasses prompt processing (prefill), KV cache generation, optional KV cache transfer (in disaggregated architectures), and the initial decode step. Interactive serving deployments typically target TTFT &lt; 500 ms at P99 (informative; not a requirement of this document).</td>
+            <td class="text-left" rowspan="1" colspan="1">Time to First Token. The elapsed time from receipt of an inference request by the serving system to emission of the first output token. Encompasses prompt processing (prefill), KV cache generation, optional KV cache transfer (in disaggregated architectures), and emission of the first output token at the end of the prefill phase. Interactive serving deployments typically target TTFT &lt; 500 ms at P99 (informative; not a requirement of this document).</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2224,25 +2229,25 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>TPS</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Tokens Per Second. Aggregate throughput of the inference serving system, measured as the total number of output tokens generated per second across all concurrent requests. Reported separately for input-side (prefill) TPS and output-side (decode) TPS.</td>
+            <td class="text-left" rowspan="1" colspan="1">Tokens Per Second. Aggregate throughput of the inference serving system, measured as the total number of tokens processed per second across all concurrent requests. Reported separately for input-side (prefill) TPS and output-side (decode) TPS.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>KV Cache</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">Key-Value Cache. The intermediate attention state (key and value projection matrices from multi-head attention layers) computed during the prefill phase and reused during each decode step to avoid redundant recomputation. KV cache size scales with: <code>layers × KV_attention_heads (H_kv) × head_dim × sequence_length × precision</code>. Under GQA/MQA the number of KV heads (H_kv) differs from the total number of attention heads (see the S_KV definition). The attention head configuration <strong><span class="bcp14">MUST</span></strong> be reported in all benchmark results.</td>
+            <td class="text-left" rowspan="1" colspan="1">Key-Value Cache. The intermediate attention state (key and value projection matrices from multi-head attention layers) computed during the prefill phase and reused during each decode step to avoid redundant recomputation. KV cache size scales with: <code>layers × KV_attention_heads (H_kv) × head_dim × sequence_length × precision</code>. Under GQA/MQA the number of KV heads (H_kv) differs from the total number of attention heads (see the S_KV definition). The attention head configuration <span class="bcp14">MUST</span> be reported in all benchmark results.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Prefill Phase</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The compute-bound phase of LLM inference in which the entire input prompt is processed in parallel to generate the KV cache and the first output token. Characterized by high arithmetic intensity (200–400 ops/byte), high accelerator utilization (90–95%), and large activation tensors. Prefill latency dominates TTFT for long prompts.</td>
+            <td class="text-left" rowspan="1" colspan="1">The compute-bound phase of LLM inference in which the entire input prompt is processed in parallel to generate the KV cache and the first output token. Characterized by high arithmetic intensity and high accelerator utilization; values in the range of 200–400 ops/byte and 90–95% utilization are commonly observed on current-generation hardware, but these are illustrative and vary with model, batch size, and accelerator, and are not part of the definition. Prefill latency dominates TTFT for long prompts.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Decode Phase</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The memory-bandwidth-bound phase of LLM inference in which output tokens are generated autoregressively, one token per forward pass, by reading the KV cache. Characterized by low arithmetic intensity (60–80 ops/byte), lower accelerator utilization (20–40%), and memory-bandwidth-limited KV cache reads. Decode throughput limits TPS.</td>
+            <td class="text-left" rowspan="1" colspan="1">The memory-bandwidth-bound phase of LLM inference in which output tokens are generated autoregressively, one token per forward pass, by reading the KV cache. Characterized by low arithmetic intensity and lower accelerator utilization; values in the range of 60–80 ops/byte and 20–40% utilization are commonly observed on current-generation hardware, but these are illustrative and vary with model, batch size, and accelerator, and are not part of the definition. Decode throughput limits TPS.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2254,19 +2259,21 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>xPyD Ratio</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The allocation ratio of x prefill workers to y decode workers in a disaggregated serving cluster. Example: 3P9D denotes 3 prefill nodes and 9 decode nodes. The optimal xPyD ratio depends on model size, prompt/output length distributions, and TTFT/ITL SLO targets.</td>
+            <td class="text-left" rowspan="1" colspan="1">The allocation ratio of x prefill workers to y decode workers in a disaggregated serving cluster. Example: 3P9D denotes 3 prefill workers and 9 decode workers. xPyD is informal notation in wide use across disaggregated-serving implementations; it has no single canonical source. The optimal xPyD ratio depends on model size, prompt/output length distributions, and TTFT/ITL SLO targets.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Continuous Batching</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A dynamic inference scheduling technique that inserts new requests into an active decode batch as slots become available (without waiting for the current batch to complete), improving accelerator utilization compared to static batching. Generates variable batch sizes that affect fabric traffic burstiness.</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#ORCA-PAPER" class="cite xref">ORCA-PAPER</a>]</span> A dynamic inference scheduling technique that inserts new requests into an active decode batch as slots become available (without waiting for the current batch to complete), improving accelerator utilization compared to static batching. Generates variable batch sizes that affect fabric traffic burstiness.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>PagedAttention</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A KV cache memory management technique storing attention keys and values in fixed-size, non-contiguous virtual pages (typically 16–64 KB), inspired by OS virtual memory management. Reduces memory fragmentation and enables efficient KV cache sharing across requests with common prefixes.</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#PAGEDATTENTION-PAPER" class="cite xref">PAGEDATTENTION-PAPER</a>]</span> A KV cache memory management technique storing attention keys and values in fixed-size, non-contiguous virtual pages (typically 16–64 KB), inspired by OS virtual memory management. Reduces memory fragmentation and enables efficient KV cache sharing across requests with common prefixes.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2278,19 +2285,22 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Normal Dispatch</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">An AllToAll MoE dispatch communication mode optimized for the prefill phase. Payload sizes are variable (depending on token-to-expert routing), generating dynamic tensor shapes incompatible with static graph capture. Maximizes throughput for large batches at the cost of higher per-dispatch latency.</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#DEEPEP" class="cite xref">DEEPEP</a>]</span> An AllToAll MoE dispatch communication mode optimized for the prefill phase. Payload sizes are variable (depending on token-to-expert routing), generating dynamic tensor shapes incompatible with static graph capture. Maximizes throughput for large batches at the cost of higher per-dispatch latency.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Low-Latency Dispatch</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">An AllToAll MoE dispatch communication mode optimized for the decode phase. Payload sizes are padded to fixed maximum dimensions (compatible with static graph capture), enabling lower kernel-launch overhead at the cost of slight bandwidth inefficiency. Target: &lt; 200 µs per dispatch round trip.</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#DEEPEP" class="cite xref">DEEPEP</a>]</span> An AllToAll MoE dispatch communication mode optimized for the decode phase. Payload sizes are padded to fixed maximum dimensions (compatible with static graph capture), enabling lower kernel-launch overhead at the cost of slight bandwidth inefficiency. Target: &lt; 200 µs per dispatch round trip.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Expert Choice Routing</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A token routing strategy in which experts select which tokens to process, rather than tokens selecting experts. Each expert accepts its top-C tokens by affinity score, producing perfect load balance but non-uniform AllToAll message sizes across EP ranks.</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#EXPERT-CHOICE-PAPER" class="cite xref">EXPERT-CHOICE-PAPER</a>]</span> A token routing strategy in which experts select which tokens to process, rather than tokens selecting experts. Each expert accepts its top-C tokens by affinity score, producing perfect load balance but non-uniform AllToAll message sizes across EP ranks.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2308,7 +2318,7 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>T_dispatch</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The dispatch payload per accelerator per MoE layer, computed as: T_dispatch = (B * k * H_model * P_bytes) / N where B = batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. Used as the canonical traffic volume parameter in the MoE test matrix (see Section 7.1 of the companion inference benchmarking draft).</td>
+            <td class="text-left" rowspan="1" colspan="1">The dispatch payload per source-destination accelerator pair per MoE layer, computed as: T_dispatch = (B × k × H_model × P_bytes) / N where B = per-GPU batch size (tokens), k = top-k routing count, H_model = hidden dimension, P_bytes = bytes per element (BF16=2, FP8=1), N = EP group size. The corresponding total egress per accelerator per MoE layer, summed over its N-1 destination peers, is T_dispatch × (N - 1), defined as T_egress in the companion inference benchmarking document. Used as the canonical traffic volume parameter in that document's MoE test matrix.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
@@ -2320,18 +2330,19 @@ benchmarking and are used normatively in
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Speculative Decoding</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">An inference acceleration technique using a small draft model to generate candidate token sequences verified in parallel by the target model. Reduces effective ITL but generates bursty, variable-length KV cache traffic; noted as a future benchmarking area not fully specified in the current companion documents.</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#SPEC-DECODE-PAPER" class="cite xref">SPEC-DECODE-PAPER</a>]</span> An inference acceleration technique using a small draft model to generate candidate token sequences verified in parallel by the target model. Reduces effective ITL but generates bursty, variable-length KV cache traffic; noted as a future benchmarking area not fully specified in the current companion documents.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>S_KV</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The total size in bytes of the KV cache state generated by a single inference request across all transformer layers and all context tokens, computed as: S_KV = 2 x L x H_kv x D x C x P_bytes. Where: L = number of transformer layers; H_kv = number of KV attention heads per layer (H_kv &lt;= H_total for GQA/MQA); D = per-head key/value dimension (head_dim), typically model_dim / H_total; C = context length in tokens (prompt + generated tokens); P_bytes = precision in bytes per element (FP16/BF16 = 2, FP8/INT8 = 1); Factor 2 accounts for both K and V tensors, each of shape [H_kv, D] per layer per token.</td>
+            <td class="text-left" rowspan="1" colspan="1">The total size in bytes of the KV cache state generated by a single inference request across all transformer layers and all context tokens, computed as: S_KV = 2 × L × H_kv × D × C × P_bytes. Where: L = number of transformer layers; H_kv = number of KV attention heads per layer (H_kv ≤ H_total for GQA/MQA); D = per-head key/value dimension (head_dim), typically model_dim / H_total; C = context length in tokens (prompt + generated tokens); P_bytes = precision in bytes per element (FP16/BF16 = 2, FP8/INT8 = 1); Factor 2 accounts for both K and V tensors, each of shape [H_kv, D] per layer per token.</td>
           </tr>
         </tbody>
       </table>
 </div>
-<p id="section-9-3">See Section 7.1 of <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span> for the MoE test matrix referenced by T_dispatch above.<a href="#section-9-3" class="pilcrow">¶</a></p>
+<p id="section-9-3">See the Canonical MoE Test Matrix in the AllToAll Dispatch Throughput test of <span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span> for the test matrix referenced by T_dispatch above.<a href="#section-9-3" class="pilcrow">¶</a></p>
 <div id="inference-phase-characteristics">
 <section id="section-9.1">
         <h3 id="name-inference-phase-characteris">
@@ -2374,6 +2385,7 @@ benchmarking and are used normatively in
           </tbody>
         </table>
 </div>
+<p id="section-9.1-2">NOTE: The arithmetic intensity and utilization figures above are illustrative values for current-generation hardware. They vary with model architecture, batch size, and accelerator, and are not normative.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2402,31 +2414,31 @@ companion methodology documents.<a href="#section-10-1" class="pilcrow">¶</a></
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Primary KPI</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT and ITL. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations.</td>
+            <td class="text-left" rowspan="1" colspan="1">A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT, ITL, and TPS. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Secondary KPI</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: collective operation throughput (BusBW), KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations.</td>
+            <td class="text-left" rowspan="1" colspan="1">A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: per-phase collective throughput breakdown, KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Fabric Health Indicator (FHI)</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">An operational metric characterizing fabric stability and anomaly conditions rather than peak performance. FHIs include: PFC event rate, PFC storm occurrence, ECN marking ratio, packet loss rate, buffer occupancy (P99), and retransmission rate. FHIs <strong><span class="bcp14">SHOULD</span></strong> be continuously monitored and reported throughout all test categories.</td>
+            <td class="text-left" rowspan="1" colspan="1">An operational metric characterizing fabric stability and anomaly conditions rather than peak performance. FHIs include: PFC event rate, PFC storm occurrence, ECN marking ratio, packet loss rate, buffer occupancy (P99), and retransmission rate. FHIs <span class="bcp14">SHOULD</span> be continuously monitored and reported throughout all test categories.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Goodput</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports <span class="bcp14">MUST</span> specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br><strong>Fabric_Goodput:</strong>  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth. Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.<br><strong>Inference_Goodput:</strong>  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br>The two planes <span class="bcp14">MUST NOT</span> be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput.</td>
+            <td class="text-left" rowspan="1" colspan="1">The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports <span class="bcp14">MUST</span> specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br><strong>Fabric_Goodput:</strong>  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document (<span>[<a href="#I-D.calabria-bmwg-ai-fabric-inference-bench" class="cite xref">I-D.calabria-bmwg-ai-fabric-inference-bench</a>]</span>). Units: GB/s or Gbps; reports <span class="bcp14">MUST</span> state which.<br><strong>Inference_Goodput:</strong>  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br>The two planes <span class="bcp14">MUST NOT</span> be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput.</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">
               <strong>Zero Packet Loss</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2 and UET transports, zero packet loss is the target operating condition. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
+            <td class="text-left" rowspan="1" colspan="1">A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2, zero packet loss is the target operating condition. UET is designed to tolerate loss (RUD retransmission across sprayed paths, packet trimming); the applicable acceptance criterion for UET is zero application-visible loss rather than zero wire-level loss, and it depends on the transport service (ROD/RUD/RUDI/UUD) under test. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion.</td>
           </tr>
         </tbody>
       </table>
@@ -2534,7 +2546,7 @@ across the companion documents are listed in the Acronyms appendix
             <td class="text-left" rowspan="1" colspan="1">
               <strong>RFC 2119 / RFC 8174</strong>
 </td>
-            <td class="text-left" rowspan="1" colspan="1">"Key words for use in RFCs to Indicate Requirement Levels" (Bradner, 1997; Leiba, 2017). Define the normative requirement language: <span class="bcp14">MUST</span>, <span class="bcp14">MUST NOT</span>, <span class="bcp14">REQUIRED</span>, <span class="bcp14">SHALL</span>, <span class="bcp14">SHALL NOT</span>, <span class="bcp14">SHOULD</span>, <span class="bcp14">SHOULD NOT</span>, <span class="bcp14">RECOMMENDED</span>, <span class="bcp14">MAY</span>, and <span class="bcp14">OPTIONAL</span>. RFC 8174 clarifies that these terms are normative only when in uppercase; lowercase uses are not normative.</td>
+            <td class="text-left" rowspan="1" colspan="1">"Key words for use in RFCs to Indicate Requirement Levels" (Bradner, 1997; Leiba, 2017). Define the normative requirement language: <span class="bcp14">MUST</span>, <span class="bcp14">MUST NOT</span>, <span class="bcp14">REQUIRED</span>, <span class="bcp14">SHALL</span>, <span class="bcp14">SHALL NOT</span>, <span class="bcp14">SHOULD</span>, <span class="bcp14">SHOULD NOT</span>, <span class="bcp14">RECOMMENDED</span>, <span class="bcp14">NOT RECOMMENDED</span>, <span class="bcp14">MAY</span>, and <span class="bcp14">OPTIONAL</span>. RFC 8174 clarifies that these terms are normative only when in uppercase; lowercase uses are not normative.</td>
           </tr>
         </tbody>
       </table>
@@ -2546,8 +2558,8 @@ across the companion documents are listed in the Acronyms appendix
       <h2 id="name-iana-considerations">
 <a href="#section-12" class="section-number selfRef">12. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-12-1">This document is a terminology document and has no IANA actions.<a href="#section-12-1" class="pilcrow">¶</a></p>
-<p id="section-12-2">Note that IANA registration of the UET UDP destination port 4793 referenced in <a href="#tab-rocev2" class="auto internal xref">Table 4</a>, specified in the Ultra Ethernet Specification <span>[<a href="#UEC-1.0" class="cite xref">UEC-1.0</a>]</span>, is pending; this document does not request any IANA assignment.<a href="#section-12-2" class="pilcrow">¶</a></p>
+<p id="section-12-1">This document has no IANA actions.<a href="#section-12-1" class="pilcrow">¶</a></p>
+<p id="section-12-2">Note that UDP destination port 4793, referenced in <a href="#tab-rocev2" class="auto internal xref">Table 4</a> and specified in the Ultra Ethernet Specification <span>[<a href="#UEC-1.0" class="cite xref">UEC-1.0</a>]</span>, has been assigned by IANA to the Ultra Ethernet Transport (assignment date 2025-06-16); this document does not request any IANA assignment.<a href="#section-12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -2557,7 +2569,7 @@ across the companion documents are listed in the Acronyms appendix
       </h2>
 <p id="section-13-1">This document defines terminology and does not specify any protocol mechanism. It therefore introduces no new protocol-level security considerations beyond those of the underlying technologies it references. The considerations below follow the BMWG convention established in <span>[<a href="#RFC8238" class="cite xref">RFC8238</a>]</span> and apply to any benchmarking activity conducted using the terms defined herein.<a href="#section-13-1" class="pilcrow">¶</a></p>
 <p id="section-13-2">Benchmarking activities as described in the companion methodology documents are limited to technology characterization of AI fabrics using controlled stimuli in a laboratory environment, with dedicated address space and the constraints specified in those documents.<a href="#section-13-2" class="pilcrow">¶</a></p>
-<p id="section-13-3">The benchmarking network topology will be an independent test setup and <span class="bcp14">MUST NOT</span> be connected to devices that may forward the test traffic into a production network or misroute traffic to the test management network. This isolation requirement is particularly important for AI fabric benchmarking because the lossless transport modes referenced in <a href="#tab-congest-control" class="auto internal xref">Table 7</a> (PFC, DCQCN) and in <a href="#tab-uet" class="auto internal xref">Table 5</a> (CBFC) propagate congestion hop-by-hop and can extend the blast radius of a misconfigured test beyond the immediate DUT.<a href="#section-13-3" class="pilcrow">¶</a></p>
+<p id="section-13-3">The benchmarking network topology will be an independent test setup and <span class="bcp14">MUST NOT</span> be connected to devices that may forward the test traffic into a production network or misroute traffic to the test management network. This isolation requirement is particularly important for AI fabric benchmarking because the hop-by-hop flow-control mechanisms referenced in <a href="#tab-congest-control" class="auto internal xref">Table 7</a> (PFC) and in <a href="#tab-uet" class="auto internal xref">Table 5</a> (CBFC) propagate backpressure toward traffic sources and can extend the blast radius of a misconfigured test beyond the immediate DUT; DCQCN (<a href="#tab-congest-control" class="auto internal xref">Table 7</a>) reduces, but does not eliminate, reliance on these mechanisms.<a href="#section-13-3" class="pilcrow">¶</a></p>
 <p id="section-13-4">Benchmarking is performed on a "black-box" basis, relying solely on measurements observable external to the DUT or SUT as defined in <a href="#tab-gen-bench" class="auto internal xref">Table 1</a>.<a href="#section-13-4" class="pilcrow">¶</a></p>
 <p id="section-13-5">Special capabilities <span class="bcp14">SHOULD NOT</span> exist in the DUT specifically for benchmarking purposes. Any implications for network security arising from the DUT <span class="bcp14">SHOULD</span> be identical in the lab and in production networks. In particular, RDMA memory-region permissions and KV cache telemetry exposure are properties of the deployed configuration, not of the benchmarking methodology, and <span class="bcp14">SHOULD</span> reflect production posture during testing. Synthetic inputs <span class="bcp14">SHOULD</span> be used for the inference benchmarks referencing the KV Cache and S_KV terms in <a href="#tab-infer-specific" class="auto internal xref">Table 11</a> so that no production prompt content is processed in the test environment.<a href="#section-13-5" class="pilcrow">¶</a></p>
 </section>
@@ -2611,6 +2623,14 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Border Gateway Protocol</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">BMWG</td>
+            <td class="text-left" rowspan="1" colspan="1">Benchmarking Methodology Working Group</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">BSP</td>
+            <td class="text-left" rowspan="1" colspan="1">Bulk Synchronous Parallel</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">BTH</td>
             <td class="text-left" rowspan="1" colspan="1">Base Transport Header</td>
           </tr>
@@ -2641,6 +2661,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">CV</td>
             <td class="text-left" rowspan="1" colspan="1">Coefficient of Variation</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">CXL</td>
+            <td class="text-left" rowspan="1" colspan="1">Compute Express Link</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">DCQCN</td>
@@ -2687,8 +2711,16 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Fabric Health Indicator</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">FRR</td>
+            <td class="text-left" rowspan="1" colspan="1">Fast Reroute</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">GIN</td>
             <td class="text-left" rowspan="1" colspan="1">GPU-Initiated Networking</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">GPU</td>
+            <td class="text-left" rowspan="1" colspan="1">Graphics Processing Unit</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">GQA</td>
@@ -2711,8 +2743,16 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Invariant CRC</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">ImmDt</td>
+            <td class="text-left" rowspan="1" colspan="1">Immediate Data</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">INT</td>
             <td class="text-left" rowspan="1" colspan="1">In-band Network Telemetry</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">IRN</td>
+            <td class="text-left" rowspan="1" colspan="1">Improved RoCE NIC</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">ITL</td>
@@ -2731,8 +2771,12 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Key Performance Indicator</td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">KVCXL</td>
+            <td class="text-left" rowspan="1" colspan="1">KVTL</td>
             <td class="text-left" rowspan="1" colspan="1">KV Cache Transfer Library</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">LLM</td>
+            <td class="text-left" rowspan="1" colspan="1">Large Language Model</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">LLR</td>
@@ -2741,6 +2785,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">MAC</td>
             <td class="text-left" rowspan="1" colspan="1">Media Access Control</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">MHA</td>
+            <td class="text-left" rowspan="1" colspan="1">Multi-Head Attention</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">ML</td>
@@ -2783,6 +2831,10 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Open Shortest Path First</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">PCIe</td>
+            <td class="text-left" rowspan="1" colspan="1">Peripheral Component Interconnect Express</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">PDC</td>
             <td class="text-left" rowspan="1" colspan="1">Packet Delivery Context</td>
           </tr>
@@ -2811,8 +2863,16 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Queue Pair</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">RC</td>
+            <td class="text-left" rowspan="1" colspan="1">Reliable Connected</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">RDMA</td>
             <td class="text-left" rowspan="1" colspan="1">Remote Direct Memory Access</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">RETH</td>
+            <td class="text-left" rowspan="1" colspan="1">RDMA Extended Transport Header</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">RoCEv2</td>
@@ -2843,12 +2903,24 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Service Level Objective</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">SPMD</td>
+            <td class="text-left" rowspan="1" colspan="1">Single Program Multiple Data</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">SUT</td>
             <td class="text-left" rowspan="1" colspan="1">System Under Test</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">TCAM</td>
             <td class="text-left" rowspan="1" colspan="1">Ternary Content-Addressable Memory</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">TG</td>
+            <td class="text-left" rowspan="1" colspan="1">Traffic Generator</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">ToR</td>
+            <td class="text-left" rowspan="1" colspan="1">Top-of-Rack</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">TP</td>
@@ -2887,12 +2959,20 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
             <td class="text-left" rowspan="1" colspan="1">Virtual Output Queue</td>
           </tr>
           <tr>
+            <td class="text-left" rowspan="1" colspan="1">WE</td>
+            <td class="text-left" rowspan="1" colspan="1">Workload Emulator</td>
+          </tr>
+          <tr>
             <td class="text-left" rowspan="1" colspan="1">XPU</td>
             <td class="text-left" rowspan="1" colspan="1">accelerator processing unit (generic)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">xPyD</td>
             <td class="text-left" rowspan="1" colspan="1">x Prefill workers : y Decode workers (disaggregated serving ratio)</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">ZeRO</td>
+            <td class="text-left" rowspan="1" colspan="1">Zero Redundancy Optimizer</td>
           </tr>
         </tbody>
       </table>
@@ -2904,7 +2984,7 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-15-1">This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel and Mohamed Boucadair for valuable reviews and comments.<a href="#section-15-1" class="pilcrow">¶</a></p>
+<p id="section-15-1">This work has benefited from the discussions that occurred during the joint IPPM and BMWG meeting and on the BMWG mailing list. Thanks to Carsten Rossenhoevel and Mohamed Boucadair for valuable review and comments. Thanks to Andrew Yourtchenko for a thorough review of the document set. Thanks to Niangen Ye for the review comments on Fabric-Visible Data Volume provenance and on forwarding-work accounting, which prompted the byte-counting rule stated in this document.<a href="#section-15-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -2959,21 +3039,49 @@ here.<a href="#section-14-2" class="pilcrow">¶</a></p>
 <a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="DCQCN-PAPER">[DCQCN-PAPER]</dt>
+        <dd>
+<span class="refAuthor">Zhu, Y.</span>, <span class="refAuthor">Eran, H.</span>, <span class="refAuthor">Firestone, D.</span>, <span class="refAuthor">Guo, C.</span>, <span class="refAuthor">Lipshteyn, M.</span>, <span class="refAuthor">Liron, Y.</span>, <span class="refAuthor">Padhye, J.</span>, <span class="refAuthor">Raindel, S.</span>, <span class="refAuthor">Yahia, M. H.</span>, and <span class="refAuthor">M. Zhang</span>, <span class="refTitle">"Congestion Control for Large-Scale RDMA Deployments"</span>, <span class="seriesInfo">ACM SIGCOMM pp. 523-536</span>, <span class="seriesInfo">DOI 10.1145/2785956.2787484</span>, <time datetime="2015" class="refDate">2015</time>, <span>&lt;<a href="https://doi.org/10.1145/2785956.2787484">https://doi.org/10.1145/2785956.2787484</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="DEEPEP">[DEEPEP]</dt>
+        <dd>
+<span class="refAuthor">DeepSeek AI</span>, <span class="refTitle">"DeepEP: an efficient expert-parallel communication library"</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://github.com/deepseek-ai/DeepEP">https://github.com/deepseek-ai/DeepEP</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="EXPERT-CHOICE-PAPER">[EXPERT-CHOICE-PAPER]</dt>
+        <dd>
+<span class="refAuthor">Zhou, Y.</span> and <span class="refAuthor">T. Lei</span>, <span class="refTitle">"Mixture-of-Experts with Expert Choice Routing"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://arxiv.org/abs/2202.09368">https://arxiv.org/abs/2202.09368</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.calabria-bmwg-ai-fabric-inference-bench">[I-D.calabria-bmwg-ai-fabric-inference-bench]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Methodology for AI Inference Serving Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-inference-bench-02</span>, <time datetime="2026-06-04" class="refDate">4 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-02">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Methodology for AI Inference Serving Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-inference-bench-03</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-03">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-inference-bench-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.calabria-bmwg-ai-fabric-training-bench">[I-D.calabria-bmwg-ai-fabric-training-bench]</dt>
         <dd>
-<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Methodology for AI Training Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-training-bench-02</span>, <time datetime="2026-06-04" class="refDate">4 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-02">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-02</a>&gt;</span>. </dd>
+<span class="refAuthor">Calabria, F.</span>, <span class="refAuthor">Pignataro, C.</span>, <span class="refAuthor">Wu, Q.</span>, <span class="refAuthor">Fioccola, G.</span>, and <span class="refAuthor">S. Reddy</span>, <span class="refTitle">"Benchmarking Methodology for AI Training Network Fabrics"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-calabria-bmwg-ai-fabric-training-bench-03</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-03">https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-training-bench-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IBTA-ROCE">[IBTA-ROCE]</dt>
         <dd>
 <span class="refAuthor">InfiniBand Trade Association</span>, <span class="refTitle">"InfiniBand Architecture Specification Volume 1, Annex A17: RoCEv2"</span>, <time datetime="2014-09" class="refDate">September 2014</time>, <span>&lt;<a href="https://www.infinibandta.org">https://www.infinibandta.org</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Jain1984">[Jain1984]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Jain, R.</span>, <span class="refAuthor">Chiu, D.</span>, and <span class="refAuthor">W. Hawe</span>, <span class="refTitle">"A Quantitative Measure of Fairness and Discrimination for Resource Allocation in Shared Computer Systems"</span>, <span class="seriesInfo">DEC Technical Report TR-301</span>, <time datetime="1984-09" class="refDate">September 1984</time>, <span>&lt;<a href="https://www.cs.wustl.edu/~jain/papers/ftp/fairness.pdf">https://www.cs.wustl.edu/~jain/papers/ftp/fairness.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ORCA-PAPER">[ORCA-PAPER]</dt>
+        <dd>
+<span class="refAuthor">Yu, G.</span>, <span class="refAuthor">Jeong, J. S.</span>, and <span class="refAuthor">G. Kim</span>, <span class="refTitle">"Orca: A Distributed Serving System for Transformer-Based Generative Models"</span>, <span class="seriesInfo">USENIX OSDI </span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://www.usenix.org/conference/osdi22/presentation/yu">https://www.usenix.org/conference/osdi22/presentation/yu</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PAGEDATTENTION-PAPER">[PAGEDATTENTION-PAPER]</dt>
+        <dd>
+<span class="refAuthor">Kwon, W.</span>, <span class="refAuthor">Li, Z.</span>, and <span class="refAuthor">S. Zheng</span>, <span class="refTitle">"Efficient Memory Management for Large Language Model Serving with PagedAttention"</span>, <span class="seriesInfo">ACM SOSP </span>, <span class="seriesInfo">DOI 10.1145/3600006.3613165</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://doi.org/10.1145/3600006.3613165">https://doi.org/10.1145/3600006.3613165</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SPEC-DECODE-PAPER">[SPEC-DECODE-PAPER]</dt>
+        <dd>
+<span class="refAuthor">Leviathan, Y.</span>, <span class="refAuthor">Kalman, M.</span>, and <span class="refAuthor">Y. Matias</span>, <span class="refTitle">"Fast Inference from Transformers via Speculative Decoding"</span>, <time datetime="2023" class="refDate">2023</time>, <span>&lt;<a href="https://arxiv.org/abs/2211.17192">https://arxiv.org/abs/2211.17192</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="ZERO-PAPER">[ZERO-PAPER]</dt>
+      <dd>
+<span class="refAuthor">Rajbhandari, S.</span>, <span class="refAuthor">Rasley, J.</span>, <span class="refAuthor">Ruwase, O.</span>, and <span class="refAuthor">Y. He</span>, <span class="refTitle">"ZeRO: Memory Optimizations Toward Training Trillion Parameter Models"</span>, <time datetime="2020" class="refDate">2020</time>, <span>&lt;<a href="https://arxiv.org/abs/1910.02054">https://arxiv.org/abs/1910.02054</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -3013,18 +3121,18 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Parallelism Strategies (§4)</td>
-            <td class="text-left" rowspan="1" colspan="1">DP, TP, PP, EP, MoE, ZeRO</td>
-            <td class="text-left" rowspan="1" colspan="1">EP, MoE, DP Attention</td>
+            <td class="text-left" rowspan="1" colspan="1">PP, EP, MoE, ZeRO</td>
+            <td class="text-left" rowspan="1" colspan="1">DP, TP, EP, MoE, DP Attention</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">RDMA / RoCEv2 (§5.1)</td>
-            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode, RDMA Verb</td>
-            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode</td>
+            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode, UET, PDC, ROD</td>
+            <td class="text-left" rowspan="1" colspan="1">RDMA, RoCEv2, QP, RC mode, RDMA Verb, UET, PDC, ROD</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">UET Terms (§5.2)</td>
-            <td class="text-left" rowspan="1" colspan="1">UET, PDC, ROD, RUD, RUDI, UUD, LLR, Packet Trimming, PRI, CBFC, UEC Profile, Entropy Value</td>
-            <td class="text-left" rowspan="1" colspan="1">UET, RUD, GIN</td>
+            <td class="text-left" rowspan="1" colspan="1">RUD, RUDI, UUD, LLR, Packet Trimming, PRI, CBFC, UEC Profile, Entropy Value</td>
+            <td class="text-left" rowspan="1" colspan="1">RUD, GIN</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Congestion Control (§6)</td>
@@ -3033,8 +3141,8 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Fabric Topology (§7)</td>
-            <td class="text-left" rowspan="1" colspan="1">Clos, Rail-Optimized, Bisection BW, Oversubscription, ToR, Spine, NIC, Buffer Occupancy, Zero-Impact Failover, Link Utilization</td>
-            <td class="text-left" rowspan="1" colspan="1">Clos, Bisection BW, ToR, NIC, Buffer Occupancy, Link Utilization</td>
+            <td class="text-left" rowspan="1" colspan="1">Fabric DUT Boundary, Intra-Node Transfer Overhead, Fabric-Visible Data Volume, Clos, Rail-Optimized, Bisection BW, Oversubscription, Spine, NIC, Zero-Impact Failover, Link Utilization</td>
+            <td class="text-left" rowspan="1" colspan="1">Fabric DUT Boundary, Fabric-Visible Data Volume, Clos, Oversubscription, Spine, NIC, Link Utilization</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Training-Specific (§8)</td>
@@ -3044,12 +3152,12 @@ in each companion methodology document.<a href="#appendix-A-1" class="pilcrow">�
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Inference-Specific (§9)</td>
             <td class="text-left" rowspan="1" colspan="1">—</td>
-            <td class="text-left" rowspan="1" colspan="1">TTFT, ITL, TPS, KV Cache, Prefill, Decode, Disaggregated Serving, xPyD, Continuous Batching, PagedAttention, Prefix Caching, Normal/Low-Latency Dispatch, SLO</td>
+            <td class="text-left" rowspan="1" colspan="1">TTFT, ITL, TPS, KV Cache, Prefill, Decode, Disaggregated Serving, xPyD, Continuous Batching, Normal/Low-Latency Dispatch, Expert Choice Routing, Top-k with Token Drop, Auxiliary Loss Top-k, T_dispatch, S_KV, SLO</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">KPI Classification (§10)</td>
             <td class="text-left" rowspan="1" colspan="1">Primary KPI (JCT Ratio, BusBW), Secondary KPI, FHI, Goodput, Zero Packet Loss</td>
-            <td class="text-left" rowspan="1" colspan="1">Primary KPI (TTFT, ITL), Secondary KPI, FHI, Goodput, Zero Packet Loss</td>
+            <td class="text-left" rowspan="1" colspan="1">Primary KPI (TTFT, ITL, TPS), Secondary KPI, FHI, Goodput, Zero Packet Loss</td>
           </tr>
         </tbody>
       </table>
@@ -3080,7 +3188,7 @@ definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">2</td>
-            <td class="text-left" rowspan="1" colspan="1">DUT, SUT, RT, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, AI Fabric</td>
+            <td class="text-left" rowspan="1" colspan="1">DUT, SUT, TG, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, AI Fabric</td>
             <td class="text-left" rowspan="1" colspan="1">General Benchmarking</td>
           </tr>
           <tr>
@@ -3100,7 +3208,7 @@ definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">5.2</td>
-            <td class="text-left" rowspan="1" colspan="1">RUD, RUDI, UUD, UEC Profile, LLR, Packet Trimming, PRI, CBFC, Entropy Value, GIN, KVCXL</td>
+            <td class="text-left" rowspan="1" colspan="1">RUD, RUDI, UUD, UEC Profile, LLR, Packet Trimming, PRI, CBFC, Entropy Value, GIN, KVTL</td>
             <td class="text-left" rowspan="1" colspan="1">Transport — UET</td>
           </tr>
           <tr>
@@ -3110,7 +3218,7 @@ definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">7</td>
-            <td class="text-left" rowspan="1" colspan="1">Fabric DUT Boundary, Intra-Node Transfer Overhead, Clos/Fat-Tree, Rail-Optimized, Bisection Bandwidth, Oversubscription Ratio, ToR Switch, Spine/Superspine, NIC, Buffer Occupancy, Zero-Impact Failover, Link Utilization</td>
+            <td class="text-left" rowspan="1" colspan="1">Fabric DUT Boundary, Intra-Node Transfer Overhead, Fabric-Visible Data Volume, Clos/Fat-Tree, Rail-Optimized, Bisection Bandwidth, Oversubscription Ratio, ToR Switch, Spine/Superspine, NIC, Buffer Occupancy, Zero-Impact Failover, Link Utilization</td>
             <td class="text-left" rowspan="1" colspan="1">Fabric Topology</td>
           </tr>
           <tr>
