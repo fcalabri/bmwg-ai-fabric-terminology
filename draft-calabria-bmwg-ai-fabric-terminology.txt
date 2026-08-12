@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 6 February 2027                            Blue Fern Consulting
+Expires: 13 February 2027                           Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                           5 August 2026
+                                                          12 August 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 February 2027.
+   This Internet-Draft will expire on 13 February 2027.
 
 Copyright Notice
 
@@ -1330,17 +1330,6 @@ Table of Contents
    |            | The two planes MUST NOT be conflated.               |
    |            | KV_xfer_bandwidth measures Fabric_Goodput; it does  |
    |            | not measure Inference_Goodput.                      |
-   |            | *Relationship to Computationally Effective Data     |
-   |            | (CED):* CED as defined in [SWITCHING-EFF] is not    |
-   |            | equivalent to Fabric_Goodput.  Fabric_Goodput       |
-   |            | integrated over an observation window equals the    |
-   |            | received volume of that document with duplicate and |
-   |            | retransmitted receipts removed; CED counts only the |
-   |            | retained output of a communication primitive, which |
-   |            | for a reduction collective is the final reduced     |
-   |            | result alone.  For an ideal ring AllReduce the two  |
-   |            | therefore differ by approximately the algo_factor   |
-   |            | of the BusBW definition in §3.                      |
    +------------+-----------------------------------------------------+
    | *Zero      | A test acceptance criterion requiring that no       |
    | Packet     | packets are dropped by the DUT during the           |
@@ -1810,14 +1799,6 @@ Informative References
               Leviathan, Y., Kalman, M., and Y. Matias, "Fast Inference
               from Transformers via Speculative Decoding", 2023,
               <https://arxiv.org/abs/2211.17192>.
-
-   [SWITCHING-EFF]
-              Ye, N., Sun, W., Wang, D., and J. Sun, "Switching
-              Efficiency: A Metric Framework for AI Data Center
-              Networks", Work in Progress, Internet-Draft, draft-ye-
-              ippm-switching-efficiency-02, April 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ye-ippm-
-              switching-efficiency-02>.
 
    [ZERO-PAPER]
               Rajbhandari, S., Rasley, J., Ruwase, O., and Y. He, "ZeRO:
