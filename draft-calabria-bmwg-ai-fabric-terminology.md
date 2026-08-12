@@ -86,21 +86,6 @@ informative:
       - org: InfiniBand Trade Association
     date: 2014-09
 
-  SWITCHING-EFF:
-    title: "Switching Efficiency: A Metric Framework for AI Data Center Networks"
-    author:
-      - ins: N. Ye
-        name: Niangen Ye
-      - ins: W. Sun
-        name: Weiqiang Sun
-      - ins: D. Wang
-        name: Dong Wang
-      - ins: J. Sun
-        name: Jiang Sun
-    date: 2026-04
-    seriesinfo:
-      Internet-Draft: draft-ye-ippm-switching-efficiency-02
-
   DCQCN-PAPER:
     title: "Congestion Control for Large-Scale RDMA Deployments"
     author:
@@ -506,7 +491,7 @@ companion methodology documents.
 | **Primary KPI** | A top-level performance indicator directly representing end-user experience or training efficiency. In training: JCT Ratio and BusBW. In inference: TTFT, ITL, and TPS. Primary KPIs are the principal reporting metric and the basis for comparative benchmarking across DUT implementations. |
 | **Secondary KPI** | A fabric-level performance indicator providing mechanistic explanation for primary KPI values. Examples: per-phase collective throughput breakdown, KV cache transfer goodput, AllToAll dispatch latency, ECMP imbalance (MMR), and link utilization. Secondary KPIs enable root-cause analysis of Primary KPI deviations. |
 | **Fabric Health Indicator (FHI)** | An operational metric characterizing fabric stability and anomaly conditions rather than peak performance. FHIs include: PFC event rate, PFC storm occurrence, ECN marking ratio, packet loss rate, buffer occupancy (P99), and retransmission rate. FHIs SHOULD be continuously monitored and reported throughout all test categories. |
-| **Goodput** | The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports MUST specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document ({{?I-D.calabria-bmwg-ai-fabric-inference-bench}}). Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput.<br />**Relationship to Computationally Effective Data (CED):**  CED as defined in {{SWITCHING-EFF}} is not equivalent to Fabric_Goodput.  Fabric_Goodput integrated over an observation window equals the received volume of that document with duplicate and retransmitted receipts removed; CED counts only the retained output of a communication primitive, which for a reduction collective is the final reduced result alone.  For an ideal ring AllReduce the two therefore differ by approximately the algo_factor of the BusBW definition in §3. |
+| **Goodput** | The application-useful data delivered per unit time, excluding retransmissions, protocol overhead, and padding. Benchmark reports MUST specify the qualified Goodput metric (e.g., Inference_Goodput or Fabric_Goodput) to avoid ambiguity. <br />**Fabric_Goodput:**  RDMA message payload bytes successfully delivered per unit time at the DUT boundary, excluding transport headers, framing overhead, padding, and retransmitted bytes.  This is the numerator quantity in KV_xfer_bandwidth and EP_alltoall_bandwidth, both defined in the companion inference benchmarking document ({{?I-D.calabria-bmwg-ai-fabric-inference-bench}}). Units: GB/s or Gbps; reports MUST state which.<br />**Inference_Goodput:**  Output tokens successfully delivered per unit time, counting only requests that complete without preemption, eviction, or error.  Corresponds to TPS_output over successfully completed requests only.  Units: tokens/second.<br />The two planes MUST NOT be conflated.  KV_xfer_bandwidth measures Fabric_Goodput; it does not measure Inference_Goodput. |
 | **Zero Packet Loss** | A test acceptance criterion requiring that no packets are dropped by the DUT during the measurement interval. For RoCEv2, zero packet loss is the target operating condition. UET is designed to tolerate loss (RUD retransmission across sprayed paths, packet trimming); the applicable acceptance criterion for UET is zero application-visible loss rather than zero wire-level loss, and it depends on the transport service (ROD/RUD/RUDI/UUD) under test. The binary search procedure in the companion methodology documents determines the maximum offered load satisfying this criterion. |
 {: #tab-kpi-class title="KPI Classification Terms"}
 
