@@ -5,13 +5,13 @@
 BMWG                                                         F. Calabria
 Internet-Draft                                                     Cisco
 Intended status: Informational                              C. Pignataro
-Expires: 13 February 2027                           Blue Fern Consulting
+Expires: 28 March 2027                              Blue Fern Consulting
                                                                    Q. Wu
                                                              G. Fioccola
                                                                   Huawei
                                                                 S. Reddy
                                                                    Apple
-                                                          12 August 2026
+                                                       24 September 2026
 
 
             Benchmarking Terminology for AI Network Fabrics
@@ -65,7 +65,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 February 2027.
+   This Internet-Draft will expire on 28 March 2027.
 
 Copyright Notice
 
@@ -174,89 +174,113 @@ Table of Contents
    The following terms establish the general measurement framework
    applicable to all AI fabric benchmarking activities.
 
-   +=============+=====================================================+
-   | Term        | Definition                                          |
-   +=============+=====================================================+
-   | *AI Fabric* | The dedicated Ethernet backend network              |
-   |             | interconnecting accelerators (GPUs/XPUs) for        |
-   |             | distributed AI training and inference workloads.    |
-   |             | Typically implemented as a Clos (fat-tree)          |
-   |             | topology, non-blocking or oversubscribed (see       |
-   |             | Oversubscription Ratio), running RoCEv2 or UET.     |
-   |             | The AI fabric is separate from the front-end        |
-   |             | management and storage network.                     |
-   +-------------+-----------------------------------------------------+
-   | *DUT*       | Device Under Test.  The network element(s) whose    |
-   |             | performance characteristics are being measured.     |
-   |             | In AI fabric benchmarking the DUT is one or more    |
-   |             | fabric elements: leaf switches, spine switches,     |
-   |             | NICs, or the complete fabric assembly.              |
-   +-------------+-----------------------------------------------------+
-   | *SUT*       | System Under Test.  The complete AI compute         |
-   |             | system including accelerators, NICs, the fabric     |
-   |             | DUT, and serving/training software, when end-to-    |
-   |             | end metrics are the measurement objective.          |
-   +-------------+-----------------------------------------------------+
-   | *TG*        | Traffic Generator.  Test equipment capable of       |
-   |             | generating and receiving network traffic at         |
-   |             | specified rates with nanosecond-resolution          |
-   |             | timestamping sufficient for the measurements        |
-   |             | defined in the companion methodology documents.     |
-   +-------------+-----------------------------------------------------+
-   | *JFI*       | Jain's Fairness Index.  A scalar measure of         |
-   |             | flow-level throughput fairness across n flows       |
-   |             | [Jain1984]: JFI = (Σxᵢ)² / (n · Σxᵢ²) where xᵢ      |
-   |             | is the throughput of flow i.  A value of 1.0        |
-   |             | indicates perfect fairness; lower values            |
-   |             | indicate disparity.  SHOULD be reported             |
-   |             | alongside throughput measurements for all multi-    |
-   |             | flow AI fabric tests.                               |
-   +-------------+-----------------------------------------------------+
-   | *Offered    | The total traffic rate presented to the DUT from    |
-   | Load*       | test equipment, expressed as a fraction of line     |
-   |             | rate (0–100%) or as absolute bit/s.  Offered        |
-   |             | load is controlled independently of DUT             |
-   |             | absorption, enabling characterization of            |
-   |             | saturation behavior.                                |
-   +-------------+-----------------------------------------------------+
-   | *Trial      | The time interval over which a single               |
-   | Duration*   | measurement is conducted.  For AI fabric tests,     |
-   |             | the RECOMMENDED minimum is 60 seconds for           |
-   |             | throughput tests and 300 seconds for congestion     |
-   |             | and stability sub-tests, per the methodology in     |
-   |             | [RFC2544] as extended in the companion              |
-   |             | methodology documents.  Soak tests use a            |
-   |             | substantially longer duration (minimum 24 hours)    |
-   |             | per the Soak Test definition in Table 10.           |
-   +-------------+-----------------------------------------------------+
-   | *Warmup     | A pre-measurement interval, used when specified     |
-   | Period*     | by a test procedure, during which traffic is        |
-   |             | sent but results are not recorded.  Ensures         |
-   |             | adaptive routing tables, PFC watermarks, and        |
-   |             | DCQCN/UET congestion controllers reach steady       |
-   |             | state before measurement begins.  RECOMMENDED       |
-   |             | minimum: 10 seconds.                                |
-   +-------------+-----------------------------------------------------+
-   | *Binary     | An iterative test procedure for determining the     |
-   | Search*     | maximum offered load at which a DUT meets a         |
-   |             | specified acceptance criterion (e.g., zero          |
-   |             | packet loss).  The search halves the candidate      |
-   |             | load range at each iteration, converging to a       |
-   |             | resolution of 0.1% offered load within 10           |
-   |             | iterations, assuming an initial search range of     |
-   |             | 0-100% offered load.                                |
-   +-------------+-----------------------------------------------------+
-   | *Percentile | A latency statistic expressing that the             |
-   | Latency*    | specified fraction of all measured latency          |
-   |             | samples fall at or below the reported value.        |
-   |             | Denoted Pxx (e.g., P50, P95, P99, P99.9).  Tail     |
-   |             | latency (P99 and above) is especially relevant      |
-   |             | for AI fabric benchmarking because SLO              |
-   |             | violations are determined by worst-case, not        |
-   |             | median, performance.                                |
-   +-------------+-----------------------------------------------------+
+    +==============+=================================================+
+    | Term         | Definition                                      |
+    +==============+=================================================+
+    | *AI Fabric*  | The dedicated Ethernet backend network          |
+    |              | interconnecting accelerators (GPUs/XPUs) for    |
+    |              | distributed AI training and inference           |
+    |              | workloads.  Typically implemented as a Clos     |
+    |              | (fat-tree) topology, non-blocking or            |
+    |              | oversubscribed (see Oversubscription Ratio),    |
+    |              | running RoCEv2 or UET.  The AI fabric is        |
+    |              | separate from the front-end management and      |
+    |              | storage network.                                |
+    +--------------+-------------------------------------------------+
+    | *DUT*        | Device Under Test.  The network element(s)      |
+    |              | whose performance characteristics are being     |
+    |              | measured.  In AI fabric benchmarking the DUT is |
+    |              | one or more fabric elements: leaf switches,     |
+    |              | spine switches, NICs, or the complete fabric    |
+    |              | assembly.                                       |
+    +--------------+-------------------------------------------------+
+    | *SUT*        | System Under Test.  The complete AI compute     |
+    |              | system including accelerators, NICs, the fabric |
+    |              | DUT, and serving/training software, when end-   |
+    |              | to-end metrics are the measurement objective.   |
+    +--------------+-------------------------------------------------+
+    | *TG*         | Traffic Generator.  Test equipment capable of   |
+    |              | generating and receiving network traffic at     |
+    |              | specified rates with nanosecond-resolution      |
+    |              | timestamping sufficient for the measurements    |
+    |              | defined in the companion methodology documents. |
+    +--------------+-------------------------------------------------+
+    | *JFI*        | Jain's Fairness Index.  A scalar measure of     |
+    |              | flow-level throughput fairness across n flows   |
+    |              | [Jain1984]: JFI = (Σxᵢ)² / (n · Σxᵢ²) where xᵢ  |
+    |              | is the throughput of flow i.  A value of 1.0    |
+    |              | indicates perfect fairness; lower values        |
+    |              | indicate disparity.  SHOULD be reported         |
+    |              | alongside throughput measurements for all       |
+    |              | multi-flow AI fabric tests.                     |
+    +--------------+-------------------------------------------------+
+    | *Offered     | The total traffic rate presented to the DUT     |
+    | Load*        | from test equipment, expressed as a fraction of |
+    |              | line rate (0–100%) or as absolute bit/s.        |
+    |              | Offered load is controlled independently of DUT |
+    |              | absorption, enabling characterization of        |
+    |              | saturation behavior.                            |
+    +--------------+-------------------------------------------------+
+    | *Trial       | The time interval over which a single           |
+    | Duration*    | measurement is conducted.  For AI fabric tests, |
+    |              | the RECOMMENDED minimum is 60 seconds for       |
+    |              | throughput tests and 300 seconds for congestion |
+    |              | and stability sub-tests, per the methodology in |
+    |              | [RFC2544] as extended in the companion          |
+    |              | methodology documents.  Soak tests use a        |
+    |              | substantially longer duration (minimum 24       |
+    |              | hours) per the Soak Test definition in          |
+    |              | Table 10.                                       |
+    +--------------+-------------------------------------------------+
+    | *Warmup      | A pre-measurement interval, used when specified |
+    | Period*      | by a test procedure, during which traffic is    |
+    |              | sent but results are not recorded.  Ensures     |
+    |              | adaptive routing tables, PFC watermarks, and    |
+    |              | DCQCN/UET congestion controllers reach steady   |
+    |              | state before measurement begins.  RECOMMENDED   |
+    |              | minimum: 10 seconds.                            |
+    +--------------+-------------------------------------------------+
+    | *Binary      | An iterative test procedure for determining the |
+    | Search*      | maximum offered load at which a DUT meets a     |
+    |              | specified acceptance criterion (e.g., zero      |
+    |              | packet loss).  The search halves the candidate  |
+    |              | load range at each iteration, converging to a   |
+    |              | resolution of 0.1% offered load within 10       |
+    |              | iterations, assuming an initial search range of |
+    |              | 0-100% offered load.                            |
+    +--------------+-------------------------------------------------+
+    | *Percentile  | A latency statistic expressing that the         |
+    | Latency*     | specified fraction of all measured latency      |
+    |              | samples fall at or below the reported value.    |
+    |              | Denoted Pxx (e.g., P50, P95, P99, P99.9).  Tail |
+    |              | latency (P99 and above) is especially relevant  |
+    |              | for AI fabric benchmarking because SLO          |
+    |              | violations are determined by worst-case, not    |
+    |              | median, performance.                            |
+    +--------------+-------------------------------------------------+
+    | *Observation | The location at which a reported value is       |
+    | Point*       | obtained.  Three classes are distinguished: (a) |
+    |              | the Fabric DUT Boundary, observed by test       |
+    |              | equipment or at the NIC Ethernet port; (b)      |
+    |              | counters or telemetry read from the DUT, such   |
+    |              | as egress queue occupancy, ECN-marked packet    |
+    |              | counts, or PFC PAUSE counts on a switch port;   |
+    |              | and (c) an endpoint software boundary, such as  |
+    |              | RDMA verb posting, completion queue polling, or |
+    |              | the application request/response boundary.      |
+    |              | Values obtained at different Observation Points |
+    |              | are not interchangeable, even when they carry   |
+    |              | the same name, and are not combined into a      |
+    |              | single reported value.  Reports MUST state the  |
+    |              | Observation Point of each reported value.  For  |
+    |              | class (b), the report also states the port,     |
+    |              | direction (ingress or egress), and traffic      |
+    |              | class to which the value applies, and labels    |
+    |              | the value as DUT-reported, since benchmarking   |
+    |              | is performed on a black-box basis.              |
+    +--------------+-------------------------------------------------+
 
-                    Table 1: General Benchmarking Terms
+                   Table 1: General Benchmarking Terms
 
 3.  Collective Communication Terms
 
@@ -1759,17 +1783,17 @@ Informative References
               Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
               Reddy, "Benchmarking Methodology for AI Inference Serving
               Network Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-inference-bench-03, 6 July 2026,
-              <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-inference-bench-03>.
+              calabria-bmwg-ai-fabric-inference-bench-04, 12 August
+              2026, <https://datatracker.ietf.org/doc/html/draft-
+              calabria-bmwg-ai-fabric-inference-bench-04>.
 
    [I-D.calabria-bmwg-ai-fabric-training-bench]
               Calabria, F., Pignataro, C., Wu, Q., Fioccola, G., and S.
               Reddy, "Benchmarking Methodology for AI Training Network
               Fabrics", Work in Progress, Internet-Draft, draft-
-              calabria-bmwg-ai-fabric-training-bench-03, 6 July 2026,
+              calabria-bmwg-ai-fabric-training-bench-04, 12 August 2026,
               <https://datatracker.ietf.org/doc/html/draft-calabria-
-              bmwg-ai-fabric-training-bench-03>.
+              bmwg-ai-fabric-training-bench-04>.
 
    [IBTA-ROCE]
               InfiniBand Trade Association, "InfiniBand Architecture
@@ -1899,7 +1923,8 @@ Appendix B: Term Taxonomy Summary
    | 2       | DUT, SUT, TG, JFI, Offered Load,   | General            |
    |         | Trial Duration, Warmup Period,     | Benchmarking       |
    |         | Binary Search, Percentile          |                    |
-   |         | Latency, AI Fabric                 |                    |
+   |         | Latency, Observation Point, AI     |                    |
+   |         | Fabric                             |                    |
    +---------+------------------------------------+--------------------+
    | 3       | Collective Operation, AllReduce,   | Collective         |
    |         | AllGather, ReduceScatter,          | Communication      |
