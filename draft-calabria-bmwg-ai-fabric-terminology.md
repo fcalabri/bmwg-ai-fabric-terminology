@@ -278,6 +278,7 @@ applicable to all AI fabric benchmarking activities.
 | **Warmup Period** | A pre-measurement interval, used when specified by a test procedure, during which traffic is sent but results are not recorded. Ensures adaptive routing tables, PFC watermarks, and DCQCN/UET congestion controllers reach steady state before measurement begins. RECOMMENDED minimum: 10 seconds. |
 | **Binary Search** | An iterative test procedure for determining the maximum offered load at which a DUT meets a specified acceptance criterion (e.g., zero packet loss). The search halves the candidate load range at each iteration, converging to a resolution of 0.1% offered load within 10 iterations, assuming an initial search range of 0-100% offered load. |
 | **Percentile Latency** | A latency statistic expressing that the specified fraction of all measured latency samples fall at or below the reported value. Denoted Pxx (e.g., P50, P95, P99, P99.9). Tail latency (P99 and above) is especially relevant for AI fabric benchmarking because SLO violations are determined by worst-case, not median, performance. |
+| **Observation Point** | The location at which a reported value is obtained. Three classes are distinguished: (a) the Fabric DUT Boundary, observed by test equipment or at the NIC Ethernet port; (b) counters or telemetry read from the DUT, such as egress queue occupancy, ECN-marked packet counts, or PFC PAUSE counts on a switch port; and (c) an endpoint software boundary, such as RDMA verb posting, completion queue polling, or the application request/response boundary. Values obtained at different Observation Points are not interchangeable, even when they carry the same name, and are not combined into a single reported value. Reports MUST state the Observation Point of each reported value. For class (b), the report also states the port, direction (ingress or egress), and traffic class to which the value applies, and labels the value as DUT-reported, since benchmarking is performed on a black-box basis. |
 {: #tab-gen-bench title="General Benchmarking Terms"}
 
 # Collective Communication Terms
@@ -693,7 +694,7 @@ definition.
 
 | Section | Term(s) | Category |
 |---|---|---|
-| 2 | DUT, SUT, TG, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, AI Fabric | General Benchmarking |
+| 2 | DUT, SUT, TG, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, Observation Point, AI Fabric | General Benchmarking |
 | 3 | Collective Operation, AllReduce, AllGather, ReduceScatter, AllToAll, Ring Algorithm, BusBW, CCL, SPMD, BSP | Collective Communication |
 | 4 | Data Parallelism, Tensor Parallelism, Pipeline Parallelism, Expert Parallelism, MoE, DP Attention, ZeRO | Parallelism Strategies |
 | 5.1 | RDMA, RoCEv2, QP, Reliable Connected (RC), RDMA Verb, UET, PDC, ROD | Transport — RDMA / RoCEv2 |
