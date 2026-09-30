@@ -1472,6 +1472,12 @@ applicable to all AI fabric benchmarking activities.<a href="#section-2-1" class
 </td>
             <td class="text-left" rowspan="1" colspan="1">A latency statistic expressing that the specified fraction of all measured latency samples fall at or below the reported value. Denoted Pxx (e.g., P50, P95, P99, P99.9). Tail latency (P99 and above) is especially relevant for AI fabric benchmarking because SLO violations are determined by worst-case, not median, performance.</td>
           </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">
+              <strong>Observation Point</strong>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">The location at which a reported value is obtained. Three classes are distinguished: (a) the Fabric DUT Boundary, observed by test equipment or at the NIC Ethernet port; (b) counters or telemetry read from the DUT, such as egress queue occupancy, ECN-marked packet counts, or PFC PAUSE counts on a switch port; and (c) an endpoint software boundary, such as RDMA verb posting, completion queue polling, or the application request/response boundary. Values obtained at different Observation Points are not interchangeable, even when they carry the same name, and are not combined into a single reported value. Reports <span class="bcp14">MUST</span> state the Observation Point of each reported value. For class (b), the report also states the port, direction (ingress or egress), and traffic class to which the value applies, and labels the value as DUT-reported. DUT-reported values are self-attested by the device, not independently verified by test equipment, and are a bounded, explicitly labeled exception to the black-box principle in Security Considerations rather than an instance of it.</td>
+          </tr>
         </tbody>
       </table>
 </div>
@@ -3188,7 +3194,7 @@ definition.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">2</td>
-            <td class="text-left" rowspan="1" colspan="1">DUT, SUT, TG, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, AI Fabric</td>
+            <td class="text-left" rowspan="1" colspan="1">DUT, SUT, TG, JFI, Offered Load, Trial Duration, Warmup Period, Binary Search, Percentile Latency, Observation Point, AI Fabric</td>
             <td class="text-left" rowspan="1" colspan="1">General Benchmarking</td>
           </tr>
           <tr>
