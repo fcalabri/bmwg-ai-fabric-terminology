@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-27T03:49:52.123818+00:00",
+  "timestamp": "2026-10-01T04:19:25.787632+00:00",
   "repo": "fcalabri/bmwg-ai-fabric-terminology",
   "labels": [
     {
@@ -679,15 +679,15 @@
       "id": "I_kwDORX8iVs8AAAABS_ZSOA",
       "title": "Saumya Comments (list)",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/issues/58",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Hello Authors, Group members,\n\nIt will be great to hear form anyone on the below email.\nAs an implementer of the solution, looking forward to the clarity,\n\nThanks,\nSaumya.\nFrom: Dikshit, Saumya <[saumya.dikshit@hpe.com](mailto:saumya.dikshit@hpe.com)>\nDate: Monday, 21 September 2026 at 5:11\u202fPM\nTo: [bmwg@ietf.org](mailto:bmwg@ietf.org) <[bmwg@ietf.org](mailto:bmwg@ietf.org)>\nCc: [draft-calabria-bmwg-ai-fabric-terminology@ietf.org](mailto:draft-calabria-bmwg-ai-fabric-terminology@ietf.org) <[draft-calabria-bmwg-ai-fabric-terminology@ietf.org](mailto:draft-calabria-bmwg-ai-fabric-terminology@ietf.org)>; [draft-calabria-bmwg-ai-fabric-training-bench@ietf.org](mailto:draft-calabria-bmwg-ai-fabric-training-bench@ietf.org) <[draft-calabria-bmwg-ai-fabric-training-bench@ietf.org](mailto:draft-calabria-bmwg-ai-fabric-training-bench@ietf.org)>; [draft-calabria-bmwg-ai-fabric-inference-bench@ietf.org](mailto:draft-calabria-bmwg-ai-fabric-inference-bench@ietf.org) <[draft-calabria-bmwg-ai-fabric-inference-bench@ietf.org](mailto:draft-calabria-bmwg-ai-fabric-inference-bench@ietf.org)>\nSubject: [bmwg] Comment on adoption of the AI network fabric benchmarking document set\n\nHello Authors of  draft-calabria-bmwg-ai-fabric-terminology, draft-calabria-bmwg-ai-fabric-training-bench, draft-calabria-bmwg-ai-fabric-inference-bench\n  and BMWG participants,\n\nI support discussion of the three companion documents on benchmarking Ethernet based AI network fabrics. \n\nBefore adoption, I suggest adding a common reproducibility and observation model across the three documents. \nThe current procedures may not cover this important bullet from implementation point of view\n, results from two fabrics may  be incomparable if the packetization, queue, observation point, or congestion control conditions differ.\n\nI would love to see the common methodology states in detail or at least draw attention to following:\n The MTU, packetization, segmentation, and encapsulation configuration used for each test.\nThe observation point for latency, queue depth, ECN marking, PFC events, and throughput.\nIngress, egress, and in fabric observations should not be treated as interchangeable.\nThe offered load, flow and microflow concurrency, message size distribution, burst pattern, and warm up period.\nThe ECN and PFC thresholds, congestion control algorithm and parameters, pause behavior, and any vendor specific defaults.\nThe separation between initialization, warm up, steady state, transient congestion, and recovery measurements.\nThe treatment of loss, counter resets, incomplete trials, retransmissions, and test runs that do not reach the required steady state.\nThe minimum metadata needed to reproduce a result, including topology, link speed, queue configuration, traffic class, endpoint and NIC configuration, software versions, and benchmark revision.\n\nThis is particularly important for the inference document. \nIts KV transfer, prefill and decode, expert parallelism, and congestion tests can produce different conclusions depending on whether the reported latency is measured at the application boundary, the RDMA operation boundary, the completion queue, or the fabric observation point.\nThe result should identify the boundary and provide enough timestamps to separate endpoint processing, queueing, and fabric delay.\n\nThe same  applies to the training document when ECN or PFC behavior is compared across fabrics. \nA marking rate or pause count without the corresponding offered load, packetization, queue threshold, and observation scope is difficult to interpret as a fabric property.\n\nI suggest adding a shared result metadata section or a common terminology and methodology table to the document set. \nThe goal is to  make the measurements comparable and the reported results reproducible.\n\nThe document set is also relevant to related IPPM and telemetry work because the benchmark output needs explicit scope and comparability rules when values are collected from multiple observation points or traffic classes.\n\nPlease let know your inputs on above and specially the last line before this one. \n\nBest Regards,\nSaumya Dikshit",
       "createdAt": "2026-09-24T13:54:18Z",
-      "updatedAt": "2026-09-24T13:54:18Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-30T18:13:38Z",
+      "closedAt": "2026-09-30T18:13:38Z",
       "comments": []
     }
   ],
@@ -2245,7 +2245,7 @@
       "id": "PR_kwDORX8iVs8AAAABE8kk_A",
       "title": "Update draft-calabria-bmwg-ai-fabric-terminology.md",
       "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/59",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fcalabri",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -2254,19 +2254,92 @@
       "labels": [],
       "body": "Saumya list comments",
       "createdAt": "2026-09-24T14:08:55Z",
-      "updatedAt": "2026-09-24T14:08:55Z",
+      "updatedAt": "2026-09-30T18:13:21Z",
       "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "baseRefName": "main",
       "baseRefOid": "125966a4fa88a3d179cf4e12a9e53f6cfd8385e6",
       "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
       "headRefName": "05/observation-point",
-      "headRefOid": "e451db5dfa9a0e2909d86a05b42b12949521c894",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1240e87a7b1b55f35f9951a7f11acd138a81f024",
+      "closedAt": "2026-09-30T18:13:20Z",
+      "mergedAt": "2026-09-30T18:13:20Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "b733c7ff54086b113b2357952135019da96528e0"
+      },
+      "comments": [
+        {
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Class (b) (DUT-internal telemetry) sits against the black-box statement in Security Considerations: \"relying solely on measurements observable external to the DUT or SUT.\" Not new scope \u2014 ECN_marking_rate, PFC_frame_count, and Buffer_utilization already depend on switch-internal counters \u2014 but the doc should say so rather than imply black-box already covers it.\n\nTwo fixes:\n1. Security Considerations (not touched by this diff, so noting here rather than as a suggestion): add a carve-out \u2014 \"Counters or telemetry read from the DUT (Observation Point class (b)) are a bounded exception to this principle, permitted only where the same telemetry is available in production, and reported as DUT-reported rather than independently observed.\"\n2. Reword class (b)'s closing clause \u2014 see inline suggestion.",
+          "createdAt": "2026-09-30T17:40:29Z",
+          "updatedAt": "2026-09-30T17:42:40Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs8AAAABQBHS6A",
+          "commit": {
+            "abbreviatedOid": "e451db5"
+          },
+          "author": "cpignata",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Inline suggestion for the Observation Point tension noted above.",
+          "createdAt": "2026-09-30T17:43:05Z",
+          "updatedAt": "2026-09-30T17:43:05Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\n| **Observation Point** | The location at which a reported value is obtained. Three classes are distinguished: (a) the Fabric DUT Boundary, observed by test equipment or at the NIC Ethernet port; (b) counters or telemetry read from the DUT, such as egress queue occupancy, ECN-marked packet counts, or PFC PAUSE counts on a switch port; and (c) an endpoint software boundary, such as RDMA verb posting, completion queue polling, or the application request/response boundary. Values obtained at different Observation Points are not interchangeable, even when they carry the same name, and are not combined into a single reported value. Reports MUST state the Observation Point of each reported value. For class (b), the report also states the port, direction (ingress or egress), and traffic class to which the value applies, and labels the value as DUT-reported. DUT-reported values are self-attested by the device, not independently verified by test equipment, and are a bounded, explicitly labeled exception to the black-box principle in Security Considerations rather than an instance of it. |\n```\nDoesn't claim class (b) satisfies black-box \u2014 names it as the labeled exception it is.",
+              "createdAt": "2026-09-30T17:43:05Z",
+              "updatedAt": "2026-09-30T17:43:05Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 60,
+      "id": "PR_kwDORX8iVs8AAAABF8kmHw",
+      "title": "Carve out DUT-reported telemetry from the black-box principle",
+      "url": "https://github.com/fcalabri/bmwg-ai-fabric-terminology/pull/60",
+      "state": "MERGED",
+      "author": "cpignata",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "## Summary\n\nSecurity Considerations says benchmarking relies \"solely on measurements observable external to the DUT or SUT,\" but that's already not true in practice \u2014 ECN marking rate, PFC PAUSE count, and switch buffer occupancy are DUT-internal counters that the existing tests depend on (see the ECN Marking Accuracy test, which can't verify threshold behavior without reading the switch's own queue depth).\n\nAdds an explicit, bounded carve-out instead of leaving the black-box statement assert something it doesn't hold to. Companion PRs open in training-bench and inference-bench, which restate the same \"solely external\" claim independently.\n\nSee the discussion on #59 for how this connects to the Observation Point term.",
+      "createdAt": "2026-09-30T17:47:37Z",
+      "updatedAt": "2026-09-30T18:10:58Z",
+      "baseRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "baseRefName": "main",
+      "baseRefOid": "125966a4fa88a3d179cf4e12a9e53f6cfd8385e6",
+      "headRepository": "fcalabri/bmwg-ai-fabric-terminology",
+      "headRefName": "carlos-blackbox-carveout",
+      "headRefOid": "4efdce609162b8f8cd5ed07c87efc62438a0ca46",
+      "closedAt": "2026-09-30T18:10:58Z",
+      "mergedAt": "2026-09-30T18:10:58Z",
+      "mergedBy": "fcalabri",
+      "mergeCommit": {
+        "oid": "48337d06c87b8cebf417df8ed4198cb163b360e4"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDORX8iVs8AAAABQBZeVA",
+          "commit": {
+            "abbreviatedOid": "4efdce6"
+          },
+          "author": "fcalabri",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-09-30T18:10:48Z",
+          "updatedAt": "2026-09-30T18:10:48Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
