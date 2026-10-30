@@ -3,14 +3,14 @@ title: "Benchmarking Terminology for AI Network Fabrics"
 abbrev: "AI Fabric Benchmarking Terminology"
 category: info
 
-docname: draft-calabria-bmwg-ai-fabric-terminology-latest
+docname: draft-calabria-bpm-ai-fabric-terminology-latest
 submissiontype: IETF
 ipr: trust200902
 number:
 consensus: true
 v: 3
 area: "Operations and Management"
-workgroup: "BMWG"
+workgroup: "BPM"
 keyword:
  - benchmarking
  - terminology
@@ -28,7 +28,7 @@ keyword:
 
 venue:
   github: "fcalabri/bmwg-ai-fabric-terminology"
-  latest: "https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-bmwg-ai-fabric-terminology.html"
+  latest: "https://fcalabri.github.io/bmwg-ai-fabric-terminology/draft-calabria-bpm-ai-fabric-terminology.html"
 
 author:
   - name: Fernando Calabria

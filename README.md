@@ -4,10 +4,10 @@
 
 This is the working area for the individual Internet-Draft, "Benchmarking Terminology for AI Network Fabrics".
 
-* [Editor's Copy](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-calabria-bmwg-ai-fabric-terminology.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-calabria-bmwg-ai-fabric-terminology)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-calabria-bmwg-ai-fabric-terminology)
-* [Compare Editor's Copy to Individual Draft](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-calabria-bmwg-ai-fabric-terminology.diff)
+* [Editor's Copy](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-calabria-bpm-ai-fabric-terminology.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-calabria-bpm-ai-fabric-terminology)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-calabria-bpm-ai-fabric-terminology)
+* [Compare Editor's Copy to Individual Draft](https://fcalabri.github.io/bmwg-ai-fabric-terminology/#go.draft-calabria-bpm-ai-fabric-terminology.diff)
 
 
 ## Contributing

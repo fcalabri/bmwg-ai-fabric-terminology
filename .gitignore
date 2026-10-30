@@ -20,7 +20,7 @@
 /versioned/
 Gemfile.lock
 archive.json
-draft-calabria-bmwg-ai-fabric-terminology.xml
+draft-calabria-bpm-ai-fabric-terminology.xml
 package-lock.json
 report.xml
 !requirements.txt
